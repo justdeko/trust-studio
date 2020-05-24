@@ -10,10 +10,13 @@ import MenuIcon from '@material-ui/icons/Menu';
 import PublishIcon from '@material-ui/icons/Publish';
 import Sidebar from "../components/Sidebar";
 import {useDashboardStyles} from "../styles/dashboard-styles";
+import Routes from "../Routes";
+import {Route, Switch} from 'react-router-dom';
 
 export default function Dashboard() {
     const classes = useDashboardStyles();
     const [open, setOpen] = React.useState(false);
+    const [title, setTitle] = React.useState("Analysis")
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -23,7 +26,7 @@ export default function Dashboard() {
 
     return (
         <div className={classes.root}>
-            <CssBaseline />
+            <CssBaseline/>
             <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
                 <Toolbar className={classes.toolbar}>
                     <IconButton
@@ -33,10 +36,10 @@ export default function Dashboard() {
                         onClick={handleDrawerOpen}
                         className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
                     >
-                        <MenuIcon />
+                        <MenuIcon/>
                     </IconButton>
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                        Analysis
+                        Dashboard
                     </Typography>
                     <IconButton color="inherit">
                         <PublishIcon/>
@@ -45,9 +48,15 @@ export default function Dashboard() {
             </AppBar>
             <Sidebar handleDrawerClose={handleDrawerClose} open={open}/>
             <main className={classes.content}>
-                <div className={classes.appBarSpacer} />
+                <div className={classes.appBarSpacer}/>
                 <Container maxWidth="lg" className={classes.container}>
-
+                    <Switch>
+                        {Routes.map((route: any) => (
+                            <Route exact path={route.path} key={route.path}>
+                                <route.component/>
+                            </Route>
+                        ))}
+                    </Switch>
                 </Container>
             </main>
         </div>

@@ -7,38 +7,43 @@ import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import HelpIcon from '@material-ui/icons/Help';
 import SettingsIcon from '@material-ui/icons/Settings';
+import {Link} from "react-router-dom";
 
 export const mainListItems = (
     <div>
-        <ListItem button>
+        <ListItem button component={Link} to={'/analysis'}>
             <ListItemIcon>
-                <BarChartIcon />
+                <BarChartIcon/>
             </ListItemIcon>
-            <ListItemText primary="Analysis" />
+            <ListItemText primary="Analysis"/>
         </ListItem>
-        <ListItem button>
+
+        <ListItem button component={Link} to={'/modeler'}>
             <ListItemIcon>
-                <EditIcon />
+                <EditIcon/>
             </ListItemIcon>
-            <ListItemText primary="Modeler" />
+            <ListItemText primary="Modeler"/>
         </ListItem>
-        <ListItem button>
+
+        <ListItem button component={Link} to={'/trust-personas'}>
             <ListItemIcon>
-                <PeopleIcon />
+                <PeopleIcon/>
             </ListItemIcon>
-            <ListItemText primary="Trust Personas" />
+            <ListItemText primary="Trust Personas"/>
         </ListItem>
-        <ListItem button>
+
+        <ListItem button component={Link} to={'/uncertainty-list'}>
             <ListItemIcon>
                 <HelpIcon/>
             </ListItemIcon>
-            <ListItemText primary="Uncertainty List" />
+            <ListItemText primary="Uncertainty List"/>
         </ListItem>
-        <ListItem button>
+
+        <ListItem button component={Link} to={'/settings'}>
             <ListItemIcon>
-                <SettingsIcon />
+                <SettingsIcon/>
             </ListItemIcon>
-            <ListItemText primary="Settings" />
+            <ListItemText primary="Settings"/>
         </ListItem>
     </div>
 )
