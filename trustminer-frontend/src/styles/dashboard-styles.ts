@@ -42,7 +42,6 @@ export const useDashboardStyles = makeStyles((theme: Theme) =>createStyles({
     },
     container: {
         paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(4),
     },
     paper: {
         padding: theme.spacing(2),

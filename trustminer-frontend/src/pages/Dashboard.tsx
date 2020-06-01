@@ -49,7 +49,7 @@ export default function Dashboard() {
             <Sidebar handleDrawerClose={handleDrawerClose} open={open}/>
             <main className={classes.content}>
                 <div className={classes.appBarSpacer}/>
-                <Container maxWidth="lg" className={classes.container}>
+                <Container maxWidth="xl" className={classes.container}>
                     <Switch>
                         {Routes.map((route: any) => (
                             <Route exact path={route.path} key={route.path}>
