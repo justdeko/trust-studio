@@ -12,6 +12,7 @@ import Sidebar from "../components/Sidebar";
 import {useDashboardStyles} from "../styles/dashboard-styles";
 import Routes from "../Routes";
 import {Route, Switch} from 'react-router-dom';
+import {CURRENT_BPMN} from "../util/constants";
 
 export default function Dashboard() {
     const classes = useDashboardStyles();
@@ -23,6 +24,19 @@ export default function Dashboard() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    function handleFileSelect() {
+        const fileSelector = document.createElement('input');
+        fileSelector.setAttribute('type', 'file');
+        fileSelector.setAttribute('accept','.bpmn')
+        fileSelector.click()
+        fileSelector.onchange = function(event) {
+            var fileList = fileSelector.files;
+            if (fileList) {
+                fileList[0].text().then(bpmnString => localStorage.setItem(CURRENT_BPMN, bpmnString))
+            }
+        }
+    }
 
     return (
         <div className={classes.root}>
@@ -42,7 +56,7 @@ export default function Dashboard() {
                         Dashboard
                     </Typography>
                     <IconButton color="inherit">
-                        <PublishIcon/>
+                        <PublishIcon onClick={handleFileSelect}/>
                     </IconButton>
                 </Toolbar>
             </AppBar>

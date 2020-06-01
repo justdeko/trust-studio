@@ -5,7 +5,9 @@ import 'bpmn-font/dist/css/bpmn-embedded.css';
 import propertiesPanelModule from 'bpmn-js-properties-panel';
 import propertiesProviderModule from 'bpmn-js-properties-panel/lib/provider/camunda';
 import camundaModdleDescriptor from 'camunda-bpmn-moddle/resources/camunda';
-import {emptyBpmn} from "../emptyBpmn";
+import {emptyBpmn} from "../resources/emptyBpmn";
+import {CURRENT_BPMN} from "../util/constants";
+import {insertUncertainties} from "../util/mining_util";
 
 
 //Code from https://github.com/Varooneh/reactbpmn/blob/master/src/components/bpmn/bpmn.modeler.component.jsx
@@ -33,15 +35,18 @@ export default function Modeler() {
         newModeler.on('element.changed', function(event: any) {
             var element = event.element;
             console.log("element changed: "+element)
-            newModeler.saveXML({ format: true }, function (err: Error, xml: String) {
-                console.log(xml)
+            newModeler.saveXML({ format: true }, function (err: Error, xml: string) {
+                localStorage.setItem(CURRENT_BPMN, xml)
             });
         });
     }, [])
 
     useEffect(() => {
         if (modeler !== undefined) {
-            openBpmnDiagram(emptyBpmn)
+            let localFile = localStorage.getItem(CURRENT_BPMN)
+            if (localFile) {
+                openBpmnDiagram(localFile)
+            } else openBpmnDiagram(emptyBpmn)
         }
     }, [modeler])
 
@@ -50,7 +55,7 @@ export default function Modeler() {
             if (error) {
                 return console.log('failed to import xml');
             }
-
+            insertUncertainties()
             var canvas = modeler.get('canvas');
 
             canvas.zoom('fit-viewport');

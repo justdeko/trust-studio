@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useEffect} from "react";
 import MaterialTable, {Column} from "material-table";
 import {tableIcons} from "../theme/MaterialTableIcons"
+import {loadUncertainties, saveUncertainties} from "../util/csv_util";
 
-interface Row {
+export interface UncertaintyRow {
     component: string,
     perspective: string,
     trustconcern: string,
@@ -11,8 +12,8 @@ interface Row {
 }
 
 interface TableState {
-    columns: Array<Column<Row>>;
-    data: Row[];
+    columns: Array<Column<UncertaintyRow>>;
+    data: UncertaintyRow[];
 }
 
 export default function UncertaintyTable() {
@@ -24,16 +25,17 @@ export default function UncertaintyTable() {
             {title: 'Concern Root', field: 'root'},
             {title: 'Question', field: 'question'},
         ],
-        data: [
-            { //TODO: import from csv
-                component: "Manual Task",
-                perspective: "Functional",
-                trustconcern: "Integrity",
-                root: "resource",
-                question: "Do the involved resources execute the activity correctly?"
-            },
-        ],
+        data: [],
     });
+
+    // load the current uncertainty state
+    useEffect(() => {
+        setState((prevState) => {
+            let data = loadUncertainties()
+            return {...prevState, data};
+        })
+    }, [])
+
     return (
         <div style={{maxWidth: "100%"}}>
             <MaterialTable
@@ -49,9 +51,10 @@ export default function UncertaintyTable() {
                                 setState((prevState) => {
                                     const data = [...prevState.data];
                                     data.push(newData);
+                                    saveUncertainties(data)
                                     return {...prevState, data};
                                 });
-                            }, 600);
+                            }, 300);
                         }),
                     onRowUpdate: (newData, oldData) =>
                         new Promise((resolve) => {
@@ -61,10 +64,11 @@ export default function UncertaintyTable() {
                                     setState((prevState) => {
                                         const data = [...prevState.data];
                                         data[data.indexOf(oldData)] = newData;
+                                        saveUncertainties(data)
                                         return {...prevState, data};
                                     });
                                 }
-                            }, 600);
+                            }, 300);
                         }),
                     onRowDelete: (oldData) =>
                         new Promise((resolve) => {
@@ -73,9 +77,10 @@ export default function UncertaintyTable() {
                                 setState((prevState) => {
                                     const data = [...prevState.data];
                                     data.splice(data.indexOf(oldData), 1);
+                                    saveUncertainties(state.data)
                                     return {...prevState, data};
                                 });
-                            }, 600);
+                            }, 300);
                         }),
                 }}
             />
