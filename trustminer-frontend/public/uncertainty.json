@@ -1,0 +1,35 @@
+{
+  "name": "Uncertainty",
+  "uri": "http://tu-berlin/schema/bpmn/trust",
+  "prefix": "unc",
+  "xml": {
+    "tagAlias": "lowerCase"
+  },
+  "types": [
+    {
+      "name": "Uncertainty",
+      "extends": [
+        "bpmn:FlowNode"
+      ],
+      "properties": [
+        {
+          "name": "perspective",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "trust_concern",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "root",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    }
+  ],
+  "emumerations": [],
+  "associations": []
+}
