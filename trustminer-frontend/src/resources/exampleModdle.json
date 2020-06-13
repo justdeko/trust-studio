@@ -1,0 +1,2874 @@
+{
+  "$type": "bpmn:Definitions",
+  "exporter": "Signavio Process Editor, http://www.signavio.com",
+  "exporterVersion": "14.0.0",
+  "expressionLanguage": "http://www.w3.org/TR/XPath",
+  "id": "sid-0b6f6351-4222-4aa2-b6f1-ced79acfea5c",
+  "targetNamespace": "http://www.signavio.com",
+  "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+  "rootElements": [
+    {
+      "$type": "bpmn:Escalation",
+      "id": "sid-c4e18aa6-7e3d-47ca-aaaf-663d1bd718b2"
+    },
+    {
+      "$type": "bpmn:Collaboration",
+      "id": "sid-04a9f8f9-47a9-43fa-b1ac-1bb8c73223f8",
+      "extensionElements": {
+        "$type": "bpmn:ExtensionElements",
+        "values": [
+          {
+            "$type": "signavio:signavioDiagramMetaData",
+            "metaKey": "businessunit",
+            "metaValue": ""
+          },
+          {
+            "$type": "signavio:signavioDiagramMetaData",
+            "metaKey": "iso9000ff",
+            "metaValue": ""
+          },
+          {
+            "$type": "signavio:signavioDiagramMetaData",
+            "metaKey": "processowner",
+            "metaValue": ""
+          },
+          {
+            "$type": "signavio:signavioDiagramMetaData",
+            "metaKey": "processgoal",
+            "metaValue": ""
+          },
+          {
+            "$type": "signavio:signavioDiagramMetaData",
+            "metaKey": "soxrelevant",
+            "metaValue": ""
+          },
+          {
+            "$type": "signavio:signavioDiagramMetaData",
+            "metaKey": "revisionid",
+            "metaValue": "0b41aca391764cfbaa5640d71b6d0465"
+          }
+        ]
+      },
+      "participants": [
+        {
+          "$type": "bpmn:Participant",
+          "id": "sid-9028AB76-0AB4-4EA1-8D45-AD27965EC75F",
+          "name": "Sender",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#ffffff"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:Participant",
+          "id": "sid-03A31EF6-B792-4F9E-9D30-23598045E2DE",
+          "name": "Carrier",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#ffffff"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:Participant",
+          "id": "sid-4B72A8B7-6265-4C05-AB20-5D8695EDD40C",
+          "name": "Receiver",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#ffffff"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        }
+      ],
+      "messageFlows": [
+        {
+          "$type": "bpmn:MessageFlow",
+          "id": "sid-98DF549B-BE8C-4961-8ADA-6A4496C82A84",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:MessageFlow",
+          "id": "sid-A539E1C8-E1D1-4278-B3B0-72C4EEC37D85",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:MessageFlow",
+          "id": "sid-A790C852-994B-4CC3-B019-13DF585E533D",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:MessageFlow",
+          "id": "sid-B99BCB16-7057-42BA-8486-A9B751FA2234",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "$type": "bpmn:Process",
+      "id": "sid-43818109-F17D-411A-9F12-AC4DB61C90A2",
+      "isClosed": false,
+      "isExecutable": false,
+      "name": "Sender",
+      "processType": "None",
+      "extensionElements": {
+        "$type": "bpmn:ExtensionElements"
+      },
+      "ioSpecification": {
+        "$type": "bpmn:InputOutputSpecification",
+        "id": "sid-7d513ddf-62a2-445a-9929-353a7d417edc",
+        "dataInputs": [
+          {
+            "$type": "bpmn:DataInput",
+            "id": "sid-423812FB-9184-443D-B1DD-4F20E3DB7C18",
+            "isCollection": false,
+            "name": "invoice",
+            "extensionElements": {
+              "$type": "bpmn:ExtensionElements",
+              "values": [
+                {
+                  "$type": "signavio:signavioMetaData",
+                  "metaKey": "bgcolor",
+                  "metaValue": "#ffffff"
+                },
+                {
+                  "$type": "signavio:signavioMetaData",
+                  "metaKey": "bordercolor",
+                  "metaValue": "#000000"
+                }
+              ]
+            }
+          }
+        ],
+        "dataOutputs": [
+          {
+            "$type": "bpmn:DataOutput",
+            "id": "sid-27BF3370-F20A-4283-BE71-2BA27F75BE51",
+            "isCollection": false,
+            "name": "SLAs",
+            "extensionElements": {
+              "$type": "bpmn:ExtensionElements",
+              "values": [
+                {
+                  "$type": "signavio:signavioMetaData",
+                  "metaKey": "bgcolor",
+                  "metaValue": "#ffffff"
+                },
+                {
+                  "$type": "signavio:signavioMetaData",
+                  "metaKey": "bordercolor",
+                  "metaValue": "#000000"
+                }
+              ]
+            }
+          }
+        ],
+        "inputSets": [
+          {
+            "$type": "bpmn:InputSet",
+            "id": "sid-56976ca7-b7cb-4a23-807d-ccf15de411cd"
+          }
+        ],
+        "outputSets": [
+          {
+            "$type": "bpmn:OutputSet",
+            "id": "sid-ed3790ca-1f27-4323-9379-ebc689e0163c"
+          }
+        ]
+      },
+      "laneSets": [
+        {
+          "$type": "bpmn:LaneSet",
+          "id": "sid-2db10714-e97d-4920-be3f-c5f86175d732",
+          "lanes": [
+            {
+              "$type": "bpmn:Lane",
+              "id": "sid-198A35CD-60FF-4753-83EA-ADD0C8AC8BA8",
+              "extensionElements": {
+                "$type": "bpmn:ExtensionElements",
+                "values": [
+                  {
+                    "$type": "signavio:signavioMetaData",
+                    "metaKey": "bgcolor",
+                    "metaValue": ""
+                  },
+                  {
+                    "$type": "signavio:signavioMetaData",
+                    "metaKey": "bordercolor",
+                    "metaValue": "#000000"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "flowElements": [
+        {
+          "$type": "bpmn:StartEvent",
+          "id": "sid-1B01F960-43E0-4D1B-9D83-B4CF358F22D8",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#ffffff"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:IntermediateThrowEvent",
+          "id": "sid-6E2722C4-BD0A-4E80-BA19-6E2D514CC554",
+          "name": "handover parcel",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#ffffff"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              },
+              {
+                "$type": "signavio:signavioLabel",
+                "bottom": "false",
+                "left": "false",
+                "ref": "text_name",
+                "right": "false",
+                "top": "true",
+                "valign": "bottom",
+                "x": "15.0",
+                "y": "-8.0"
+              }
+            ]
+          },
+          "eventDefinitions": [
+            {
+              "$type": "bpmn:MessageEventDefinition",
+              "id": "sid-323f788a-f860-403e-8dce-706c4a3e1383"
+            }
+          ]
+        },
+        {
+          "$type": "bpmn:IntermediateCatchEvent",
+          "id": "sid-E9C1DE44-71D9-47EE-A817-482820518B93",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#ffffff"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "viaitsystem",
+                "metaValue": ""
+              }
+            ]
+          },
+          "eventDefinitions": [
+            {
+              "$type": "bpmn:MessageEventDefinition",
+              "id": "sid-253d6203-e21f-45c6-bd80-5f0a29753f54"
+            }
+          ]
+        },
+        {
+          "$type": "bpmn:UserTask",
+          "completionQuantity": 1,
+          "id": "sid-CE946C01-BDBC-4CA7-BA51-D5C42992A5CC",
+          "implementation": "##WebService",
+          "isForCompensation": false,
+          "name": "pay invoice",
+          "startQuantity": 1,
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#FFFFFF"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "risklevel",
+                "metaValue": ""
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "externaldocuments",
+                "metaValue": "[]"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:EndEvent",
+          "id": "sid-9B538D0B-EDE0-40F6-A55F-41B3409E6659",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#ffffff"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:UserTask",
+          "completionQuantity": 1,
+          "id": "sid-5AAEE300-64A5-4167-9EA2-CBBFF5CEEA68",
+          "implementation": "##WebService",
+          "isForCompensation": false,
+          "name": "prepare parcel",
+          "startQuantity": 1,
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#FFFFFF"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "risklevel",
+                "metaValue": ""
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "externaldocuments",
+                "metaValue": "[]"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:SequenceFlow",
+          "id": "sid-0D58D937-E0FE-4A79-89E8-B83F29B7FC54",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:SequenceFlow",
+          "id": "sid-D030BD63-52F5-41EF-976F-F01497B96A3E",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:SequenceFlow",
+          "id": "sid-17807F92-AD25-44ED-AA81-AD38548CB7D2",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:SequenceFlow",
+          "id": "sid-7E476408-1972-48F3-8DCC-63F8B5D6B10C",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:SequenceFlow",
+          "id": "sid-F4A0EBF2-B140-4735-A57B-22E327821406",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        }
+      ],
+      "artifacts": [
+        {
+          "$type": "bpmn:Association",
+          "associationDirection": "None",
+          "id": "sid-0B1D4693-FE71-4F8C-B4AA-C3F46237E4A8",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:Association",
+          "associationDirection": "None",
+          "id": "sid-ECC53970-1016-4B14-B1DF-988700C2D69D",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "$type": "bpmn:Process",
+      "id": "sid-1E3129E1-2A20-4D3A-93E1-7E640D335618",
+      "isClosed": false,
+      "isExecutable": false,
+      "name": "Carrier",
+      "processType": "None",
+      "extensionElements": {
+        "$type": "bpmn:ExtensionElements"
+      },
+      "ioSpecification": {
+        "$type": "bpmn:InputOutputSpecification",
+        "id": "sid-34c07920-0799-4ce6-ad5d-cad24dab3d78",
+        "dataInputs": [
+          {
+            "$type": "bpmn:DataInput",
+            "id": "sid-7ED9BAD9-4211-4942-B415-45E0446BD467",
+            "isCollection": false,
+            "name": "SLAs",
+            "extensionElements": {
+              "$type": "bpmn:ExtensionElements",
+              "values": [
+                {
+                  "$type": "signavio:signavioMetaData",
+                  "metaKey": "bgcolor",
+                  "metaValue": "#ffffff"
+                },
+                {
+                  "$type": "signavio:signavioMetaData",
+                  "metaKey": "bordercolor",
+                  "metaValue": "#000000"
+                }
+              ]
+            }
+          },
+          {
+            "$type": "bpmn:DataInput",
+            "id": "sid-BAA815A9-F49F-480B-BA3E-CFCE4E357CB2",
+            "isCollection": false,
+            "name": "SLAs",
+            "extensionElements": {
+              "$type": "bpmn:ExtensionElements",
+              "values": [
+                {
+                  "$type": "signavio:signavioMetaData",
+                  "metaKey": "bgcolor",
+                  "metaValue": "#ffffff"
+                },
+                {
+                  "$type": "signavio:signavioMetaData",
+                  "metaKey": "bordercolor",
+                  "metaValue": "#000000"
+                }
+              ]
+            }
+          }
+        ],
+        "dataOutputs": [
+          {
+            "$type": "bpmn:DataOutput",
+            "id": "sid-55D441AE-C2C9-4316-8931-CEEE1D5E4A03",
+            "isCollection": false,
+            "name": "invoice",
+            "extensionElements": {
+              "$type": "bpmn:ExtensionElements",
+              "values": [
+                {
+                  "$type": "signavio:signavioMetaData",
+                  "metaKey": "bgcolor",
+                  "metaValue": "#ffffff"
+                },
+                {
+                  "$type": "signavio:signavioMetaData",
+                  "metaKey": "bordercolor",
+                  "metaValue": "#000000"
+                }
+              ]
+            }
+          },
+          {
+            "$type": "bpmn:DataOutput",
+            "id": "sid-1F661508-883F-467F-9964-D969CC3F8161",
+            "isCollection": false,
+            "name": "report",
+            "extensionElements": {
+              "$type": "bpmn:ExtensionElements",
+              "values": [
+                {
+                  "$type": "signavio:signavioMetaData",
+                  "metaKey": "bgcolor",
+                  "metaValue": "#ffffff"
+                },
+                {
+                  "$type": "signavio:signavioMetaData",
+                  "metaKey": "bordercolor",
+                  "metaValue": "#000000"
+                }
+              ]
+            }
+          }
+        ],
+        "inputSets": [
+          {
+            "$type": "bpmn:InputSet",
+            "id": "sid-6d614b39-94b4-4217-86a0-6aa28881500a"
+          }
+        ],
+        "outputSets": [
+          {
+            "$type": "bpmn:OutputSet",
+            "id": "sid-48d483f8-1e26-4119-b1f3-d8dab98d1549"
+          }
+        ]
+      },
+      "laneSets": [
+        {
+          "$type": "bpmn:LaneSet",
+          "id": "sid-05d5382f-0291-4d0d-8437-b83d39b7bb16",
+          "lanes": [
+            {
+              "$type": "bpmn:Lane",
+              "id": "sid-91B88C4F-6EFC-4D36-9688-7F5270A0F7BB",
+              "extensionElements": {
+                "$type": "bpmn:ExtensionElements",
+                "values": [
+                  {
+                    "$type": "signavio:signavioMetaData",
+                    "metaKey": "bgcolor",
+                    "metaValue": ""
+                  },
+                  {
+                    "$type": "signavio:signavioMetaData",
+                    "metaKey": "bordercolor",
+                    "metaValue": "#000000"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "flowElements": [
+        {
+          "$type": "bpmn:StartEvent",
+          "id": "sid-08705128-8BD2-4262-9F41-709E44E94BA1",
+          "isInterrupting": true,
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#ffffff"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "viaitsystem",
+                "metaValue": ""
+              }
+            ]
+          },
+          "eventDefinitions": [
+            {
+              "$type": "bpmn:MessageEventDefinition",
+              "id": "sid-58bd3d12-3aa2-4094-abde-c0166d3e77d9"
+            }
+          ]
+        },
+        {
+          "$type": "bpmn:ManualTask",
+          "completionQuantity": 1,
+          "id": "sid-85C3F308-8992-4DEF-8C6A-8622FE62060A",
+          "isForCompensation": false,
+          "name": "deliver parcel",
+          "startQuantity": 1,
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#FFFFFF"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "risklevel",
+                "metaValue": ""
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "externaldocuments",
+                "metaValue": "[]"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:IntermediateThrowEvent",
+          "id": "sid-CFD34EB0-7AF3-4030-BA00-A4B4A6F772F1",
+          "name": "handover parcel",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#ffffff"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              },
+              {
+                "$type": "signavio:signavioLabel",
+                "bottom": "false",
+                "left": "false",
+                "ref": "text_name",
+                "right": "false",
+                "top": "true",
+                "valign": "bottom",
+                "x": "15.0",
+                "y": "-8.0"
+              }
+            ]
+          },
+          "eventDefinitions": [
+            {
+              "$type": "bpmn:MessageEventDefinition",
+              "id": "sid-d3ccdcc3-54df-4612-9088-9a6ec0f44e82"
+            }
+          ]
+        },
+        {
+          "$type": "bpmn:IntermediateThrowEvent",
+          "id": "sid-6736A8E0-D0B0-4F8A-94F8-CCCA5A3ABF80",
+          "name": "send invoice",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#ffffff"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          },
+          "eventDefinitions": [
+            {
+              "$type": "bpmn:MessageEventDefinition",
+              "id": "sid-a80362b3-6b30-4beb-890c-a5733809c211"
+            }
+          ]
+        },
+        {
+          "$type": "bpmn:EndEvent",
+          "id": "sid-CCA902CE-D734-4766-9EF3-66D70AE07FA0",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#ffffff"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:ServiceTask",
+          "completionQuantity": 1,
+          "id": "sid-F5CB219E-F87E-4BE4-AB06-C23370EA47DF",
+          "implementation": "##WebService",
+          "isForCompensation": false,
+          "name": "create invoice",
+          "startQuantity": 1,
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#FFFFFF"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "risklevel",
+                "metaValue": ""
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "externaldocuments",
+                "metaValue": "[]"
+              }
+            ]
+          },
+          "dataInputAssociations": [
+            {
+              "$type": "bpmn:DataInputAssociation",
+              "id": "sid-6A88A2DF-3C35-4625-93A9-83457AAC00D5",
+              "extensionElements": {
+                "$type": "bpmn:ExtensionElements",
+                "values": [
+                  {
+                    "$type": "signavio:signavioMetaData",
+                    "metaKey": "bordercolor",
+                    "metaValue": "#000000"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "$type": "bpmn:UserTask",
+          "completionQuantity": 1,
+          "id": "sid-0D306884-7F25-4F26-8540-295392DBC33C",
+          "implementation": "##WebService",
+          "isForCompensation": false,
+          "name": "create report",
+          "startQuantity": 1,
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#FFFFFF"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "risklevel",
+                "metaValue": ""
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "externaldocuments",
+                "metaValue": "[]"
+              }
+            ]
+          },
+          "ioSpecification": {
+            "$type": "bpmn:InputOutputSpecification",
+            "id": "sid-a30606cd-64f8-4c5c-90af-e38753bed826",
+            "dataOutputs": [
+              {
+                "$type": "bpmn:DataOutput",
+                "id": "sid-f373ef63-1791-4d20-92db-719655eb5812"
+              }
+            ],
+            "inputSets": [
+              {
+                "$type": "bpmn:InputSet",
+                "id": "sid-926bc08b-1cc7-4676-9fcc-9d26878a7003",
+                "name": "DefaultInputSet"
+              }
+            ],
+            "outputSets": [
+              {
+                "$type": "bpmn:OutputSet",
+                "id": "sid-de63b4f6-5a84-45af-93c9-52d82ecff0e9",
+                "name": "DefaultOutputSet"
+              }
+            ]
+          },
+          "dataOutputAssociations": [
+            {
+              "$type": "bpmn:DataOutputAssociation",
+              "id": "sid-3F9CECA2-D8C9-40D0-BE91-DC13E231F4A4",
+              "extensionElements": {
+                "$type": "bpmn:ExtensionElements",
+                "values": [
+                  {
+                    "$type": "signavio:signavioMetaData",
+                    "metaKey": "bordercolor",
+                    "metaValue": "#000000"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "$type": "bpmn:EndEvent",
+          "id": "sid-CEB42A44-41F3-4402-8BF6-93902031CE0F",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#ffffff"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          },
+          "eventDefinitions": [
+            {
+              "$type": "bpmn:TerminateEventDefinition",
+              "id": "sid-fa0c2007-3a50-44ed-82e1-fe22d070e14c"
+            }
+          ]
+        },
+        {
+          "$type": "bpmn:IntermediateCatchEvent",
+          "id": "sid-FB5F85DD-D19C-42D6-B6C9-F5BDB8EE8593",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#ffffff"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "viaitsystem",
+                "metaValue": ""
+              }
+            ]
+          },
+          "eventDefinitions": [
+            {
+              "$type": "bpmn:MessageEventDefinition",
+              "id": "sid-58dbd077-39c2-4333-a309-018258f025d8"
+            }
+          ]
+        },
+        {
+          "$type": "bpmn:IntermediateCatchEvent",
+          "id": "sid-EB497C6A-0ABF-4110-AB96-B568F5277901",
+          "name": "incident",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#ffffff"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              },
+              {
+                "$type": "signavio:signavioLabel",
+                "ref": "text_name",
+                "valign": "middle",
+                "x": "58.0",
+                "y": "26.0"
+              }
+            ]
+          },
+          "eventDefinitions": [
+            {
+              "$type": "bpmn:EscalationEventDefinition",
+              "id": "sid-a88c4e2b-4a93-4c5b-89cb-b004322646c8"
+            }
+          ]
+        },
+        {
+          "$type": "bpmn:SequenceFlow",
+          "id": "sid-03AA944C-DCD4-4D8A-8499-1FE7C5FF0E42",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:SequenceFlow",
+          "id": "sid-73166009-1959-414F-A300-ABF797C8C467",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:SequenceFlow",
+          "id": "sid-9E30C50C-1EFA-480C-89EC-B2B7BC43702D",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:SequenceFlow",
+          "id": "sid-246728EF-EB9C-4D04-8089-FCE2C8CB391D",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:SequenceFlow",
+          "id": "sid-7C3450FC-4056-4636-85AC-AFABFA1BA17B",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:SequenceFlow",
+          "id": "sid-8779C01A-4EF4-44C3-A7BA-C38D6CB4B624",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:SequenceFlow",
+          "id": "sid-AD647956-0393-4BFD-AF56-70D24242ADC4",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:SequenceFlow",
+          "id": "sid-39D9EE56-48BF-4601-80FC-24557EF3D8DD",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        }
+      ],
+      "artifacts": [
+        {
+          "$type": "bpmn:Association",
+          "associationDirection": "None",
+          "id": "sid-04069AF2-611E-4DC3-955D-D2C028DC0176",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:Association",
+          "associationDirection": "None",
+          "id": "sid-0B4C2E74-904A-4DC0-86AD-AC934680691C",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "$type": "bpmn:Process",
+      "id": "sid-E21AE530-B159-4DD4-9650-4635D6D2496F",
+      "isClosed": false,
+      "isExecutable": false,
+      "name": "Receiver",
+      "processType": "None",
+      "extensionElements": {
+        "$type": "bpmn:ExtensionElements"
+      },
+      "ioSpecification": {
+        "$type": "bpmn:InputOutputSpecification",
+        "id": "sid-93547466-31cd-4c88-bbf2-2bf337fb8757",
+        "dataInputs": [
+          {
+            "$type": "bpmn:DataInput",
+            "id": "sid-2594D7BE-AF56-414E-95B8-12F3D5D3BBBF",
+            "isCollection": false,
+            "name": "SLAs",
+            "extensionElements": {
+              "$type": "bpmn:ExtensionElements",
+              "values": [
+                {
+                  "$type": "signavio:signavioMetaData",
+                  "metaKey": "bgcolor",
+                  "metaValue": "#ffffff"
+                },
+                {
+                  "$type": "signavio:signavioMetaData",
+                  "metaKey": "bordercolor",
+                  "metaValue": "#000000"
+                }
+              ]
+            }
+          }
+        ],
+        "inputSets": [
+          {
+            "$type": "bpmn:InputSet",
+            "id": "sid-6f7f4167-d6b3-4eaf-b42e-8597ef965739"
+          }
+        ],
+        "outputSets": [
+          {
+            "$type": "bpmn:OutputSet",
+            "id": "sid-5f33b50f-cdd6-4b50-ba6a-068d5aa56596"
+          }
+        ]
+      },
+      "laneSets": [
+        {
+          "$type": "bpmn:LaneSet",
+          "id": "sid-9b7ea905-1a6c-4d02-9cc8-a9de9a9d1166",
+          "lanes": [
+            {
+              "$type": "bpmn:Lane",
+              "id": "sid-A5007B80-7C6D-486C-9EA6-838AD73052CC",
+              "extensionElements": {
+                "$type": "bpmn:ExtensionElements",
+                "values": [
+                  {
+                    "$type": "signavio:signavioMetaData",
+                    "metaKey": "bgcolor",
+                    "metaValue": ""
+                  },
+                  {
+                    "$type": "signavio:signavioMetaData",
+                    "metaKey": "bordercolor",
+                    "metaValue": "#000000"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "flowElements": [
+        {
+          "$type": "bpmn:ManualTask",
+          "completionQuantity": 1,
+          "id": "sid-1BF1E80F-C04A-4E89-91FB-AEB857FED03D",
+          "isForCompensation": false,
+          "name": "receive parcel",
+          "startQuantity": 1,
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#FFFFFF"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "risklevel",
+                "metaValue": ""
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "externaldocuments",
+                "metaValue": "[]"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:StartEvent",
+          "id": "sid-85222F0E-BF58-44A9-B409-A5DB50AB0CBA",
+          "isInterrupting": true,
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#ffffff"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "viaitsystem",
+                "metaValue": ""
+              }
+            ]
+          },
+          "eventDefinitions": [
+            {
+              "$type": "bpmn:MessageEventDefinition",
+              "id": "sid-86a06a8c-e160-489b-a663-b9eb8266ac06"
+            }
+          ]
+        },
+        {
+          "$type": "bpmn:ExclusiveGateway",
+          "gatewayDirection": "Diverging",
+          "id": "sid-BC5BD1E7-4E2F-4313-BAF7-1257EFA4000E",
+          "name": "parcel in \nacceptable \ncondition?",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#ffffff"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              },
+              {
+                "$type": "signavio:signavioLabel",
+                "align": "center",
+                "ref": "text_name",
+                "valign": "middle",
+                "x": "79.0",
+                "y": "49.0"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:UserTask",
+          "completionQuantity": 1,
+          "id": "sid-02131101-8AC1-4FFE-B449-B25287A49274",
+          "implementation": "##WebService",
+          "isForCompensation": false,
+          "name": "accept parcel",
+          "startQuantity": 1,
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#FFFFFF"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "risklevel",
+                "metaValue": ""
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "externaldocuments",
+                "metaValue": "[]"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:UserTask",
+          "completionQuantity": 1,
+          "id": "sid-D47E7497-71E0-4E6F-9916-AC22016C1DD2",
+          "implementation": "##WebService",
+          "isForCompensation": false,
+          "name": "reject parcel",
+          "startQuantity": 1,
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#FFFFFF"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "risklevel",
+                "metaValue": ""
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "externaldocuments",
+                "metaValue": "[]"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:IntermediateThrowEvent",
+          "id": "sid-CAAB31F9-BA8E-416F-81FE-6D4E41EFA446",
+          "name": "notify acceptance",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#ffffff"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          },
+          "eventDefinitions": [
+            {
+              "$type": "bpmn:MessageEventDefinition",
+              "id": "sid-6bdfd454-3048-4c4e-9e15-d50376ee9ceb"
+            }
+          ]
+        },
+        {
+          "$type": "bpmn:EndEvent",
+          "id": "sid-F2E6FE1A-B134-4C1F-A998-CB7A730C04BC",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#ffffff"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:EndEvent",
+          "id": "sid-056C939C-750C-4BD8-BF85-7F020977BA07",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bgcolor",
+                "metaValue": "#ffffff"
+              },
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          },
+          "eventDefinitions": [
+            {
+              "$type": "bpmn:TerminateEventDefinition",
+              "id": "sid-27688ba4-6c9e-4e2f-a093-23de0692ccc8"
+            }
+          ]
+        },
+        {
+          "$type": "bpmn:SequenceFlow",
+          "id": "sid-41F50BDE-593E-4B22-97D7-ECEC359218BA",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:SequenceFlow",
+          "id": "sid-9FABF3EA-687C-47CC-860E-A967674CF773",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:SequenceFlow",
+          "id": "sid-AE0261B0-7304-438F-A984-094DF452DE76",
+          "name": "no",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:SequenceFlow",
+          "id": "sid-328A10F9-C9D1-43CB-8923-E8CDC0A45A0C",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:SequenceFlow",
+          "id": "sid-92FE67D1-22AA-41D3-A6BB-BF2CF8531EF0",
+          "name": "yes",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:SequenceFlow",
+          "id": "sid-8AE91523-07EA-4829-A251-651688AED026",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        },
+        {
+          "$type": "bpmn:SequenceFlow",
+          "id": "sid-8759DB2E-C0D3-4517-933F-A812B702FB3A",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        }
+      ],
+      "artifacts": [
+        {
+          "$type": "bpmn:Association",
+          "associationDirection": "None",
+          "id": "sid-7C071E51-713E-4A37-BCC1-F3E49265F957",
+          "extensionElements": {
+            "$type": "bpmn:ExtensionElements",
+            "values": [
+              {
+                "$type": "signavio:signavioMetaData",
+                "metaKey": "bordercolor",
+                "metaValue": "#000000"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "diagrams": [
+    {
+      "$type": "bpmndi:BPMNDiagram",
+      "id": "sid-bd685300-9a0e-45aa-89a9-efe32b722ab9",
+      "plane": {
+        "$type": "bpmndi:BPMNPlane",
+        "id": "sid-691eecf5-fe6c-48aa-98ce-a37d0a14d466",
+        "planeElement": [
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-9028AB76-0AB4-4EA1-8D45-AD27965EC75F_gui",
+            "isHorizontal": true,
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 149,
+              "width": 833,
+              "x": 563,
+              "y": 80
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 38.57143020629883,
+                "width": 12,
+                "x": 568,
+                "y": 135.2142848968506
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-03A31EF6-B792-4F9E-9D30-23598045E2DE_gui",
+            "isHorizontal": true,
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 260.128225833148,
+              "width": 833,
+              "x": 563,
+              "y": 246
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 36.25714111328125,
+                "width": 12,
+                "x": 567.9998824447541,
+                "y": 357.9355423599334
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-4B72A8B7-6265-4C05-AB20-5D8695EDD40C_gui",
+            "isHorizontal": true,
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 214,
+              "width": 833,
+              "x": 563,
+              "y": 520.3376014051028
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 44.74285888671875,
+                "width": 12,
+                "x": 568,
+                "y": 604.9661719617434
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-198A35CD-60FF-4753-83EA-ADD0C8AC8BA8_gui",
+            "isHorizontal": true,
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 149,
+              "width": 803,
+              "x": 593,
+              "y": 80
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-1B01F960-43E0-4D1B-9D83-B4CF358F22D8_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 30,
+              "width": 30,
+              "x": 622,
+              "y": 114.24867403083738
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-6E2722C4-BD0A-4E80-BA19-6E2D514CC554_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 30,
+              "width": 30,
+              "x": 904,
+              "y": 114.24867403083738
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 11,
+                "width": 79.19999694824219,
+                "x": 879.4000015258789,
+                "y": 95.24867403083738
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-E9C1DE44-71D9-47EE-A817-482820518B93_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 30,
+              "width": 30,
+              "x": 1012,
+              "y": 114.24867403083738
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-CE946C01-BDBC-4CA7-BA51-D5C42992A5CC_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 80,
+              "width": 100,
+              "x": 1092,
+              "y": 89.24867403083738
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 12,
+                "width": 59.400001525878906,
+                "x": 1112.2999992370605,
+                "y": 121.24867403083738
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-9B538D0B-EDE0-40F6-A55F-41B3409E6659_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 28,
+              "width": 28,
+              "x": 1323,
+              "y": 115.24867403083738
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-5AAEE300-64A5-4167-9EA2-CBBFF5CEEA68_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 80,
+              "width": 100,
+              "x": 697,
+              "y": 89.24867403083738
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 12,
+                "width": 77.14286041259766,
+                "x": 708.4285697937012,
+                "y": 121.24867403083738
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-423812FB-9184-443D-B1DD-4F20E3DB7C18_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 59,
+              "width": 40,
+              "x": 1041,
+              "y": 158
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 12,
+                "width": 36.25714111328125,
+                "x": 1042.8714294433594,
+                "y": 179.5
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-27BF3370-F20A-4283-BE71-2BA27F75BE51_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 59,
+              "width": 40,
+              "x": 836,
+              "y": 158
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 12,
+                "width": 27.77143096923828,
+                "x": 842.1142845153809,
+                "y": 179.5
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-91B88C4F-6EFC-4D36-9688-7F5270A0F7BB_gui",
+            "isHorizontal": true,
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 260.128225833148,
+              "width": 803,
+              "x": 593,
+              "y": 246
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-08705128-8BD2-4262-9F41-709E44E94BA1_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 30,
+              "width": 30,
+              "x": 622,
+              "y": 299
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-85C3F308-8992-4DEF-8C6A-8622FE62060A_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 80,
+              "width": 100,
+              "x": 697,
+              "y": 274
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 12,
+                "width": 70.19999694824219,
+                "x": 711.9000015258789,
+                "y": 306
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-CFD34EB0-7AF3-4030-BA00-A4B4A6F772F1_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 30,
+              "width": 30,
+              "x": 904,
+              "y": 299
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 11,
+                "width": 79.19999694824219,
+                "x": 879.4000015258789,
+                "y": 280
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-6736A8E0-D0B0-4F8A-94F8-CCCA5A3ABF80_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 30,
+              "width": 30,
+              "x": 1237,
+              "y": 299
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 11,
+                "width": 60.81428527832031,
+                "x": 1221.5928573608398,
+                "y": 331
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-CCA902CE-D734-4766-9EF3-66D70AE07FA0_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 28,
+              "width": 28,
+              "x": 1323,
+              "y": 300
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-F5CB219E-F87E-4BE4-AB06-C23370EA47DF_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 80,
+              "width": 100,
+              "x": 1092,
+              "y": 274
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 12,
+                "width": 73.28571319580078,
+                "x": 1105.3571434020996,
+                "y": 306
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-0D306884-7F25-4F26-8540-295392DBC33C_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 80,
+              "width": 100,
+              "x": 699,
+              "y": 394.33760140510276
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 12,
+                "width": 70.97142791748047,
+                "x": 713.5142860412598,
+                "y": 426.33760140510276
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-CEB42A44-41F3-4402-8BF6-93902031CE0F_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 28,
+              "width": 28,
+              "x": 842,
+              "y": 420.33760140510276
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-FB5F85DD-D19C-42D6-B6C9-F5BDB8EE8593_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 30,
+              "width": 30,
+              "x": 1017,
+              "y": 299
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-EB497C6A-0ABF-4110-AB96-B568F5277901_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 30,
+              "width": 30,
+              "x": 734,
+              "y": 339.29551285815273
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 11,
+                "width": 38.18571472167969,
+                "x": 772.9071426391602,
+                "y": 358.29551285815273
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-7ED9BAD9-4211-4942-B415-45E0446BD467_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 59,
+              "width": 40,
+              "x": 617,
+              "y": 354.33760140510276
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 12,
+                "width": 27.77143096923828,
+                "x": 623.1142845153809,
+                "y": 375.83760140510276
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-BAA815A9-F49F-480B-BA3E-CFCE4E357CB2_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 59,
+              "width": 40,
+              "x": 1041,
+              "y": 354.33760140510276
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 12,
+                "width": 27.77143096923828,
+                "x": 1047.1142845153809,
+                "y": 375.83760140510276
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-55D441AE-C2C9-4316-8931-CEEE1D5E4A03_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 59,
+              "width": 40,
+              "x": 1202,
+              "y": 374
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 12,
+                "width": 36.25714111328125,
+                "x": 1203.8714294433594,
+                "y": 395.5
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-1F661508-883F-467F-9964-D969CC3F8161_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 59,
+              "width": 40,
+              "x": 836,
+              "y": 346
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 12,
+                "width": 33.94285583496094,
+                "x": 839.0285720825195,
+                "y": 367.5
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-A5007B80-7C6D-486C-9EA6-838AD73052CC_gui",
+            "isHorizontal": true,
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 214,
+              "width": 803,
+              "x": 593,
+              "y": 520.3376014051028
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-1BF1E80F-C04A-4E89-91FB-AEB857FED03D_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 80,
+              "width": 100,
+              "x": 697,
+              "y": 548.3376014051028
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 12,
+                "width": 72.5142822265625,
+                "x": 710.7428588867188,
+                "y": 580.3376014051028
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-85222F0E-BF58-44A9-B409-A5DB50AB0CBA_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 30,
+              "width": 30,
+              "x": 622,
+              "y": 573.3376014051028
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-BC5BD1E7-4E2F-4313-BAF7-1257EFA4000E_gui",
+            "isMarkerVisible": true,
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 40,
+              "width": 40,
+              "x": 836,
+              "y": 568.3376014051028
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 36,
+                "width": 56.31428527832031,
+                "x": 886.8428573608398,
+                "y": 597.3376014051028
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-02131101-8AC1-4FFE-B449-B25287A49274_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 80,
+              "width": 100,
+              "x": 982,
+              "y": 548.3376014051028
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 12,
+                "width": 70.19999694824219,
+                "x": 996.9000015258789,
+                "y": 580.3376014051028
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-D47E7497-71E0-4E6F-9916-AC22016C1DD2_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 80,
+              "width": 100,
+              "x": 806,
+              "y": 647
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 12,
+                "width": 66.34285736083984,
+                "x": 822.8285713195801,
+                "y": 679
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-CAAB31F9-BA8E-416F-81FE-6D4E41EFA446_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 30,
+              "width": 30,
+              "x": 1127,
+              "y": 573.3376014051028
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 11,
+                "width": 86.27143096923828,
+                "x": 1098.8642845153809,
+                "y": 605.3376014051028
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-F2E6FE1A-B134-4C1F-A998-CB7A730C04BC_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 28,
+              "width": 28,
+              "x": 1323,
+              "y": 574.3376014051028
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-056C939C-750C-4BD8-BF85-7F020977BA07_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 28,
+              "width": 28,
+              "x": 1018,
+              "y": 673
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNShape",
+            "id": "sid-2594D7BE-AF56-414E-95B8-12F3D5D3BBBF_gui",
+            "bounds": {
+              "$type": "dc:Bounds",
+              "height": 59,
+              "width": 40,
+              "x": 751,
+              "y": 648.3376014051028
+            },
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 12,
+                "width": 27.77143096923828,
+                "x": 757.1142845153809,
+                "y": 669.8376014051028
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-0D58D937-E0FE-4A79-89E8-B83F29B7FC54_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 652,
+                "y": 129.24867403083738
+              },
+              {
+                "$type": "dc:Point",
+                "x": 697,
+                "y": 129.24867403083738
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-D030BD63-52F5-41EF-976F-F01497B96A3E_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 1192,
+                "y": 129.24867403083738
+              },
+              {
+                "$type": "dc:Point",
+                "x": 1323,
+                "y": 129.24867403083738
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-03AA944C-DCD4-4D8A-8499-1FE7C5FF0E42_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 1267,
+                "y": 314
+              },
+              {
+                "$type": "dc:Point",
+                "x": 1323,
+                "y": 314
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-41F50BDE-593E-4B22-97D7-ECEC359218BA_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 652,
+                "y": 588.3376014051028
+              },
+              {
+                "$type": "dc:Point",
+                "x": 697,
+                "y": 588.3376014051028
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-73166009-1959-414F-A300-ABF797C8C467_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 1192,
+                "y": 314
+              },
+              {
+                "$type": "dc:Point",
+                "x": 1237,
+                "y": 314
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-6A88A2DF-3C35-4625-93A9-83457AAC00D5_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 1206.3587005126308,
+                "y": 374
+              },
+              {
+                "$type": "dc:Point",
+                "x": 1192,
+                "y": 346.91902341844
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-9E30C50C-1EFA-480C-89EC-B2B7BC43702D_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 749,
+                "y": 369.29551285815273
+              },
+              {
+                "$type": "dc:Point",
+                "x": 749,
+                "y": 394.33760140510276
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-246728EF-EB9C-4D04-8089-FCE2C8CB391D_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 799,
+                "y": 434.33760140510276
+              },
+              {
+                "$type": "dc:Point",
+                "x": 842,
+                "y": 434.33760140510276
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-17807F92-AD25-44ED-AA81-AD38548CB7D2_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 1042,
+                "y": 129.24867403083738
+              },
+              {
+                "$type": "dc:Point",
+                "x": 1092,
+                "y": 129.24867403083738
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-7C3450FC-4056-4636-85AC-AFABFA1BA17B_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 652,
+                "y": 314
+              },
+              {
+                "$type": "dc:Point",
+                "x": 697,
+                "y": 314
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-8779C01A-4EF4-44C3-A7BA-C38D6CB4B624_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 797,
+                "y": 314
+              },
+              {
+                "$type": "dc:Point",
+                "x": 904,
+                "y": 314
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-AD647956-0393-4BFD-AF56-70D24242ADC4_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 934,
+                "y": 314
+              },
+              {
+                "$type": "dc:Point",
+                "x": 1017,
+                "y": 314
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-9FABF3EA-687C-47CC-860E-A967674CF773_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 797,
+                "y": 588.5659119073858
+              },
+              {
+                "$type": "dc:Point",
+                "x": 836,
+                "y": 588.7439940991667
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-AE0261B0-7304-438F-A984-094DF452DE76_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 856.4006747987054,
+                "y": 608.3376014051028
+              },
+              {
+                "$type": "dc:Point",
+                "x": 856.2037440026556,
+                "y": 647
+              }
+            ],
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 13.946684537965666,
+                "width": 12.070571915639903,
+                "x": 836.2903781387986,
+                "y": 616.1417573149298
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-328A10F9-C9D1-43CB-8923-E8CDC0A45A0C_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 1082,
+                "y": 588.3376014051028
+              },
+              {
+                "$type": "dc:Point",
+                "x": 1127,
+                "y": 588.3376014051028
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-39D9EE56-48BF-4601-80FC-24557EF3D8DD_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 1047,
+                "y": 314
+              },
+              {
+                "$type": "dc:Point",
+                "x": 1092,
+                "y": 314
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-7E476408-1972-48F3-8DCC-63F8B5D6B10C_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 934,
+                "y": 129.24867403083738
+              },
+              {
+                "$type": "dc:Point",
+                "x": 1012,
+                "y": 129.24867403083738
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-F4A0EBF2-B140-4735-A57B-22E327821406_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 797,
+                "y": 129.24867403083738
+              },
+              {
+                "$type": "dc:Point",
+                "x": 904,
+                "y": 129.24867403083738
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-98DF549B-BE8C-4961-8ADA-6A4496C82A84_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 919,
+                "y": 144.24867403083738
+              },
+              {
+                "$type": "dc:Point",
+                "x": 919,
+                "y": 264
+              },
+              {
+                "$type": "dc:Point",
+                "x": 637,
+                "y": 264
+              },
+              {
+                "$type": "dc:Point",
+                "x": 637,
+                "y": 299
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-92FE67D1-22AA-41D3-A6BB-BF2CF8531EF0_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 876,
+                "y": 588.7820458495472
+              },
+              {
+                "$type": "dc:Point",
+                "x": 982,
+                "y": 588.4800515475529
+              }
+            ],
+            "label": {
+              "$type": "bpmndi:BPMNLabel",
+              "bounds": {
+                "$type": "dc:Bounds",
+                "height": 12.052699337022318,
+                "width": 18.54839563617577,
+                "x": 883.890007491089,
+                "y": 568.7065239728
+              }
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-8AE91523-07EA-4829-A251-651688AED026_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 906,
+                "y": 687
+              },
+              {
+                "$type": "dc:Point",
+                "x": 1018,
+                "y": 687
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-8759DB2E-C0D3-4517-933F-A812B702FB3A_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 1157,
+                "y": 588.3376014051028
+              },
+              {
+                "$type": "dc:Point",
+                "x": 1323,
+                "y": 588.3376014051028
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-04069AF2-611E-4DC3-955D-D2C028DC0176_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 653.47393348071,
+                "y": 354.33760140510276
+              },
+              {
+                "$type": "dc:Point",
+                "x": 676,
+                "y": 314
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-0B1D4693-FE71-4F8C-B4AA-C3F46237E4A8_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 1060.2403606396285,
+                "y": 158
+              },
+              {
+                "$type": "dc:Point",
+                "x": 1059.5,
+                "y": 129.24867403083738
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-ECC53970-1016-4B14-B1DF-988700C2D69D_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 876,
+                "y": 162.10432655295364
+              },
+              {
+                "$type": "dc:Point",
+                "x": 901.875,
+                "y": 129.24867403083738
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-A539E1C8-E1D1-4278-B3B0-72C4EEC37D85_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 919,
+                "y": 329
+              },
+              {
+                "$type": "dc:Point",
+                "x": 919,
+                "y": 496
+              },
+              {
+                "$type": "dc:Point",
+                "x": 637,
+                "y": 496
+              },
+              {
+                "$type": "dc:Point",
+                "x": 637,
+                "y": 573.3376014051028
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-3F9CECA2-D8C9-40D0-BE91-DC13E231F4A4_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 799,
+                "y": 406.84339514103607
+              },
+              {
+                "$type": "dc:Point",
+                "x": 836,
+                "y": 386.4976825056267
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-0B4C2E74-904A-4DC0-86AD-AC934680691C_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 1073.0122431630177,
+                "y": 354.33760140510276
+              },
+              {
+                "$type": "dc:Point",
+                "x": 1089.4375,
+                "y": 314
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-7C071E51-713E-4A37-BCC1-F3E49265F957_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 791,
+                "y": 649.601957201562
+              },
+              {
+                "$type": "dc:Point",
+                "x": 834.1077578894201,
+                "y": 588.7431914926598
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-A790C852-994B-4CC3-B019-13DF585E533D_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 1252,
+                "y": 299
+              },
+              {
+                "$type": "dc:Point",
+                "x": 1252,
+                "y": 264
+              },
+              {
+                "$type": "dc:Point",
+                "x": 1027,
+                "y": 264
+              },
+              {
+                "$type": "dc:Point",
+                "x": 1027,
+                "y": 144.24867403083738
+              }
+            ]
+          },
+          {
+            "$type": "bpmndi:BPMNEdge",
+            "id": "sid-B99BCB16-7057-42BA-8486-A9B751FA2234_gui",
+            "waypoint": [
+              {
+                "$type": "dc:Point",
+                "x": 1142,
+                "y": 573.3376014051028
+              },
+              {
+                "$type": "dc:Point",
+                "x": 1142,
+                "y": 499
+              },
+              {
+                "$type": "dc:Point",
+                "x": 1032,
+                "y": 499
+              },
+              {
+                "$type": "dc:Point",
+                "x": 1032,
+                "y": 329
+              }
+            ]
+          }
+        ]
+      },
+      "labelStyle": [
+        {
+          "$type": "bpmndi:BPMNLabelStyle",
+          "id": "sid-cc4dfa1e-6e2c-4c4e-ae5b-82f1057d0d41",
+          "font": {
+            "$type": "dc:Font",
+            "isBold": false,
+            "isItalic": false,
+            "isStrikeThrough": false,
+            "isUnderline": false,
+            "name": "Arial",
+            "size": 11
+          }
+        },
+        {
+          "$type": "bpmndi:BPMNLabelStyle",
+          "id": "sid-5c1be77a-56d9-4df8-9ad3-ec1122187a41",
+          "font": {
+            "$type": "dc:Font",
+            "isBold": false,
+            "isItalic": false,
+            "isStrikeThrough": false,
+            "isUnderline": false,
+            "name": "Arial",
+            "size": 12
+          }
+        }
+      ]
+    }
+  ]
+}

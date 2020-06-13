@@ -8,6 +8,7 @@ import camundaModdleDescriptor from 'camunda-bpmn-moddle/resources/camunda';
 import {emptyBpmn} from "../resources/emptyBpmn";
 import {CURRENT_BPMN} from "../util/constants";
 import {insertUncertainties} from "../util/mining_util";
+import uncertainty from "../resources/uncertainty.json"
 
 
 //Code from https://github.com/Varooneh/reactbpmn/blob/master/src/components/bpmn/bpmn.modeler.component.jsx
@@ -28,6 +29,7 @@ export default function Modeler() {
                 propertiesProviderModule
             ],
             moddleExtensions: {
+                unc: uncertainty,
                 camunda: camundaModdleDescriptor
             }
         });

@@ -1,16 +1,27 @@
 {
   "name": "Uncertainty",
-  "uri": "http://tu-berlin/schema/bpmn/trust",
+  "uri": "http://trust",
   "prefix": "unc",
   "xml": {
     "tagAlias": "lowerCase"
   },
   "types": [
     {
-      "name": "Uncertainty",
+      "name": "Uncertainty Score",
       "extends": [
         "bpmn:FlowNode"
       ],
+      "properties": [
+        {
+          "name": "uncertainty_score",
+          "isAttr": true,
+          "type": "Integer"
+        }
+      ]
+    },
+    {
+      "name": "Uncertainty",
+      "superClass": [ "Element" ],
       "properties": [
         {
           "name": "perspective",
@@ -30,6 +41,5 @@
       ]
     }
   ],
-  "emumerations": [],
   "associations": []
 }

@@ -5,8 +5,6 @@ import {CURRENT_UNCERTAINTY_LIST} from "./constants";
 
 export function loadUncertainties(): Array<UncertaintyRow> {
     let currentList = localStorage.getItem(CURRENT_UNCERTAINTY_LIST)
-    console.log(currentList)
-    console.log(currentList)
     let csvList = (currentList) ? currentList.split("\n") : defaultUncertainties.split("\n")
     let lines = [];
     let header = csvList[0].split(',');
@@ -46,3 +44,6 @@ export function saveUncertainties(uncertaintyList: Array<UncertaintyRow>) {
     let csv = header + "\n" + csvString
     localStorage.setItem(CURRENT_UNCERTAINTY_LIST, csv)
 }
+
+export const extractUncertaintyList = (component: String) =>
+    loadUncertainties().filter(uncertainty => uncertainty.component == component)
