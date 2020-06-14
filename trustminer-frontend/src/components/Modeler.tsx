@@ -11,7 +11,7 @@ import {insertUncertainties} from "../util/mining_util";
 import uncertainty from "../resources/uncertainty.json"
 
 
-//Code from https://github.com/Varooneh/reactbpmn/blob/master/src/components/bpmn/bpmn.modeler.component.jsx
+//Initial code from https://github.com/Varooneh/reactbpmn/blob/master/src/components/bpmn/bpmn.modeler.component.jsx
 
 export default function Modeler() {
     const [modeler, setModeler] = useState<typeof BpmnModeler>()

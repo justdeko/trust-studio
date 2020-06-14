@@ -31,6 +31,12 @@ export function loadUncertainties(): Array<UncertaintyRow> {
     })
 }
 
+function getComponentType(component: string, subcomponent: string) {
+    if (subcomponent == "-") {
+        return component
+    } else return subcomponent
+}
+
 export function saveUncertainties(uncertaintyList: Array<UncertaintyRow>) {
     console.log("this was called")
     let csvString = ""

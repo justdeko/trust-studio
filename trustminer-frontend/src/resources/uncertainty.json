@@ -9,7 +9,7 @@
     {
       "name": "Uncertainty Score",
       "extends": [
-        "bpmn:FlowNode"
+        "bpmn:Participant"
       ],
       "properties": [
         {
