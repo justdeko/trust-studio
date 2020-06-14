@@ -7,8 +7,8 @@ import propertiesProviderModule from 'bpmn-js-properties-panel/lib/provider/camu
 import camundaModdleDescriptor from 'camunda-bpmn-moddle/resources/camunda';
 import {emptyBpmn} from "../resources/emptyBpmn";
 import {CURRENT_BPMN} from "../util/constants";
-import {insertUncertainties} from "../util/mining_util";
-import uncertainty from "../resources/uncertainty.json"
+import {insertUncertainties} from "../miner/uncertaintyDiscovery";
+import uncertainty from "../resources/uncertaintyExtension.json"
 
 
 //Initial code from https://github.com/Varooneh/reactbpmn/blob/master/src/components/bpmn/bpmn.modeler.component.jsx

@@ -2,14 +2,10 @@ import React, {useEffect} from "react";
 import MaterialTable, {Column} from "material-table";
 import {tableIcons} from "../theme/MaterialTableIcons"
 import {loadUncertainties, saveUncertainties} from "../util/csv_util";
+import {Perspective} from "../model/Perspective";
+import {TrustConcern} from "../model/TrustConcern";
+import {UncertaintyRow} from "../model/UncertaintyRow";
 
-export interface UncertaintyRow {
-    component: string,
-    perspective: string,
-    trustconcern: string,
-    root: string,
-    question: string
-}
 
 interface TableState {
     columns: Array<Column<UncertaintyRow>>;
@@ -19,9 +15,10 @@ interface TableState {
 export default function UncertaintyTable() {
     const [state, setState] = React.useState<TableState>({
         columns: [
+            {title: 'Parent Component', field: "parentComponent"},
             {title: 'Component', field: 'component'},
-            {title: 'Perspective', field: 'perspective'},
-            {title: 'Trust Concern', field: 'trustconcern'},
+            {title: 'Perspective', field: 'perspective', lookup: Perspective},
+            {title: 'Trust Concern', field: 'trustconcern', lookup: TrustConcern},
             {title: 'Concern Root', field: 'root'},
             {title: 'Question', field: 'question'},
         ],

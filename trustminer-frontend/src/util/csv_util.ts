@@ -1,16 +1,18 @@
 import {defaultUncertainties} from "../resources/defaultUncertainties";
-import {UncertaintyRow} from "../components/UncertaintyTable";
+import {UncertaintyRow} from "../model/UncertaintyRow";
 import {CURRENT_UNCERTAINTY_LIST} from "./constants";
 
+const sep = ";" // Column separator
+const nl = "\n" // Row separator
 
 export function loadUncertainties(): Array<UncertaintyRow> {
     let currentList = localStorage.getItem(CURRENT_UNCERTAINTY_LIST)
-    let csvList = (currentList) ? currentList.split("\n") : defaultUncertainties.split("\n")
+    let csvList = (currentList) ? currentList.split(nl) : defaultUncertainties.split(nl)
     let lines = [];
-    let header = csvList[0].split(',');
+    let header = csvList[0].split(sep);
     for (let i = 1; i < csvList.length; i++) {
         // split uncertainties based on comma
-        let data = csvList[i].split(',');
+        let data = csvList[i].split(sep);
         if (data.length === header.length) {
             let line = [];
             for (let j = 0; j < header.length; j++) {
@@ -22,32 +24,29 @@ export function loadUncertainties(): Array<UncertaintyRow> {
     // Convert uncertainties to UncertaintyRow interface
     return lines.map(line => {
         return {
-            component: line[2],
-            perspective: line[3],
-            trustconcern: line[4],
-            root: line[5],
-            question: line[6]
+            parentComponent: line[0],
+            component: line[1],
+            perspective: Number(line[2]),
+            trustconcern: line[3],
+            root: line[4],
+            question: line[5]
         }
     })
 }
 
-function getComponentType(component: string, subcomponent: string) {
-    if (subcomponent == "-") {
-        return component
-    } else return subcomponent
-}
-
 export function saveUncertainties(uncertaintyList: Array<UncertaintyRow>) {
-    console.log("this was called")
     let csvString = ""
     uncertaintyList.forEach((row, index) => {
-        let stringRow = ",," + row.component + "," + row.perspective + "," + row.trustconcern + "," + row.root + "," + row.question + ","
+        let stringRow =
+            row.parentComponent + sep + row.component + sep +
+            row.perspective + sep + row.trustconcern + sep +
+            row.root + sep + row.question
         // add a newline if its not the last item
-        if (index != uncertaintyList.length - 1) stringRow += "\n"
+        if (index != uncertaintyList.length - 1) stringRow += nl
         csvString += stringRow
     })
-    let header = defaultUncertainties.split("\n")[0]
-    let csv = header + "\n" + csvString
+    let header = defaultUncertainties.split(nl)[0]
+    let csv = header + nl + csvString
     localStorage.setItem(CURRENT_UNCERTAINTY_LIST, csv)
 }
 

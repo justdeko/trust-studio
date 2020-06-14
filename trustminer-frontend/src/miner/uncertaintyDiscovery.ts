@@ -1,8 +1,8 @@
-import {CURRENT_BPMN} from "./constants";
+import {CURRENT_BPMN} from "../util/constants";
 import BpmnModdle from 'bpmn-moddle';
-import {extractUncertaintyList} from "./csv_util";
+import {extractUncertaintyList} from "../util/csv_util";
 import {UncertaintyTypes} from "../model/UncertaintyTypes";
-import uncertainty from "../resources/uncertainty.json"
+import uncertainty from "../resources/uncertaintyExtension.json"
 
 const moddle = new BpmnModdle({
     unc: uncertainty
@@ -30,7 +30,7 @@ function insertIntoElement(el: any) {
     let type = UncertaintyTypes[el.$type]
     let uncertaintyList = extractUncertaintyList(type)
     const extensionElements = el.extensionElements || moddle.create('bpmn:ExtensionElements');
-    uncertaintyList.forEach( uncertainty => {
+    uncertaintyList.forEach(uncertainty => {
         let uncertaintyEl = moddle.create('unc:Uncertainty');
         extensionElements.get("values").push(uncertaintyEl)
         uncertaintyEl.perspective = uncertainty.perspective

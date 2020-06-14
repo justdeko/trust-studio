@@ -1,5 +1,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Code conventions
+- UpperCamelCase for files and modules, camelCase for variables and other
+- types that are more complex than three key-value-pairs need to be defined in the model directory
+-  Separation of concerns: components, pages, model, resources and util
+
+
+
 ## Available Scripts
 
 In the project directory, you can run:
