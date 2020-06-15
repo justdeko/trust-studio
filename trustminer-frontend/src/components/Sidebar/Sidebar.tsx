@@ -5,8 +5,8 @@ import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
-import {mainListItems} from "./DashboardMenu";
-import {useSidebarStyles} from "../styles/sidebar-styles";
+import {mainListItems} from "./SidebarMenu";
+import {useSidebarStyles} from "../../styles/sidebar-styles";
 
 
 interface SidebarProps {

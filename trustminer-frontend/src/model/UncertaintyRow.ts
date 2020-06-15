@@ -2,7 +2,7 @@ export interface UncertaintyRow {
     component: string,
     parentComponent: string | null,
     perspective: number,
-    trustconcern: string,
+    trustconcern: number,
     root: string,
     question: string
 }

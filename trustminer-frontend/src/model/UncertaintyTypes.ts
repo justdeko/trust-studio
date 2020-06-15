@@ -1,4 +1,4 @@
-export const UncertaintyTypes: { [id: string] : string; } = {
+export const UncertaintyTypes: { [id: string]: string; } = {
     "bpmn:Task": "Task",
     "bpmn:ManualTask": "Manual Task",
     "bpmn:UserTask": "User Task",
@@ -17,5 +17,6 @@ export const UncertaintyTypes: { [id: string] : string; } = {
     "bpmn:ParallelGateway": "Parallel Split",
     "bpmn:Join": "Join",
 
-    "bpmn:SequenceFlow": "Attached Data input",
+    "bpmn:SequenceFlow": "Control Flow",
+    "bpmn:MessageFlow": "Message Flow"
 }

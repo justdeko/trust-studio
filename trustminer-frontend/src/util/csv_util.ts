@@ -27,7 +27,7 @@ export function loadUncertainties(): Array<UncertaintyRow> {
             parentComponent: line[0],
             component: line[1],
             perspective: Number(line[2]),
-            trustconcern: line[3],
+            trustconcern: Number(line[3]),
             root: line[4],
             question: line[5]
         }
@@ -51,4 +51,8 @@ export function saveUncertainties(uncertaintyList: Array<UncertaintyRow>) {
 }
 
 export const extractUncertaintyList = (component: String) =>
-    loadUncertainties().filter(uncertainty => uncertainty.component == component)
+    loadUncertainties().filter(uncertainty =>
+        uncertainty.component == component
+        || (uncertainty.parentComponent == component && uncertainty.component == "-")
+        || (uncertainty.parentComponent == component && uncertainty.component.toLowerCase().includes("all"))
+    )

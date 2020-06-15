@@ -65,4 +65,4 @@ export const defaultUncertainties = "Component;Subcomponent;Perspective;Trust Co
     "Message Flow;Attached Data Object;1;2;data;Is the data during its transfer between nodes only visible to authorized entities?\n" +
     "Message Flow;-;3;1;organization;Is the control flow executed correctly?\n" +
     "Message Flow;-;3;2;organization;Is the inter-organizational control flow only visible to authorized entities?\n" +
-    "Message Flow;-;3;5;organization;Is the transitions between nodes fast enough?"
+    "Message Flow;-;3;5;organization;Is the transitions between nodes fast enough?";
