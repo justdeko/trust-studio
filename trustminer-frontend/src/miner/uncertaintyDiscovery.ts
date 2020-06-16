@@ -14,14 +14,12 @@ export async function insertUncertainties() {
     let bpmn = localStorage.getItem(CURRENT_BPMN)
     if (bpmn != null) {
         const {rootElement: definitions} = await moddle.fromXML(bpmn)
-        console.log(definitions)
         definitions.rootElements.forEach((el: any, index: number) => {
             if (index < 1) return // skipping the collaboration definition root element
             if (el.hasOwnProperty("flowElements")) {
                 el.flowElements.forEach((el: any) => insertIntoElement(el))
             }
         })
-        console.log(definitions)
         const {
             xml: xmlStrUpdated
         } = await moddle.toXML(definitions)
@@ -33,6 +31,11 @@ function insertIntoElement(el: any) {
     let type = UncertaintyTypes[el.$type]
     let uncertaintyList = extractUncertaintyList(type)
     const extensionElements = el.extensionElements || moddle.create('bpmn:ExtensionElements');
+
+    //if there already are uncertainties in this element, skip it
+    if (extensionElements.get("values").find((extensionElement: any) => extensionElement.$instanceOf('unc:Uncertainty'))) {
+        return
+    }
     uncertaintyList.forEach(uncertainty => {
         let uncertaintyEl = moddle.create('unc:Uncertainty');
         extensionElements.get("values").push(uncertaintyEl)

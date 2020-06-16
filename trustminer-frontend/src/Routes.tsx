@@ -1,5 +1,5 @@
 import React from 'react';
-import Modeler from "./components/Modeler";
+import Modeler from "./components/Modeler/Modeler";
 import 'bpmn-js-properties-panel/dist/assets/bpmn-js-properties-panel.css';
 import UncertaintyTable from "./components/UncertaintyTable";
 
