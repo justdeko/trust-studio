@@ -70,8 +70,8 @@ export default function Modeler() {
             console.log("this happened")
             return;
         }
-        let businessObject = (element && element.businessObject) || element
-        let uncertainties = getUncertainties(businessObject)
+
+        let uncertainties = getUncertainties(element)
         console.log(uncertainties)
         setUncertaintyList(uncertainties)
         setDialogOpen(true)
@@ -112,7 +112,8 @@ export default function Modeler() {
                 <List>
                     {uncertaintyList.map((uncertainty: any, index) => (
                         <ListItem button key={index}>
-                            <ListItemText primary={uncertainty.perspective + " => " + uncertainty.trust_concern}/>
+                            <ListItemText
+                                primary={`[${uncertainty.perspective}]` + " => " + uncertainty.trust_concern}/>
                         </ListItem>
                     ))}
                 </List>

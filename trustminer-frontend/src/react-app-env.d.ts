@@ -8,3 +8,4 @@ declare module 'bpmn-js/lib/util/ModelUtil';
 declare module 'camunda-bpmn-moddle/resources/camunda';
 declare module 'bpmn-moddle'
 declare module 'diagram-js/lib/draw/BaseRenderer'
+declare module 'bpmn-js/lib/features/modeling/util/ModelingUtil'
