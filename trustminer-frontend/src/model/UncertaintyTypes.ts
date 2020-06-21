@@ -18,5 +18,9 @@ export const UncertaintyTypes: { [id: string]: string; } = {
     "bpmn:Join": "Join",
 
     "bpmn:SequenceFlow": "Control Flow",
-    "bpmn:MessageFlow": "Message Flow"
+    "bpmn:MessageFlow": "Message Flow",
+
+    "bpmn:BoundaryEvent": "Event",
+    //Database
+    "bpmn:DataStoreReference": ""
 }

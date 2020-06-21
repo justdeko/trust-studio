@@ -39,7 +39,7 @@ export default function Modeler() {
                 UncertaintyBox
             ],
             moddleExtensions: {
-                unc: uncertainty,
+                trust: uncertainty,
                 camunda: camundaModdleDescriptor
             }
         });
@@ -60,19 +60,16 @@ export default function Modeler() {
     }, [])
 
     function openUncertainties(event: any) {
-        console.log("this happened")
         event.originalEvent.preventDefault();
         event.originalEvent.stopPropagation();
         let {element} = event
 
         // ignore root element
         if (!element.parent) {
-            console.log("this happened")
             return;
         }
 
         let uncertainties = getUncertainties(element)
-        console.log(uncertainties)
         setUncertaintyList(uncertainties)
         setDialogOpen(true)
     }
@@ -89,6 +86,7 @@ export default function Modeler() {
     const openBpmnDiagram = (xml: String) => {
         modeler.importXML(xml, (error: Error) => {
             if (error) {
+                console.log(error)
                 return console.log('failed to import xml');
             }
             insertUncertainties()

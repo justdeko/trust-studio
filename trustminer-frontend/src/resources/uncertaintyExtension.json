@@ -1,7 +1,7 @@
 {
   "name": "Uncertainty",
-  "uri": "http://trust",
-  "prefix": "unc",
+  "uri": "http://trust.snet.tu-berlin.de",
+  "prefix": "trust",
   "xml": {
     "tagAlias": "lowerCase"
   },

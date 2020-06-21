@@ -3,6 +3,9 @@ export const defaultUncertainties = "Component;Subcomponent;Perspective;Trust Co
     "Task;All / Attached Data Output;1;2;data;Is the data output only visible to authorized entities?\n" +
     "Task;All / Attached Data Output;1;3;data;Can the data output not be denied later on?\n" +
     "Task;All / Attached Data Output;1;4;data;Is the data storage available?\n" +
+    "Task;Database;1;1;data;Is the integrity of the stored data given?\n" +
+    "Task;Database;1;2;data;Is the database and its contents only visible to authorized entities?\n" +
+    "Task;Database;1;3;data;Is the database available when it is needed by other elements?\n" +
     "Task;Manual Task;2;1;resource;Do the involved resources execute the activity correctly?\n" +
     "Task;Manual Task;2;2;resource;Do the involved resources conform to the 2 requirements?\n" +
     "Task;Manual Task;2;3;resource;Can the resource not deny that the task was executed?\n" +

@@ -24,11 +24,28 @@ class UncertaintyBox extends BaseRenderer {
         const shape = this.bpmnRenderer.drawShape(parentNode, element);
 
         const uncertainties = getUncertainties(element);
-        console.log(uncertainties)
 
         if (uncertainties.length > 0) {
 
-            const rect = drawRect(parentNode, 85, 5 + 14 * uncertainties.length, UNCERTAINTY_BORDER_RADIUS, FILL_COLOR);
+            if (uncertainties.length > 5) {
+                const rect = drawRect(parentNode, 30, 20, UNCERTAINTY_BORDER_RADIUS, FILL_COLOR);
+                svgAttr(rect, {
+                    transform: `translate(-20, -10)`
+                });
+                const text = svgCreate("text");
+                svgAttr(text, {
+                    fill: UNCERTAINTY_TEXT_COLOR,
+                    transform: `translate(-15, 5)`
+                });
+                svgClasses(text).add("djs-label");
+                // @ts-ignore
+                svgAppend(text, document.createTextNode(uncertainties.length));
+
+                svgAppend(parentNode, text);
+                return shape
+            }
+
+            const rect = drawRect(parentNode, 90, 5 + 14 * uncertainties.length, UNCERTAINTY_BORDER_RADIUS, FILL_COLOR);
 
             svgAttr(rect, {
                 transform: `translate(-20, ${uncertainties.length * -10 - 25})`

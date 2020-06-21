@@ -1,3 +1,6 @@
+import BpmnUncertainty from "../model/BpmnUncertainty";
+import {EXTENSION_NAME} from "./constants";
+
 export function getUncertainties(element: any) {
     let businessObject = (element && element.businessObject) || element
     if (!businessObject.extensionElements) {
@@ -7,9 +10,9 @@ export function getUncertainties(element: any) {
         return [];
     }
     return businessObject.extensionElements.values.filter((extensionElement: any) => {
-        return extensionElement.$instanceOf('unc:Uncertainty');
+        return extensionElement.$instanceOf(EXTENSION_NAME);
     });
 }
 
-export const getAsShortenedString = (unc: any) =>
+export const getAsShortenedString = (unc: BpmnUncertainty) =>
     unc.root.slice(0, 3) + ". =>" + unc.trust_concern.slice(0, 4) + "."
