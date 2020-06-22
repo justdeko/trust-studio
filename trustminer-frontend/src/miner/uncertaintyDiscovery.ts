@@ -7,16 +7,17 @@ import {Perspective} from "../model/Perspective";
 import {TrustConcern} from "../model/TrustConcern";
 
 const moddle = new BpmnModdle({
-    unc: uncertainty
+    trust: uncertainty
 });
 
 export async function insertUncertainties() {
     let bpmn = localStorage.getItem(CURRENT_BPMN)
     if (bpmn != null) {
         const {rootElement: definitions} = await moddle.fromXML(bpmn)
+        console.log(definitions)
         definitions.rootElements.forEach((el: any, index: number) => {
             //First root element is the collaboration element with contained message flows
-            if (index < 1) {
+            if (index < 1) { //TODO: skipping of top level elements (search for first "collaboration" rootelement
                 if (el.hasOwnProperty("messageFlows")) {
                     el.messageFlows.forEach((el: any) => insertIntoElement(el))
                 }
@@ -30,6 +31,10 @@ export async function insertUncertainties() {
         } = await moddle.toXML(definitions)
         localStorage.setItem(CURRENT_BPMN, xmlStrUpdated)
     }
+}
+
+function insertIntoIo(el: any) {
+    let x = el.ioSpecification.dataInputs //TODO
 }
 
 function insertIntoElement(el: any) {

@@ -10,5 +10,6 @@ export interface Collaborator {
 export enum ConnectionType {
     INCOMING,
     OUTGOING,
-    BIDIRECTIONAL
+    BIDIRECTIONAL,
+    NONE
 }

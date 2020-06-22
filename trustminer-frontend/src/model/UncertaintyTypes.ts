@@ -22,5 +22,9 @@ export const UncertaintyTypes: { [id: string]: string; } = {
 
     "bpmn:BoundaryEvent": "Event",
     //Database
-    "bpmn:DataStoreReference": ""
+    "bpmn:DataStoreReference": "Database",
+
+    // I/O
+    "bpmn:DataInput": "Attached Data Input",
+    "bpmn:DataOutput": "Attached Data Output",
 }

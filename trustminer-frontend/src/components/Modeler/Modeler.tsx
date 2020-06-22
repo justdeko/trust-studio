@@ -11,7 +11,7 @@ import {insertUncertainties} from "../../miner/uncertaintyDiscovery";
 import uncertainty from "../../resources/uncertaintyExtension.json"
 import UncertaintyBox from "./UncertaintyBox";
 import {getUncertainties} from "../../util/modeler_util";
-import {Dialog, DialogTitle, List, ListItem, ListItemText} from "@material-ui/core";
+import {Button, Dialog, DialogTitle, List, ListItem, ListItemText} from "@material-ui/core";
 
 
 //Initial code from https://github.com/Varooneh/reactbpmn/blob/master/src/components/bpmn/bpmn.modeler.component.jsx
@@ -100,8 +100,29 @@ export default function Modeler() {
         setDialogOpen(false)
     }
 
+    function saveSvg() {
+        modeler.saveSVG({format: true}, function (error: Error, svg: any) {
+            if (error) {
+                console.log(error)
+                return
+            }
+
+            let svgBlob = new Blob([svg], {type: 'image/svg+xml'})
+            let fileName = 'process' + '.svg'
+            let link = document.createElement('a')
+
+            link.download = fileName
+            link.innerHTML = 'Get the BPMN SVG'
+            link.href = window.URL.createObjectURL(svgBlob)
+            link.style.visibility = 'hidden'
+            document.body.appendChild(link)
+            link.click()
+        });
+    }
+
     return (
         <div id="bpmncontainer" style={{height: '100%'}}>
+            <Button onClick={saveSvg}>Save to Svg</Button>
             <div id="propview"
                  style={{width: '25%', height: '100vh', float: 'right', maxHeight: '100vh', overflowX: 'auto'}}/>
             <div id="bpmnview" style={{width: '75%', height: '100vh', float: 'left'}}/>
