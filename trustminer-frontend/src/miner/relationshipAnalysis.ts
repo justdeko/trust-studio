@@ -1,42 +1,50 @@
-import {Collaborator} from "../model/Collaborator";
 import {Moddle} from "../util/miner_util";
 import {CURRENT_BPMN} from "../util/constants";
+import {GraphData} from "../model/GraphData";
 
 let moddle = Moddle
 
-export async function getCollaborators(): Promise<Collaborator[]> {
+export async function generateGraphData(): Promise<GraphData> {
     let bpmn = localStorage.getItem(CURRENT_BPMN)
+    let nodes: { id: string }[] = []
+    let links: { source: string, target: string }[] = []
+
     if (bpmn != null) {
         const {rootElement: definitions} = await moddle.fromXML(bpmn)
-        let collab = definitions.find((el: any) => el.$type == 'bpmn:Collaboration')
-        let collaborators: { [processId: string]: string } = {}
+        let collab = definitions.rootElements.find((el: any) => el.$type == 'bpmn:Collaboration')
+        let collaboratorNames = getCollaboratorNames(collab)
         if (collab && collab.messageFlows) {
-            getCollaboratorConnections(collab.messageFlows)
-        }
-        if (collab && collab.participants) {
-            collab.participants.forEach((participant: any) => {
-                let name = participant.name
-                let id = participant.id
-                let processId = participant.processRef.id
-                collaborators[processId] = id
-                //kv-pair processid, collaboratorid?
+            collab.messageFlows.forEach((messageFlow: any) => {
+                let sourceId = messageFlow.sourceRef.$parent.id
+                let sourceName = collaboratorNames[sourceId]
+                let targetId = messageFlow.targetRef.$parent.id
+                let targetName = collaboratorNames[targetId]
+                let linkObj = {source: sourceName, target: targetName}
+                if (!links.find(link => link == linkObj)) {
+                    links.push(linkObj)
+                }
+                if (!nodes.find(node => node == sourceId)) {
+                    nodes.push({id: sourceName})
+                }
+                if (!nodes.find(node => node == targetId)) {
+                    nodes.push({id: targetName})
+                }
             })
         }
     }
-    return []
+    return {nodes: nodes, links: links}
 }
 
-function getCollaboratorConnections(messageFlows: any[]) {
-    let connections: { [id: string]: string[] } = {}
-    messageFlows.forEach((messageFlow: any) => {
-        let sourceId = messageFlow.sourceRef.$parent.id
-        let targetId = messageFlow.targetRef.$parent.id
-        if (connections[sourceId]) {
-            connections[sourceId].push(targetId)
-        } else {
-            connections[sourceId] = [targetId]
-        }
-    })
+function getCollaboratorNames(collab: any) {
+    let collaboratorNames: { [id: string]: string } = {}
+    if (collab && collab.participants) {
+        collab.participants.forEach((participant: any) => {
+            let name = participant.name
+            let processId = participant.processRef.id
+            collaboratorNames[processId] = name
+        })
+    }
+    return collaboratorNames
 }
 
 //For displaying: https://www.bsimard.com/2018/04/25/graph-viz-with-sigmajs.html or maybe d3?

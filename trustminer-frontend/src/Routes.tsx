@@ -2,11 +2,12 @@ import React from 'react';
 import Modeler from "./components/Modeler/Modeler";
 import 'bpmn-js-properties-panel/dist/assets/bpmn-js-properties-panel.css';
 import UncertaintyTable from "./components/UncertaintyTable";
+import Analysis from "./components/dashboard/Analysis";
 
 
-const Analysis: React.FC = () => {
+const AnalysisRoute: React.FC = () => {
     return (
-        <h1>Analysis</h1>
+        <Analysis/>
     )
 }
 const ModelerRoute: React.FC = () => {
@@ -34,7 +35,7 @@ const Routes = [
     {
         path: '/analysis',
         title: 'Analysis',
-        component: Analysis
+        component: AnalysisRoute
     },
     {
         path: '/modeler',
