@@ -2,7 +2,7 @@ import React from 'react';
 import Modeler from "./components/Modeler/Modeler";
 import 'bpmn-js-properties-panel/dist/assets/bpmn-js-properties-panel.css';
 import UncertaintyTable from "./components/UncertaintyTable";
-import Analysis from "./components/dashboard/Analysis";
+import Analysis from "./components/Analysis/Analysis";
 
 
 const AnalysisRoute: React.FC = () => {
