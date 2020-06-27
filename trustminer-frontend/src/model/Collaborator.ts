@@ -1,15 +1,9 @@
-import {UncertaintyRow} from "./UncertaintyRow";
+import {Uncertainty} from "./Uncertainty";
 
 export interface Collaborator {
     id: string,
+    name: string,
+    processId: string,
     uncertaintyScore: number,
-    connections: [{ [id: string]: ConnectionType }]
-    uncertainties: [UncertaintyRow]
-}
-
-export enum ConnectionType {
-    INCOMING,
-    OUTGOING,
-    BIDIRECTIONAL,
-    NONE
+    uncertainties: Uncertainty[]
 }

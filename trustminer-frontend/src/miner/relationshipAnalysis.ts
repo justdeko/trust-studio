@@ -23,10 +23,10 @@ export async function generateGraphData(): Promise<GraphData> {
                 if (!links.find(link => link == linkObj)) {
                     links.push(linkObj)
                 }
-                if (!nodes.find(node => node == sourceId)) {
+                if (!nodes.find(node => node.id == sourceId)) {
                     nodes.push({id: sourceName})
                 }
-                if (!nodes.find(node => node == targetId)) {
+                if (!nodes.find(node => node.id == targetId)) {
                     nodes.push({id: targetName})
                 }
             })

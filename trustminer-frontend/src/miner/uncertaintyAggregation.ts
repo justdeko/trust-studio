@@ -1,7 +1,9 @@
 import UncertaintyChartData from "../model/UncertaintyChartData";
-import {getChartColors} from "../util/graph_util";
+import {getChartColors} from "../util/chart_util";
 import {CURRENT_BPMN} from "../util/constants";
 import {Moddle} from "../util/miner_util";
+import {Collaborator} from "../model/Collaborator";
+import {Uncertainty} from "../model/Uncertainty";
 
 let moddle = Moddle
 
@@ -11,6 +13,26 @@ function getUncertaintyCount(flowElements: any[]) {
         count += element.extensionElements.values.filter((el: any) => el.$type == "trust:Uncertainty").length
     })
     return count
+}
+
+function getUncertainties(flowElements: any[]): Uncertainty[] {
+    let uncertainties: Uncertainty[] = []
+    flowElements.forEach(element => {
+        uncertainties = uncertainties.concat(
+            element.extensionElements.values
+                .filter((el: any) => el.$type == "trust:Uncertainty")
+                .map((el: any) => {
+                    return {
+                        component: element.$type,
+                        perspective: el.perspective,
+                        trustConcern: el.trust_concern,
+                        root: el.root,
+                        parentComponent: undefined
+                    }
+                })
+        )
+    })
+    return uncertainties
 }
 
 async function getCollaboratorUncertaintyCounts(): Promise<{ [id: string]: number }> {
@@ -42,4 +64,28 @@ export async function getUncertaintyDistributionData(): Promise<UncertaintyChart
             ]
         }
     })
+}
+
+export async function getCollaborators(): Promise<Collaborator[]> {
+    let collaborators: Collaborator[] = []
+    let bpmn = localStorage.getItem(CURRENT_BPMN)
+    if (bpmn != null) {
+        const {rootElement: definitions} = await moddle.fromXML(bpmn)
+        let collab = definitions.rootElements.find((el: any) => el.$type == 'bpmn:Collaboration')
+        collab.participants.forEach((collaborator: any) => {
+            let uncertainties = getUncertainties(collaborator.processRef.flowElements)
+            let id: string = collaborator.id
+            let processId: string = collaborator.processRef.id
+            let name: string = collaborator.name
+            let collaboratorObject = {
+                id: id,
+                name: name,
+                processId: processId,
+                uncertaintyScore: 0,
+                uncertainties: uncertainties
+            }
+            collaborators.push(collaboratorObject)
+        })
+    }
+    return collaborators
 }

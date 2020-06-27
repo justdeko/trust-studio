@@ -1,4 +1,6 @@
 export const graphConfig = {
+    automaticRearrangeAfterDropNode: true,
+    collapsible: false,
     directed: true,
     nodeHighlightBehavior: true,
     node: {

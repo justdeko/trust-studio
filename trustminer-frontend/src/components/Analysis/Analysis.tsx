@@ -5,7 +5,7 @@ import {GraphData} from "../../model/GraphData";
 import {CircularProgress} from "@material-ui/core";
 import UncertaintyChart from "./UncertaintyChart";
 import UncertaintyChartData from "../../model/UncertaintyChartData";
-import {getUncertaintyDistributionData} from "../../miner/uncertaintyAggregation";
+import {getCollaborators, getUncertaintyDistributionData} from "../../miner/uncertaintyAggregation";
 
 export default function Analysis() {
     const [graphData, setGraphData] = useState<GraphData>()
@@ -13,6 +13,7 @@ export default function Analysis() {
 
     useEffect(() => {
         generateGraphData().then(data => setGraphData(data))
+        getCollaborators().then(collaborators => console.log(collaborators))
         getUncertaintyDistributionData().then(data => setUncertaintyData(data))
     }, [])
 
