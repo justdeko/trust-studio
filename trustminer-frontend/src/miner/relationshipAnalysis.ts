@@ -12,7 +12,10 @@ export async function generateGraphData(): Promise<GraphData> {
     if (bpmn != null) {
         const {rootElement: definitions} = await moddle.fromXML(bpmn)
         let collab = definitions.rootElements.find((el: any) => el.$type == 'bpmn:Collaboration')
+        let processes = definitions.rootElements.filter((el: any) => el.$type == 'bpmn:Process')
         let collaboratorNames = getCollaboratorNames(collab)
+        let dataLinks = getDataObjectRoutes(processes, collaboratorNames)
+        links = links.concat(dataLinks)
         if (collab && collab.messageFlows) {
             collab.messageFlows.forEach((messageFlow: any) => {
                 let sourceId = messageFlow.sourceRef.$parent.id
@@ -45,6 +48,42 @@ function getCollaboratorNames(collab: any) {
         })
     }
     return collaboratorNames
+}
+
+function getDataObjectRoutes(processes: any[], collaboratorNames: { [id: string]: string }) {
+    let dataOutputs = getDataOutputObjectNames(processes)
+    let links: { source: string, target: string }[] = []
+    processes.forEach((process: any) => {
+        let ioSpecification = process.ioSpecification
+        if (ioSpecification.dataInputs) {
+            ioSpecification.dataInputs.forEach((el: any) => {
+                for (const [key, value] of Object.entries(dataOutputs)) {
+                    if (key == el.name) {
+                        let sourceName = collaboratorNames[value]
+                        let targetName = collaboratorNames[process.id]
+                        let linkObj = {source: sourceName, target: targetName}
+                        links.push(linkObj)
+                    }
+                }
+            })
+        }
+    })
+    return links
+}
+
+function getDataOutputObjectNames(processes: any[]) {
+    let dataObjectNames: { [name: string]: string } = {}
+    processes.forEach((process: any) => {
+        let ioSpecification = process.ioSpecification
+        if (ioSpecification.dataOutputs) {
+            ioSpecification.dataOutputs.forEach((el: any) => {
+                if (!dataObjectNames[el.name]) {
+                    dataObjectNames[el.name] = process.id
+                }
+            })
+        }
+    })
+    return dataObjectNames
 }
 
 //For displaying: https://www.bsimard.com/2018/04/25/graph-viz-with-sigmajs.html or maybe d3?

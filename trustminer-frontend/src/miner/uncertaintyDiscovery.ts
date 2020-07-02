@@ -16,14 +16,19 @@ export async function insertUncertainties() {
         const {rootElement: definitions} = await moddle.fromXML(bpmn)
         console.log(definitions)
         definitions.rootElements.forEach((el: any, index: number) => {
-            //First root element is the collaboration element with contained message flows
-            if (index < 1) { //TODO: skipping of top level elements (search for first "collaboration" rootelement
-                if (el.hasOwnProperty("messageFlows")) {
-                    el.messageFlows.forEach((el: any) => insertIntoElement(el))
-                }
+            if (el.hasOwnProperty("messageFlows")) {
+                el.messageFlows.forEach((el: any) => insertIntoElement(el))
             }
             if (el.hasOwnProperty("flowElements")) {
                 el.flowElements.forEach((el: any) => insertIntoElement(el))
+            }
+            if (el.hasOwnProperty("ioSpecification")) {
+                if (el.ioSpecification.dataInputs) {
+                    el.ioSpecification.dataInputs.forEach((el: any) => insertIntoElement(el))
+                }
+                if (el.ioSpecification.dataOutputs) {
+                    el.ioSpecification.dataOutputs.forEach((el: any) => insertIntoElement(el))
+                }
             }
         })
         const {
@@ -31,10 +36,6 @@ export async function insertUncertainties() {
         } = await moddle.toXML(definitions)
         localStorage.setItem(CURRENT_BPMN, xmlStrUpdated)
     }
-}
-
-function insertIntoIo(el: any) {
-    let x = el.ioSpecification.dataInputs //TODO
 }
 
 function insertIntoElement(el: any) {
@@ -48,10 +49,15 @@ function insertIntoElement(el: any) {
     }
     uncertaintyList.forEach(uncertainty => {
         let uncertaintyEl = moddle.create(EXTENSION_NAME);
-        extensionElements.get("values").push(uncertaintyEl)
         uncertaintyEl.perspective = Perspective[uncertainty.perspective]
         uncertaintyEl.trust_concern = TrustConcern[uncertainty.trustconcern]
         uncertaintyEl.root = uncertainty.root
+        if (!extensionElements.get("values").find((extensionEl: any) => // filter for duplicates
+            extensionEl.perspective == uncertaintyEl.perspective
+            && extensionEl.trust_concern == uncertaintyEl.trust_concern
+            && extensionEl.root == uncertaintyEl.root)) {
+            extensionElements.get("values").push(uncertaintyEl)
+        }
     })
     el.extensionElements = extensionElements
 }
