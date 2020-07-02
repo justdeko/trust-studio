@@ -55,7 +55,7 @@ function getDataObjectRoutes(processes: any[], collaboratorNames: { [id: string]
     let links: { source: string, target: string }[] = []
     processes.forEach((process: any) => {
         let ioSpecification = process.ioSpecification
-        if (ioSpecification.dataInputs) {
+        if (ioSpecification && ioSpecification.dataInputs) {
             ioSpecification.dataInputs.forEach((el: any) => {
                 for (const [key, value] of Object.entries(dataOutputs)) {
                     if (key == el.name) {
@@ -75,7 +75,7 @@ function getDataOutputObjectNames(processes: any[]) {
     let dataObjectNames: { [name: string]: string } = {}
     processes.forEach((process: any) => {
         let ioSpecification = process.ioSpecification
-        if (ioSpecification.dataOutputs) {
+        if (ioSpecification && ioSpecification.dataOutputs) {
             ioSpecification.dataOutputs.forEach((el: any) => {
                 if (!dataObjectNames[el.name]) {
                     dataObjectNames[el.name] = process.id
@@ -85,6 +85,3 @@ function getDataOutputObjectNames(processes: any[]) {
     })
     return dataObjectNames
 }
-
-//For displaying: https://www.bsimard.com/2018/04/25/graph-viz-with-sigmajs.html or maybe d3?
-//https://www.npmjs.com/package/react-cytoscape

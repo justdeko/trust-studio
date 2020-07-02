@@ -4,6 +4,10 @@ export interface Collaborator {
     id: string,
     name: string,
     processId: string,
-    uncertaintyScore: number,
-    uncertainties: Uncertainty[]
+    laneUncertainty: number,
+    relativeLanceUncertainty: number,
+    laneUncertaintyBalance: number,
+    uncertainties: Uncertainty[],
+    inDegree: number,
+    outDegree: number
 }
