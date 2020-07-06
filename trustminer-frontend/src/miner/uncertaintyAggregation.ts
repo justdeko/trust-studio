@@ -4,6 +4,7 @@ import {CURRENT_BPMN} from "../util/constants";
 import {Moddle} from "../util/miner_util";
 import {Collaborator} from "../model/Collaborator";
 import {Uncertainty} from "../model/Uncertainty";
+import {generateGraphData} from "./relationshipAnalysis";
 
 let moddle = Moddle
 
@@ -81,11 +82,52 @@ export async function getCollaborators(): Promise<Collaborator[]> {
                 id: id,
                 name: name,
                 processId: processId,
-                uncertaintyScore: 0,
-                uncertainties: uncertainties
+                laneUncertainty: uncertainties.length,
+                relativeLanceUncertainty: 0,
+                laneUncertaintyBalance: 0,
+                uncertainties: uncertainties,
+                inDegree: 0,
+                outDegree: 0
             }
             collaborators.push(collaboratorObject)
         })
     }
-    return collaborators
+    return insertAggregationMetrics(collaborators)
+}
+
+async function insertAggregationMetrics(collaborators: Collaborator[]) {
+    let gu = globalUncertainty(collaborators)
+    let graphData = await generateGraphData()
+    let dataLinks = graphData.links
+    return collaborators.map((collaborator: Collaborator) => {
+        let rlu = collaborator.laneUncertainty / gu
+        let lub = -(1 / collaborators.length) + rlu
+        let dd = dataLinks.filter((link) => link.target == collaborator.name).length
+        let di = dataLinks.filter((link) => link.source == collaborator.name).length
+        return {
+            ...collaborator,
+            relativeLanceUncertainty: rlu,
+            laneUncertaintyBalance: lub,
+            inDegree: dd,
+            outDegree: di
+        }
+    })
+}
+
+
+// Metrics
+const globalUncertainty = (collaborators: Collaborator[]) =>
+    collaborators.map((col: Collaborator) => col.laneUncertainty).reduce((acc, val) => acc + val)
+
+const averageElementUncertainty = (gu: number, rootElements: any[]) => gu / getElementCount(rootElements)
+
+
+function getElementCount(rootElements: any[]) {
+    let count = 0
+    rootElements.forEach((rootElement: any) => {
+        if (rootElement.flowElements) {
+            count += rootElement.flowElements.length
+        }
+    })
+    return count
 }
