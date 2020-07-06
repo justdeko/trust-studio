@@ -3,6 +3,7 @@ import Modeler from "./components/Modeler/Modeler";
 import 'bpmn-js-properties-panel/dist/assets/bpmn-js-properties-panel.css';
 import UncertaintyTable from "./components/UncertaintyTable";
 import Analysis from "./components/Analysis/Analysis";
+import TrustPolicies from "./components/Trust/TrustPolicies";
 
 
 const AnalysisRoute: React.FC = () => {
@@ -15,9 +16,9 @@ const ModelerRoute: React.FC = () => {
         <Modeler/>
     )
 }
-const TrustPersonas: React.FC = () => {
+const TrustRoute: React.FC = () => {
     return (
-        <h1>Trust Personas</h1>
+        <TrustPolicies/>
     )
 }
 const UncertaintyList: React.FC = () => {
@@ -43,9 +44,9 @@ const Routes = [
         component: ModelerRoute
     },
     {
-        path: '/trust-personas',
-        title: 'Trust Personas',
-        component: TrustPersonas
+        path: '/trust-policies',
+        title: 'Trust Policies',
+        component: TrustRoute
     },
     {
         path: '/uncertainty-list',

@@ -25,11 +25,11 @@ export const mainListItems = (
             <ListItemText primary="Modeler"/>
         </ListItem>
 
-        <ListItem button component={Link} to={'/trust-personas'}>
+        <ListItem button component={Link} to={'/trust-policies'}>
             <ListItemIcon>
                 <PeopleIcon/>
             </ListItemIcon>
-            <ListItemText primary="Trust Personas"/>
+            <ListItemText primary="Trust Policies"/>
         </ListItem>
 
         <ListItem button component={Link} to={'/uncertainty-list'}>
