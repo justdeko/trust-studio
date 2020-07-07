@@ -74,7 +74,7 @@ export default function UncertaintyTable() {
                                 setState((prevState) => {
                                     const data = [...prevState.data];
                                     data.splice(data.indexOf(oldData), 1);
-                                    saveUncertainties(state.data)
+                                    saveUncertainties(data)
                                     return {...prevState, data};
                                 });
                             }, 300);

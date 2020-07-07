@@ -1,6 +1,7 @@
 //Local storage
 export const CURRENT_BPMN = "current_bpmn"
 export const CURRENT_UNCERTAINTY_LIST = "current_uncertainty_list"
+export const TRUST_POLICY_LIST = "trust_policy_list_"
 
 //Custom uncertainty rendering
 export const HIGH_PRIORITY = 1500,

@@ -1,6 +1,7 @@
 import {defaultUncertainties} from "../resources/defaultUncertainties";
 import {UncertaintyRow} from "../model/UncertaintyRow";
-import {CURRENT_UNCERTAINTY_LIST} from "./constants";
+import {CURRENT_UNCERTAINTY_LIST, TRUST_POLICY_LIST} from "./constants";
+import {TrustPolicyRow} from "../model/TrustPolicyRow";
 
 const sep = ";" // Column separator
 const nl = "\n" // Row separator
@@ -11,7 +12,7 @@ export function loadUncertainties(): Array<UncertaintyRow> {
     let lines = [];
     let header = csvList[0].split(sep);
     for (let i = 1; i < csvList.length; i++) {
-        // split uncertainties based on comma
+        // split uncertainties based on separator
         let data = csvList[i].split(sep);
         if (data.length === header.length) {
             let line = [];
@@ -22,6 +23,7 @@ export function loadUncertainties(): Array<UncertaintyRow> {
         }
     }
     // Convert uncertainties to UncertaintyRow interface
+    console.log(lines)
     return lines.map(line => {
         return {
             parentComponent: line[0],
@@ -56,3 +58,37 @@ export const extractUncertaintyList = (component: String) =>
         || (uncertainty.parentComponent == component && uncertainty.component == "-")
         || (uncertainty.parentComponent == component && uncertainty.component.toLowerCase().includes("all"))
     )
+
+export function saveTrustPolicies(trustPolicyList: Array<TrustPolicyRow>, trustPersona: string) {
+    let csvString = ""
+    trustPolicyList.forEach((row, index) => {
+        let stringRow = row.trustEntity + sep + row.processElement + sep + row.trustConcern
+        if (index != trustPolicyList.length - 1) stringRow += nl
+        csvString += stringRow
+    })
+    console.log(csvString)
+    localStorage.setItem(TRUST_POLICY_LIST + trustPersona, csvString)
+}
+
+export function loadTrustPoliciesForPersona(persona: string): Array<TrustPolicyRow> {
+    let storedList = localStorage.getItem(TRUST_POLICY_LIST + persona)
+    let policyList = storedList ? storedList.split(nl) : []
+    let lines = [];
+    for (let i = 0; i < policyList.length; i++) {
+        let line = [];
+        // split uncertainties based on separator
+        let data = policyList[i].split(sep);
+        for (let j = 0; j < 3; j++) {
+            line.push(data[j]);
+        }
+        lines.push(line);
+    }
+    console.log(lines)
+    return lines.map(line => {
+        return {
+            trustEntity: line[0],
+            processElement: line[1],
+            trustConcern: Number(line[2])
+        }
+    })
+}

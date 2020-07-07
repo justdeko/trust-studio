@@ -1,12 +1,12 @@
 import {createStyles, FormControl, InputLabel, MenuItem, Select, Theme} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import React, {useState} from "react";
+import React, {Dispatch, SetStateAction, useState} from "react";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         formControl: {
             margin: theme.spacing(1),
-            minWidth: 120,
+            minWidth: 150,
         },
         selectEmpty: {
             marginTop: theme.spacing(2),
@@ -15,16 +15,18 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface SelectorProps {
-    personas: string[]
+    personas: string[],
+    setSelected: Dispatch<SetStateAction<string>>
 }
 
 export default function TrustPersonaSelector(props: SelectorProps) {
-    const {personas} = props
+    const {personas, setSelected} = props
     const [currentValue, setCurrentValue] = useState(personas[0])
 
 
     function handleChange(e: any) {
         setCurrentValue(e.target.value)
+        setSelected(e.target.value)
     }
 
     const classes = useStyles();
