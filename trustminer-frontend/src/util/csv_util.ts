@@ -2,6 +2,8 @@ import {defaultUncertainties} from "../resources/defaultUncertainties";
 import {UncertaintyRow} from "../model/UncertaintyRow";
 import {CURRENT_UNCERTAINTY_LIST, TRUST_POLICY_LIST} from "./constants";
 import {TrustPolicyRow} from "../model/TrustPolicyRow";
+import {TrustPolicy} from "../model/TrustPolicy";
+import {TrustConcern} from "../model/TrustConcern";
 
 const sep = ";" // Column separator
 const nl = "\n" // Row separator
@@ -23,7 +25,6 @@ export function loadUncertainties(): Array<UncertaintyRow> {
         }
     }
     // Convert uncertainties to UncertaintyRow interface
-    console.log(lines)
     return lines.map(line => {
         return {
             parentComponent: line[0],
@@ -89,6 +90,15 @@ export function loadTrustPoliciesForPersona(persona: string): Array<TrustPolicyR
             trustEntity: line[0],
             processElement: line[1],
             trustConcern: Number(line[2])
+        }
+    })
+}
+
+export function mapToTrustPolicyEntities(list: Array<TrustPolicyRow>): Array<TrustPolicy> {
+    return list.map((policy) => {
+        return {
+            ...policy,
+            trustConcern: TrustConcern[policy.trustConcern]
         }
     })
 }

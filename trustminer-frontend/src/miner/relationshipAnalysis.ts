@@ -14,8 +14,8 @@ export async function generateGraphData(): Promise<GraphData> {
         let collab = definitions.rootElements.find((el: any) => el.$type == 'bpmn:Collaboration')
         let processes = definitions.rootElements.filter((el: any) => el.$type == 'bpmn:Process')
         let collaboratorNames = getCollaboratorNames(collab)
-        let dataLinks = getDataObjectRoutes(processes, collaboratorNames)
-        links = links.concat(dataLinks)
+        //let dataLinks = getDataObjectRoutes(processes, collaboratorNames)
+        // links = links.concat(dataLinks) TODO: better mapping and concat
         if (collab && collab.messageFlows) {
             collab.messageFlows.forEach((messageFlow: any) => {
                 let sourceId = messageFlow.sourceRef.$parent.id
