@@ -8,6 +8,7 @@ export interface Collaborator {
     relativeLanceUncertainty: number,
     laneUncertaintyBalance: number,
     uncertainties: Uncertainty[],
+    relevantUncertainties: Uncertainty[],
     inDegree: number,
     outDegree: number
 }

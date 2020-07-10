@@ -1,5 +1,5 @@
 import React from "react";
-import {Graph} from "react-d3-graph";
+import {Graph, GraphConfiguration} from "react-d3-graph";
 import {graphConfig} from "../../resources/graphConfig";
 import {GraphData} from "../../model/GraphData";
 
@@ -12,6 +12,6 @@ export default function RelationshipGraph(props: GraphProps) {
     return <Graph
         id="collaborator-relationship-graph"
         data={graphData}
-        config={graphConfig}
+        config={graphConfig as GraphConfiguration<any, any>}
     />
 }

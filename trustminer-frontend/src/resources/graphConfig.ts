@@ -10,5 +10,7 @@ export const graphConfig = {
     },
     link: {
         highlightColor: "lightblue",
+        renderLabel: true,
+        labelProperty: "label"
     },
 };

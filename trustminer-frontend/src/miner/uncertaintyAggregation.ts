@@ -86,6 +86,7 @@ export async function getCollaborators(): Promise<Collaborator[]> {
                 relativeLanceUncertainty: 0,
                 laneUncertaintyBalance: 0,
                 uncertainties: uncertainties,
+                relevantUncertainties: [],
                 inDegree: 0,
                 outDegree: 0
             }
