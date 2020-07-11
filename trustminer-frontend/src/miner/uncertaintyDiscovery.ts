@@ -10,32 +10,28 @@ const moddle = new BpmnModdle({
     trust: uncertainty
 });
 
-export async function insertUncertainties() {
-    let bpmn = localStorage.getItem(CURRENT_BPMN)
-    if (bpmn != null) {
-        const {rootElement: definitions} = await moddle.fromXML(bpmn)
-        console.log(definitions)
-        definitions.rootElements.forEach((el: any, index: number) => {
-            if (el.hasOwnProperty("messageFlows")) {
-                el.messageFlows.forEach((el: any) => insertIntoElement(el))
+export async function insertUncertainties(definitions: any) {
+    console.log(definitions)
+    definitions.rootElements.forEach((el: any, index: number) => {
+        if (el.hasOwnProperty("messageFlows")) {
+            el.messageFlows.forEach((el: any) => insertIntoElement(el))
+        }
+        if (el.hasOwnProperty("flowElements")) {
+            el.flowElements.forEach((el: any) => insertIntoElement(el))
+        }
+        if (el.hasOwnProperty("ioSpecification")) {
+            if (el.ioSpecification.dataInputs) {
+                el.ioSpecification.dataInputs.forEach((el: any) => insertIntoElement(el))
             }
-            if (el.hasOwnProperty("flowElements")) {
-                el.flowElements.forEach((el: any) => insertIntoElement(el))
+            if (el.ioSpecification.dataOutputs) {
+                el.ioSpecification.dataOutputs.forEach((el: any) => insertIntoElement(el))
             }
-            if (el.hasOwnProperty("ioSpecification")) {
-                if (el.ioSpecification.dataInputs) {
-                    el.ioSpecification.dataInputs.forEach((el: any) => insertIntoElement(el))
-                }
-                if (el.ioSpecification.dataOutputs) {
-                    el.ioSpecification.dataOutputs.forEach((el: any) => insertIntoElement(el))
-                }
-            }
-        })
-        const {
-            xml: xmlStrUpdated
-        } = await moddle.toXML(definitions)
-        localStorage.setItem(CURRENT_BPMN, xmlStrUpdated)
-    }
+        }
+    })
+    const {
+        xml: xmlStrUpdated
+    } = await moddle.toXML(definitions)
+    localStorage.setItem(CURRENT_BPMN, xmlStrUpdated)
 }
 
 function insertIntoElement(el: any) {

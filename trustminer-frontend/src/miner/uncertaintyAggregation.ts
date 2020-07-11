@@ -4,7 +4,7 @@ import {CURRENT_BPMN} from "../util/constants";
 import {Moddle} from "../util/miner_util";
 import {Collaborator} from "../model/Collaborator";
 import {Uncertainty} from "../model/Uncertainty";
-import {generateGraphData} from "./relationshipAnalysis";
+import {GraphData} from "../model/GraphData";
 
 let moddle = Moddle
 
@@ -67,38 +67,33 @@ export async function getUncertaintyDistributionData(): Promise<UncertaintyChart
     })
 }
 
-export async function getCollaborators(): Promise<Collaborator[]> {
+export function getCollaborators(definitions: any, graphData: GraphData): Collaborator[] {
     let collaborators: Collaborator[] = []
-    let bpmn = localStorage.getItem(CURRENT_BPMN)
-    if (bpmn != null) {
-        const {rootElement: definitions} = await moddle.fromXML(bpmn)
-        let collab = definitions.rootElements.find((el: any) => el.$type == 'bpmn:Collaboration')
-        collab.participants.forEach((collaborator: any) => {
-            let uncertainties = getUncertainties(collaborator.processRef.flowElements)
-            let id: string = collaborator.id
-            let processId: string = collaborator.processRef.id
-            let name: string = collaborator.name
-            let collaboratorObject = {
-                id: id,
-                name: name,
-                processId: processId,
-                laneUncertainty: uncertainties.length,
-                relativeLanceUncertainty: 0,
-                laneUncertaintyBalance: 0,
-                uncertainties: uncertainties,
-                relevantUncertainties: [],
-                inDegree: 0,
-                outDegree: 0
-            }
-            collaborators.push(collaboratorObject)
-        })
-    }
-    return insertAggregationMetrics(collaborators)
+    let collab = definitions.rootElements.find((el: any) => el.$type == 'bpmn:Collaboration')
+    collab.participants.forEach((collaborator: any) => {
+        let uncertainties = getUncertainties(collaborator.processRef.flowElements)
+        let id: string = collaborator.id
+        let processId: string = collaborator.processRef.id
+        let name: string = collaborator.name
+        let collaboratorObject = {
+            id: id,
+            name: name,
+            processId: processId,
+            laneUncertainty: uncertainties.length,
+            relativeLanceUncertainty: 0,
+            laneUncertaintyBalance: 0,
+            uncertainties: uncertainties,
+            relevantUncertainties: [],
+            inDegree: 0,
+            outDegree: 0
+        }
+        collaborators.push(collaboratorObject)
+    })
+    return insertAggregationMetrics(collaborators, definitions, graphData)
 }
 
-async function insertAggregationMetrics(collaborators: Collaborator[]) {
+function insertAggregationMetrics(collaborators: Collaborator[], definitions: any, graphData: GraphData) {
     let gu = globalUncertainty(collaborators)
-    let graphData = await generateGraphData()
     let dataLinks = graphData.links
     return collaborators.map((collaborator: Collaborator) => {
         let rlu = collaborator.laneUncertainty / gu

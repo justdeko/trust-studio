@@ -1,20 +1,21 @@
 import React, {useEffect, useState} from "react";
-import {generateGraphData} from "../../miner/relationshipAnalysis";
 import RelationshipGraph from "./RelationshipGraph";
 import {GraphData} from "../../model/GraphData";
 import {CircularProgress} from "@material-ui/core";
 import UncertaintyChart from "./UncertaintyChart";
 import UncertaintyChartData from "../../model/UncertaintyChartData";
-import {getCollaborators, getUncertaintyDistributionData} from "../../miner/uncertaintyAggregation";
-import {filterWithTrustPolicies} from "../../miner/trustAnalysis";
+import {getUncertaintyDistributionData} from "../../miner/uncertaintyAggregation";
+import {mine} from "../../miner/miner";
 
 export default function Analysis() {
     const [graphData, setGraphData] = useState<GraphData>()
     const [uncertaintyData, setUncertaintyData] = useState<UncertaintyChartData>()
 
     useEffect(() => {
-        generateGraphData().then(data => setGraphData(data))
-        getCollaborators().then(collaborators => console.log(filterWithTrustPolicies(collaborators)))
+        mine().then((trustreport) => {
+            setGraphData(trustreport.messageFlowGraphData)
+            console.log(trustreport)
+        })
         getUncertaintyDistributionData().then(data => setUncertaintyData(data))
     }, [])
 

@@ -7,7 +7,6 @@ import propertiesProviderModule from 'bpmn-js-properties-panel/lib/provider/camu
 import camundaModdleDescriptor from 'camunda-bpmn-moddle/resources/camunda';
 import {emptyBpmn} from "../../resources/emptyBpmn";
 import {CURRENT_BPMN} from "../../util/constants";
-import {insertUncertainties} from "../../miner/uncertaintyDiscovery";
 import uncertainty from "../../resources/uncertaintyExtension.json"
 import UncertaintyBox from "./UncertaintyBox";
 import {getUncertainties} from "../../util/modeler_util";
@@ -89,7 +88,6 @@ export default function Modeler() {
                 console.log(error)
                 return console.log('failed to import xml');
             }
-            insertUncertainties()
             var canvas = modeler.get('canvas');
 
             canvas.zoom('fit-viewport');

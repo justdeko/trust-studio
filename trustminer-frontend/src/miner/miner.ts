@@ -1,6 +1,10 @@
 import {TrustReport} from "../model/TrustReport";
+import {insertUncertainties} from "./uncertaintyDiscovery";
+import {generateDataObjectGraphData, generateGraphData} from "./relationshipAnalysis";
+import {getCollaborators} from "./uncertaintyAggregation";
+import {getDefinitions} from "../util/miner_util";
 
-export async function mine(): Promise<TrustReport | Error> {
+export async function mine(): Promise<TrustReport> {
     /**
      * Procedure:
      * 0. get bpmn moddle
@@ -10,6 +14,21 @@ export async function mine(): Promise<TrustReport | Error> {
      * 4. perform relevancy analysis from the perspective of each collaborator and additional trust personas
      * 5. return: completed trust report model containing data from steps 2-4
      */
-
-    return Error() //TODO implement
+    let definitions = await getDefinitions()
+    // 1
+    await insertUncertainties(definitions)
+    // 2
+    let graphData = generateGraphData(definitions)
+    let dataObjectGraphData = generateDataObjectGraphData(definitions)
+    // 3
+    let collaborators = getCollaborators(definitions, graphData)
+    let globalUncertainty = 0
+    let averageElementUncertainty = 0
+    return {
+        globalUncertainty: globalUncertainty,
+        averageElementUncertainty: averageElementUncertainty,
+        collaborators: collaborators,
+        messageFlowGraphData: graphData,
+        dataObjectGraphData: dataObjectGraphData,
+    }
 }

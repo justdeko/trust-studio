@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import TrustPersonaSelector from "./TrustPersonaSelector";
-import {getCollaborators} from "../../miner/uncertaintyAggregation";
 import TrustPoliciesTable from "./TrustPoliciesTable";
 
 
@@ -9,11 +8,11 @@ export default function TrustPolicies() {
     const [selectedTrustPersona, setSelectedTrustPersona] = useState("")
 
     useEffect(() => {
-        getCollaborators().then(collaborators => {
+        /*getCollaborators().then(collaborators => {
             let names = collaborators.map(collaborator => collaborator.name)
             setTrustPersonas(names)
             setSelectedTrustPersona(names[0])
-        })
+        })*/ //TODO
     }, [])
 
     return (
