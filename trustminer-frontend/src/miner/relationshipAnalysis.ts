@@ -17,10 +17,10 @@ export function generateGraphData(definitions: any): GraphData {
             if (!links.find(link => link == linkObj)) {
                 links.push(linkObj)
             }
-            if (!nodes.find(node => node.id == sourceId)) {
+            if (!nodes.find(node => node.id == sourceName)) {
                 nodes.push({id: sourceName})
             }
-            if (!nodes.find(node => node.id == targetId)) {
+            if (!nodes.find(node => node.id == targetName)) {
                 nodes.push({id: targetName})
             }
         })

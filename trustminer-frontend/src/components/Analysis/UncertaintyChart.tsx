@@ -10,7 +10,6 @@ export default function UncertaintyChart(props: UncertaintyChartProps) {
 
     return (
         <div>
-            <h2>Uncertainty Distribution</h2>
             <Doughnut data={props.data}/>
         </div>
     )
