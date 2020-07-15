@@ -14,7 +14,7 @@ export function generateGraphData(definitions: any): GraphData {
             let targetId = messageFlow.targetRef.$parent.id
             let targetName = collaboratorNames[targetId]
             let linkObj = {source: sourceName, target: targetName}
-            if (!links.find(link => link == linkObj)) {
+            if (!links.find(link => link.target == targetName && link.source == sourceName)) {
                 links.push(linkObj)
             }
             if (!nodes.find(node => node.id == sourceName)) {
@@ -65,7 +65,12 @@ function getDataObjectRoutes(processes: any[], collaboratorNames: { [id: string]
                         let targetName = collaboratorNames[process.id]
                         let labelName = el.name
                         let linkObj = {source: sourceName, target: targetName, label: labelName}
-                        links.push(linkObj)
+                        if (!links.find(linkObj =>
+                            linkObj.source == sourceName
+                            && linkObj.target == targetName
+                            && linkObj.label == labelName)) {
+                            links.push(linkObj)
+                        }
 
                         if (!nodes.find(node => node.id == sourceName)) {
                             nodes.push({id: sourceName})

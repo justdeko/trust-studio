@@ -1,7 +1,7 @@
 import {TrustReport} from "../model/TrustReport";
 import {insertUncertainties} from "./uncertaintyDiscovery";
 import {generateDataObjectGraphData, generateGraphData} from "./relationshipAnalysis";
-import {getCollaborators} from "./uncertaintyAggregation";
+import {averageElementUncertainty, getCollaborators, globalUncertainty} from "./uncertaintyAggregation";
 import {getDefinitions} from "../util/miner_util";
 
 export async function mine(): Promise<TrustReport> {
@@ -22,11 +22,10 @@ export async function mine(): Promise<TrustReport> {
     let dataObjectGraphData = generateDataObjectGraphData(definitions)
     // 3
     let collaborators = getCollaborators(definitions, graphData)
-    let globalUncertainty = 0
-    let averageElementUncertainty = 0
+    let gu = globalUncertainty(collaborators)
     return {
-        globalUncertainty: globalUncertainty,
-        averageElementUncertainty: averageElementUncertainty,
+        globalUncertainty: gu,
+        averageElementUncertainty: averageElementUncertainty(gu, definitions.rootElements),
         collaborators: collaborators,
         messageFlowGraphData: graphData,
         dataObjectGraphData: dataObjectGraphData,

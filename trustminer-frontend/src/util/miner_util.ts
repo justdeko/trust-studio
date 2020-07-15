@@ -6,7 +6,7 @@ export const Moddle = new BpmnModdle({
     trust: uncertainty
 });
 
-export async function getDefinitions(): Promise<any[]> {
+export async function getDefinitions(): Promise<any> {
     let bpmn = localStorage.getItem(CURRENT_BPMN)
     if (bpmn != null) {
         const {rootElement: definitions} = await Moddle.fromXML(bpmn)

@@ -1,46 +1,53 @@
 import React, {useEffect, useState} from "react";
 import RelationshipGraph from "./RelationshipGraph";
-import {DataObjectGraphData, GraphData} from "../../model/GraphData";
-import {CircularProgress, Grid} from "@material-ui/core";
+import {Grid} from "@material-ui/core";
 import UncertaintyChart from "./UncertaintyChart";
-import UncertaintyChartData from "../../model/UncertaintyChartData";
 import {getUncertaintyDistributionData} from "../../miner/uncertaintyAggregation";
 import {mine} from "../../miner/miner";
 import DataCard from "./DataCard";
 import {useAnalysisStyles} from "../../styles/analysis-styles";
+import Indicator from "./Indicator";
+import {TrustReport} from "../../model/TrustReport";
 
 export default function Analysis() {
     const classes = useAnalysisStyles();
-    const [graphData, setGraphData] = useState<GraphData>()
-    const [dataObjGraphData, setDataObjGraphData] = useState<DataObjectGraphData>()
-    const [uncertaintyData, setUncertaintyData] = useState<UncertaintyChartData>()
+    const [trustReport, setTrustReport] = useState<TrustReport>()
 
     useEffect(() => {
-        mine().then((trustreport) => {
-            setGraphData(trustreport.messageFlowGraphData)
-            setDataObjGraphData(trustreport.dataObjectGraphData)
-            console.log(trustreport)
+        mine().then((trustReport) => {
+            setTrustReport(trustReport)
+            console.log(trustReport)
         })
-        getUncertaintyDistributionData().then(data => setUncertaintyData(data))
     }, [])
 
     return (
         <div>
-            <Grid container spacing={3} className={classes.root}>
-                <Grid item xs>
-                    <DataCard
-                        content={dataObjGraphData
-                            ? <RelationshipGraph graphData={dataObjGraphData} forDataObjects={true}/>
-                            : <CircularProgress/>}
-                        title="Relationship Analysis"
-                    />
+            {trustReport ?
+                <Grid container spacing={3} className={classes.root}>
+                    <Grid item xs>
+                        <DataCard
+                            content={<RelationshipGraph graphData={trustReport.dataObjectGraphData}
+                                                        forDataObjects={true}/>}
+                            title="Data Relationship Analysis"
+                        />
+                    </Grid>
+                    <Grid item xs>
+                        <DataCard
+                            content={<UncertaintyChart
+                                data={getUncertaintyDistributionData(trustReport.collaborators)}/>}
+                            title="Uncertainty Distribution"/>
+                    </Grid>
+                    <Grid item xs>
+                        <Indicator indicatorNumber={trustReport.globalUncertainty}
+                                   indicatorTitle="Global uncertainty"/>
+                    </Grid>
+                    <Grid item xs>
+                        <Indicator indicatorNumber={trustReport.averageElementUncertainty.toFixed(3)}
+                                   indicatorTitle="Average Element uncertainty"/>
+                    </Grid>
                 </Grid>
-                <Grid item xs>
-                    <DataCard
-                        content={uncertaintyData ? <UncertaintyChart data={uncertaintyData}/> : <CircularProgress/>}
-                        title="Uncertainty Distribution"/>
-                </Grid>
-            </Grid>
+                : <div/>}
+
         </div>
     )
 }

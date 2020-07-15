@@ -1,6 +1,5 @@
 import UncertaintyChartData from "../model/UncertaintyChartData";
 import {getChartColors} from "../util/chart_util";
-import {CURRENT_BPMN} from "../util/constants";
 import {Moddle} from "../util/miner_util";
 import {Collaborator} from "../model/Collaborator";
 import {Uncertainty} from "../model/Uncertainty";
@@ -36,35 +35,29 @@ function getUncertainties(flowElements: any[]): Uncertainty[] {
     return uncertainties
 }
 
-async function getCollaboratorUncertaintyCounts(): Promise<{ [id: string]: number }> {
+function getCollaboratorUncertaintyCounts(collaborators: Collaborator[]): { [id: string]: number } {
     let collaboratorCounts: { [id: string]: number } = {}
-    let bpmn = localStorage.getItem(CURRENT_BPMN)
-    if (bpmn != null) {
-        const {rootElement: definitions} = await moddle.fromXML(bpmn)
-        let collab = definitions.rootElements.find((el: any) => el.$type == 'bpmn:Collaboration')
-        collab.participants.forEach((collaborator: any) => {
-            collaboratorCounts[collaborator.name] = getUncertaintyCount(collaborator.processRef.flowElements)
-        })
-    }
+    collaborators.forEach(collaborator => {
+        collaboratorCounts[collaborator.name] = collaborator.uncertainties.length
+    })
     return collaboratorCounts
 }
 
-export async function getUncertaintyDistributionData(): Promise<UncertaintyChartData> {
-    return getCollaboratorUncertaintyCounts().then(data => {
-        let labels = Object.keys(data)
-        let values = Object.values(data)
-        let colors = getChartColors(labels.length)
-        return {
-            labels: labels,
-            datasets: [
-                {
-                    data: values,
-                    backgroundColor: colors,
-                    hoverBackgroundColor: colors
-                }
-            ]
-        }
-    })
+export function getUncertaintyDistributionData(collaborators: Collaborator[]): UncertaintyChartData {
+    let counts = getCollaboratorUncertaintyCounts(collaborators)
+    let labels = Object.keys(counts)
+    let values = Object.values(counts)
+    let colors = getChartColors(labels.length)
+    return {
+        labels: labels,
+        datasets: [
+            {
+                data: values,
+                backgroundColor: colors,
+                hoverBackgroundColor: colors
+            }
+        ]
+    }
 }
 
 export function getCollaborators(definitions: any, graphData: GraphData): Collaborator[] {
@@ -112,10 +105,10 @@ function insertAggregationMetrics(collaborators: Collaborator[], definitions: an
 
 
 // Metrics
-const globalUncertainty = (collaborators: Collaborator[]) =>
+export const globalUncertainty = (collaborators: Collaborator[]) =>
     collaborators.map((col: Collaborator) => col.laneUncertainty).reduce((acc, val) => acc + val)
 
-const averageElementUncertainty = (gu: number, rootElements: any[]) => gu / getElementCount(rootElements)
+export const averageElementUncertainty = (gu: number, rootElements: any[]) => gu / getElementCount(rootElements)
 
 
 function getElementCount(rootElements: any[]) {
