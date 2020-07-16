@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import TrustPersonaSelector from "./TrustPersonaSelector";
 import TrustPoliciesTable from "./TrustPoliciesTable";
+import TrustPersonaEdit from "./TrustPersonaEdit";
+import {Grid} from "@material-ui/core";
 
 
 export default function TrustPolicies() {
@@ -17,7 +19,18 @@ export default function TrustPolicies() {
 
     return (
         <div>
-            <TrustPersonaSelector personas={trustPersonas} setSelected={setSelectedTrustPersona}/>
+            <Grid container
+                  spacing={2}
+                  justify="flex-start"
+                  alignItems="center"
+                  direction="row">
+                <Grid item>
+                    <TrustPersonaSelector personas={trustPersonas} setSelected={setSelectedTrustPersona}/>
+                </Grid>
+                <Grid item>
+                    <TrustPersonaEdit personas={trustPersonas} setPersonas={setTrustPersonas}/>
+                </Grid>
+            </Grid>
             <TrustPoliciesTable trustPersona={selectedTrustPersona}/>
         </div>
     )

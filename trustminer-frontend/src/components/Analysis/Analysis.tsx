@@ -24,26 +24,30 @@ export default function Analysis() {
         <div>
             {trustReport ?
                 <Grid container spacing={3} className={classes.root}>
-                    <Grid item xs>
+                    <Grid item xs={4}>
                         <DataCard
                             content={<RelationshipGraph graphData={trustReport.dataObjectGraphData}
                                                         forDataObjects={true}/>}
                             title="Data Relationship Analysis"
                         />
                     </Grid>
-                    <Grid item xs>
+                    <Grid item xs={6}>
                         <DataCard
                             content={<UncertaintyChart
                                 data={getUncertaintyDistributionData(trustReport.collaborators)}/>}
                             title="Uncertainty Distribution"/>
                     </Grid>
                     <Grid item xs>
-                        <Indicator indicatorNumber={trustReport.globalUncertainty}
-                                   indicatorTitle="Global uncertainty"/>
-                    </Grid>
-                    <Grid item xs>
-                        <Indicator indicatorNumber={trustReport.averageElementUncertainty.toFixed(3)}
-                                   indicatorTitle="Average Element uncertainty"/>
+                        <Grid container spacing={1} direction="column">
+                            <Grid item xs>
+                                <Indicator indicatorNumber={trustReport.globalUncertainty}
+                                           indicatorTitle="Global uncertainty"/>
+                            </Grid>
+                            <Grid item xs>
+                                <Indicator indicatorNumber={trustReport.averageElementUncertainty.toFixed(3)}
+                                           indicatorTitle="Average Element uncertainty"/>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
                 : <div/>}

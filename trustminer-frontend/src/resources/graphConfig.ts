@@ -2,6 +2,9 @@ export const graphConfig = {
     automaticRearrangeAfterDropNode: true,
     collapsible: false,
     directed: true,
+    minZoom: 1,
+    height: 300,
+    width: 400,
     nodeHighlightBehavior: true,
     node: {
         color: "lightgreen",
