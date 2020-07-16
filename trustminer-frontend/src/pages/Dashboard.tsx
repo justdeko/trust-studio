@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import clsx from 'clsx';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -13,29 +13,49 @@ import {useDashboardStyles} from "../styles/dashboard-styles";
 import Routes from "../Routes";
 import {Route, Switch} from 'react-router-dom';
 import {CURRENT_BPMN} from "../util/constants";
+import {TrustReport} from "../model/TrustReport";
+import {mine} from "../miner/miner";
+import UncertaintyDiscoveryDialog from "../components/UncertaintyDiscoveryDialog";
+import {checkForUncertainties} from "../util/miner_util";
 
 export default function Dashboard() {
-    const classes = useDashboardStyles();
-    const [open, setOpen] = React.useState(false);
-    const [title, setTitle] = React.useState("Analysis")
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
+    const classes = useDashboardStyles()
+    const [open, setOpen] = useState(false);
+    const [trustReport, setTrustReport] = useState<TrustReport>()
+    const [title, setTitle] = useState("Analysis")
+    const [uncDiscoveryDialogOpen, setUncDiscoveryDialogOpen] = useState(false)
+
+    const handleDrawerOpen = () => setOpen(true)
+    const handleDrawerClose = () => setOpen(false)
+
+    useEffect(() => {
+        checkForUncertainties().then(found => {
+            mineWithGeneration(!found)
+        })
+    }, [])
 
     function handleFileSelect() {
         const fileSelector = document.createElement('input');
         fileSelector.setAttribute('type', 'file');
-        fileSelector.setAttribute('accept','.bpmn')
+        fileSelector.setAttribute('accept', '.bpmn')
         fileSelector.click()
-        fileSelector.onchange = function(event) {
-            var fileList = fileSelector.files;
+        fileSelector.onchange = function (event) {
+            let fileList = fileSelector.files;
             if (fileList) {
-                fileList[0].text().then(bpmnString => localStorage.setItem(CURRENT_BPMN, bpmnString))
+                fileList[0].text().then(bpmnString => {
+                    localStorage.setItem(CURRENT_BPMN, bpmnString)
+                    checkForUncertainties().then(found => {
+                        if (found) {
+                            setUncDiscoveryDialogOpen(true)
+                        } else mineWithGeneration(true)
+                    })
+                })
             }
         }
+    }
+
+    function mineWithGeneration(shouldDiscover: boolean) {
+        mine(shouldDiscover).then(trustReport => setTrustReport(trustReport))
     }
 
     return (
@@ -73,6 +93,10 @@ export default function Dashboard() {
                     </Switch>
                 </Container>
             </main>
+            <UncertaintyDiscoveryDialog
+                callWithUncertaintyGeneration={mineWithGeneration}
+                dialogOpen={uncDiscoveryDialogOpen}
+                setDialogOpen={setUncDiscoveryDialogOpen}/>
         </div>
     );
 }

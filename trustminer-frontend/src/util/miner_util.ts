@@ -13,3 +13,12 @@ export async function getDefinitions(): Promise<any> {
         return definitions
     } else throw Error()
 }
+
+export async function checkForUncertainties(): Promise<boolean> {
+    let found = false
+    let bpmn = localStorage.getItem(CURRENT_BPMN)
+    if (bpmn != null) {
+        found = bpmn.includes("trust:Uncertainty")
+    }
+    return found
+}

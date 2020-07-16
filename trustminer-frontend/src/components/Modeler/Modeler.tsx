@@ -44,7 +44,7 @@ export default function Modeler() {
         });
         setModeler(newModeler)
         newModeler.on('element.changed', function (event: any) {
-            var element = event.element;
+            let element = event.element
             console.log("element changed: " + element)
             newModeler.saveXML({format: true}, function (err: Error, xml: string) {
                 localStorage.setItem(CURRENT_BPMN, xml)
@@ -88,8 +88,7 @@ export default function Modeler() {
                 console.log(error)
                 return console.log('failed to import xml');
             }
-            var canvas = modeler.get('canvas');
-
+            let canvas = modeler.get('canvas');
             canvas.zoom('fit-viewport');
         });
     }

@@ -1,6 +1,6 @@
 import MaterialTable, {Column} from "material-table";
 import {TrustPolicyRow} from "../../model/TrustPolicyRow";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {TrustConcern} from "../../model/TrustConcern";
 import {tableIcons} from "../../theme/MaterialTableIcons";
 import {loadTrustPoliciesForPersona, saveTrustPolicies} from "../../util/csv_util";
@@ -16,7 +16,7 @@ interface TrustTableProps {
 
 export default function TrustPoliciesTable(props: TrustTableProps) {
     const {trustPersona} = props
-    const [state, setState] = React.useState<TableState>({
+    const [state, setState] = useState<TableState>({
         columns: [
             {title: 'Trust Entity', field: "trustEntity"},
             {title: 'Process Element', field: 'processElement'},

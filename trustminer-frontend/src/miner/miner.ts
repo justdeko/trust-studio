@@ -4,7 +4,7 @@ import {generateDataObjectGraphData, generateGraphData} from "./relationshipAnal
 import {averageElementUncertainty, getCollaborators, globalUncertainty} from "./uncertaintyAggregation";
 import {getDefinitions} from "../util/miner_util";
 
-export async function mine(): Promise<TrustReport> {
+export async function mine(shouldDiscover = true): Promise<TrustReport> {
     /**
      * Procedure:
      * 0. get bpmn moddle
@@ -15,8 +15,8 @@ export async function mine(): Promise<TrustReport> {
      * 5. return: completed trust report model containing data from steps 2-4
      */
     let definitions = await getDefinitions()
-    // 1
-    await insertUncertainties(definitions)
+    // 1 (only performed if user agrees to discovery)
+    if (shouldDiscover) await insertUncertainties(definitions)
     // 2
     let graphData = generateGraphData(definitions)
     let dataObjectGraphData = generateDataObjectGraphData(definitions)

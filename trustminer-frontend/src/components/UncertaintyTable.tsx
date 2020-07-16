@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import MaterialTable, {Column} from "material-table";
 import {tableIcons} from "../theme/MaterialTableIcons"
 import {loadUncertainties, saveUncertainties} from "../util/csv_util";
@@ -13,7 +13,7 @@ interface TableState {
 }
 
 export default function UncertaintyTable() {
-    const [state, setState] = React.useState<TableState>({
+    const [state, setState] = useState<TableState>({
         columns: [
             {title: 'Parent Component', field: "parentComponent"},
             {title: 'Component', field: 'component'},
