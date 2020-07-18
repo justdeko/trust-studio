@@ -3,6 +3,7 @@ import TrustPersonaSelector from "./TrustPersonaSelector";
 import TrustPoliciesTable from "./TrustPoliciesTable";
 import TrustPersonaEdit from "./TrustPersonaEdit";
 import {Grid} from "@material-ui/core";
+import {collaboratorNames, externalTrustPersonaNames} from "../../util/miner_util";
 
 
 export default function TrustPolicies() {
@@ -10,11 +11,10 @@ export default function TrustPolicies() {
     const [selectedTrustPersona, setSelectedTrustPersona] = useState("")
 
     useEffect(() => {
-        /*getCollaborators().then(collaborators => {
-            let names = collaborators.map(collaborator => collaborator.name)
-            setTrustPersonas(names)
+        collaboratorNames().then(names => {
+            setTrustPersonas(names.concat(externalTrustPersonaNames()))
             setSelectedTrustPersona(names[0])
-        })*/ //TODO
+        })
     }, [])
 
     return (

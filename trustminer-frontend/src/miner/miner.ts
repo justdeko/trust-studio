@@ -3,7 +3,7 @@ import {insertUncertainties} from "./uncertaintyDiscovery";
 import {generateDataObjectGraphData, generateGraphData} from "./relationshipAnalysis";
 import {averageElementUncertainty, getCollaborators, globalUncertainty} from "./uncertaintyAggregation";
 import {getDefinitions} from "../util/miner_util";
-import {findCriticalUncertainties} from "./trustAnalysis";
+import {findCriticalUncertainties, findCriticalUncertaintiesForExternal} from "./trustAnalysis";
 
 export async function mine(shouldDiscover = true): Promise<TrustReport> {
     /**
@@ -24,19 +24,21 @@ export async function mine(shouldDiscover = true): Promise<TrustReport> {
     // 3
     let collaborators = getCollaborators(definitions, graphData, dataObjectGraphData)
     let gu = globalUncertainty(collaborators)
+    let avg = averageElementUncertainty(gu, definitions.rootElements)
     //4
-    let filteredCollaborators = collaborators.map((collaborator) => {
+    let collaboratorsWithCritical = collaborators.map((collaborator) => {
         return {
             ...collaborator,
             trustIssues: findCriticalUncertainties(collaborators, collaborator.name)
         }
     })
+    let external = findCriticalUncertaintiesForExternal(collaborators)
     return {
         globalUncertainty: gu,
-        averageElementUncertainty: averageElementUncertainty(gu, definitions.rootElements),
-        collaborators: filteredCollaborators,
+        averageElementUncertainty: avg,
+        collaborators: collaboratorsWithCritical,
         messageFlowGraphData: graphData,
         dataObjectGraphData: dataObjectGraphData,
-        externalTrustPersonas: {}
+        externalTrustPersonas: external
     }
 }

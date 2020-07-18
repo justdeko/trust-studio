@@ -5,7 +5,7 @@ import {TrustPolicyRow} from "../model/TrustPolicyRow";
 import {TrustPolicy} from "../model/TrustPolicy";
 import {TrustConcern} from "../model/TrustConcern";
 
-const sep = ";" // Column separator
+export const sep = ";" // Column separator
 const nl = "\n" // Row separator
 
 export function loadUncertainties(): Array<UncertaintyRow> {
@@ -47,7 +47,7 @@ export function saveUncertainties(uncertaintyList: Array<UncertaintyRow>) {
         // add a newline if its not the last item
         if (index != uncertaintyList.length - 1) stringRow += nl
         csvString += stringRow
-    })
+    }) //TODO: use join
     let header = defaultUncertainties.split(nl)[0]
     let csv = header + nl + csvString
     localStorage.setItem(CURRENT_UNCERTAINTY_LIST, csv)

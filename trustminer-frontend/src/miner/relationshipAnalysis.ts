@@ -28,7 +28,7 @@ export function generateGraphData(definitions: any): GraphData {
     return {nodes: nodes, links: links}
 }
 
-function getCollaboratorNames(collab: any) {
+export function getCollaboratorNames(collab: any) {
     let collaboratorNames: { [id: string]: string } = {}
     if (collab && collab.participants) {
         collab.participants.forEach((participant: any) => {

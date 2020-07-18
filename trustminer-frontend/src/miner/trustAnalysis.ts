@@ -3,6 +3,8 @@ import {Uncertainty} from "../model/Uncertainty";
 import {loadTrustPoliciesForPersona, mapToTrustPolicyEntities} from "../util/csv_util";
 import {TrustPolicy} from "../model/TrustPolicy";
 import {UncertaintyTypes} from "../model/UncertaintyTypes";
+import {ExternalTrustPersona} from "../model/ExternalTrustPersona";
+import {externalTrustPersonaNames} from "../util/miner_util";
 
 export function findCriticalUncertainties(collaborators: Collaborator[], personaName: string): { [id: string]: Uncertainty[] } {
     let policies = getPoliciesForPersona(personaName)
@@ -17,6 +19,17 @@ export function findCriticalUncertainties(collaborators: Collaborator[], persona
         )
     })
     return trustIssues
+}
+
+export function findCriticalUncertaintiesForExternal(collaborators: Collaborator[]): ExternalTrustPersona[] {
+    let externalNames = externalTrustPersonaNames()
+    return externalNames.map((personaName) => {
+            return {
+                name: personaName,
+                trustIssues: findCriticalUncertainties(collaborators, personaName)
+            }
+        }
+    )
 }
 
 function getPoliciesForPersona(id: string): TrustPolicy[] {

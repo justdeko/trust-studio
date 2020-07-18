@@ -63,8 +63,8 @@ export function getCollaborators(
     graphData: GraphData,
     dataObjectGraphData: DataObjectGraphData): Collaborator[] {
     let collaborators: Collaborator[] = []
-    let collab = definitions.rootElements.find((el: any) => el.$type == 'bpmn:Collaboration')
-    collab.participants.forEach((collaborator: any) => {
+    let collaboratorElements = definitions.rootElements.find((el: any) => el.$type == 'bpmn:Collaboration')
+    collaboratorElements.participants.forEach((collaborator: any) => {
         let uncertainties = getUncertainties(collaborator.processRef.flowElements)
         let id: string = collaborator.id
         let processId: string = collaborator.processRef.id

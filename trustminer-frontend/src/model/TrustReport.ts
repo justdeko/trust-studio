@@ -1,6 +1,6 @@
 import {Collaborator} from "./Collaborator";
 import {DataObjectGraphData, GraphData} from "./GraphData";
-import {Uncertainty} from "./Uncertainty";
+import {ExternalTrustPersona} from "./ExternalTrustPersona";
 
 export interface TrustReport {
     globalUncertainty: number,
@@ -8,5 +8,5 @@ export interface TrustReport {
     collaborators: Collaborator[],
     messageFlowGraphData: GraphData,
     dataObjectGraphData: DataObjectGraphData,
-    externalTrustPersonas: { [id: string]: Uncertainty[] }
+    externalTrustPersonas: ExternalTrustPersona[]
 }

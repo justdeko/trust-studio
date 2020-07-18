@@ -1,6 +1,7 @@
 import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
 import {Button, Grid, IconButton, TextField} from "@material-ui/core";
 import {Add, Close} from "@material-ui/icons";
+import {editTrustPersonaNames} from "../../util/miner_util";
 
 interface EditorProps {
     personas: string[],
@@ -27,6 +28,7 @@ export default function TrustPersonaEdit(props: EditorProps) {
         if (personas.includes(personaName)) {
             setError(true)
         } else {
+            editTrustPersonaNames(true, personaName)
             setPersonas((prevState => prevState.concat(personaName)))
             setPersonaName("")
         }
