@@ -1,45 +1,25 @@
-import {getDefinitions} from "../util/miner_util";
 import {Collaborator} from "../model/Collaborator";
 import {Uncertainty} from "../model/Uncertainty";
-import {TrustPolicyRow} from "../model/TrustPolicyRow";
 import {loadTrustPoliciesForPersona, mapToTrustPolicyEntities} from "../util/csv_util";
 import {TrustPolicy} from "../model/TrustPolicy";
 import {UncertaintyTypes} from "../model/UncertaintyTypes";
 
-export function findCriticalUncertainties() {
-    getDefinitions().then((definitions: any[]) => {
-
-    }).catch((e) => console.log(e))
-}
-
-function removeTrusted(oldUncertainties: Uncertainty[], trustPolicies: TrustPolicy[], trustPersona: string): Uncertainty[] {
-    let relevantPolicies = trustPolicies.filter(
-        (policy) => policy.trustEntity == trustPersona || policy.trustEntity == "all"
-    )
-    return oldUncertainties.filter(
-        (uncertainty) =>
-            !relevantPolicies.find((policy) =>
+export function findCriticalUncertainties(collaborators: Collaborator[], personaName: string): { [id: string]: Uncertainty[] } {
+    let policies = getPoliciesForPersona(personaName)
+    let trustIssues: { [id: string]: Uncertainty[] } = {}
+    collaborators.filter(collaborator => collaborator.name != personaName).forEach((collaborator) => {
+        trustIssues[collaborator.name] = collaborator.uncertainties.filter(uncertainty =>
+            !policies.find((policy) =>
                 UncertaintyTypes[uncertainty.component] == policy.processElement
                 && uncertainty.trustConcern == policy.trustConcern
+                && collaborator.name == policy.trustEntity
             )
-    )
+        )
+    })
+    return trustIssues
 }
 
-function getAllTrustPolicies(personas: string[]): TrustPolicy[] {
-    let policyList: TrustPolicyRow[] = []
-    personas.forEach((persona) => {
-        let trustPolicies = loadTrustPoliciesForPersona(persona)
-        policyList = policyList.concat(trustPolicies)
-    })
+function getPoliciesForPersona(id: string): TrustPolicy[] {
+    let policyList = loadTrustPoliciesForPersona(id)
     return mapToTrustPolicyEntities(policyList)
-}
-
-export function filterWithTrustPolicies(collaborators: Collaborator[]): Collaborator[] {
-    let trustPolicyList = getAllTrustPolicies(collaborators.map((collaborator) => collaborator.name))
-    return collaborators.map((collaborator) => {
-        return {
-            ...collaborator,
-            uncertainties: removeTrusted(collaborator.uncertainties, trustPolicyList, collaborator.name)
-        }
-    })
 }

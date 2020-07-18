@@ -17,12 +17,13 @@ import {TrustReport} from "../model/TrustReport";
 import {mine} from "../miner/miner";
 import UncertaintyDiscoveryDialog from "../components/UncertaintyDiscoveryDialog";
 import {checkForUncertainties} from "../util/miner_util";
+import Analysis from "../components/Analysis/Analysis";
 
 export default function Dashboard() {
     const classes = useDashboardStyles()
     const [open, setOpen] = useState(false);
     const [trustReport, setTrustReport] = useState<TrustReport>()
-    const [title, setTitle] = useState("Analysis")
+    const [title, setTitle] = useState("Dashboard")
     const [uncDiscoveryDialogOpen, setUncDiscoveryDialogOpen] = useState(false)
 
     const handleDrawerOpen = () => setOpen(true)
@@ -73,7 +74,7 @@ export default function Dashboard() {
                         <MenuIcon/>
                     </IconButton>
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                        Dashboard
+                        {title}
                     </Typography>
                     <IconButton color="inherit">
                         <PublishIcon onClick={handleFileSelect}/>
@@ -85,11 +86,17 @@ export default function Dashboard() {
                 <div className={classes.appBarSpacer}/>
                 <Container maxWidth="xl" className={classes.container}>
                     <Switch>
-                        {Routes.map((route: any) => (
-                            <Route exact path={route.path} key={route.path}>
-                                <route.component/>
-                            </Route>
-                        ))}
+                        {Routes.map((route: any) => {
+                            if (route.path == "/analysis") {
+                                return <Route exact path={route.path} key={route.path}>
+                                    <Analysis trustReport={trustReport}/>
+                                </Route>
+                            } else {
+                                return <Route exact path={route.path} key={route.path}>
+                                    <route.component/>
+                                </Route>
+                            }
+                        })}
                     </Switch>
                 </Container>
             </main>

@@ -6,31 +6,11 @@ import Analysis from "./components/Analysis/Analysis";
 import TrustPolicies from "./components/Trust/TrustPolicies";
 
 
-const AnalysisRoute: React.FC = () => {
-    return (
-        <Analysis/>
-    )
-}
-const ModelerRoute: React.FC = () => {
-    return (
-        <Modeler/>
-    )
-}
-const TrustRoute: React.FC = () => {
-    return (
-        <TrustPolicies/>
-    )
-}
-const UncertaintyList: React.FC = () => {
-    return (
-        <UncertaintyTable/>
-    )
-}
-const Settings: React.FC = () => {
-    return (
-        <h1>Settings</h1>
-    )
-}
+const AnalysisRoute: React.FC = () => <Analysis/>
+const ModelerRoute: React.FC = () => <Modeler/>
+const TrustRoute: React.FC = () => <TrustPolicies/>
+const UncertaintyList: React.FC = () => <UncertaintyTable/>
+const Settings: React.FC = () => <h1>Settings</h1>
 
 const Routes = [
     {

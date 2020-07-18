@@ -1,25 +1,21 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import RelationshipGraph from "./RelationshipGraph";
 import {Grid} from "@material-ui/core";
 import UncertaintyChart from "./UncertaintyChart";
 import {getUncertaintyDistributionData} from "../../miner/uncertaintyAggregation";
-import {mine} from "../../miner/miner";
 import DataCard from "./DataCard";
 import {useAnalysisStyles} from "../../styles/analysis-styles";
 import Indicator from "./Indicator";
 import {TrustReport} from "../../model/TrustReport";
 
-export default function Analysis() {
+interface AnalysisProps {
+    trustReport?: TrustReport
+}
+
+export default function Analysis(props: AnalysisProps) {
     const classes = useAnalysisStyles();
-    const [trustReport, setTrustReport] = useState<TrustReport>()
-
-    useEffect(() => {
-        mine().then((trustReport) => {
-            setTrustReport(trustReport)
-            console.log(trustReport)
-        })
-    }, [])
-
+    const {trustReport} = props
+    console.log(trustReport)
     return (
         <div>
             {trustReport ?

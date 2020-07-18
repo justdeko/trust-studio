@@ -1,16 +1,14 @@
 import UncertaintyChartData from "../model/UncertaintyChartData";
 import {getChartColors} from "../util/chart_util";
-import {Moddle} from "../util/miner_util";
 import {Collaborator} from "../model/Collaborator";
 import {Uncertainty} from "../model/Uncertainty";
-import {GraphData} from "../model/GraphData";
-
-let moddle = Moddle
+import {DataObjectGraphData, GraphData} from "../model/GraphData";
+import {EXTENSION_NAME} from "../util/constants";
 
 function getUncertaintyCount(flowElements: any[]) {
     let count = 0
     flowElements.forEach(element => {
-        count += element.extensionElements.values.filter((el: any) => el.$type == "trust:Uncertainty").length
+        count += element.extensionElements.values.filter((el: any) => el.$type == EXTENSION_NAME).length
     })
     return count
 }
@@ -20,7 +18,7 @@ function getUncertainties(flowElements: any[]): Uncertainty[] {
     flowElements.forEach(element => {
         uncertainties = uncertainties.concat(
             element.extensionElements.values
-                .filter((el: any) => el.$type == "trust:Uncertainty")
+                .filter((el: any) => el.$type == EXTENSION_NAME)
                 .map((el: any) => {
                     return {
                         component: element.$type,
@@ -60,7 +58,10 @@ export function getUncertaintyDistributionData(collaborators: Collaborator[]): U
     }
 }
 
-export function getCollaborators(definitions: any, graphData: GraphData): Collaborator[] {
+export function getCollaborators(
+    definitions: any,
+    graphData: GraphData,
+    dataObjectGraphData: DataObjectGraphData): Collaborator[] {
     let collaborators: Collaborator[] = []
     let collab = definitions.rootElements.find((el: any) => el.$type == 'bpmn:Collaboration')
     collab.participants.forEach((collaborator: any) => {
@@ -77,28 +78,40 @@ export function getCollaborators(definitions: any, graphData: GraphData): Collab
             laneUncertaintyBalance: 0,
             uncertainties: uncertainties,
             relevantUncertainties: [],
-            inDegree: 0,
-            outDegree: 0
+            messageInDegree: 0,
+            messageOutDegree: 0,
+            dataInDegree: 0,
+            dataOutDegree: 0,
+            trustIssues: {}
         }
         collaborators.push(collaboratorObject)
     })
-    return insertAggregationMetrics(collaborators, definitions, graphData)
+    return insertAggregationMetrics(collaborators, definitions, graphData, dataObjectGraphData)
 }
 
-function insertAggregationMetrics(collaborators: Collaborator[], definitions: any, graphData: GraphData) {
+function insertAggregationMetrics(
+    collaborators: Collaborator[],
+    definitions: any,
+    graphData: GraphData,
+    dataObjectGraphData: DataObjectGraphData): Collaborator[] {
     let gu = globalUncertainty(collaborators)
-    let dataLinks = graphData.links
+    let messageLinks = graphData.links
+    let dataLinks = dataObjectGraphData.links
     return collaborators.map((collaborator: Collaborator) => {
         let rlu = collaborator.laneUncertainty / gu
         let lub = -(1 / collaborators.length) + rlu
+        let md = messageLinks.filter((link) => link.target == collaborator.name).length
+        let mi = messageLinks.filter((link) => link.source == collaborator.name).length
         let dd = dataLinks.filter((link) => link.target == collaborator.name).length
         let di = dataLinks.filter((link) => link.source == collaborator.name).length
         return {
             ...collaborator,
             relativeLanceUncertainty: rlu,
             laneUncertaintyBalance: lub,
-            inDegree: dd,
-            outDegree: di
+            messageInDegree: md,
+            messageOutDegree: mi,
+            dataInDegree: dd,
+            dataOutDegree: di
         }
     })
 }
