@@ -15,16 +15,17 @@ interface AnalysisProps {
 export default function Analysis(props: AnalysisProps) {
     const classes = useAnalysisStyles();
     const {trustReport} = props
-    console.log(trustReport)
     return (
         <div>
             {trustReport ?
                 <Grid container spacing={3} className={classes.root}>
                     <Grid item xs={4}>
                         <DataCard
-                            content={<RelationshipGraph graphData={trustReport.dataObjectGraphData}
-                                                        forDataObjects={true}/>}
-                            title="Data Relationship Analysis"
+                            content={
+                                <RelationshipGraph graphData={trustReport.messageFlowGraphData}
+                                                   dataObjectGraphData={trustReport.dataObjectGraphData}/>
+                            }
+                            title="Relationship Analysis"
                         />
                     </Grid>
                     <Grid item xs={6}>
