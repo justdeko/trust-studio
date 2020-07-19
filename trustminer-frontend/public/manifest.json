@@ -1,6 +1,6 @@
 {
-  "short_name": "Trust miner",
-  "name": "Trust miner for collaborative business processes",
+  "short_name": "Trust Studio",
+  "name": "Trust Studio",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#ffffff",
+  "theme_color": "#002635",
   "background_color": "#ffffff"
 }
