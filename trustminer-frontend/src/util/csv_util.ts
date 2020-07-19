@@ -84,7 +84,6 @@ export function loadTrustPoliciesForPersona(persona: string): Array<TrustPolicyR
         }
         lines.push(line);
     }
-    console.log(lines)
     return lines.map(line => {
         return {
             trustEntity: line[0],

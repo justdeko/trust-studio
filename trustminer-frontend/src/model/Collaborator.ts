@@ -9,9 +9,9 @@ export interface Collaborator {
     laneUncertaintyBalance: number,
     uncertainties: Uncertainty[],
     relevantUncertainties: Uncertainty[],
-    messageInDegree: number | undefined,
-    messageOutDegree: number | undefined,
-    dataInDegree: number | undefined,
-    dataOutDegree: number | undefined,
+    messageInDegree: number,
+    messageOutDegree: number,
+    dataInDegree: number,
+    dataOutDegree: number,
     trustIssues: { [id: string]: Uncertainty[] }
 }

@@ -1,6 +1,6 @@
 import {createStyles, FormControl, InputLabel, MenuItem, Select, Theme} from "@material-ui/core";
-import React, {Dispatch, SetStateAction, useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
+import React, {Dispatch, SetStateAction, useState} from "react";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -15,12 +15,13 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface SelectorProps {
+    collaboratorNames: string[],
     setSelected: Dispatch<SetStateAction<string>>
 }
 
-export default function RelationshipGraphSelector(props: SelectorProps) {
-    const {setSelected} = props
-    const [currentValue, setCurrentValue] = useState("data")
+export default function CollaboratorSelector(props: SelectorProps) {
+    const {collaboratorNames, setSelected} = props
+    const [currentValue, setCurrentValue] = useState(collaboratorNames[0])
 
 
     function handleChange(e: any) {
@@ -29,17 +30,18 @@ export default function RelationshipGraphSelector(props: SelectorProps) {
     }
 
     const classes = useStyles();
-    return <FormControl className={classes.formControl}>
-        <InputLabel id="select-relationship-graph-label">Relationship View</InputLabel>
+    return <FormControl variant="outlined" className={classes.formControl}>
+        <InputLabel id="select-collaborator-label">Collaborator</InputLabel>
         <Select
-            labelId="select-relationship-graph-label"
-            id="select-relationship-graph-type"
+            labelId="select-collaborator-label"
+            id="select-collaborator"
             value={currentValue}
             onChange={handleChange}
-            label="Relationship View"
+            label="Collaborator"
         >
-            <MenuItem value="data">Data</MenuItem>
-            <MenuItem value="message-flow">Message Flow</MenuItem>
+            {collaboratorNames.map((collaborator) =>
+                <MenuItem value={collaborator}>{collaborator}</MenuItem>)
+            }
         </Select>
     </FormControl>
 }
