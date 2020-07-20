@@ -2,6 +2,7 @@ import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
 import {Button, Grid, IconButton, TextField} from "@material-ui/core";
 import {Add, Close} from "@material-ui/icons";
 import {editTrustPersonaNames} from "../../util/miner_util";
+import {sep} from "../../util/csv_util";
 
 interface EditorProps {
     personas: string[],
@@ -63,7 +64,7 @@ export default function TrustPersonaEdit(props: EditorProps) {
                             variant="outlined"
                         />
                     </Grid>
-                    {(error || personaName.length < 3) ? <div/> :
+                    {(error || personaName.length < 3 || personaName.includes(sep)) ? <div/> :
                         <Grid item>
                             <IconButton color="primary" aria-label="add trust persona" onClick={addPersona}>
                                 <Add/>

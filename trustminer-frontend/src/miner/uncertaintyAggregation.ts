@@ -3,14 +3,6 @@ import {Uncertainty} from "../model/Uncertainty";
 import {DataObjectGraphData, GraphData} from "../model/GraphData";
 import {EXTENSION_NAME} from "../util/constants";
 
-function getUncertaintyCount(flowElements: any[]) {
-    let count = 0
-    flowElements.forEach(element => {
-        count += element.extensionElements.values.filter((el: any) => el.$type == EXTENSION_NAME).length
-    })
-    return count
-}
-
 function getUncertainties(flowElements: any[]): Uncertainty[] {
     let uncertainties: Uncertainty[] = []
     flowElements.forEach(element => {

@@ -10,7 +10,7 @@ import {CURRENT_BPMN} from "../../util/constants";
 import uncertainty from "../../resources/uncertaintyExtension.json"
 import UncertaintyBox from "./UncertaintyBox";
 import {getUncertainties} from "../../util/modeler_util";
-import {Button, Dialog, DialogTitle, List, ListItem, ListItemText} from "@material-ui/core";
+import {Button, Dialog, DialogTitle, Grid, List, ListItem, ListItemText} from "@material-ui/core";
 
 
 //Initial code from https://github.com/Varooneh/reactbpmn/blob/master/src/components/bpmn/bpmn.modeler.component.jsx
@@ -117,9 +117,31 @@ export default function Modeler() {
         });
     }
 
+    function saveBpmn() {
+        modeler.saveXML({format: true}, function (err: Error, xml: string) {
+            if (err) {
+                console.log(err)
+                return
+            }
+            let bpmnBlob = new Blob([xml], {type: 'bpmn'})
+            let fileName = 'process' + '.bpmn'
+            let link = document.createElement('a')
+
+            link.download = fileName
+            link.innerHTML = 'Get the BPMN file'
+            link.href = window.URL.createObjectURL(bpmnBlob)
+            link.style.visibility = 'hidden'
+            document.body.appendChild(link)
+            link.click()
+        })
+    }
+
     return (
         <div id="bpmncontainer" style={{height: '100%'}}>
-            <Button onClick={saveSvg}>Save to Svg</Button>
+            <Grid container direction="row">
+                <Button onClick={saveSvg}>Save to Svg</Button>
+                <Button onClick={saveBpmn}>Save to bpmn</Button>
+            </Grid>
             <div id="propview"
                  style={{width: '25%', height: '100vh', float: 'right', maxHeight: '100vh', overflowX: 'auto'}}/>
             <div id="bpmnview" style={{width: '75%', height: '100vh', float: 'left'}}/>

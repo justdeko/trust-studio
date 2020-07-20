@@ -78,7 +78,7 @@ export function mapToTrustIssuesChartData(trustIssues: { [id: string]: Uncertain
     return {
         labels: labels,
         datasets: [{
-            label: "Amount",
+            label: "Critical Uncertainties",
             backgroundColor: colorPresets[6],
             borderColor: colorPresets[6],
             borderWidth: 1,

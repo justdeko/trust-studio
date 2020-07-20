@@ -12,3 +12,4 @@ export const FILL_COLOR = '#4a4a4a',
 
 //Schema-related
 export const EXTENSION_NAME = 'trust:Uncertainty'
+export const EXTENSION_NAME_LOWERCASE = 'trust:uncertainty'

@@ -67,7 +67,6 @@ export function saveTrustPolicies(trustPolicyList: Array<TrustPolicyRow>, trustP
         if (index != trustPolicyList.length - 1) stringRow += nl
         csvString += stringRow
     })
-    console.log(csvString)
     localStorage.setItem(TRUST_POLICY_LIST + trustPersona, csvString)
 }
 

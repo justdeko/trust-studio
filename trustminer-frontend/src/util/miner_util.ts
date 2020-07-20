@@ -1,6 +1,6 @@
 import BpmnModdle from "bpmn-moddle";
 import uncertainty from "../resources/uncertaintyExtension.json";
-import {CURRENT_BPMN, EXTENSION_NAME, EXTERNAL_PERSONA_NAMES} from "./constants";
+import {CURRENT_BPMN, EXTENSION_NAME_LOWERCASE, EXTERNAL_PERSONA_NAMES} from "./constants";
 import {sep} from "./csv_util";
 import {getCollaboratorNames} from "../miner/relationshipAnalysis";
 
@@ -26,13 +26,16 @@ export async function collaboratorNames(): Promise<string[]> {
     })
 }
 
-export async function checkForUncertainties(): Promise<boolean> {
-    let found = false
-    let bpmn = localStorage.getItem(CURRENT_BPMN)
-    if (bpmn != null) {
-        found = bpmn.includes(EXTENSION_NAME)
+export function checkForUncertainties(bpmnString?: string): boolean {
+    if (bpmnString) {
+        return bpmnString.includes(EXTENSION_NAME_LOWERCASE)
+    } else {
+        let bpmn = localStorage.getItem(CURRENT_BPMN)
+        if (bpmn != null) {
+            return bpmn.includes(EXTENSION_NAME_LOWERCASE)
+        }
     }
-    return found
+    return false
 }
 
 export function externalTrustPersonaNames(): string[] {

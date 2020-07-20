@@ -32,10 +32,10 @@ export default function UncertaintyDiscoveryDialog(props: DiscoveryDialogProps) 
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">Uncertainties discovered</DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                    It looks like your BPMN file already contains some uncertainties. \n
+                    It looks like your BPMN file already contains some uncertainties. <br/>
                     Do you want us to try and discover more?
                 </DialogContentText>
             </DialogContent>

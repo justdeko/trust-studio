@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Route, Switch, useHistory} from "react-router-dom";
+import {Redirect, Route, Switch, useHistory} from "react-router-dom";
 import clsx from 'clsx';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -7,7 +7,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Container from '@material-ui/core/Container';
-import MenuIcon from '@material-ui/icons/Menu';
 import PublishIcon from '@material-ui/icons/Publish';
 import Sidebar from "../components/Sidebar/Sidebar";
 import {useDashboardStyles} from "../styles/dashboard-styles";
@@ -18,6 +17,7 @@ import {mine} from "../miner/miner";
 import UncertaintyDiscoveryDialog from "../components/UncertaintyDiscoveryDialog";
 import {checkForUncertainties} from "../util/miner_util";
 import Analysis from "../components/Analysis/Analysis";
+import {TrustLogo} from "../TrustLogo";
 
 export default function Dashboard() {
     const classes = useDashboardStyles()
@@ -33,9 +33,8 @@ export default function Dashboard() {
     useEffect(() => {
         let route = Routes.find(route => route.path == window.location.pathname)
         if (route) setTitle(route.title)
-        checkForUncertainties().then(found => {
-            mineWithGeneration(!found)
-        })
+        let found = checkForUncertainties()
+        mineWithGeneration(!found)
     }, [])
 
     useEffect(() => {
@@ -55,11 +54,10 @@ export default function Dashboard() {
             if (fileList) {
                 fileList[0].text().then(bpmnString => {
                     localStorage.setItem(CURRENT_BPMN, bpmnString)
-                    checkForUncertainties().then(found => {
-                        if (found) {
-                            setUncDiscoveryDialogOpen(true)
-                        } else mineWithGeneration(true)
-                    })
+                    let found = checkForUncertainties(bpmnString)
+                    if (found) {
+                        setUncDiscoveryDialogOpen(true)
+                    } else mineWithGeneration(true)
                 })
             }
         }
@@ -81,7 +79,7 @@ export default function Dashboard() {
                         onClick={handleDrawerOpen}
                         className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
                     >
-                        <MenuIcon/>
+                        <TrustLogo/>
                     </IconButton>
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         {title}
@@ -96,6 +94,9 @@ export default function Dashboard() {
                 <div className={classes.appBarSpacer}/>
                 <Container maxWidth="xl" className={classes.container}>
                     <Switch>
+                        <Route exact path="/">
+                            <Redirect to="/analysis"/>
+                        </Route>
                         {Routes.map((route: any) => {
                             if (route.path == "/analysis") {
                                 return <Route exact path={route.path} key={route.path}>
