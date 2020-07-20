@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {Route, Switch, useHistory} from "react-router-dom";
 import clsx from 'clsx';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -11,7 +12,6 @@ import PublishIcon from '@material-ui/icons/Publish';
 import Sidebar from "../components/Sidebar/Sidebar";
 import {useDashboardStyles} from "../styles/dashboard-styles";
 import Routes from "../Routes";
-import {Route, Switch} from 'react-router-dom';
 import {CURRENT_BPMN} from "../util/constants";
 import {TrustReport} from "../model/TrustReport";
 import {mine} from "../miner/miner";
@@ -25,15 +25,25 @@ export default function Dashboard() {
     const [trustReport, setTrustReport] = useState<TrustReport>()
     const [title, setTitle] = useState("Dashboard")
     const [uncDiscoveryDialogOpen, setUncDiscoveryDialogOpen] = useState(false)
+    let history = useHistory()
 
     const handleDrawerOpen = () => setOpen(true)
     const handleDrawerClose = () => setOpen(false)
 
     useEffect(() => {
+        let route = Routes.find(route => route.path == window.location.pathname)
+        if (route) setTitle(route.title)
         checkForUncertainties().then(found => {
             mineWithGeneration(!found)
         })
     }, [])
+
+    useEffect(() => {
+        return history.listen((location) => {
+            let route = Routes.find(route => route.path == location.pathname)
+            if (route) setTitle(route.title)
+        })
+    }, [history])
 
     function handleFileSelect() {
         const fileSelector = document.createElement('input');

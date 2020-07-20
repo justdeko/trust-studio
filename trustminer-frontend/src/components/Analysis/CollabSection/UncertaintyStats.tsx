@@ -14,13 +14,13 @@ export default function UncertaintyStats(props: UncertaintyStatsProps) {
             <Typography variant="h5" component="h2">
                 Uncertainty Statistics
             </Typography>
-            <Typography variant="h6" component="h6">
+            <Typography variant="subtitle1">
                 Lane Uncertainty: {lu}
             </Typography>
-            <Typography variant="h6" component="h6">
+            <Typography variant="subtitle1">
                 Relative Lane Uncertainty: {rlu.toFixed(3)}
             </Typography>
-            <Typography variant="h6" component="h6">
+            <Typography variant="subtitle1">
                 Lane Uncertainty Balance: {lub.toFixed(3)}
             </Typography>
         </CardContent>

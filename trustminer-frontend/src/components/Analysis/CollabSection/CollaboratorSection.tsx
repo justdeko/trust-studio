@@ -6,7 +6,8 @@ import {Collaborator} from "../../../model/Collaborator";
 import UncertaintyStats from "./UncertaintyStats";
 import UncertaintyDependencies from "./UncertaintyDependencies";
 import TrustConcernChart from "./TrustConcernChart";
-import {mapToTrustConcernChartData} from "../../../util/chart_util";
+import {mapToTrustConcernChartData, mapToTrustIssuesChartData} from "../../../util/chart_util";
+import TrustIssuesChart from "./TrustIssuesChart";
 
 interface CollaboratorSectionProps {
     trustReport: TrustReport
@@ -15,7 +16,7 @@ interface CollaboratorSectionProps {
 export default function CollaboratorSection(props: CollaboratorSectionProps) {
     const {trustReport} = props
     const [selectedCollaboratorName, setSelectedCollaboratorName] = useState<string>(trustReport.collaborators[0].name)
-    const [selCollab, setSelectedCollaborator] = useState<Collaborator>(trustReport.collaborators[0])
+    const [selectedCollaborator, setSelectedCollaborator] = useState<Collaborator>(trustReport.collaborators[0])
     const [collaboratorNames, setCollaboratorNames] =
         useState<string[]>(trustReport.collaborators.map(collaborator => collaborator.name))
 
@@ -29,19 +30,24 @@ export default function CollaboratorSection(props: CollaboratorSectionProps) {
     return (
         <div>
             <CollaboratorSelector collaboratorNames={collaboratorNames} setSelected={setSelectedCollaboratorName}/>
-            <Grid alignItems="stretch" container spacing={2}>
-                <Grid item>
-                    <UncertaintyStats lu={selCollab.laneUncertainty}
-                                      rlu={selCollab.relativeLanceUncertainty}
-                                      lub={selCollab.laneUncertaintyBalance}/>
+            <Grid justify="space-between" alignItems="stretch" container spacing={2}>
+                <Grid item xs>
+                    <UncertaintyStats lu={selectedCollaborator.laneUncertainty}
+                                      rlu={selectedCollaborator.relativeLanceUncertainty}
+                                      lub={selectedCollaborator.laneUncertaintyBalance}/>
                 </Grid>
 
                 <Grid item>
-                    <TrustConcernChart chartData={mapToTrustConcernChartData(selCollab)}/>
+                    <TrustConcernChart chartData={mapToTrustConcernChartData(selectedCollaborator)}/>
+                </Grid>
+                <Grid item xs>
+                    <UncertaintyDependencies dd={selectedCollaborator.dataInDegree}
+                                             di={selectedCollaborator.dataOutDegree}
+                                             md={selectedCollaborator.messageInDegree}
+                                             mi={selectedCollaborator.messageOutDegree}/>
                 </Grid>
                 <Grid item>
-                    <UncertaintyDependencies dd={selCollab.dataInDegree} di={selCollab.dataOutDegree}
-                                             md={selCollab.messageInDegree} mi={selCollab.messageOutDegree}/>
+                    <TrustIssuesChart chartData={mapToTrustIssuesChartData(selectedCollaborator.trustIssues)}/>
                 </Grid>
             </Grid>
         </div>

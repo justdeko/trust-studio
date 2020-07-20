@@ -15,16 +15,16 @@ export default function UncertaintyDependencies(props: DependenciesProps) {
             <Typography variant="h5" component="h2">
                 Uncertainty Dependencies
             </Typography>
-            <Typography variant="h6" component="h6">
+            <Typography variant="subtitle1">
                 Data Influence: {di}
             </Typography>
-            <Typography variant="h6" component="h6">
+            <Typography variant="subtitle1">
                 Data Dependency: {dd}
             </Typography>
-            <Typography variant="h6" component="h6">
+            <Typography variant="subtitle1">
                 Message Influence: {mi}
             </Typography>
-            <Typography variant="h6" component="h6">
+            <Typography variant="subtitle1">
                 Message Dependency: {md}
             </Typography>
         </CardContent>

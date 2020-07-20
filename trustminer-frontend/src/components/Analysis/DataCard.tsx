@@ -8,7 +8,7 @@ interface DataCardProps {
 
 export default function DataCard(props: DataCardProps) {
     const {content, title} = props
-    return <Card>
+    return <Card style={{height: '100%'}}>
         <CardContent>
             <Typography variant="h5" component="h2">
                 {title}

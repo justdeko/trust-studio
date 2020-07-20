@@ -1,5 +1,3 @@
-import UncertaintyChartData from "../model/UncertaintyChartData";
-import {getChartColors} from "../util/chart_util";
 import {Collaborator} from "../model/Collaborator";
 import {Uncertainty} from "../model/Uncertainty";
 import {DataObjectGraphData, GraphData} from "../model/GraphData";
@@ -31,31 +29,6 @@ function getUncertainties(flowElements: any[]): Uncertainty[] {
         )
     })
     return uncertainties
-}
-
-function getCollaboratorUncertaintyCounts(collaborators: Collaborator[]): { [id: string]: number } {
-    let collaboratorCounts: { [id: string]: number } = {}
-    collaborators.forEach(collaborator => {
-        collaboratorCounts[collaborator.name] = collaborator.uncertainties.length
-    })
-    return collaboratorCounts
-}
-
-export function getUncertaintyDistributionData(collaborators: Collaborator[]): UncertaintyChartData {
-    let counts = getCollaboratorUncertaintyCounts(collaborators)
-    let labels = Object.keys(counts)
-    let values = Object.values(counts)
-    let colors = getChartColors(labels.length)
-    return {
-        labels: labels,
-        datasets: [
-            {
-                data: values,
-                backgroundColor: colors,
-                hoverBackgroundColor: colors
-            }
-        ]
-    }
 }
 
 export function getCollaborators(

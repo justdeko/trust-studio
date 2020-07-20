@@ -8,7 +8,7 @@ interface GlobalStatProps {
 
 export default function GlobalStats(props: GlobalStatProps) {
     const {globalUncertainty, averageUncertainty} = props
-    return <Card>
+    return <Card style={{height: '100%'}}>
         <CardContent>
             <Typography variant="h5" component="h2">Global Uncertainty</Typography>
             <Typography variant='h4'>{globalUncertainty}</Typography>

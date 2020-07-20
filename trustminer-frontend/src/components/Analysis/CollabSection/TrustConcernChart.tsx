@@ -7,7 +7,7 @@ interface concernChartProps {
     chartData: BarChartData
 }
 
-const chartOptions = {
+export const chartOptions = {
     scales: {
         yAxes: [{
             ticks: {
@@ -19,6 +19,6 @@ const chartOptions = {
 }
 
 export default function TrustConcernChart(props: concernChartProps) {
-    return <DataCard content={<Bar data={props.chartData} height={200} width={400}
+    return <DataCard content={<Bar data={props.chartData} height={200} width={300}
                                    options={chartOptions}/>} title="Trust concern distribution"/>
 }

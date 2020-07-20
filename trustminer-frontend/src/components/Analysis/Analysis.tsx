@@ -2,12 +2,11 @@ import React from "react";
 import RelationshipGraph from "./RelationshipGraph";
 import {Grid} from "@material-ui/core";
 import UncertaintyChart from "./UncertaintyChart";
-import {getUncertaintyDistributionData} from "../../miner/uncertaintyAggregation";
-import DataCard from "./DataCard";
 import {useAnalysisStyles} from "../../styles/analysis-styles";
 import GlobalStats from "./GlobalStats";
 import {TrustReport} from "../../model/TrustReport";
 import CollaboratorSection from "./CollabSection/CollaboratorSection";
+import {getUncertaintyDistributionData} from "../../util/chart_util";
 
 interface AnalysisProps {
     trustReport?: TrustReport
@@ -25,10 +24,8 @@ export default function Analysis(props: AnalysisProps) {
                                            dataObjectGraphData={trustReport.dataObjectGraphData}/>
                     </Grid>
                     <Grid item style={{minWidth: 300}} xs={6}>
-                        <DataCard
-                            content={<UncertaintyChart
-                                data={getUncertaintyDistributionData(trustReport.collaborators)}/>}
-                            title="Uncertainty Distribution"/>
+                        <UncertaintyChart
+                            data={getUncertaintyDistributionData(trustReport.collaborators)}/>
                     </Grid>
                     <Grid item xs>
                         <GlobalStats globalUncertainty={trustReport.globalUncertainty}

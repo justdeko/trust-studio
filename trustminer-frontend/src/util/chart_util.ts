@@ -1,8 +1,10 @@
 import {Collaborator} from "../model/Collaborator";
 import {BarChartData} from "../model/BarChartData";
 import {TrustConcern} from "../model/TrustConcern";
+import {Uncertainty} from "../model/Uncertainty";
+import UncertaintyChartData from "../model/UncertaintyChartData";
 
-const colorPresets = [
+export const colorPresets = [
     '#003f5c', '#2f4b7c',
     '#665191', '#a05195',
     '#d45087', '#f95d6a',
@@ -68,4 +70,47 @@ export function mapToTrustConcernChartData(collaborator: Collaborator): BarChart
             data: distributionData
         }]
     }
+}
+
+export function mapToTrustIssuesChartData(trustIssues: { [id: string]: Uncertainty[] }): BarChartData {
+    let labels = Object.entries(trustIssues).map(([key, _]) => key)
+    let issuesData = Object.entries(trustIssues).map(([_, uncertainties]) => uncertainties.length)
+    return {
+        labels: labels,
+        datasets: [{
+            label: "Amount",
+            backgroundColor: colorPresets[6],
+            borderColor: colorPresets[6],
+            borderWidth: 1,
+            hoverBackgroundColor: colorPresets[3],
+            hoverBorderColor: colorPresets[3],
+            data: issuesData
+        }]
+    }
+}
+
+export function getUncertaintyDistributionData(collaborators: Collaborator[]): UncertaintyChartData {
+    let counts = getCollaboratorUncertaintyCounts(collaborators)
+    let labels = Object.keys(counts)
+    let values = Object.values(counts)
+    let colors = getChartColors(labels.length)
+    return {
+        labels: labels,
+        datasets: [
+            {
+                data: values,
+                backgroundColor: colors,
+                hoverBackgroundColor: colors
+            }
+        ]
+    }
+}
+
+
+function getCollaboratorUncertaintyCounts(collaborators: Collaborator[]): { [id: string]: number } {
+    let collaboratorCounts: { [id: string]: number } = {}
+    collaborators.forEach(collaborator => {
+        collaboratorCounts[collaborator.name] = collaborator.uncertainties.length
+    })
+    return collaboratorCounts
 }

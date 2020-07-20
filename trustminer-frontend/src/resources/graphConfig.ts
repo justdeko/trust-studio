@@ -1,3 +1,5 @@
+import {colorPresets} from "../util/chart_util";
+
 export const graphConfig = {
     automaticRearrangeAfterDropNode: true,
     collapsible: false,
@@ -7,9 +9,9 @@ export const graphConfig = {
     width: 400,
     nodeHighlightBehavior: true,
     node: {
-        color: "lightgreen",
+        color: colorPresets[4],
         size: 120,
-        highlightStrokeColor: "blue",
+        highlightStrokeColor: colorPresets[1],
     },
     link: {
         highlightColor: "lightblue",

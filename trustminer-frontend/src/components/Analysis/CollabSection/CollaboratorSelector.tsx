@@ -31,7 +31,7 @@ export default function CollaboratorSelector(props: SelectorProps) {
 
     const classes = useStyles();
     return <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="select-collaborator-label">Collaborator</InputLabel>
+        <InputLabel id="select-collaborator-label">Perspective</InputLabel>
         <Select
             labelId="select-collaborator-label"
             id="select-collaborator"
