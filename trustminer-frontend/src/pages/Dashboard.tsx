@@ -18,6 +18,8 @@ import UncertaintyDiscoveryDialog from "../components/UncertaintyDiscoveryDialog
 import {checkForUncertainties} from "../util/miner_util";
 import Analysis from "../components/Analysis/Analysis";
 import {TrustLogo} from "../TrustLogo";
+import {useSnackbar} from "notistack";
+import Modeler from "../components/Modeler/Modeler";
 
 export default function Dashboard() {
     const classes = useDashboardStyles()
@@ -25,6 +27,7 @@ export default function Dashboard() {
     const [trustReport, setTrustReport] = useState<TrustReport>()
     const [title, setTitle] = useState("Dashboard")
     const [uncDiscoveryDialogOpen, setUncDiscoveryDialogOpen] = useState(false)
+    const {enqueueSnackbar} = useSnackbar();
     let history = useHistory()
 
     const handleDrawerOpen = () => setOpen(true)
@@ -34,7 +37,7 @@ export default function Dashboard() {
         let route = Routes.find(route => route.path == window.location.pathname)
         if (route) setTitle(route.title)
         let found = checkForUncertainties()
-        mineWithGeneration(!found)
+        mineWithGeneration(!found, false)
     }, [])
 
     useEffect(() => {
@@ -57,14 +60,19 @@ export default function Dashboard() {
                     let found = checkForUncertainties(bpmnString)
                     if (found) {
                         setUncDiscoveryDialogOpen(true)
-                    } else mineWithGeneration(true)
+                    } else mineWithGeneration(true, true)
                 })
             }
         }
     }
 
-    function mineWithGeneration(shouldDiscover: boolean) {
-        mine(shouldDiscover).then(trustReport => setTrustReport(trustReport))
+    function mineWithGeneration(shouldDiscover: boolean, isUpload: boolean) {
+        mine(shouldDiscover).then(trustReport => {
+            if (isUpload) {
+                enqueueSnackbar('Trust report computed', {variant: 'success'})
+            }
+            setTrustReport(trustReport)
+        })
     }
 
     return (
@@ -101,6 +109,10 @@ export default function Dashboard() {
                             if (route.path == "/analysis") {
                                 return <Route exact path={route.path} key={route.path}>
                                     <Analysis trustReport={trustReport}/>
+                                </Route>
+                            } else if (route.path == "/modeler") {
+                                return <Route exact path={route.path} key={route.path}>
+                                    <Modeler performMining={mineWithGeneration}/>
                                 </Route>
                             } else {
                                 return <Route exact path={route.path} key={route.path}>

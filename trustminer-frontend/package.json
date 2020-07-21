@@ -25,6 +25,7 @@
     "diagram-js": "^6.6.1",
     "diagram-js-minimap": "^2.0.3",
     "material-table": "^1.62.0",
+    "notistack": "^0.9.17",
     "react": "^16.13.1",
     "react-chartjs-2": "^2.9.0",
     "react-d3-graph": "^2.4.1",

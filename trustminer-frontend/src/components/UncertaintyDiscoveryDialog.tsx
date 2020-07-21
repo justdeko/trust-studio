@@ -5,7 +5,7 @@ interface DiscoveryDialogProps {
     dialogOpen: boolean,
     setDialogOpen: Dispatch<SetStateAction<boolean>>
 
-    callWithUncertaintyGeneration(generate: boolean): void
+    callWithUncertaintyGeneration(generate: boolean, isUpload: boolean): void
 }
 
 export default function UncertaintyDiscoveryDialog(props: DiscoveryDialogProps) {
@@ -17,12 +17,12 @@ export default function UncertaintyDiscoveryDialog(props: DiscoveryDialogProps) 
 
     function handleAccept() {
         handleClose()
-        callWithUncertaintyGeneration(true)
+        callWithUncertaintyGeneration(true, true)
     }
 
     function handleDecline() {
         handleClose()
-        callWithUncertaintyGeneration(false)
+        callWithUncertaintyGeneration(false, true)
     }
 
     return (

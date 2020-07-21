@@ -15,12 +15,18 @@ import {Button, Dialog, DialogTitle, Grid, List, ListItem, ListItemText} from "@
 
 //Initial code from https://github.com/Varooneh/reactbpmn/blob/master/src/components/bpmn/bpmn.modeler.component.jsx
 
-export default function Modeler() {
+interface ModelerProps {
+    performMining?(shouldDiscover: boolean, isUpload: boolean): void
+}
+
+export default function Modeler(props: ModelerProps) {
+    const {performMining} = props
     const [modeler, setModeler] = useState<typeof BpmnModeler>()
     const [dialogOpen, setDialogOpen] = useState(false)
     const [moddle, setModdle] = useState()
     const [uncertaintyList, setUncertaintyList] = useState([])
     const [modeling, setModeling] = useState()
+    const [canRecompute, setCanRecompute] = useState(false)
 
 
     useEffect(() => {
@@ -46,6 +52,7 @@ export default function Modeler() {
         newModeler.on('element.changed', function (event: any) {
             let element = event.element
             console.log("element changed: " + element)
+            setCanRecompute(true)
             newModeler.saveXML({format: true}, function (err: Error, xml: string) {
                 localStorage.setItem(CURRENT_BPMN, xml)
             });
@@ -136,15 +143,30 @@ export default function Modeler() {
         })
     }
 
+    function recomputeReport() {
+        setCanRecompute(false)
+        if (performMining) {
+            performMining(true, true)
+        }
+    }
+
     return (
         <div id="bpmncontainer" style={{height: '100%'}}>
-            <Grid container direction="row">
-                <Button onClick={saveSvg}>Save to Svg</Button>
-                <Button onClick={saveBpmn}>Save to bpmn</Button>
+            <Grid container justify="space-between" direction="row">
+                <Grid item>
+                    <Button onClick={saveSvg}>Save to Svg</Button>
+                    <Button onClick={saveBpmn}>Save to bpmn</Button>
+                </Grid>
+                {canRecompute ?
+                    <Button variant="contained"
+                            color="secondary"
+                            onClick={recomputeReport}>Recompute Trust Report</Button>
+                    : <div/>
+                }
             </Grid>
             <div id="propview"
-                 style={{width: '25%', height: '100vh', float: 'right', maxHeight: '100vh', overflowX: 'auto'}}/>
-            <div id="bpmnview" style={{width: '75%', height: '100vh', float: 'left'}}/>
+                 style={{width: '25%', height: '80vh', float: 'right', maxHeight: '80vh', overflowX: 'auto'}}/>
+            <div id="bpmnview" style={{width: '75%', height: '80vh', float: 'left'}}/>
             <Dialog onClose={handleDialogClose} aria-labelledby="simple-dialog-title" open={dialogOpen}>
                 <DialogTitle id="simple-dialog-title">Uncertainties for this element</DialogTitle>
                 <List>

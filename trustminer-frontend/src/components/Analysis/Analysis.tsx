@@ -7,6 +7,7 @@ import GlobalStats from "./GlobalStats";
 import {TrustReport} from "../../model/TrustReport";
 import CollaboratorSection from "./CollabSection/CollaboratorSection";
 import {getUncertaintyDistributionData} from "../../util/chart_util";
+import MissingTrustReportScreen from "./MissingTrustReportScreen";
 
 interface AnalysisProps {
     trustReport?: TrustReport
@@ -35,8 +36,7 @@ export default function Analysis(props: AnalysisProps) {
                         <CollaboratorSection trustReport={trustReport}/>
                     </Grid>
                 </Grid>
-                : <div/>}
-
+                : <MissingTrustReportScreen/>}
         </div>
     )
 }
