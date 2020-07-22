@@ -58,7 +58,9 @@ export function exportCsv() {
     }
 }
 
-export function importCsv(setState: React.Dispatch<React.SetStateAction<TableState>>, launchSnackbar: (message: SnackbarMessage, options?: OptionsObject) => SnackbarKey) {
+export function importCsv(
+    setState: React.Dispatch<React.SetStateAction<TableState>>,
+    launchSnackbar: (message: SnackbarMessage, options?: OptionsObject) => SnackbarKey) {
     const fileSelector = document.createElement('input');
     fileSelector.setAttribute('type', 'file');
     fileSelector.setAttribute('accept', '.csv')
@@ -92,6 +94,14 @@ export function saveUncertainties(uncertaintyList: Array<UncertaintyRow>) {
     let header = defaultUncertainties.split(nl)[0]
     let csv = header + nl + csvString
     localStorage.setItem(CURRENT_UNCERTAINTY_LIST, csv)
+}
+
+export function resetToDefault(setState: React.Dispatch<React.SetStateAction<TableState>>) {
+    localStorage.setItem(CURRENT_UNCERTAINTY_LIST, defaultUncertainties)
+    setState((prevState) => {
+        let data = loadUncertainties()
+        return {...prevState, data};
+    })
 }
 
 export const extractUncertaintyList = (component: String) =>

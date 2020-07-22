@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import MaterialTable, {Column} from "material-table";
 import {tableIcons} from "../theme/MaterialTableIcons"
-import {exportCsv, importCsv, loadUncertainties, saveUncertainties} from "../util/csv_util";
+import {exportCsv, importCsv, loadUncertainties, resetToDefault, saveUncertainties} from "../util/csv_util";
 import {Perspective} from "../model/Perspective";
 import {TrustConcern} from "../model/TrustConcern";
 import {UncertaintyRow} from "../model/UncertaintyRow";
@@ -44,6 +44,7 @@ export default function UncertaintyTable() {
                     <Button onClick={() => {
                         importCsv(setState, enqueueSnackbar)
                     }}>Import from CSV</Button>
+                    <Button onClick={() => resetToDefault(setState)}>Reset to default</Button>
                 </Grid>
             </Grid>
             <MaterialTable
