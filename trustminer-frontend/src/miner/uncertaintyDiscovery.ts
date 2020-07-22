@@ -49,9 +49,9 @@ function insertIntoElement(el: any) {
         uncertaintyEl.trust_concern = TrustConcern[uncertainty.trustconcern]
         uncertaintyEl.root = uncertainty.root
         if (!extensionElements.get("values").find((extensionEl: any) => // filter for duplicates
-            extensionEl.perspective == uncertaintyEl.perspective
-            && extensionEl.trust_concern == uncertaintyEl.trust_concern
-            && extensionEl.root == uncertaintyEl.root)) {
+            extensionEl.perspective === uncertaintyEl.perspective
+            && extensionEl.trust_concern === uncertaintyEl.trust_concern
+            && extensionEl.root === uncertaintyEl.root)) {
             extensionElements.get("values").push(uncertaintyEl)
         }
     })

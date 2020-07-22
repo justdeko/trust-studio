@@ -17,15 +17,14 @@ export default function CollaboratorSection(props: CollaboratorSectionProps) {
     const {trustReport} = props
     const [selectedCollaboratorName, setSelectedCollaboratorName] = useState<string>(trustReport.collaborators[0].name)
     const [selectedCollaborator, setSelectedCollaborator] = useState<Collaborator>(trustReport.collaborators[0])
-    const [collaboratorNames, setCollaboratorNames] =
-        useState<string[]>(trustReport.collaborators.map(collaborator => collaborator.name))
+    const collaboratorNames = trustReport.collaborators.map(collaborator => collaborator.name)
 
     useEffect(() => {
-        let collaborator = trustReport.collaborators.find(collaborator => collaborator.name == selectedCollaboratorName)
+        let collaborator = trustReport.collaborators.find(collaborator => collaborator.name === selectedCollaboratorName)
         if (collaborator) {
             setSelectedCollaborator(collaborator)
         }
-    }, [selectedCollaboratorName])
+    }, [selectedCollaboratorName, trustReport.collaborators])
 
     return (
         <div>

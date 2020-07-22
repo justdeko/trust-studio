@@ -112,7 +112,7 @@ export default function Modeler(props: ModelerProps) {
             }
 
             let svgBlob = new Blob([svg], {type: 'image/svg+xml'})
-            let fileName = 'process' + '.svg'
+            let fileName = 'process.svg'
             let link = document.createElement('a')
 
             link.download = fileName
@@ -131,7 +131,7 @@ export default function Modeler(props: ModelerProps) {
                 return
             }
             let bpmnBlob = new Blob([xml], {type: 'bpmn'})
-            let fileName = 'process' + '.bpmn'
+            let fileName = 'process.bpmn'
             let link = document.createElement('a')
 
             link.download = fileName
@@ -173,7 +173,7 @@ export default function Modeler(props: ModelerProps) {
                     {uncertaintyList.map((uncertainty: any, index) => (
                         <ListItem button key={index}>
                             <ListItemText
-                                primary={`[${uncertainty.perspective}]` + " => " + uncertainty.trust_concern}/>
+                                primary={`[${uncertainty.perspective}] => ${uncertainty.trust_concern}`}/>
                         </ListItem>
                     ))}
                 </List>

@@ -40,7 +40,7 @@ export default function CollaboratorSelector(props: SelectorProps) {
             label="Collaborator"
         >
             {collaboratorNames.map((collaborator) =>
-                <MenuItem value={collaborator}>{collaborator}</MenuItem>)
+                <MenuItem key={collaborator} value={collaborator}>{collaborator}</MenuItem>)
             }
         </Select>
     </FormControl>

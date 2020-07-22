@@ -24,9 +24,9 @@ export default function RelationshipGraph(props: GraphProps) {
                     <RelationshipGraphSelector setSelected={setSelectedType}/>
                 </Grid>
                 {graphWrapper(
-                    selectedType == "data" ? dataObjectGraphData : graphData,
+                    selectedType === "data" ? dataObjectGraphData : graphData,
                     graphConfig as GraphConfiguration<any, any>,
-                    selectedType == "data" ? "collaborator-relationship-graph-data-objects" : "collaborator-relationship-graph"
+                    selectedType === "data" ? "collaborator-relationship-graph-data-objects" : "collaborator-relationship-graph"
                 )}
             </CardContent>
         </Card>

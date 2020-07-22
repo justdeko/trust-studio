@@ -8,7 +8,7 @@ function getUncertainties(flowElements: any[]): Uncertainty[] {
     flowElements.forEach(element => {
         uncertainties = uncertainties.concat(
             element.extensionElements.values
-                .filter((el: any) => el.$type == EXTENSION_NAME)
+                .filter((el: any) => el.$type === EXTENSION_NAME)
                 .map((el: any) => {
                     return {
                         component: element.$type,
@@ -28,7 +28,7 @@ export function getCollaborators(
     graphData: GraphData,
     dataObjectGraphData: DataObjectGraphData): Collaborator[] {
     let collaborators: Collaborator[] = []
-    let collaboratorElements = definitions.rootElements.find((el: any) => el.$type == 'bpmn:Collaboration')
+    let collaboratorElements = definitions.rootElements.find((el: any) => el.$type === 'bpmn:Collaboration')
     collaboratorElements.participants.forEach((collaborator: any) => {
         let uncertainties = getUncertainties(collaborator.processRef.flowElements)
         let id: string = collaborator.id
@@ -65,10 +65,10 @@ function insertAggregationMetrics(
     return collaborators.map((collaborator: Collaborator) => {
         let rlu = collaborator.laneUncertainty / gu
         let lub = -(1 / collaborators.length) + rlu
-        let md = messageLinks.filter((link) => link.target == collaborator.name).length
-        let mi = messageLinks.filter((link) => link.source == collaborator.name).length
-        let dd = dataLinks.filter((link) => link.target == collaborator.name).length
-        let di = dataLinks.filter((link) => link.source == collaborator.name).length
+        let md = messageLinks.filter((link) => link.target === collaborator.name).length
+        let mi = messageLinks.filter((link) => link.source === collaborator.name).length
+        let dd = dataLinks.filter((link) => link.target === collaborator.name).length
+        let di = dataLinks.filter((link) => link.source === collaborator.name).length
         return {
             ...collaborator,
             relativeLanceUncertainty: rlu,

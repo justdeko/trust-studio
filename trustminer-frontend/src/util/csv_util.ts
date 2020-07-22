@@ -45,7 +45,7 @@ export function saveUncertainties(uncertaintyList: Array<UncertaintyRow>) {
             row.perspective + sep + row.trustconcern + sep +
             row.root + sep + row.question
         // add a newline if its not the last item
-        if (index != uncertaintyList.length - 1) stringRow += nl
+        if (index !== uncertaintyList.length - 1) stringRow += nl
         csvString += stringRow
     }) //TODO: use join
     let header = defaultUncertainties.split(nl)[0]
@@ -55,16 +55,16 @@ export function saveUncertainties(uncertaintyList: Array<UncertaintyRow>) {
 
 export const extractUncertaintyList = (component: String) =>
     loadUncertainties().filter(uncertainty =>
-        uncertainty.component == component
-        || (uncertainty.parentComponent == component && uncertainty.component == "-")
-        || (uncertainty.parentComponent == component && uncertainty.component.toLowerCase().includes("all"))
+        uncertainty.component === component
+        || (uncertainty.parentComponent === component && uncertainty.component === "-")
+        || (uncertainty.parentComponent === component && uncertainty.component.toLowerCase().includes("all"))
     )
 
 export function saveTrustPolicies(trustPolicyList: Array<TrustPolicyRow>, trustPersona: string) {
     let csvString = ""
     trustPolicyList.forEach((row, index) => {
         let stringRow = row.trustEntity + sep + row.processElement + sep + row.trustConcern
-        if (index != trustPolicyList.length - 1) stringRow += nl
+        if (index !== trustPolicyList.length - 1) stringRow += nl
         csvString += stringRow
     })
     localStorage.setItem(TRUST_POLICY_LIST + trustPersona, csvString)

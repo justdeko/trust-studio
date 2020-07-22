@@ -34,7 +34,7 @@ export default function Dashboard() {
     const handleDrawerClose = () => setOpen(false)
 
     useEffect(() => {
-        let route = Routes.find(route => route.path == window.location.pathname)
+        let route = Routes.find(route => route.path === window.location.pathname)
         if (route) setTitle(route.title)
         let found = checkForUncertainties()
         mineWithGeneration(!found, false)
@@ -42,7 +42,7 @@ export default function Dashboard() {
 
     useEffect(() => {
         return history.listen((location) => {
-            let route = Routes.find(route => route.path == location.pathname)
+            let route = Routes.find(route => route.path === location.pathname)
             if (route) setTitle(route.title)
         })
     }, [history])
@@ -68,11 +68,16 @@ export default function Dashboard() {
 
     function mineWithGeneration(shouldDiscover: boolean, isUpload: boolean) {
         mine(shouldDiscover).then(trustReport => {
-            if (isUpload) {
-                enqueueSnackbar('Trust report computed', {variant: 'success'})
+            if (trustReport instanceof Error) {
+                console.log(trustReport)
+            } else {
+                if (isUpload) {
+                    enqueueSnackbar('Trust report computed', {variant: 'success'})
+                }
+                setTrustReport(trustReport)
             }
-            setTrustReport(trustReport)
         })
+
     }
 
     return (
@@ -92,8 +97,8 @@ export default function Dashboard() {
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         {title}
                     </Typography>
-                    <IconButton color="inherit">
-                        <PublishIcon onClick={handleFileSelect}/>
+                    <IconButton color="inherit" onClick={handleFileSelect}>
+                        <PublishIcon/>
                     </IconButton>
                 </Toolbar>
             </AppBar>
@@ -106,11 +111,11 @@ export default function Dashboard() {
                             <Redirect to="/analysis"/>
                         </Route>
                         {Routes.map((route: any) => {
-                            if (route.path == "/analysis") {
+                            if (route.path === "/analysis") {
                                 return <Route exact path={route.path} key={route.path}>
                                     <Analysis trustReport={trustReport}/>
                                 </Route>
-                            } else if (route.path == "/modeler") {
+                            } else if (route.path === "/modeler") {
                                 return <Route exact path={route.path} key={route.path}>
                                     <Modeler performMining={mineWithGeneration}/>
                                 </Route>

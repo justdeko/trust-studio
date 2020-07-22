@@ -5,7 +5,7 @@ import {averageElementUncertainty, getCollaborators, globalUncertainty} from "./
 import {getDefinitions} from "../util/miner_util";
 import {findCriticalUncertainties, findCriticalUncertaintiesForExternal} from "./trustAnalysis";
 
-export async function mine(shouldDiscover = true): Promise<TrustReport> {
+export async function mine(shouldDiscover = true): Promise<TrustReport | Error> {
     /**
      * Procedure:
      * 0. get bpmn moddle
@@ -21,6 +21,9 @@ export async function mine(shouldDiscover = true): Promise<TrustReport> {
     // 2
     let graphData = generateGraphData(definitions)
     let dataObjectGraphData = generateDataObjectGraphData(definitions)
+    if (graphData.nodes.length === 0 && dataObjectGraphData.nodes.length === 0) {
+        return Error("no collaborators")
+    }
     // 3
     let collaborators = getCollaborators(definitions, graphData, dataObjectGraphData)
     let gu = globalUncertainty(collaborators)

@@ -19,7 +19,7 @@ export default function TrustPersonaEdit(props: EditorProps) {
         if (!personas.includes(personaName)) {
             setError(false)
         }
-    }, [personaName])
+    }, [personaName, personas])
 
     function handleChange(e: any) {
         setPersonaName(e.target.value)
@@ -43,7 +43,7 @@ export default function TrustPersonaEdit(props: EditorProps) {
             {!open ?
                 <Button
                     variant="contained"
-                    color="primary"
+                    color="secondary"
                     onClick={handleOpen}
                     startIcon={<Add/>}>
                     Add Trust Persona

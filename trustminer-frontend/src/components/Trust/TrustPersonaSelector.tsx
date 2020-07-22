@@ -1,6 +1,6 @@
 import {createStyles, FormControl, InputLabel, MenuItem, Select, Theme} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import React, {Dispatch, SetStateAction, useState} from "react";
+import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -23,6 +23,11 @@ export default function TrustPersonaSelector(props: SelectorProps) {
     const {personas, setSelected} = props
     const [currentValue, setCurrentValue] = useState(personas[0])
 
+    useEffect(() => {
+        console.log(personas)
+        console.log("this was called btw")
+        setCurrentValue(personas[0])
+    }, [personas])
 
     function handleChange(e: any) {
         setCurrentValue(e.target.value)
@@ -40,7 +45,7 @@ export default function TrustPersonaSelector(props: SelectorProps) {
             label="Trust Persona"
         >
             {personas.map((persona) =>
-                <MenuItem value={persona}>{persona}</MenuItem>)
+                <MenuItem key={persona} value={persona}>{persona}</MenuItem>)
             }
         </Select>
     </FormControl>

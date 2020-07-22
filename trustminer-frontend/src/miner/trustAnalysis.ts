@@ -9,12 +9,12 @@ import {externalTrustPersonaNames} from "../util/miner_util";
 export function findCriticalUncertainties(collaborators: Collaborator[], personaName: string): { [id: string]: Uncertainty[] } {
     let policies = getPoliciesForPersona(personaName)
     let trustIssues: { [id: string]: Uncertainty[] } = {}
-    collaborators.filter(collaborator => collaborator.name != personaName).forEach((collaborator) => {
+    collaborators.filter(collaborator => collaborator.name !== personaName).forEach((collaborator) => {
         trustIssues[collaborator.name] = collaborator.uncertainties.filter(uncertainty =>
             !policies.find((policy) =>
-                UncertaintyTypes[uncertainty.component] == policy.processElement
-                && uncertainty.trustConcern == policy.trustConcern
-                && collaborator.name == policy.trustEntity
+                UncertaintyTypes[uncertainty.component] === policy.processElement
+                && uncertainty.trustConcern === policy.trustConcern
+                && collaborator.name === policy.trustEntity
             )
         )
     })

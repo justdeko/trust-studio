@@ -12,8 +12,9 @@ export default function TrustPolicies() {
 
     useEffect(() => {
         collaboratorNames().then(names => {
-            setTrustPersonas(names.concat(externalTrustPersonaNames()))
-            setSelectedTrustPersona(names[0])
+            let personaArray = names.concat(externalTrustPersonaNames())
+            setTrustPersonas(personaArray)
+            setSelectedTrustPersona(personaArray[0])
         })
     }, [])
 
@@ -25,7 +26,10 @@ export default function TrustPolicies() {
                   alignItems="center"
                   direction="row">
                 <Grid item>
-                    <TrustPersonaSelector personas={trustPersonas} setSelected={setSelectedTrustPersona}/>
+                    {trustPersonas.length > 0 ?
+                        <TrustPersonaSelector personas={trustPersonas} setSelected={setSelectedTrustPersona}/>
+                        : <div/>
+                    }
                 </Grid>
                 <Grid item>
                     <TrustPersonaEdit personas={trustPersonas} setPersonas={setTrustPersonas}/>
