@@ -8,6 +8,7 @@ import {TrustReport} from "../../model/TrustReport";
 import CollaboratorSection from "./CollabSection/CollaboratorSection";
 import {getUncertaintyDistributionData} from "../../util/chart_util";
 import MissingTrustReportScreen from "./MissingTrustReportScreen";
+import {externalTrustPersonaNames} from "../../util/miner_util";
 
 interface AnalysisProps {
     trustReport?: TrustReport
@@ -30,7 +31,9 @@ export default function Analysis(props: AnalysisProps) {
                     </Grid>
                     <Grid item xs>
                         <GlobalStats globalUncertainty={trustReport.globalUncertainty}
-                                     averageUncertainty={trustReport.averageElementUncertainty}/>
+                                     averageUncertainty={trustReport.averageElementUncertainty}
+                                     collaboratorCount={trustReport.collaborators.length}
+                                     externalTrustPersonaCount={externalTrustPersonaNames().length}/>
                     </Grid>
                     <Grid item>
                         <CollaboratorSection trustReport={trustReport}/>

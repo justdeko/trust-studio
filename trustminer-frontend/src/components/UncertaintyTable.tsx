@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from "react";
 import MaterialTable, {Column} from "material-table";
 import {tableIcons} from "../theme/MaterialTableIcons"
-import {loadUncertainties, saveUncertainties} from "../util/csv_util";
+import {exportCsv, importCsv, loadUncertainties, saveUncertainties} from "../util/csv_util";
 import {Perspective} from "../model/Perspective";
 import {TrustConcern} from "../model/TrustConcern";
 import {UncertaintyRow} from "../model/UncertaintyRow";
+import {Button, Grid} from "@material-ui/core";
+import {useSnackbar} from "notistack";
 
 
-interface TableState {
+export interface TableState {
     columns: Array<Column<UncertaintyRow>>;
     data: UncertaintyRow[];
 }
@@ -24,6 +26,7 @@ export default function UncertaintyTable() {
         ],
         data: [],
     });
+    const {enqueueSnackbar} = useSnackbar();
 
     // load the current uncertainty state
     useEffect(() => {
@@ -35,6 +38,14 @@ export default function UncertaintyTable() {
 
     return (
         <div style={{maxWidth: "100%"}}>
+            <Grid container justify="space-between" direction="row">
+                <Grid item>
+                    <Button onClick={exportCsv}>Export to CSV</Button>
+                    <Button onClick={() => {
+                        importCsv(setState, enqueueSnackbar)
+                    }}>Import from CSV</Button>
+                </Grid>
+            </Grid>
             <MaterialTable
                 icons={tableIcons}
                 title="Uncertainty List"

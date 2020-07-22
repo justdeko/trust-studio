@@ -4,12 +4,17 @@ import {CURRENT_UNCERTAINTY_LIST, TRUST_POLICY_LIST} from "./constants";
 import {TrustPolicyRow} from "../model/TrustPolicyRow";
 import {TrustPolicy} from "../model/TrustPolicy";
 import {TrustConcern} from "../model/TrustConcern";
+import {TableState} from "../components/UncertaintyTable";
+import {OptionsObject, SnackbarKey, SnackbarMessage} from "notistack";
 
 export const sep = ";" // Column separator
 const nl = "\n" // Row separator
 
 export function loadUncertainties(): Array<UncertaintyRow> {
     let currentList = localStorage.getItem(CURRENT_UNCERTAINTY_LIST)
+    if (!currentList) {
+        localStorage.setItem(CURRENT_UNCERTAINTY_LIST, defaultUncertainties)
+    }
     let csvList = (currentList) ? currentList.split(nl) : defaultUncertainties.split(nl)
     let lines = [];
     let header = csvList[0].split(sep);
@@ -35,6 +40,42 @@ export function loadUncertainties(): Array<UncertaintyRow> {
             question: line[5]
         }
     })
+}
+
+export function exportCsv() {
+    let currentList = localStorage.getItem(CURRENT_UNCERTAINTY_LIST)
+    if (currentList !== null) {
+        console.log("this too")
+        let bpmnBlob = new Blob([currentList], {type: 'text/csv;charset=utf-8;'})
+        let fileName = 'uncertainties.csv'
+        let link = document.createElement('a')
+        link.download = fileName
+        link.innerHTML = 'Get the .csv file'
+        link.href = window.URL.createObjectURL(bpmnBlob)
+        link.style.visibility = 'hidden'
+        document.body.appendChild(link)
+        link.click()
+    }
+}
+
+export function importCsv(setState: React.Dispatch<React.SetStateAction<TableState>>, launchSnackbar: (message: SnackbarMessage, options?: OptionsObject) => SnackbarKey) {
+    const fileSelector = document.createElement('input');
+    fileSelector.setAttribute('type', 'file');
+    fileSelector.setAttribute('accept', '.csv')
+    fileSelector.click()
+    fileSelector.onchange = function (event) {
+        let fileList = fileSelector.files;
+        if (fileList) {
+            fileList[0].text().then(csvText => {
+                localStorage.setItem(CURRENT_UNCERTAINTY_LIST, csvText)
+                setState((prevState) => {
+                    let data = loadUncertainties()
+                    return {...prevState, data};
+                })
+                launchSnackbar('.csv imported', {variant: 'success'})
+            })
+        } else launchSnackbar('Something went wrong during import!', {variant: "error"})
+    }
 }
 
 export function saveUncertainties(uncertaintyList: Array<UncertaintyRow>) {

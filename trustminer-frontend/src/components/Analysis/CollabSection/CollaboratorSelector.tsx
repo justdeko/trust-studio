@@ -1,18 +1,6 @@
-import {createStyles, FormControl, InputLabel, MenuItem, Select, Theme} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
+import {FormControl, InputLabel, MenuItem, Select} from "@material-ui/core";
 import React, {Dispatch, SetStateAction, useState} from "react";
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        formControl: {
-            margin: theme.spacing(1),
-            minWidth: 150,
-        },
-        selectEmpty: {
-            marginTop: theme.spacing(2),
-        },
-    }),
-);
+import {useSelectorStyles} from "../../../styles/selector-styles";
 
 interface SelectorProps {
     collaboratorNames: string[],
@@ -29,7 +17,7 @@ export default function CollaboratorSelector(props: SelectorProps) {
         setSelected(e.target.value)
     }
 
-    const classes = useStyles();
+    const classes = useSelectorStyles();
     return <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel id="select-collaborator-label">Perspective</InputLabel>
         <Select
