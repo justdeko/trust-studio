@@ -8,7 +8,7 @@ interface SelectorProps {
 
 export default function RelationshipGraphSelector(props: SelectorProps) {
     const {setSelected} = props
-    const [currentValue, setCurrentValue] = useState("data")
+    const [currentValue, setCurrentValue] = useState("message-flow")
 
 
     function handleChange(e: any) {

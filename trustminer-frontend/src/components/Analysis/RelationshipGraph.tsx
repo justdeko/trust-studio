@@ -12,7 +12,7 @@ interface GraphProps {
 
 export default function RelationshipGraph(props: GraphProps) {
     const {graphData, dataObjectGraphData} = props
-    const [selectedType, setSelectedType] = useState("data")
+    const [selectedType, setSelectedType] = useState("message-flow")
 
     return (
         <Card data-tour="relationship-analysis" style={{height: '100%'}}>

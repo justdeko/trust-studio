@@ -42,7 +42,6 @@ export function getCollaborators(
             relativeLanceUncertainty: 0,
             laneUncertaintyBalance: 0,
             uncertainties: uncertainties,
-            relevantUncertainties: [],
             messageInDegree: 0,
             messageOutDegree: 0,
             dataInDegree: 0,
