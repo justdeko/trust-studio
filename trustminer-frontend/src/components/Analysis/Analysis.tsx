@@ -18,7 +18,7 @@ export default function Analysis(props: AnalysisProps) {
     const classes = useAnalysisStyles();
     const {trustReport} = props
     return (
-        <div>
+        <div data-tour="analysis">
             {trustReport ?
                 <Grid container spacing={2} justify="space-between" alignItems="stretch" className={classes.root}>
                     <Grid item xs>
@@ -35,7 +35,7 @@ export default function Analysis(props: AnalysisProps) {
                                      collaboratorCount={trustReport.collaborators.length}
                                      externalTrustPersonaCount={externalTrustPersonaNames().length}/>
                     </Grid>
-                    <Grid item>
+                    <Grid item style={{width: "100%"}}>
                         <CollaboratorSection trustReport={trustReport}/>
                     </Grid>
                 </Grid>

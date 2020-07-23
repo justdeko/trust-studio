@@ -20,6 +20,9 @@ import Analysis from "../components/Analysis/Analysis";
 import {TrustLogo} from "../TrustLogo";
 import {useSnackbar} from "notistack";
 import Modeler from "../components/Modeler/Modeler";
+import FirstTimeDialog from "../tour/FirstTimeDialog";
+import {getFirstTime} from "../tour/tour_util";
+import FirstTimeTour from "../tour/FirstTimeTour";
 
 export default function Dashboard() {
     const classes = useDashboardStyles()
@@ -27,7 +30,10 @@ export default function Dashboard() {
     const [trustReport, setTrustReport] = useState<TrustReport>()
     const [title, setTitle] = useState("Dashboard")
     const [uncDiscoveryDialogOpen, setUncDiscoveryDialogOpen] = useState(false)
+    const [firstTimeDialogOpen, setFirstTimeDialogOpen] = useState(getFirstTime())
+    const [tourOpen, setTourOpen] = useState(false)
     const {enqueueSnackbar} = useSnackbar();
+
     let history = useHistory()
 
     const handleDrawerOpen = () => setOpen(true)
@@ -80,12 +86,17 @@ export default function Dashboard() {
 
     }
 
+    function startTour() {
+        setTourOpen(true)
+    }
+
     return (
         <div className={classes.root}>
             <CssBaseline/>
             <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
                 <Toolbar className={classes.toolbar}>
                     <IconButton
+                        data-tour="welcome"
                         edge="start"
                         color="inherit"
                         aria-label="open drawer"
@@ -97,7 +108,7 @@ export default function Dashboard() {
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         {title}
                     </Typography>
-                    <IconButton color="inherit" onClick={handleFileSelect}>
+                    <IconButton data-tour="upload" color="inherit" onClick={handleFileSelect}>
                         <PublishIcon/>
                     </IconButton>
                 </Toolbar>
@@ -128,10 +139,14 @@ export default function Dashboard() {
                     </Switch>
                 </Container>
             </main>
+            <FirstTimeTour tourOpen={tourOpen} setTourOpen={setTourOpen}/>
             <UncertaintyDiscoveryDialog
                 callWithUncertaintyGeneration={mineWithGeneration}
                 dialogOpen={uncDiscoveryDialogOpen}
                 setDialogOpen={setUncDiscoveryDialogOpen}/>
+            <FirstTimeDialog dialogOpen={firstTimeDialogOpen}
+                             setDialogOpen={setFirstTimeDialogOpen}
+                             startTour={startTour}/>
         </div>
     );
 }

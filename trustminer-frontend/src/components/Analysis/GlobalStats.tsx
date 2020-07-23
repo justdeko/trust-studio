@@ -10,7 +10,7 @@ interface GlobalStatProps {
 
 export default function GlobalStats(props: GlobalStatProps) {
     const {globalUncertainty, averageUncertainty, collaboratorCount, externalTrustPersonaCount} = props
-    return <Card style={{height: '100%'}}>
+    return <Card data-tour="stats" style={{height: '100%'}}>
         <CardContent style={{height: '100%'}}>
             <Grid direction="column" style={{height: '100%'}} container justify="space-between">
                 <Grid item>

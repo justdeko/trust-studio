@@ -28,10 +28,10 @@ export default function Sidebar(props: SidebarProps) {
         >
             <div className={classes.toolbarIcon}>
                 <IconButton onClick={handleDrawerClose}>
-                    <ChevronLeftIcon />
+                    <ChevronLeftIcon/>
                 </IconButton>
             </div>
-            <Divider />
+            <Divider/>
             <List>{mainListItems}</List>
         </Drawer>
     )

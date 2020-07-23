@@ -10,8 +10,10 @@ interface UncertaintyChartProps {
 export default function UncertaintyChart(props: UncertaintyChartProps) {
 
     return (
-        <DataCard
-            content={<Doughnut data={props.data}/>}
-            title="Uncertainty Distribution"/>
+        <div data-tour="uncertainty-chart">
+            <DataCard
+                content={<Doughnut data={props.data}/>}
+                title="Uncertainty Distribution"/>
+        </div>
     )
 }

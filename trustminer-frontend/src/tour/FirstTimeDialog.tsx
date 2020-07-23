@@ -1,26 +1,27 @@
-import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@material-ui/core";
 import React, {Dispatch, SetStateAction} from "react";
+import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@material-ui/core";
+import {setFirstTime} from "./tour_util";
 
-interface DiscoveryDialogProps {
+interface FirstTimeDialogProps {
     dialogOpen: boolean,
     setDialogOpen: Dispatch<SetStateAction<boolean>>,
 
-    callWithUncertaintyGeneration(generate: boolean, isUpload: boolean): void
+    startTour(): void
 }
 
-export default function UncertaintyDiscoveryDialog(props: DiscoveryDialogProps) {
-    const {dialogOpen, setDialogOpen, callWithUncertaintyGeneration} = props
+export default function FirstTimeDialog(props: FirstTimeDialogProps) {
+    const {dialogOpen, setDialogOpen, startTour} = props
 
     const handleClose = () => setDialogOpen(false)
 
     function handleAccept() {
         handleClose()
-        callWithUncertaintyGeneration(true, true)
+        startTour()
     }
 
     function handleDecline() {
         handleClose()
-        callWithUncertaintyGeneration(false, true)
+        setFirstTime(false)
     }
 
     return (
@@ -30,11 +31,10 @@ export default function UncertaintyDiscoveryDialog(props: DiscoveryDialogProps) 
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">Uncertainties discovered</DialogTitle>
+            <DialogTitle id="alert-dialog-title">Welcome to Trust Studio</DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                    It looks like your BPMN file already contains some uncertainties. <br/>
-                    Do you want us to try and discover more?
+                    Is this your first time using the app?
                 </DialogContentText>
             </DialogContent>
             <DialogActions>

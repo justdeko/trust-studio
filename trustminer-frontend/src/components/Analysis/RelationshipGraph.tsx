@@ -15,7 +15,7 @@ export default function RelationshipGraph(props: GraphProps) {
     const [selectedType, setSelectedType] = useState("data")
 
     return (
-        <Card style={{height: '100%'}}>
+        <Card data-tour="relationship-analysis" style={{height: '100%'}}>
             <CardContent>
                 <Grid container justify="space-between" alignItems="center" direction="row">
                     <Typography variant="h5" component="h2">

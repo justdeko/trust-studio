@@ -37,7 +37,7 @@ export default function UncertaintyTable() {
     }, [])
 
     return (
-        <div style={{maxWidth: "100%"}}>
+        <div data-tour="uncertainties" style={{maxWidth: "100%"}}>
             <Grid container justify="space-between" direction="row">
                 <Grid item>
                     <Button onClick={exportCsv}>Export to CSV</Button>

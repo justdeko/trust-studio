@@ -46,4 +46,8 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ### Libraries used
 
-[Material table](https://github.com/mbrn/material-table)
+- [Material table](https://github.com/mbrn/material-table)
+- [Reactour](https://github.com/elrumordelaluz/reactour)
+- [react-chartjs-2](https://github.com/jerairrest/react-chartjs-2)
+- [react-d3-graph](https://github.com/danielcaldas/react-d3-graph)
+- [notistack](https://github.com/iamhosseindhv/notistack)

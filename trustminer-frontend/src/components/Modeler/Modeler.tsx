@@ -166,7 +166,7 @@ export default function Modeler(props: ModelerProps) {
             </Grid>
             <div id="propview"
                  style={{width: '25%', height: '80vh', float: 'right', maxHeight: '80vh', overflowX: 'auto'}}/>
-            <div id="bpmnview" style={{width: '75%', height: '80vh', float: 'left'}}/>
+            <div data-tour="modeler" id="bpmnview" style={{width: '75%', height: '80vh', float: 'left'}}/>
             <Dialog onClose={handleDialogClose} aria-labelledby="simple-dialog-title" open={dialogOpen}>
                 <DialogTitle id="simple-dialog-title">Uncertainties for this element</DialogTitle>
                 <List>

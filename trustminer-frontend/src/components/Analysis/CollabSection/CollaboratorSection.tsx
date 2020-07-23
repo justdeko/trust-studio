@@ -27,9 +27,9 @@ export default function CollaboratorSection(props: CollaboratorSectionProps) {
     }, [selectedCollaboratorName, trustReport.collaborators])
 
     return (
-        <div>
+        <div data-tour="collab-section" style={{width: "100%"}}>
             <CollaboratorSelector collaboratorNames={collaboratorNames} setSelected={setSelectedCollaboratorName}/>
-            <Grid justify="space-between" alignItems="stretch" container spacing={2}>
+            <Grid justify="space-between" alignItems="stretch" container spacing={2} style={{width: "100%"}}>
                 <Grid item xs>
                     <UncertaintyStats lu={selectedCollaborator.laneUncertainty}
                                       rlu={selectedCollaborator.relativeLanceUncertainty}

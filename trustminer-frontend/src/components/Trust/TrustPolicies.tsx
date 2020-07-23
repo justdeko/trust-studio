@@ -19,7 +19,7 @@ export default function TrustPolicies() {
     }, [])
 
     return (
-        <div>
+        <div data-tour="trust-policies">
             <Grid container
                   spacing={2}
                   justify="flex-start"
