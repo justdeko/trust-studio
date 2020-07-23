@@ -1,6 +1,6 @@
 import React, {Dispatch, SetStateAction} from "react";
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@material-ui/core";
-import {setFirstTime} from "./tour_util";
+import {setFirstTime} from "../../util/tour_util";
 
 interface FirstTimeDialogProps {
     dialogOpen: boolean,

@@ -2,6 +2,7 @@ import Tour from "reactour";
 import React, {Dispatch, SetStateAction} from "react";
 import {Link, useTheme} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
+import {setFirstTime} from "../../util/tour_util";
 
 interface TourProps {
     tourOpen: boolean,
@@ -67,7 +68,8 @@ export default function FirstTimeTour(props: TourProps) {
                     This concludes our little tour. If you want more info about the project, check out our <Link
                     color="secondary" href="https://github.com/justdeko/trustminer">Github Page</Link>.
                 </div>
-            )
+            ),
+            action: () => setFirstTime(false)
         }
     ]
     const theme = useTheme();

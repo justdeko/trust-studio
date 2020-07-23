@@ -1,7 +1,9 @@
 import {createMuiTheme} from '@material-ui/core/styles';
+import {getNightMode} from "../util/ui_util";
 
 export const mainTheme = createMuiTheme({
     palette: {
+        type: getNightMode() ? "dark" : "light",
         primary: {
             light: '#2e4e5f',
             main: '#002635',

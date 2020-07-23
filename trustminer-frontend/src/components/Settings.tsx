@@ -1,8 +1,18 @@
-import {Button, Grid, Typography} from "@material-ui/core";
-import React from "react";
+import {Button, Grid, Switch, Typography} from "@material-ui/core";
+import React, {useState} from "react";
 import {Delete} from "@material-ui/icons";
+import {getNightMode, setNightMode} from "../util/ui_util";
 
 export default function Settings() {
+    const [nightModeOn, setNightModeOn] = useState(getNightMode())
+
+    function changeNightMode() {
+        setNightModeOn(prevState => {
+            setNightMode(!prevState)
+            window.location.reload()
+            return !prevState
+        })
+    }
 
     return (
         <Grid style={{width: "100%"}} container>
@@ -27,6 +37,24 @@ export default function Settings() {
                             startIcon={<Delete/>}>
                             Delete
                         </Button>
+                    </Grid>
+                </Grid>
+                <Grid style={{width: "100%"}} container direction="row" justify="space-between">
+                    <Grid item>
+                        <Typography variant="h6">
+                            Night mode
+                        </Typography>
+                        <Typography variant="subtitle1">
+                            Enables/disables Night mode.
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <Switch
+                            checked={nightModeOn}
+                            onChange={changeNightMode}
+                            name="checkedA"
+                            inputProps={{'aria-label': 'secondary checkbox'}}
+                        />
                     </Grid>
                 </Grid>
             </Grid>

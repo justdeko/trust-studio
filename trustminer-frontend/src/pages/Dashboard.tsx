@@ -20,9 +20,11 @@ import Analysis from "../components/Analysis/Analysis";
 import {TrustLogo} from "../TrustLogo";
 import {useSnackbar} from "notistack";
 import Modeler from "../components/Modeler/Modeler";
-import FirstTimeDialog from "../tour/FirstTimeDialog";
-import {getFirstTime} from "../tour/tour_util";
-import FirstTimeTour from "../tour/FirstTimeTour";
+import FirstTimeDialog from "../components/Tour/FirstTimeDialog";
+import {getFirstTime} from "../util/tour_util";
+import FirstTimeTour from "../components/Tour/FirstTimeTour";
+import {defaults} from "react-chartjs-2";
+import {getNightMode} from "../util/ui_util";
 
 export default function Dashboard() {
     const classes = useDashboardStyles()
@@ -35,6 +37,9 @@ export default function Dashboard() {
     const {enqueueSnackbar} = useSnackbar();
 
     let history = useHistory()
+
+    // Set all chart colors corresponding to theme
+    defaults.global.defaultFontColor = getNightMode() ? "white" : "black"
 
     const handleDrawerOpen = () => setOpen(true)
     const handleDrawerClose = () => setOpen(false)

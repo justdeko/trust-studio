@@ -11,7 +11,7 @@ import uncertainty from "../../resources/uncertaintyExtension.json"
 import UncertaintyBox from "./UncertaintyBox";
 import {getUncertainties} from "../../util/modeler_util";
 import {Button, Dialog, DialogTitle, Grid, List, ListItem, ListItemText} from "@material-ui/core";
-
+import {getNightMode} from "../../util/ui_util";
 
 //Initial code from https://github.com/Varooneh/reactbpmn/blob/master/src/components/bpmn/bpmn.modeler.component.jsx
 
@@ -30,14 +30,16 @@ export default function Modeler(props: ModelerProps) {
 
 
     useEffect(() => {
+        let propPanel = getNightMode() ? {} : {
+            parent: '#propview'
+        }
         const newModeler = new BpmnModeler({
+            defaultStrokeColor: '#a58998',
             container: '#bpmnview',
             keyboard: {
                 bindTo: window
             },
-            propertiesPanel: {
-                parent: '#propview'
-            },
+            propertiesPanel: propPanel,
             additionalModules: [
                 propertiesPanelModule,
                 propertiesProviderModule,
@@ -164,9 +166,12 @@ export default function Modeler(props: ModelerProps) {
                     : <div/>
                 }
             </Grid>
-            <div id="propview"
-                 style={{width: '25%', height: '80vh', float: 'right', maxHeight: '80vh', overflowX: 'auto'}}/>
-            <div data-tour="modeler" id="bpmnview" style={{width: '75%', height: '80vh', float: 'left'}}/>
+            {getNightMode() ? <div/>
+                : <div id="propview"
+                       style={{width: '25%', height: '80vh', float: 'right', maxHeight: '80vh', overflowX: 'auto'}}/>
+            }
+            <div data-tour="modeler" id="bpmnview"
+                 style={{width: getNightMode() ? '100%' : '75%', height: '80vh', float: 'left'}}/>
             <Dialog onClose={handleDialogClose} aria-labelledby="simple-dialog-title" open={dialogOpen}>
                 <DialogTitle id="simple-dialog-title">Uncertainties for this element</DialogTitle>
                 <List>

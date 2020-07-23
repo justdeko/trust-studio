@@ -1,4 +1,4 @@
-import {FIRST_TIME} from "../util/constants";
+import {FIRST_TIME} from "./constants";
 
 export function getFirstTime(): boolean {
     let firstTime = localStorage.getItem(FIRST_TIME)
