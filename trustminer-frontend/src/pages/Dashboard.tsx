@@ -25,7 +25,7 @@ import {getFirstTime} from "../util/tour_util";
 import FirstTimeTour from "../components/Tour/FirstTimeTour";
 import {defaults} from "react-chartjs-2";
 import {getNightMode} from "../util/ui_util";
-import {collaboratorText, exportToPdf, generalText} from "../miner/pdfExport";
+import PdfExport from "../miner/PdfExport";
 import {PictureAsPdf} from "@material-ui/icons";
 
 export default function Dashboard() {
@@ -87,8 +87,7 @@ export default function Dashboard() {
                 if (isUpload) {
                     enqueueSnackbar('Trust report computed', {variant: 'success'})
                 }
-                console.log(generalText(trustReport))
-                trustReport.collaborators.forEach(collab => console.log(collaboratorText(collab)))
+                console.log(trustReport)
                 setTrustReport(trustReport)
             }
         })
@@ -118,9 +117,11 @@ export default function Dashboard() {
                         {title}
                     </Typography>
                     {trustReport ?
-                        <IconButton color="inherit" onClick={() => exportToPdf(trustReport)}>
-                            <PictureAsPdf/>
-                        </IconButton>
+                        <PdfExport trustReport={trustReport} content={
+                            <IconButton color="inherit">
+                                <PictureAsPdf/>
+                            </IconButton>
+                        }/>
                         : <div/>
                     }
                     <IconButton data-tour="upload" color="inherit" onClick={handleFileSelect}>
