@@ -16,6 +16,12 @@ export const styles = StyleSheet.create({
         margin: 12,
         fontFamily: 'Comfortaa'
     },
+    subtitle2: {
+        fontSize: 16,
+        marginHorizontal: 12,
+        marginVertical: 6,
+        fontFamily: 'Comfortaa'
+    },
     text: {
         margin: 12,
         fontSize: 14,

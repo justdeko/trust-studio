@@ -14,3 +14,7 @@ export interface Collaborator {
     dataOutDegree: number,
     trustIssues: { [id: string]: Uncertainty[] }
 }
+
+export function instanceOfCollaborator(obj: any): obj is Collaborator {
+    return 'laneUncertainty' in obj
+}

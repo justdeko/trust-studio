@@ -9,10 +9,17 @@ interface UncertaintyChartProps {
 
 export default function UncertaintyChart(props: UncertaintyChartProps) {
 
+    const plugins = [{
+        afterDraw: (chartInstance: any, _: any) => {
+            localStorage.setItem("uncertainty_chart", chartInstance.toBase64Image())
+        }
+    }]
+
+
     return (
         <div data-tour="uncertainty-chart">
             <DataCard
-                content={<Doughnut data={props.data}/>}
+                content={<Doughnut plugins={plugins} data={props.data}/>}
                 title="Uncertainty Distribution"/>
         </div>
     )

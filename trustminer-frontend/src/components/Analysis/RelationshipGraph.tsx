@@ -35,11 +35,13 @@ export default function RelationshipGraph(props: GraphProps) {
 
 function graphWrapper(data: GraphData | DataObjectGraphData, config: GraphConfiguration<any, any>, id: string): React.ReactNode {
     if (data.links.length > 0) {
-        return <Graph
-            id={id}
-            data={data}
-            config={config}
-        />
+        return <div id="rel_graph">
+            <Graph
+                id={id}
+                data={data}
+                config={config}
+            />
+        </div>
     } else {
         return <Typography>No Data available</Typography>
     }

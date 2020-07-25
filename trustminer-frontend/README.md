@@ -51,3 +51,5 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 - [react-chartjs-2](https://github.com/jerairrest/react-chartjs-2)
 - [react-d3-graph](https://github.com/danielcaldas/react-d3-graph)
 - [notistack](https://github.com/iamhosseindhv/notistack)
+- [react-pdf](https://github.com/diegomura/react-pdf)
+- [html2canvas](https://github.com/niklasvh/html2canvas)

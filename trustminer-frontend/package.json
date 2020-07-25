@@ -25,6 +25,7 @@
     "d3": "^5.5.0",
     "diagram-js": "^6.6.1",
     "diagram-js-minimap": "^2.0.3",
+    "html2canvas": "^1.0.0-rc.5",
     "material-table": "^1.62.0",
     "notistack": "^0.9.17",
     "react": "^16.13.1",
