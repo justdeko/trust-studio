@@ -12,6 +12,7 @@ import UncertaintyBox from "./UncertaintyBox";
 import {getUncertainties} from "../../util/modeler_util";
 import {Button, Dialog, DialogTitle, Grid, List, ListItem, ListItemText} from "@material-ui/core";
 import {getNightMode} from "../../util/ui_util";
+import {saveFile} from "../../util/general_util";
 
 //Initial code from https://github.com/Varooneh/reactbpmn/blob/master/src/components/bpmn/bpmn.modeler.component.jsx
 
@@ -112,17 +113,8 @@ export default function Modeler(props: ModelerProps) {
                 console.log(error)
                 return
             }
-
             let svgBlob = new Blob([svg], {type: 'image/svg+xml'})
-            let fileName = 'process.svg'
-            let link = document.createElement('a')
-
-            link.download = fileName
-            link.innerHTML = 'Get the BPMN SVG'
-            link.href = window.URL.createObjectURL(svgBlob)
-            link.style.visibility = 'hidden'
-            document.body.appendChild(link)
-            link.click()
+            saveFile('process.svg', 'Get the BPMN SVG', svgBlob)
         });
     }
 
@@ -133,15 +125,7 @@ export default function Modeler(props: ModelerProps) {
                 return
             }
             let bpmnBlob = new Blob([xml], {type: 'bpmn'})
-            let fileName = 'process.bpmn'
-            let link = document.createElement('a')
-
-            link.download = fileName
-            link.innerHTML = 'Get the BPMN file'
-            link.href = window.URL.createObjectURL(bpmnBlob)
-            link.style.visibility = 'hidden'
-            document.body.appendChild(link)
-            link.click()
+            saveFile('process.bpmn', 'Get the BPMN file', bpmnBlob)
         })
     }
 
@@ -178,7 +162,7 @@ export default function Modeler(props: ModelerProps) {
                     {uncertaintyList.map((uncertainty: any, index) => (
                         <ListItem button key={index}>
                             <ListItemText
-                                primary={`[${uncertainty.perspective}] => ${uncertainty.trust_concern}`}/>
+                                primary={`[${uncertainty.root}] => ${uncertainty.trust_concern}`}/>
                         </ListItem>
                     ))}
                 </List>

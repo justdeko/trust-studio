@@ -15,4 +15,4 @@ export function getUncertainties(element: any) {
 }
 
 export const getAsShortenedString = (unc: BpmnUncertainty) =>
-    unc.root.slice(0, 3) + ". =>" + unc.trust_concern.slice(0, 4) + "."
+    unc.root.slice(0, 3) + ". → " + unc.trust_concern.slice(0, 4) + "."

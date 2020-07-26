@@ -13,7 +13,6 @@ export default function TrustPersonaSelector(props: SelectorProps) {
 
     useEffect(() => {
         console.log(personas)
-        console.log("this was called btw")
         setCurrentValue(personas[0])
     }, [personas])
 
@@ -24,8 +23,9 @@ export default function TrustPersonaSelector(props: SelectorProps) {
 
     const classes = useSelectorStyles();
     return <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="select-trust-persona-label">Trust Persona</InputLabel>
+        <InputLabel color="secondary" id="select-trust-persona-label">Trust Persona</InputLabel>
         <Select
+            color="secondary"
             labelId="select-trust-persona-label"
             id="select-trust-persona"
             value={currentValue}

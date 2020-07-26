@@ -25,8 +25,9 @@ import {getFirstTime} from "../util/tour_util";
 import FirstTimeTour from "../components/Tour/FirstTimeTour";
 import {defaults} from "react-chartjs-2";
 import {getNightMode} from "../util/ui_util";
-import PdfExport from "../miner/PdfExport";
+import {generatePdfDocument} from "../miner/PdfExport";
 import {PictureAsPdf} from "@material-ui/icons";
+import {Tooltip} from "@material-ui/core";
 
 export default function Dashboard() {
     const classes = useDashboardStyles()
@@ -117,12 +118,13 @@ export default function Dashboard() {
                         {title}
                     </Typography>
                     {trustReport ?
-                        <PdfExport trustReport={trustReport} content={
-                            <IconButton color="inherit">
+                        <Tooltip
+                            title="Make sure to adjust all of the graphs before exporting depending on how you want them to look like in your report.">
+                            <IconButton color="inherit" onClick={() => generatePdfDocument(trustReport)}>
                                 <PictureAsPdf/>
                             </IconButton>
-                        }/>
-                        : <div/>
+                        </Tooltip>
+                        : undefined
                     }
                     <IconButton data-tour="upload" color="inherit" onClick={handleFileSelect}>
                         <PublishIcon/>

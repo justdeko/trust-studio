@@ -6,6 +6,7 @@ import {TrustPolicy} from "../model/TrustPolicy";
 import {TrustConcern} from "../model/TrustConcern";
 import {TableState} from "../components/UncertaintyTable";
 import {OptionsObject, SnackbarKey, SnackbarMessage} from "notistack";
+import {saveFile} from "./general_util";
 
 export const sep = ";" // Column separator
 const nl = "\n" // Row separator
@@ -45,16 +46,8 @@ export function loadUncertainties(): Array<UncertaintyRow> {
 export function exportCsv() {
     let currentList = localStorage.getItem(CURRENT_UNCERTAINTY_LIST)
     if (currentList !== null) {
-        console.log("this too")
-        let bpmnBlob = new Blob([currentList], {type: 'text/csv;charset=utf-8;'})
-        let fileName = 'uncertainties.csv'
-        let link = document.createElement('a')
-        link.download = fileName
-        link.innerHTML = 'Get the .csv file'
-        link.href = window.URL.createObjectURL(bpmnBlob)
-        link.style.visibility = 'hidden'
-        document.body.appendChild(link)
-        link.click()
+        let csvBlob = new Blob([currentList], {type: 'text/csv;charset=utf-8;'})
+        saveFile('uncertainties.csv', 'Get the .csv file', csvBlob)
     }
 }
 

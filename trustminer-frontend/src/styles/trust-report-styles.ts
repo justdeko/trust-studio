@@ -11,6 +11,12 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         fontFamily: 'Comfortaa'
     },
+    imageCaption: {
+        fontSize: 10,
+        textAlign: 'center',
+        marginBottom: 12,
+        fontFamily: 'Comfortaa'
+    },
     subtitle: {
         fontSize: 18,
         margin: 12,
@@ -19,7 +25,7 @@ export const styles = StyleSheet.create({
     subtitle2: {
         fontSize: 16,
         marginHorizontal: 12,
-        marginVertical: 6,
+        marginTop: 6,
         fontFamily: 'Comfortaa'
     },
     text: {
@@ -29,7 +35,21 @@ export const styles = StyleSheet.create({
         fontFamily: 'Roboto'
     },
     image: {
-        marginVertical: 15,
         marginHorizontal: 100,
     },
+    row: {
+        flexGrow: 1,
+        flexDirection: 'row',
+    },
+    rowText: {
+        width: '50%',
+        fontSize: 14,
+        margin: 12,
+        textAlign: 'justify',
+        fontFamily: 'Roboto',
+    },
+    rowImageContainer: {
+        width: '50%',
+        marginRight: 12,
+    }
 });
