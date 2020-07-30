@@ -1,5 +1,5 @@
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import {createStyles, Theme} from "@material-ui/core";
+import {createMuiTheme, createStyles, Theme} from "@material-ui/core";
 
 export const useSelectorStyles = makeStyles((theme: Theme) => createStyles({
     formControl: {
@@ -10,3 +10,12 @@ export const useSelectorStyles = makeStyles((theme: Theme) => createStyles({
         marginTop: theme.spacing(2),
     },
 }))
+
+export const whiteSelectorTheme = createMuiTheme({
+    palette: {
+        type: 'dark',
+        secondary: {
+            main: '#ffffff'
+        }
+    }
+});

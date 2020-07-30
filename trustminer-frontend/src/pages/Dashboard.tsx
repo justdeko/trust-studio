@@ -15,7 +15,7 @@ import {CURRENT_BPMN} from "../util/constants";
 import {TrustReport} from "../model/TrustReport";
 import {mine} from "../miner/miner";
 import UncertaintyDiscoveryDialog from "../components/UncertaintyDiscoveryDialog";
-import {checkForUncertainties} from "../util/miner_util";
+import {checkForUncertainties, getPerspectiveNames} from "../util/miner_util";
 import Analysis from "../components/Analysis/Analysis";
 import {TrustLogo} from "../TrustLogo";
 import {useSnackbar} from "notistack";
@@ -27,7 +27,9 @@ import {defaults} from "react-chartjs-2";
 import {getNightMode} from "../util/ui_util";
 import {generatePdfDocument} from "../miner/PdfExport";
 import {PictureAsPdf} from "@material-ui/icons";
-import {Tooltip} from "@material-ui/core";
+import {MuiThemeProvider, Tooltip} from "@material-ui/core";
+import PerspectiveSelector from "../components/PerspectiveSelector";
+import {whiteSelectorTheme} from "../styles/selector-styles";
 
 export default function Dashboard() {
     const classes = useDashboardStyles()
@@ -36,6 +38,7 @@ export default function Dashboard() {
     const [title, setTitle] = useState("Dashboard")
     const [uncDiscoveryDialogOpen, setUncDiscoveryDialogOpen] = useState(false)
     const [firstTimeDialogOpen, setFirstTimeDialogOpen] = useState(getFirstTime())
+    const [selectedPerspective, setSelectedPerspective] = useState("")
     const [tourOpen, setTourOpen] = useState(false)
     const {enqueueSnackbar} = useSnackbar();
 
@@ -53,6 +56,12 @@ export default function Dashboard() {
         let found = checkForUncertainties()
         mineWithGeneration(!found, false)
     }, [])
+
+    useEffect(() => {
+        if (trustReport) {
+            setSelectedPerspective("General")
+        }
+    }, [trustReport])
 
     useEffect(() => {
         return history.listen((location) => {
@@ -117,6 +126,14 @@ export default function Dashboard() {
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         {title}
                     </Typography>
+                    {trustReport && title === "Analysis" ?
+                        <MuiThemeProvider theme={whiteSelectorTheme}>
+                            <PerspectiveSelector
+                                perspectiveNames={["General"].concat(getPerspectiveNames(trustReport))}
+                                setSelected={setSelectedPerspective}/>
+                        </MuiThemeProvider>
+                        : undefined
+                    }
                     {trustReport ?
                         <Tooltip
                             title="Make sure to adjust all of the graphs before exporting depending on how you want them to look like in your report.">
@@ -142,7 +159,7 @@ export default function Dashboard() {
                         {Routes.map((route: any) => {
                             if (route.path === "/analysis") {
                                 return <Route exact path={route.path} key={route.path}>
-                                    <Analysis trustReport={trustReport}/>
+                                    <Analysis selectedPerspective={selectedPerspective} trustReport={trustReport}/>
                                 </Route>
                             } else if (route.path === "/modeler") {
                                 return <Route exact path={route.path} key={route.path}>

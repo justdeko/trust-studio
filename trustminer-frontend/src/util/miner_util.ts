@@ -4,6 +4,9 @@ import {CURRENT_BPMN, EXTENSION_NAME_LOWERCASE, EXTERNAL_PERSONA_NAMES} from "./
 import {sep} from "./csv_util";
 import {getCollaboratorNames} from "../miner/relationshipAnalysis";
 import {emptyBpmn} from "../resources/emptyBpmn";
+import {TrustReport} from "../model/TrustReport";
+import {Collaborator} from "../model/Collaborator";
+import {ExternalTrustPersona} from "../model/ExternalTrustPersona";
 
 export const Moddle = new BpmnModdle({
     trust: uncertainty
@@ -62,4 +65,21 @@ export function editTrustPersonaNames(add: boolean, name: string) {
             localStorage.setItem(EXTERNAL_PERSONA_NAMES, newString)
         }
     }
+}
+
+export function getPerspectiveNames(trustReport: TrustReport) {
+    let collaboratorNames = mapToCollaboratorNames(trustReport.collaborators)
+    return collaboratorNames.concat(externalTrustPersonaNames())
+}
+
+export const mapToCollaboratorNames = (collaborators: Collaborator[]) =>
+    collaborators.map(collaborator => collaborator.name)
+
+export function getTrustIssues(trustReport: TrustReport, selected: string) {
+    let combined: Collaborator[] | ExternalTrustPersona[] = []
+    let collaborators = trustReport.collaborators
+    let external = trustReport.externalTrustPersonas
+    combined = combined.concat(collaborators).concat(external)
+    console.log(combined)
+    return combined.filter(persona => persona.name === selected)[0].trustIssues
 }
