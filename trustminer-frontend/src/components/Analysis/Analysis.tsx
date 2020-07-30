@@ -11,15 +11,16 @@ import MissingTrustReportScreen from "./MissingTrustReportScreen";
 import {externalTrustPersonaNames} from "../../util/miner_util";
 
 interface AnalysisProps {
-    trustReport?: TrustReport
+    trustReport?: TrustReport,
+    selectedPerspective?: string
 }
 
 export default function Analysis(props: AnalysisProps) {
     const classes = useAnalysisStyles();
-    const {trustReport} = props
+    const {trustReport, selectedPerspective} = props
     return (
         <div data-tour="analysis">
-            {trustReport ?
+            {trustReport && selectedPerspective ?
                 <Grid container spacing={2} justify="space-between" alignItems="stretch" className={classes.root}>
                     <Grid item xs>
                         <RelationshipGraph graphData={trustReport.messageFlowGraphData}
@@ -36,7 +37,7 @@ export default function Analysis(props: AnalysisProps) {
                                      externalTrustPersonaCount={externalTrustPersonaNames().length}/>
                     </Grid>
                     <Grid item style={{width: "100%"}}>
-                        <CollaboratorSection trustReport={trustReport}/>
+                        <CollaboratorSection trustReport={trustReport} selectedPerspective={selectedPerspective}/>
                     </Grid>
                 </Grid>
                 : <MissingTrustReportScreen/>}
