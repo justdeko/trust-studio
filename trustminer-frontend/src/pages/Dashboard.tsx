@@ -38,7 +38,7 @@ export default function Dashboard() {
     const [title, setTitle] = useState("Dashboard")
     const [uncDiscoveryDialogOpen, setUncDiscoveryDialogOpen] = useState(false)
     const [firstTimeDialogOpen, setFirstTimeDialogOpen] = useState(getFirstTime())
-    const [selectedPerspective, setSelectedPerspective] = useState("")
+    const [selectedPerspective, setSelectedPerspective] = useState("General")
     const [tourOpen, setTourOpen] = useState(false)
     const {enqueueSnackbar} = useSnackbar();
 
@@ -56,12 +56,6 @@ export default function Dashboard() {
         let found = checkForUncertainties()
         mineWithGeneration(!found, false)
     }, [])
-
-    useEffect(() => {
-        if (trustReport) {
-            setSelectedPerspective("General")
-        }
-    }, [trustReport])
 
     useEffect(() => {
         return history.listen((location) => {

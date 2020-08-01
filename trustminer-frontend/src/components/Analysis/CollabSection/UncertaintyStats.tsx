@@ -1,36 +1,19 @@
-import React, {useEffect, useState} from "react";
-import {Card, CardContent, Grid, Typography} from "@material-ui/core";
-import CollaboratorSelector from "./CollaboratorSelector";
-import {Collaborator} from "../../../model/Collaborator";
-import {mapToCollaboratorNames} from "../../../util/miner_util";
+import React from "react";
+import {Card, CardContent, Typography} from "@material-ui/core";
 
 interface UncertaintyStatsProps {
-    collaborators: Collaborator[]
+    lu: number,
+    rlu: number,
+    lub: number
 }
 
 export default function UncertaintyStats(props: UncertaintyStatsProps) {
-    const {collaborators} = props
-    const [selected, setSelected] = useState(mapToCollaboratorNames(collaborators)[0])
-    const [lu, setLu] = useState(0)
-    const [rlu, setRlu] = useState(0)
-    const [lub, setLub] = useState(0)
-
-    useEffect(() => {
-        const relevantCollaborator = collaborators.filter(collaborator => collaborator.name === selected)[0]
-        setLu(relevantCollaborator.laneUncertainty)
-        setRlu(relevantCollaborator.relativeLanceUncertainty)
-        setLub(relevantCollaborator.laneUncertaintyBalance)
-    }, [selected])
+    const {lu, rlu, lub} = props
     return <Card style={{height: '100%'}}>
         <CardContent>
-            <Grid container justify="space-between" alignItems="center" direction="row">
-                <Typography variant="h5" component="h2">
-                    Uncertainty Statistics
-                </Typography>
-                <CollaboratorSelector
-                    setSelected={setSelected}
-                    collaboratorNames={mapToCollaboratorNames(collaborators)}/>
-            </Grid>
+            <Typography variant="h5" component="h2">
+                Uncertainty Statistics
+            </Typography>
             <Typography variant="subtitle1">
                 Lane Uncertainty: {lu}
             </Typography>

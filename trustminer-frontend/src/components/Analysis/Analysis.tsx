@@ -6,9 +6,10 @@ import {useAnalysisStyles} from "../../styles/analysis-styles";
 import GlobalStats from "./GlobalStats";
 import {TrustReport} from "../../model/TrustReport";
 import CollaboratorSection from "./CollabSection/CollaboratorSection";
-import {getUncertaintyDistributionData} from "../../util/chart_util";
+import {getUncertaintyDistributionData, mapToTrustIssuesChartData} from "../../util/chart_util";
 import MissingTrustReportScreen from "./MissingTrustReportScreen";
-import {externalTrustPersonaNames} from "../../util/miner_util";
+import {externalTrustPersonaNames, getTrustIssues} from "../../util/miner_util";
+import TrustIssuesChart from "./TrustIssuesChart";
 
 interface AnalysisProps {
     trustReport?: TrustReport,
@@ -26,10 +27,17 @@ export default function Analysis(props: AnalysisProps) {
                         <RelationshipGraph graphData={trustReport.messageFlowGraphData}
                                            dataObjectGraphData={trustReport.dataObjectGraphData}/>
                     </Grid>
-                    <Grid item style={{minWidth: 300}} xs={6}>
+                    <Grid item style={{minWidth: 300}}>
                         <UncertaintyChart
                             data={getUncertaintyDistributionData(trustReport.collaborators)}/>
                     </Grid>
+                    {
+                        selectedPerspective !== "General" ?
+                            <Grid item>
+                                <TrustIssuesChart
+                                    chartData={mapToTrustIssuesChartData(getTrustIssues(trustReport, selectedPerspective))}/>
+                            </Grid> : undefined
+                    }
                     <Grid item xs>
                         <GlobalStats globalUncertainty={trustReport.globalUncertainty}
                                      averageUncertainty={trustReport.averageElementUncertainty}
@@ -37,7 +45,7 @@ export default function Analysis(props: AnalysisProps) {
                                      externalTrustPersonaCount={externalTrustPersonaNames().length}/>
                     </Grid>
                     <Grid item style={{width: "100%"}}>
-                        <CollaboratorSection trustReport={trustReport} selectedPerspective={selectedPerspective}/>
+                        <CollaboratorSection trustReport={trustReport}/>
                     </Grid>
                 </Grid>
                 : <MissingTrustReportScreen/>}

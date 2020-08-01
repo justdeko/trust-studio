@@ -1,4 +1,4 @@
-export const UncertaintyTypes: { [id: string]: string; } = {
+export const ComponentTypes: { [id: string]: string; } = {
     "bpmn:Task": "Task",
     "bpmn:ManualTask": "Manual Task",
     "bpmn:UserTask": "User Task",
@@ -28,3 +28,6 @@ export const UncertaintyTypes: { [id: string]: string; } = {
     "bpmn:DataInput": "Attached Data Input",
     "bpmn:DataOutput": "Attached Data Output",
 }
+
+export const getWrittenName = (tag: string) => tag.split(":")[1]
+    .replace(/([a-z])([A-Z])/g, '$1 $2') //replace the camel case values with spaces
