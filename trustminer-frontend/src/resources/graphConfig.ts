@@ -6,7 +6,7 @@ export const graphConfig = {
     collapsible: false,
     directed: true,
     minZoom: 1,
-    height: 300,
+    height: 250,
     width: 400,
     nodeHighlightBehavior: true,
     node: {

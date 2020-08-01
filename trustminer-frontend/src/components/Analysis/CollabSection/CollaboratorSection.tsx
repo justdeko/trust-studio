@@ -6,8 +6,8 @@ import {Collaborator} from "../../../model/Collaborator";
 import UncertaintyStats from "./UncertaintyStats";
 import UncertaintyDependencies from "./UncertaintyDependencies";
 import TrustConcernChart from "./TrustConcernChart";
-import {mapToTrustConcernChartData, mapToTrustIssuesChartData} from "../../../util/chart_util";
-import TrustIssuesChart from "./TrustIssuesChart";
+import {mapToTrustConcernChartData, mapToUncertaintyComponentData} from "../../../util/chart_util";
+import ComponentTypesChart from "./ComponentTypesChart";
 
 interface CollaboratorSectionProps {
     trustReport: TrustReport
@@ -46,7 +46,7 @@ export default function CollaboratorSection(props: CollaboratorSectionProps) {
                                              mi={selectedCollaborator.messageOutDegree}/>
                 </Grid>
                 <Grid item>
-                    <TrustIssuesChart chartData={mapToTrustIssuesChartData(selectedCollaborator.trustIssues)}/>
+                    <ComponentTypesChart chartData={mapToUncertaintyComponentData(selectedCollaborator.uncertainties)}/>
                 </Grid>
             </Grid>
         </div>

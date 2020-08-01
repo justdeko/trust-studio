@@ -3,6 +3,24 @@ import {BarChartData} from "../model/BarChartData";
 import {TrustConcern} from "../model/TrustConcern";
 import {Uncertainty} from "../model/Uncertainty";
 import UncertaintyChartData from "../model/UncertaintyChartData";
+import {getWrittenName} from "../model/ComponentTypes";
+
+export const chartOptions = {
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true,
+                min: 0
+            }
+        }],
+        xAxes: [{
+            ticks: {
+                beginAtZero: true,
+                min: 0
+            }
+        }]
+    }
+}
 
 export const colorPresets = [
     '#003f5c', '#2f4b7c',
@@ -85,6 +103,27 @@ export function mapToTrustIssuesChartData(trustIssues: { [id: string]: Uncertain
             hoverBackgroundColor: colorPresets[3],
             hoverBorderColor: colorPresets[3],
             data: issuesData
+        }]
+    }
+}
+
+export function mapToUncertaintyComponentData(uncertainties: Uncertainty[]): BarChartData {
+    let componentNames = uncertainties
+        .map(uncertainty => uncertainty.component).filter((v, i, a) => a.indexOf(v) == i)
+    let componentCounts: number[] = []
+    componentNames.forEach(name => {
+        componentCounts.push(uncertainties.filter(uncertainty => uncertainty.component == name).length)
+    })
+    return {
+        labels: componentNames.map(name => getWrittenName(name)),
+        datasets: [{
+            label: "Amount of uncertainties",
+            backgroundColor: colorPresets[4],
+            borderColor: colorPresets[4],
+            borderWidth: 1,
+            hoverBackgroundColor: colorPresets[3],
+            hoverBorderColor: colorPresets[3],
+            data: componentCounts
         }]
     }
 }
