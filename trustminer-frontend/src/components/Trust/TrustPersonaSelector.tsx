@@ -12,7 +12,6 @@ export default function TrustPersonaSelector(props: SelectorProps) {
     const [currentValue, setCurrentValue] = useState(personas[0])
 
     useEffect(() => {
-        console.log(personas)
         setCurrentValue(personas[0])
     }, [personas])
 

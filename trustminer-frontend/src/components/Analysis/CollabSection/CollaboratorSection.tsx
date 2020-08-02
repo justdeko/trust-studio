@@ -8,24 +8,35 @@ import UncertaintyDependencies from "./UncertaintyDependencies";
 import TrustConcernChart from "./TrustConcernChart";
 import {mapToTrustConcernChartData, mapToUncertaintyComponentData} from "../../../util/chart_util";
 import ComponentTypesChart from "./ComponentTypesChart";
+import {mapToCritical} from "../../../util/miner_util";
 
 interface CollaboratorSectionProps {
-    trustReport: TrustReport
+    trustReport: TrustReport,
+    selectedPerspective: string
 }
 
 export default function CollaboratorSection(props: CollaboratorSectionProps) {
-    const {trustReport} = props
+    const {trustReport, selectedPerspective} = props
     const [selectedCollaboratorName, setSelectedCollaboratorName] = useState<string>(trustReport.collaborators[0].name)
-    const [selectedCollaborator, setSelectedCollaborator] = useState<Collaborator>(trustReport.collaborators[0])
-    const collaboratorNames = trustReport.collaborators.map(collaborator => collaborator.name)
+    const [selectedCollaborator, setSelectedCollaborator] =
+        useState<Collaborator>(mapToCritical(trustReport, trustReport.collaborators[0], selectedPerspective))
+    const collaboratorNames = trustReport.collaborators.map(collaborator => collaborator.name).filter(name => name !== selectedPerspective)
+    useEffect(() => {
+        if (selectedPerspective === selectedCollaboratorName) {
+            let nextCollaboratorName = collaboratorNames.filter(name => name !== selectedPerspective)[0]
+            setSelectedCollaboratorName(nextCollaboratorName)
+            let collaborator = trustReport.collaborators.filter(collaborator => collaborator.name !== selectedPerspective)[0]
+            setSelectedCollaborator(mapToCritical(trustReport, collaborator, selectedPerspective))
+        } else {
+            let collaborator = trustReport.collaborators.find(collaborator => collaborator.name === selectedCollaboratorName)
+            if (collaborator) {
+                setSelectedCollaborator(mapToCritical(trustReport, collaborator, selectedPerspective))
+            }
+        }
+    }, [selectedCollaboratorName, trustReport.collaborators, selectedPerspective])
 
     useEffect(() => {
-        let collaborator = trustReport.collaborators.find(collaborator => collaborator.name === selectedCollaboratorName)
-        if (collaborator) {
-            setSelectedCollaborator(collaborator)
-        }
-    }, [selectedCollaboratorName, trustReport.collaborators])
-
+    }, [selectedPerspective])
     return (
         <div data-tour="collab-section" style={{width: "100%"}}>
             <CollaboratorSelector collaboratorNames={collaboratorNames} setSelected={setSelectedCollaboratorName}/>

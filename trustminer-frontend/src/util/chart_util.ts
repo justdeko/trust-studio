@@ -90,9 +90,13 @@ export function mapToTrustConcernChartData(collaborator: Collaborator): BarChart
     }
 }
 
-export function mapToTrustIssuesChartData(trustIssues: { [id: string]: Uncertainty[] }): BarChartData {
+export function mapToTrustIssuesChartData(trustIssues: { [id: string]: Uncertainty[] }, collaborators: Collaborator[]): BarChartData {
     let labels = Object.entries(trustIssues).map(([key, _]) => key)
     let issuesData = Object.entries(trustIssues).map(([_, uncertainties]) => uncertainties.length)
+    let uncriticalData = Object.entries(trustIssues)
+        .map(([name, uncertainties], index) =>
+            collaborators.filter(collaborator => collaborator.name === name)[0].uncertainties.length - issuesData[index]
+        )
     return {
         labels: labels,
         datasets: [{
@@ -103,6 +107,14 @@ export function mapToTrustIssuesChartData(trustIssues: { [id: string]: Uncertain
             hoverBackgroundColor: colorPresets[3],
             hoverBorderColor: colorPresets[3],
             data: issuesData
+        }, {
+            label: "Other",
+            backgroundColor: colorPresets[4],
+            borderColor: colorPresets[4],
+            borderWidth: 1,
+            hoverBackgroundColor: colorPresets[2],
+            hoverBorderColor: colorPresets[2],
+            data: uncriticalData
         }]
     }
 }

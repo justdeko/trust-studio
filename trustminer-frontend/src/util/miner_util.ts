@@ -1,6 +1,6 @@
 import BpmnModdle from "bpmn-moddle";
 import uncertainty from "../resources/uncertaintyExtension.json";
-import {CURRENT_BPMN, EXTENSION_NAME_LOWERCASE, EXTERNAL_PERSONA_NAMES} from "./constants";
+import {CURRENT_BPMN, EXTENSION_NAME_LOWERCASE, EXTERNAL_PERSONA_NAMES, GENERAL} from "./constants";
 import {sep} from "./csv_util";
 import {getCollaboratorNames} from "../miner/relationshipAnalysis";
 import {emptyBpmn} from "../resources/emptyBpmn";
@@ -80,6 +80,14 @@ export function getTrustIssues(trustReport: TrustReport, selected: string) {
     let collaborators = trustReport.collaborators
     let external = trustReport.externalTrustPersonas
     combined = combined.concat(collaborators).concat(external)
-    console.log(combined)
     return combined.filter(persona => persona.name === selected)[0].trustIssues
+}
+
+export function mapToCritical(trustReport: TrustReport, collaborator: Collaborator, perspective: string): Collaborator {
+    if (perspective == GENERAL) return collaborator
+    let criticalUncertainties = getTrustIssues(trustReport, perspective)[collaborator.name]
+    return {
+        ...collaborator,
+        uncertainties: criticalUncertainties
+    }
 }

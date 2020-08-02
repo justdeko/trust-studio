@@ -11,7 +11,7 @@ import PublishIcon from '@material-ui/icons/Publish';
 import Sidebar from "../components/Sidebar/Sidebar";
 import {useDashboardStyles} from "../styles/dashboard-styles";
 import Routes from "../Routes";
-import {CURRENT_BPMN} from "../util/constants";
+import {CURRENT_BPMN, GENERAL} from "../util/constants";
 import {TrustReport} from "../model/TrustReport";
 import {mine} from "../miner/miner";
 import UncertaintyDiscoveryDialog from "../components/UncertaintyDiscoveryDialog";
@@ -38,7 +38,7 @@ export default function Dashboard() {
     const [title, setTitle] = useState("Dashboard")
     const [uncDiscoveryDialogOpen, setUncDiscoveryDialogOpen] = useState(false)
     const [firstTimeDialogOpen, setFirstTimeDialogOpen] = useState(getFirstTime())
-    const [selectedPerspective, setSelectedPerspective] = useState("General")
+    const [selectedPerspective, setSelectedPerspective] = useState(GENERAL)
     const [tourOpen, setTourOpen] = useState(false)
     const {enqueueSnackbar} = useSnackbar();
 
@@ -123,7 +123,7 @@ export default function Dashboard() {
                     {trustReport && title === "Analysis" ?
                         <MuiThemeProvider theme={whiteSelectorTheme}>
                             <PerspectiveSelector
-                                perspectiveNames={["General"].concat(getPerspectiveNames(trustReport))}
+                                perspectiveNames={[GENERAL].concat(getPerspectiveNames(trustReport))}
                                 setSelected={setSelectedPerspective}/>
                         </MuiThemeProvider>
                         : undefined

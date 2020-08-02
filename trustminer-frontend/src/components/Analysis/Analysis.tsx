@@ -10,6 +10,7 @@ import {getUncertaintyDistributionData, mapToTrustIssuesChartData} from "../../u
 import MissingTrustReportScreen from "./MissingTrustReportScreen";
 import {externalTrustPersonaNames, getTrustIssues} from "../../util/miner_util";
 import TrustIssuesChart from "./TrustIssuesChart";
+import {GENERAL} from "../../util/constants";
 
 interface AnalysisProps {
     trustReport?: TrustReport,
@@ -32,10 +33,13 @@ export default function Analysis(props: AnalysisProps) {
                             data={getUncertaintyDistributionData(trustReport.collaborators)}/>
                     </Grid>
                     {
-                        selectedPerspective !== "General" ?
+                        selectedPerspective !== GENERAL ?
                             <Grid item>
                                 <TrustIssuesChart
-                                    chartData={mapToTrustIssuesChartData(getTrustIssues(trustReport, selectedPerspective))}/>
+                                    chartData={mapToTrustIssuesChartData(
+                                        getTrustIssues(trustReport, selectedPerspective), trustReport.collaborators
+                                    )}
+                                />
                             </Grid> : undefined
                     }
                     <Grid item xs>
@@ -45,7 +49,7 @@ export default function Analysis(props: AnalysisProps) {
                                      externalTrustPersonaCount={externalTrustPersonaNames().length}/>
                     </Grid>
                     <Grid item style={{width: "100%"}}>
-                        <CollaboratorSection trustReport={trustReport}/>
+                        <CollaboratorSection trustReport={trustReport} selectedPerspective={selectedPerspective}/>
                     </Grid>
                 </Grid>
                 : <MissingTrustReportScreen/>}
