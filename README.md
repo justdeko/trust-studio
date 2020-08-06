@@ -9,7 +9,7 @@ The general idea is based on research conducted by Marcel Müller et. al. and is
 of the "trust mining" process.
  
 You can find a working demo of this project **here**: 
-#####[trust.snet.tu-berlin.de](http://trust.snet.tu-berlin.de/)
+##### [trust.snet.tu-berlin.de](http://trust.snet.tu-berlin.de/)
 
 This project was completed under the supervision of 
 [Marcel Müller](https://scholar.google.de/citations?hl=en&user=n5r-1sUAAAAJ) and with the help of 
