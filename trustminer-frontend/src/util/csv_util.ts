@@ -11,9 +11,13 @@ import {saveFile} from "./general_util";
 export const sep = ";" // Column separator
 const nl = "\n" // Row separator
 
+/**
+ * Loads the uncertainties from local storage and returns a list of UncertaintyRow objects
+ */
 export function loadUncertainties(): Array<UncertaintyRow> {
     let currentList = localStorage.getItem(CURRENT_UNCERTAINTY_LIST)
     if (!currentList) {
+        // If no uncertainties stored, load the default ones
         localStorage.setItem(CURRENT_UNCERTAINTY_LIST, defaultUncertainties)
     }
     let csvList = (currentList) ? currentList.split(nl) : defaultUncertainties.split(nl)
@@ -43,6 +47,9 @@ export function loadUncertainties(): Array<UncertaintyRow> {
     })
 }
 
+/**
+ * Exports the currently stored uncertainties to a .csv file
+ */
 export function exportCsv() {
     let currentList = localStorage.getItem(CURRENT_UNCERTAINTY_LIST)
     if (currentList !== null) {
@@ -51,6 +58,11 @@ export function exportCsv() {
     }
 }
 
+/**
+ * Converts an imported .csv file to a list of uncertainties and stores them
+ * @param setState passed function from the table component to set its state
+ * @param launchSnackbar method to launch a snackbar from the component context
+ */
 export function importCsv(
     setState: React.Dispatch<React.SetStateAction<TableState>>,
     launchSnackbar: (message: SnackbarMessage, options?: OptionsObject) => SnackbarKey) {
@@ -62,7 +74,9 @@ export function importCsv(
         let fileList = fileSelector.files;
         if (fileList) {
             fileList[0].text().then(csvText => {
+                // Store the csv string into local storage
                 localStorage.setItem(CURRENT_UNCERTAINTY_LIST, csvText)
+                // Update the table state
                 setState((prevState) => {
                     let data = loadUncertainties()
                     return {...prevState, data};
@@ -73,8 +87,13 @@ export function importCsv(
     }
 }
 
+/**
+ * Saves a list of UncertaintyRow Objects to local storage
+ * @param uncertaintyList the specified list of uncertainties
+ */
 export function saveUncertainties(uncertaintyList: Array<UncertaintyRow>) {
     let csvString = ""
+    // Split the list into string rows, and combine those into a stringified csv object
     uncertaintyList.forEach((row, index) => {
         let stringRow =
             row.parentComponent + sep + row.component + sep +
@@ -89,6 +108,10 @@ export function saveUncertainties(uncertaintyList: Array<UncertaintyRow>) {
     localStorage.setItem(CURRENT_UNCERTAINTY_LIST, csv)
 }
 
+/**
+ * Method for resetting the uncertainties to the default state (default uncertainty list)
+ * @param setState method to update the table state from the component context
+ */
 export function resetToDefault(setState: React.Dispatch<React.SetStateAction<TableState>>) {
     localStorage.setItem(CURRENT_UNCERTAINTY_LIST, defaultUncertainties)
     setState((prevState) => {
@@ -97,6 +120,10 @@ export function resetToDefault(setState: React.Dispatch<React.SetStateAction<Tab
     })
 }
 
+/**
+ * Returns a list of uncertainties for a specified component
+ * @param component the component we want to fetch a relevant list of uncertainties for
+ */
 export const extractUncertaintyList = (component: String) =>
     loadUncertainties().filter(uncertainty =>
         uncertainty.component === component
@@ -104,8 +131,14 @@ export const extractUncertaintyList = (component: String) =>
         || (uncertainty.parentComponent === component && uncertainty.component.toLowerCase().includes("all"))
     )
 
+/**
+ * Saves a list of trust policy objects to local storage
+ * @param trustPolicyList the list of Trust Policies (table object)
+ * @param trustPersona the relevant name of the Trust Persona
+ */
 export function saveTrustPolicies(trustPolicyList: Array<TrustPolicyRow>, trustPersona: string) {
     let csvString = ""
+    // Split the objects into string rows and combine those into a stringified csv to save
     trustPolicyList.forEach((row, index) => {
         let stringRow = row.trustEntity + sep + row.processElement + sep + row.trustConcern
         if (index !== trustPolicyList.length - 1) stringRow += nl
@@ -114,6 +147,10 @@ export function saveTrustPolicies(trustPolicyList: Array<TrustPolicyRow>, trustP
     localStorage.setItem(TRUST_POLICY_LIST + trustPersona, csvString)
 }
 
+/**
+ * Loads the trust policies for a specified trust persona
+ * @param persona the name of the relevant persona
+ */
 export function loadTrustPoliciesForPersona(persona: string): Array<TrustPolicyRow> {
     let storedList = localStorage.getItem(TRUST_POLICY_LIST + persona)
     let policyList = storedList ? storedList.split(nl) : []
@@ -127,6 +164,7 @@ export function loadTrustPoliciesForPersona(persona: string): Array<TrustPolicyR
         }
         lines.push(line);
     }
+    // Return a list of TrustPolicyRow objects
     return lines.map(line => {
         return {
             trustEntity: line[0],
@@ -136,6 +174,10 @@ export function loadTrustPoliciesForPersona(persona: string): Array<TrustPolicyR
     })
 }
 
+/**
+ * Map a list of table Trust policy objects to a list of "pure" Trust policy objects.
+ * @param list the list of trust policy table objects
+ */
 export function mapToTrustPolicyEntities(list: Array<TrustPolicyRow>): Array<TrustPolicy> {
     return list.map((policy) => {
         return {

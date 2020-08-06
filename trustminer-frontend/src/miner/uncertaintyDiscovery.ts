@@ -10,15 +10,22 @@ const moddle = new BpmnModdle({
     trust: uncertainty
 });
 
+/**
+ * Insert uncertainty annotations into the current bpmn file
+ * @param definitions the root moddle object
+ */
 export async function insertUncertainties(definitions: any) {
     console.log(definitions)
     definitions.rootElements.forEach((el: any, index: number) => {
+        // Insert uncertainty tags for message flow objects
         if (el.hasOwnProperty("messageFlows")) {
             el.messageFlows.forEach((el: any) => insertIntoElement(el))
         }
+        // Insert uncertainty tags for link objects (Control flow, etc.)
         if (el.hasOwnProperty("flowElements")) {
             el.flowElements.forEach((el: any) => insertIntoElement(el))
         }
+        // Insert uncertainty tags for data objects
         if (el.hasOwnProperty("ioSpecification")) {
             if (el.ioSpecification.dataInputs) {
                 el.ioSpecification.dataInputs.forEach((el: any) => insertIntoElement(el))
@@ -34,6 +41,10 @@ export async function insertUncertainties(definitions: any) {
     localStorage.setItem(CURRENT_BPMN, xmlStrUpdated)
 }
 
+/**
+ * Insert all relevant uncertainties into an element
+ * @param el the specified moddle element
+ */
 function insertIntoElement(el: any) {
     let type = ComponentTypes[el.$type]
     let uncertaintyList = extractUncertaintyList(type)
@@ -43,6 +54,8 @@ function insertIntoElement(el: any) {
     if (extensionElements.get("values").find((extensionElement: any) => extensionElement.$instanceOf(EXTENSION_NAME))) {
         return
     }
+    // For each uncertainty of the element, get the relevant string names of parameters (perspective, root, etc.)
+    // and push it into the moddle model
     uncertaintyList.forEach(uncertainty => {
         let uncertaintyEl = moddle.create(EXTENSION_NAME);
         uncertaintyEl.perspective = Perspective[uncertainty.perspective]

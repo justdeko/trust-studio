@@ -3,6 +3,10 @@ import {Collaborator, instanceOfCollaborator} from "../model/Collaborator";
 import {ExternalTrustPersona} from "../model/ExternalTrustPersona";
 import html2canvas from "html2canvas";
 
+/**
+ * Convert a list of objects into a string enumeration: ["Tom", "Marie", "Max"] => "Tom, Marie and Max"
+ * @param stringList the list to convert
+ */
 function toEnumeration(stringList: string[]): string {
     let listString = ""
     if (stringList.length === 1) return stringList[0]
@@ -18,6 +22,11 @@ function toEnumeration(stringList: string[]): string {
     return listString
 }
 
+/**
+ * Get the "General text" related to the trust report,
+ * containing information about global uncertainty, amount of collaborators etc.
+ * @param trustReport the current trust report
+ */
 export function generalText(trustReport: TrustReport) {
     let collaboratorList = toEnumeration(trustReport.collaborators.map(collaborator => collaborator.name))
 
@@ -36,6 +45,10 @@ export function generalText(trustReport: TrustReport) {
         `Currently, there ${externalText()}`
 }
 
+/**
+ * Get the specific collaborator section text
+ * @param collaborator the collaborator in question
+ */
 export function collaboratorText(collaborator: Collaborator) {
     let balance = collaborator.laneUncertaintyBalance
 
@@ -67,6 +80,10 @@ export function collaboratorText(collaborator: Collaborator) {
         ` Futhermore, ${getDependencyPhrase(collaborator.dataInDegree, false, "Data dependency")}`
 }
 
+/**
+ * Get the trust analysis section text for a specified trust persona
+ * @param trustPersona the relevant trust persona, either external or a collaborator
+ */
 export function trustAnalysisText(trustPersona: Collaborator | ExternalTrustPersona) {
     let issues = trustPersona.trustIssues
     let external = (instanceOfCollaborator(trustPersona)) ? "a collaborator" : "an external"
@@ -83,6 +100,10 @@ export function trustAnalysisText(trustPersona: Collaborator | ExternalTrustPers
         `of ${issues[largestEntry].length} has ${largestEntry}, followed by ${otherEntriesText}.`
 }
 
+/**
+ * Get the png file of a react component, used for fetching some charts
+ * @param componentId the specified component id in the DOM tree
+ */
 export async function getComponentPng(componentId: string): Promise<string | undefined> {
     let input = document.getElementById(componentId)
     if (input) {

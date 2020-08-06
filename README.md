@@ -1,7 +1,20 @@
-# trustminer
-Open-source implementation of a trust miner for collaborative business processes.
+![Trust Studio Logo](images/trust_studio_logo.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Trust studio is a tool for evaluating and analysing trust and uncertainties
+in business process models annotated with [BPMN](https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation).
+This web application combines various tools and utilities to be able to evaluate all relevant aspects 
+of the selected bpmn file.
+
+The general idea is based on research conducted by Marcel Müller et. al. and is thus a practical implementation
+of the "trust mining" process.
+ 
+You can find a working demo of this project **here**: 
+#####[trust.snet.tu-berlin.de](http://trust.snet.tu-berlin.de/)
+
+This project was completed under the supervision of 
+[Marcel Müller](https://scholar.google.de/citations?hl=en&user=n5r-1sUAAAAJ) and with the help of 
+the [SNET team](https://www.snet.tu-berlin.de/menue/service_centric_networking/welcome/) at TU Berlin.
+
 
 ## Code conventions
 - UpperCamelCase for files and modules, camelCase for variables and other
@@ -25,30 +38,24 @@ You will also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Libraries used APIs used
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+##### Bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Libraries
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-### Libraries used
-
+- [material-ui](https://material-ui.com/)
 - [Material table](https://github.com/mbrn/material-table)
 - [Reactour](https://github.com/elrumordelaluz/reactour)
 - [react-chartjs-2](https://github.com/jerairrest/react-chartjs-2)
 - [react-d3-graph](https://github.com/danielcaldas/react-d3-graph)
 - [notistack](https://github.com/iamhosseindhv/notistack)
+- [react-pdf](https://github.com/diegomura/react-pdf)
+- [html2canvas](https://github.com/niklasvh/html2canvas)
+
+#### bpmn.io
+
+- [bpmn-js](https://github.com/bpmn-io/bpmn-js)
+- [bpmn-moddle](https://github.com/bpmn-io/bpmn-moddle)
+- [tiny-svg](https://github.com/bpmn-io/tiny-svg)
+

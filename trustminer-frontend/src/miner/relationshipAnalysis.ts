@@ -1,5 +1,9 @@
 import {DataObjectGraphData, GraphData} from "../model/GraphData";
 
+/**
+ * Generate message flow data for the relationship graph. find all nodes and links between the collaborators
+ * @param definitions the root elements of the bpmn file
+ */
 export function generateGraphData(definitions: any): GraphData {
     let nodes: { id: string }[] = []
     let links: { source: string, target: string }[] = []
@@ -7,8 +11,10 @@ export function generateGraphData(definitions: any): GraphData {
     let collab = definitions.rootElements.find((el: any) => el.$type === 'bpmn:Collaboration')
     let collaboratorNames = getCollaboratorNames(collab)
 
+    // If there are message flows and participant objects...
     if (collab && collab.messageFlows) {
         collab.messageFlows.forEach((messageFlow: any) => {
+            // Find source, target name and id, and insert them into the links and nodes set
             let sourceId = messageFlow.sourceRef.$parent.id
             let sourceName = collaboratorNames[sourceId]
             let targetId = messageFlow.targetRef.$parent.id
@@ -28,6 +34,10 @@ export function generateGraphData(definitions: any): GraphData {
     return {nodes: nodes, links: links}
 }
 
+/**
+ * Get all collaborator names from the moddle participant objects
+ * @param collab the list of moddle participant objects
+ */
 export function getCollaboratorNames(collab: any) {
     let collaboratorNames: { [id: string]: string } = {}
     if (collab && collab.participants) {
@@ -40,6 +50,10 @@ export function getCollaboratorNames(collab: any) {
     return collaboratorNames
 }
 
+/**
+ * Generate data object graph data for the relationship graph. find all nodes and links between the collaborators
+ * @param definitions the root elements of the bpmn file
+ */
 export function generateDataObjectGraphData(definitions: any): DataObjectGraphData {
     let collab = definitions.rootElements.find((el: any) => el.$type === 'bpmn:Collaboration')
     let processes = definitions.rootElements.filter((el: any) => el.$type === 'bpmn:Process')
@@ -51,11 +65,17 @@ export function generateDataObjectGraphData(definitions: any): DataObjectGraphDa
     }
 }
 
+/**
+ * Get all data object routes for a list of processes
+ * @param processes the list of processes
+ * @param collaboratorNames the list of corresponding collaborators (id-name key-value pairs)
+ */
 function getDataObjectRoutes(processes: any[], collaboratorNames: { [id: string]: string }) {
     let dataOutputs = getDataOutputObjectNames(processes)
     let links: { source: string, target: string, label: string }[] = []
     let nodes: { id: string }[] = []
     processes.forEach((process: any) => {
+        // Find the ioSpecification moddle object and search through data objects for relevant links
         let ioSpecification = process.ioSpecification
         if (ioSpecification && ioSpecification.dataInputs) {
             ioSpecification.dataInputs.forEach((el: any) => {
@@ -86,6 +106,10 @@ function getDataObjectRoutes(processes: any[], collaboratorNames: { [id: string]
     return {links: links, nodes: nodes}
 }
 
+/**
+ * Get the id-name pairs of data output objects, used to label the links between nodes
+ * @param processes the list of processes
+ */
 function getDataOutputObjectNames(processes: any[]) {
     let dataObjectNames: { [name: string]: string } = {}
     processes.forEach((process: any) => {

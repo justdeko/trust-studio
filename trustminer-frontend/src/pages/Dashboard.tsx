@@ -123,7 +123,7 @@ export default function Dashboard() {
                     {trustReport && title === "Analysis" ?
                         <MuiThemeProvider theme={whiteSelectorTheme}>
                             <PerspectiveSelector
-                                perspectiveNames={[GENERAL].concat(getPerspectiveNames(trustReport))}
+                                perspectiveNames={getPerspectiveNames(trustReport)}
                                 setSelected={setSelectedPerspective}/>
                         </MuiThemeProvider>
                         : undefined

@@ -29,6 +29,10 @@ export const colorPresets = [
     '#ff7c43', '#ffa600'
 ]
 
+/**
+ * Returns an array of chart colors.
+ * @param count the amount of labels in the chart
+ */
 export function getChartColors(count: number): string[] {
     if (count < 9) {
         return colorPresets.slice(0, count)
@@ -45,6 +49,10 @@ export function getChartColors(count: number): string[] {
     }
 }
 
+/**
+ * Maps the uncertainties of a collaborator to uncertainties sorted by trust concern
+ * @param collaborator the relevant collaborator
+ */
 export function mapToTrustConcernChartData(collaborator: Collaborator): BarChartData {
     let labels = Object.entries(TrustConcern).map(([_, values]) => values)
     let distributionData = [0, 0, 0, 0, 0, 0]
@@ -90,6 +98,11 @@ export function mapToTrustConcernChartData(collaborator: Collaborator): BarChart
     }
 }
 
+/**
+ * Maps a dictionary of critical uncertainties to trust issue chart data (critical and non-critical uncertainties)
+ * @param trustIssues the relevant trust issues
+ * @param collaborators the current list of collaborators
+ */
 export function mapToTrustIssuesChartData(trustIssues: { [id: string]: Uncertainty[] }, collaborators: Collaborator[]): BarChartData {
     let labels = Object.entries(trustIssues).map(([key, _]) => key)
     let issuesData = Object.entries(trustIssues).map(([_, uncertainties]) => uncertainties.length)
@@ -119,7 +132,12 @@ export function mapToTrustIssuesChartData(trustIssues: { [id: string]: Uncertain
     }
 }
 
+/**
+ * Maps a list of uncertainties to a distribution of uncertainties by bpmn component
+ * @param uncertainties the uncertainty list
+ */
 export function mapToUncertaintyComponentData(uncertainties: Uncertainty[]): BarChartData {
+    // Get all unique component names
     let componentNames = uncertainties
         .map(uncertainty => uncertainty.component).filter((v, i, a) => a.indexOf(v) == i)
     let componentCounts: number[] = []
@@ -140,6 +158,10 @@ export function mapToUncertaintyComponentData(uncertainties: Uncertainty[]): Bar
     }
 }
 
+/**
+ * Get the uncertainty distribution data for a list of collaborators
+ * @param collaborators the collaborator list
+ */
 export function getUncertaintyDistributionData(collaborators: Collaborator[]): UncertaintyChartData {
     let counts = getCollaboratorUncertaintyCounts(collaborators)
     let labels = Object.keys(counts)

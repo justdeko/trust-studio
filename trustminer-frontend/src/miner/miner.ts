@@ -5,6 +5,11 @@ import {averageElementUncertainty, getCollaborators, globalUncertainty} from "./
 import {getDefinitions} from "../util/miner_util";
 import {findCriticalUncertainties, findCriticalUncertaintiesForExternal} from "./trustAnalysis";
 
+/**
+ * The big "miner" method. Returns a complete trust report from the
+ * current state of the studio (bpmn model, external trust personas, list of uncertainties)
+ * @param shouldDiscover whether new uncertainties should be inserted into the bpmn model
+ */
 export async function mine(shouldDiscover = true): Promise<TrustReport | Error> {
     /**
      * Procedure:
@@ -36,6 +41,7 @@ export async function mine(shouldDiscover = true): Promise<TrustReport | Error> 
         }
     })
     let external = findCriticalUncertaintiesForExternal(collaborators)
+    // Return a TrustReport Object
     return {
         globalUncertainty: gu,
         averageElementUncertainty: avg,
