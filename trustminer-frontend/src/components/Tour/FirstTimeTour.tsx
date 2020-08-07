@@ -27,6 +27,10 @@ export default function FirstTimeTour(props: TourProps) {
             action: () => history.push("/analysis")
         },
         {
+            selector: '[data-tour="perspective"]',
+            content: 'This dropdown menu lets you select the current perspective. A general view is the default, there are also collaborator and external perspectives. More on that later.'
+        },
+        {
             selector: '[data-tour="relationship-analysis"]',
             content: `This graph displays the relationships of collaborators between each other, both from a data and a message flow perspective`,
             action: () => history.push("/analysis")

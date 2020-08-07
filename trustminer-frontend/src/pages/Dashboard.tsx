@@ -131,7 +131,9 @@ export default function Dashboard() {
                     {trustReport ?
                         <Tooltip
                             title="Make sure to adjust all of the graphs before exporting depending on how you want them to look like in your report.">
-                            <IconButton color="inherit" onClick={() => generatePdfDocument(trustReport)}>
+                            <IconButton data-tour="perspective"
+                                        color="inherit"
+                                        onClick={() => generatePdfDocument(trustReport)}>
                                 <PictureAsPdf/>
                             </IconButton>
                         </Tooltip>
@@ -147,7 +149,7 @@ export default function Dashboard() {
                 <div className={classes.appBarSpacer}/>
                 <Container maxWidth="xl" className={classes.container}>
                     <Switch>
-                        <Route exact path="/">
+                        <Route exact path="/dashboard">
                             <Redirect to="/analysis"/>
                         </Route>
                         {Routes.map((route: any) => {
