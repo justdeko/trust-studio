@@ -8,6 +8,7 @@ import FrontPage from "./pages/FrontPage";
 import Dashboard from "./pages/Dashboard";
 import SignIn from "./pages/SignIn";
 import {Route} from 'react-router-dom';
+import Introduction from "./pages/Introduction";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
             <SnackbarProvider maxSnack={4}>
                 <main>
                     <Route exact path="/" component={FrontPage}/>
+                    <Route exact path="/introduction" component={Introduction}/>
                     <Route exact path="/analysis" component={Dashboard}/>
                     <Route exact path="/modeler" component={Dashboard}/>
                     <Route exact path="/trust-policies" component={Dashboard}/>

@@ -128,7 +128,7 @@ export default function Dashboard() {
                         </MuiThemeProvider>
                         : undefined
                     }
-                    {trustReport ?
+                    {trustReport && title === "Analysis" ?
                         <Tooltip
                             title="Make sure to adjust all of the graphs before exporting depending on how you want them to look like in your report.">
                             <IconButton data-tour="perspective"

@@ -2,10 +2,11 @@ import {Button, Grid, Switch, Typography} from "@material-ui/core";
 import React, {useState} from "react";
 import {Delete} from "@material-ui/icons";
 import {getNightMode, setNightMode} from "../util/ui_util";
+import {useHistory} from "react-router-dom"
 
 export default function Settings() {
     const [nightModeOn, setNightModeOn] = useState(getNightMode())
-
+    const history = useHistory()
     function changeNightMode() {
         setNightModeOn(prevState => {
             setNightMode(!prevState)
@@ -32,7 +33,7 @@ export default function Settings() {
                             color="secondary"
                             onClick={() => {
                                 localStorage.clear()
-                                window.location.reload()
+                                history.push("/")
                             }}
                             startIcon={<Delete/>}>
                             Delete

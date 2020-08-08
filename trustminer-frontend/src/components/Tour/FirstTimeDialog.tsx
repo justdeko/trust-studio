@@ -5,12 +5,13 @@ import {setFirstTime} from "../../util/tour_util";
 interface FirstTimeDialogProps {
     dialogOpen: boolean,
     setDialogOpen: Dispatch<SetStateAction<boolean>>,
+    cancelTour?(): void
 
     startTour(): void
 }
 
 export default function FirstTimeDialog(props: FirstTimeDialogProps) {
-    const {dialogOpen, setDialogOpen, startTour} = props
+    const {dialogOpen, setDialogOpen, startTour, cancelTour} = props
 
     const handleClose = () => setDialogOpen(false)
 
@@ -22,6 +23,9 @@ export default function FirstTimeDialog(props: FirstTimeDialogProps) {
     function handleDecline() {
         handleClose()
         setFirstTime(false)
+        if (cancelTour) {
+            cancelTour()
+        }
     }
 
     return (
