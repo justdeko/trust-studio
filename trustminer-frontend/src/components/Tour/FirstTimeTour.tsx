@@ -12,6 +12,7 @@ interface TourProps {
 export default function FirstTimeTour(props: TourProps) {
     const {tourOpen, setTourOpen} = props
     let history = useHistory()
+    // TODO: fix tour error when routing to analysis
     const tourConfig = [
         {
             selector: '[data-tour="welcome"]',

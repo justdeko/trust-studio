@@ -1,35 +1,46 @@
 import React, {useState} from "react";
 import {introductionTheme, useIntroductionStyles} from "../styles/introduction-styles";
-import {Button, Fade, Grid, MobileStepper, MuiThemeProvider, Typography} from "@material-ui/core";
+import {Button, Container, Fade, Grid, MobileStepper, MuiThemeProvider, Typography} from "@material-ui/core";
 import {KeyboardArrowLeft, KeyboardArrowRight} from "@material-ui/icons";
-import TrustMiningSteps from "../components/IntroductionPages/TrustMiningSteps";
+import TrustMiningSection from "../components/IntroductionPages/TrustMiningSection";
+import UncertaintiesSection from "../components/IntroductionPages/UncertaintiesSection";
+import BpmTrustSection from "../components/IntroductionPages/BpmTrustSection";
+import FinalSection from "../components/IntroductionPages/FinalSection";
+
+const description = (text: string) =>
+    <Typography align="center" color="textPrimary" variant="h6" style={{whiteSpace: 'pre-line', margin: '10'}}>
+        {text}
+    </Typography>
 
 function getIntroductionPage(step: number) {
     switch (step) {
         case 0:
             return {
                 title: "Introduction",
-                content: <div/>
+                content: description("Welcome to Trust Studio!\nThis is an application for mining and analysing trust in business processes. " +
+                    "This introduction will give you a quick overview of the relevant topics, " +
+                    "related to trust and uncertainties in business processes.\n" +
+                    "The app was developed with help from the SNET chair of the technical university berlin and is an open-source project.")
             }
         case 1:
             return {
                 title: "BPM and Trust",
-                content: <div/>
+                content: <BpmTrustSection/>
             }
         case 2:
             return {
                 title: "Uncertainties",
-                content: <TrustMiningSteps/>
+                content: <UncertaintiesSection/>
             }
         case 3:
             return {
                 title: "Trust Mining",
-                content: <TrustMiningSteps/>
+                content: <TrustMiningSection/>
             }
         case 4:
             return {
                 title: "Final Words",
-                content: <div/>
+                content: <FinalSection/>
             }
         default:
             return {
@@ -68,7 +79,9 @@ export default function Introduction() {
                         <Typography variant="h2" color="textPrimary" style={{margin: 20}}>
                             {getIntroductionPage(currentStep).title}
                         </Typography>
-                        {getIntroductionPage(currentStep).content}
+                        <Container maxWidth={"md"}>
+                            {getIntroductionPage(currentStep).content}
+                        </Container>
                     </Grid>
                 </Fade>
                 <div style={{bottom: '0', width: '100%', position: 'fixed'}}>
