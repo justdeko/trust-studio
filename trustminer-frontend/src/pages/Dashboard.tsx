@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Redirect, Route, Switch, useHistory} from "react-router-dom";
+import {Route, Switch, useHistory} from "react-router-dom";
 import clsx from 'clsx';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -40,6 +40,7 @@ export default function Dashboard() {
     const [firstTimeDialogOpen, setFirstTimeDialogOpen] = useState(getFirstTime())
     const [selectedPerspective, setSelectedPerspective] = useState(GENERAL)
     const [tourOpen, setTourOpen] = useState(false)
+    const [loadingTrustReport, setLoadingTrustReport] = useState(true)
     const {enqueueSnackbar} = useSnackbar();
 
     let history = useHistory()
@@ -85,6 +86,7 @@ export default function Dashboard() {
 
     function mineWithGeneration(shouldDiscover: boolean, isUpload: boolean) {
         mine(shouldDiscover).then(trustReport => {
+            setLoadingTrustReport(false)
             if (trustReport instanceof Error) {
                 console.log(trustReport)
             } else {
@@ -149,13 +151,12 @@ export default function Dashboard() {
                 <div className={classes.appBarSpacer}/>
                 <Container maxWidth="xl" className={classes.container}>
                     <Switch>
-                        <Route exact path="/dashboard">
-                            <Redirect to="/analysis"/>
-                        </Route>
                         {Routes.map((route: any) => {
                             if (route.path === "/analysis") {
                                 return <Route exact path={route.path} key={route.path}>
-                                    <Analysis selectedPerspective={selectedPerspective} trustReport={trustReport}/>
+                                    <Analysis selectedPerspective={selectedPerspective}
+                                              trustReport={trustReport}
+                                              loading={loadingTrustReport}/>
                                 </Route>
                             } else if (route.path === "/modeler") {
                                 return <Route exact path={route.path} key={route.path}>

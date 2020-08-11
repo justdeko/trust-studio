@@ -14,7 +14,7 @@ export default function FrontPage() {
         if (getFirstTime()) {
             setFirstTimeDialogOpen(true)
         } else {
-            history.push('/dashboard')
+            history.push('/analysis')
         }
     }
 
@@ -28,7 +28,7 @@ export default function FrontPage() {
     }
 
     function cancelTour() {
-        history.push("/dashboard")
+        history.push("/analysis")
     }
 
     return (

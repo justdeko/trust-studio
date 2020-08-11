@@ -12,7 +12,13 @@ interface TourProps {
 export default function FirstTimeTour(props: TourProps) {
     const {tourOpen, setTourOpen} = props
     let history = useHistory()
-    // TODO: fix tour error when routing to analysis
+
+    const pushToTarget = (target: string) => {
+        if (history.location.pathname !== target) {
+            history.push(target)
+        }
+    }
+
     const tourConfig = [
         {
             selector: '[data-tour="welcome"]',
@@ -25,7 +31,7 @@ export default function FirstTimeTour(props: TourProps) {
         {
             selector: '[data-tour="analysis"]',
             content: `The analysis page displays all relevant information about the status of uncertainties and trust.`,
-            action: () => history.push("/analysis")
+            action: () => pushToTarget("/analysis")
         },
         {
             selector: '[data-tour="perspective"]',
@@ -34,37 +40,37 @@ export default function FirstTimeTour(props: TourProps) {
         {
             selector: '[data-tour="relationship-analysis"]',
             content: `This graph displays the relationships of collaborators between each other, both from a data and a message flow perspective`,
-            action: () => history.push("/analysis")
+            action: () => pushToTarget("/analysis")
         },
         {
             selector: '[data-tour="uncertainty-chart"]',
             content: `The uncertainty chart shows how uncertainties are distributed between collaborators.`,
-            action: () => history.push("/analysis")
+            action: () => pushToTarget("/analysis")
         },
         {
             selector: '[data-tour="stats"]',
             content: `Here are some general statistics about uncertainties and trust.`,
-            action: () => history.push("/analysis")
+            action: () => pushToTarget("/analysis")
         },
         {
             selector: '[data-tour="collab-section"]',
             content: `The collaborator section displays information about uncertainties and trust from the perspective of the selected collaborator.`,
-            action: () => history.push("/analysis")
+            action: () => pushToTarget("/analysis")
         },
         {
             selector: '[data-tour="modeler"]',
             content: `In the modeler you can edit and even export your uploaded bpmn file.`,
-            action: () => history.push("/modeler")
+            action: () => pushToTarget("/modeler")
         },
         {
             selector: '[data-tour="trust-policies"]',
             content: `On this page you can configure trust policies about trusted process elements from the perspective of a specific trust persona. You can also add external trust personas.`,
-            action: () => history.push("/trust-policies")
+            action: () => pushToTarget("/trust-policies")
         },
         {
             selector: '[data-tour="uncertainties"]',
             content: `In the uncertainties page you can modify all of the uncertainties, add new ones and remove ones you consider irrelevant. You can also export the table or import your own.`,
-            action: () => history.push("/uncertainty-list")
+            action: () => pushToTarget("/uncertainty-list")
         },
         {
             selector: '[data-tour="final"]',

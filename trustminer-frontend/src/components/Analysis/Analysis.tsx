@@ -14,12 +14,13 @@ import {GENERAL} from "../../util/constants";
 
 interface AnalysisProps {
     trustReport?: TrustReport,
+    loading?: boolean
     selectedPerspective?: string
 }
 
 export default function Analysis(props: AnalysisProps) {
     const classes = useAnalysisStyles();
-    const {trustReport, selectedPerspective} = props
+    const {trustReport, selectedPerspective, loading} = props
     return (
         <div data-tour="analysis">
             {trustReport && selectedPerspective ?
@@ -52,7 +53,7 @@ export default function Analysis(props: AnalysisProps) {
                         <CollaboratorSection trustReport={trustReport} selectedPerspective={selectedPerspective}/>
                     </Grid>
                 </Grid>
-                : <MissingTrustReportScreen/>}
+                : <MissingTrustReportScreen loading={loading}/>}
         </div>
     )
 }

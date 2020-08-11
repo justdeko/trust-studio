@@ -15,7 +15,7 @@ export default function FinalSection() {
                     variant="contained"
                     color="secondary"
                     onClick={() => {
-                        history.push("/dashboard")
+                        history.push("/analysis")
                     }}>
                     Go to Dashboard
                 </Button>
