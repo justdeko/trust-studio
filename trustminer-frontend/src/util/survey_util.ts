@@ -1,6 +1,7 @@
 import {START_TIME, SURVEY_DATA} from "./constants";
 import {SurveyData} from "../model/SurveyData";
 import {externalTrustPersonaNames} from "./miner_util";
+import {ExternalTrustPersona} from "../model/ExternalTrustPersona";
 
 /**
  * Makes a post request to the survey backend
@@ -34,7 +35,23 @@ export function updateSurveyData(newValues: { [key: string]: any }) {
  */
 export function checkTrustPersonaCreated(): boolean {
     let external = externalTrustPersonaNames()
-    return !!external.find(name => name == "Overseer");
+    return !!external.find(name => name == "Distributor");
+}
+
+/**
+ * Checks if the specific trust policy for distributor trust persona exists (survey checkpoint)
+ * @param externalTrustPersonas the dictionary of all external trust personas
+ */
+export function checkPolicyExists(externalTrustPersonas: ExternalTrustPersona[]): boolean {
+    let distributorPersona = externalTrustPersonas.find(persona => persona.name === "Distributor")
+    if (distributorPersona) {
+        let collaboratorIssues = distributorPersona.trustIssues["Collaborator"]
+        if (collaboratorIssues) {
+            let matchUncertainty = collaboratorIssues
+                .find(uncertainty => uncertainty.trustConcern = "Integrity")
+            return !!matchUncertainty;
+        } else return false
+    } else return false
 }
 
 /**
@@ -55,3 +72,11 @@ export function startTimer() {
     let startTime = new Date()
     localStorage.setItem(START_TIME, startTime.toDateString())
 }
+
+export const surveyTexts = [
+    'Add a new external trust persona called "Distributor".',
+    'Add a trust policy for the trust entity "Collaborator" for the process Element "Manual" task and Integrity as a trust concern.',
+    'Go back to the dashboard. What amount of critical uncertainties from the perspective of the Distributor does Sender have?',
+    'Go to the modeler. How many uncertainties does the task "prepare parcel" have?',
+    'Export a trust report and save it locally.'
+]

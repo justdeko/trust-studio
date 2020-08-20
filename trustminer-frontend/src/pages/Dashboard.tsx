@@ -32,6 +32,7 @@ import PerspectiveSelector from "../components/PerspectiveSelector";
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import {whiteSelectorTheme} from "../styles/selector-styles";
 import SurveySidebar from "../components/Survey/SurveySidebar";
+import {checkPolicyExists, checkTrustPersonaCreated} from "../util/survey_util";
 
 export default function Dashboard() {
     const classes = useDashboardStyles()
@@ -44,6 +45,8 @@ export default function Dashboard() {
     const [tourOpen, setTourOpen] = useState(false)
     const [surveySidebarOpen, setSurveySidebarOpen] = useState(false)
     const [loadingTrustReport, setLoadingTrustReport] = useState(true)
+    const [completedTasks, setCompletedTasks] = useState([false, false, false])
+
     const {enqueueSnackbar} = useSnackbar();
 
     let history = useHistory()
@@ -67,6 +70,17 @@ export default function Dashboard() {
             if (route) setTitle(route.title)
         })
     }, [history])
+
+    useEffect(() => {
+        if (checkTrustPersonaCreated()) {
+            completeTask(0)
+        }
+        if (trustReport) {
+            if (checkPolicyExists(trustReport.externalTrustPersonas)) {
+                completeTask(1)
+            }
+        }
+    }, [trustReport])
 
     function handleFileSelect() {
         const fileSelector = document.createElement('input');
@@ -107,6 +121,14 @@ export default function Dashboard() {
         setTourOpen(true)
     }
 
+    function completeTask(selected: number) {
+        setCompletedTasks(prevState => prevState.map((completed, index) => {
+            if (index === selected) {
+                return true
+            } else return completed
+        }))
+    }
+
     return (
         <div className={classes.root}>
             <CssBaseline/>
@@ -138,7 +160,10 @@ export default function Dashboard() {
                             title="Make sure to adjust all of the graphs before exporting depending on how you want them to look like in your report.">
                             <IconButton data-tour="perspective"
                                         color="inherit"
-                                        onClick={() => generatePdfDocument(trustReport)}>
+                                        onClick={() => {
+                                            generatePdfDocument(trustReport)
+                                            completeTask(2)
+                                        }}>
                                 <PictureAsPdf/>
                             </IconButton>
                         </Tooltip>
@@ -187,7 +212,7 @@ export default function Dashboard() {
                 <EmojiObjectsIcon/>
                 Survey Progress
             </Fab>
-            <SurveySidebar open={surveySidebarOpen} setOpen={setSurveySidebarOpen}/>
+            <SurveySidebar open={surveySidebarOpen} setOpen={setSurveySidebarOpen} completedTasks={completedTasks}/>
         </div>
     );
 }

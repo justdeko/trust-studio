@@ -1,5 +1,60 @@
-import React from "react";
+import React, {Dispatch, SetStateAction, useState} from "react";
+import {Grid, IconButton, TextField, Typography} from "@material-ui/core";
+import {surveyTexts} from "../../util/survey_util";
+import {Check} from "@material-ui/icons";
+import {green} from "@material-ui/core/colors";
 
-export default function SurveyQuestion() {
-    return <div/>
+interface QuestionProps {
+    index: number,
+    correctAnswer: number,
+    setCompletedCount: Dispatch<SetStateAction<number>>
+}
+
+export default function SurveyQuestion(props: QuestionProps) {
+    const {index, correctAnswer, setCompletedCount} = props
+    const [answerCorrect, setAnswerCorrect] = useState(false)
+    const [answerSubmitted, setAnswerSubmitted] = useState(0)
+    const [answer, setAnswer] = useState<number | undefined>()
+
+    function submitAnswer() {
+        setAnswerSubmitted(prevState => prevState + 1)
+        setAnswerCorrect(answer === correctAnswer)
+        if (correctAnswer === answer) {
+            setCompletedCount(prevState => prevState + 1)
+        }
+    }
+
+    return <>
+        <Typography style={{marginBottom: "10px"}}>
+            {surveyTexts[index]}
+        </Typography>
+        {answerCorrect ?
+            <Grid container alignItems="center" justify="space-evenly" direction="row">
+                <Typography variant="button" display="block">
+                    COMPLETED
+                </Typography>
+                <Check style={{color: green[500]}}/>
+            </Grid>
+            :
+            <Grid container alignItems="center" justify="space-evenly" direction="row">
+                <TextField
+                    value={answer}
+                    onChange={(event) =>
+                        setAnswer(parseInt(event.target.value))}
+                    error={!answerCorrect && answerSubmitted > 0}
+                    id="amount"
+                    label="Amount"
+                    type="number"
+                    style={{width: "75%"}}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    variant="outlined"
+                />
+                <IconButton onClick={submitAnswer}>
+                    <Check color="primary"/>
+                </IconButton>
+            </Grid>
+        }
+    </>
 }
