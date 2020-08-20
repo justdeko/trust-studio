@@ -27,9 +27,11 @@ import {defaults} from "react-chartjs-2";
 import {getNightMode} from "../util/ui_util";
 import {generatePdfDocument} from "../miner/PdfExport";
 import {PictureAsPdf} from "@material-ui/icons";
-import {MuiThemeProvider, Tooltip} from "@material-ui/core";
+import {Fab, MuiThemeProvider, Tooltip} from "@material-ui/core";
 import PerspectiveSelector from "../components/PerspectiveSelector";
+import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import {whiteSelectorTheme} from "../styles/selector-styles";
+import SurveySidebar from "../components/Survey/SurveySidebar";
 
 export default function Dashboard() {
     const classes = useDashboardStyles()
@@ -40,6 +42,7 @@ export default function Dashboard() {
     const [firstTimeDialogOpen, setFirstTimeDialogOpen] = useState(getFirstTime())
     const [selectedPerspective, setSelectedPerspective] = useState(GENERAL)
     const [tourOpen, setTourOpen] = useState(false)
+    const [surveySidebarOpen, setSurveySidebarOpen] = useState(false)
     const [loadingTrustReport, setLoadingTrustReport] = useState(true)
     const {enqueueSnackbar} = useSnackbar();
 
@@ -179,6 +182,12 @@ export default function Dashboard() {
             <FirstTimeDialog dialogOpen={firstTimeDialogOpen}
                              setDialogOpen={setFirstTimeDialogOpen}
                              startTour={startTour}/>
+            <Fab className={classes.fab} color="secondary" variant="extended"
+                 onClick={() => setSurveySidebarOpen(true)}>
+                <EmojiObjectsIcon/>
+                Survey Progress
+            </Fab>
+            <SurveySidebar open={surveySidebarOpen} setOpen={setSurveySidebarOpen}/>
         </div>
     );
 }
