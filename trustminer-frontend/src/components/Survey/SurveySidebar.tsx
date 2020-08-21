@@ -35,7 +35,7 @@ export default function SurveySidebar(props: SidebarProps) {
     useEffect(() => {
         let amount = completedTasks.filter(completed => completed).length
         setCompletedCount(answeredCount + amount)
-    }, [completedTasks])
+    }, [completedTasks, answeredCount])
 
     const surveyContent = () => (
         <div
@@ -59,7 +59,12 @@ export default function SurveySidebar(props: SidebarProps) {
             {completedCount > 1 ?
                 <>
                     <div className={classes.item}>
-                        <SurveyQuestion correctAnswer={25} index={2} setCompletedCount={setAnsweredCount}/>
+                        <SurveyQuestion
+                            correctAnswer={41}
+                            answeredCount={answeredCount}
+                            index={2}
+                            setCompletedCount={setAnsweredCount}
+                        />
                     </div>
                     <Divider/>
                 </>
@@ -68,7 +73,12 @@ export default function SurveySidebar(props: SidebarProps) {
             {completedCount > 2 ?
                 <>
                     <div className={classes.item}>
-                        <SurveyQuestion correctAnswer={2} index={3} setCompletedCount={setAnsweredCount}/>
+                        <SurveyQuestion
+                            correctAnswer={6}
+                            index={3}
+                            answeredCount={answeredCount}
+                            setCompletedCount={setAnsweredCount}
+                        />
                     </div>
                     <Divider/>
                 </>

@@ -45,11 +45,12 @@ export function checkTrustPersonaCreated(): boolean {
 export function checkPolicyExists(externalTrustPersonas: ExternalTrustPersona[]): boolean {
     let distributorPersona = externalTrustPersonas.find(persona => persona.name === "Distributor")
     if (distributorPersona) {
-        let collaboratorIssues = distributorPersona.trustIssues["Collaborator"]
+        let collaboratorIssues = distributorPersona.trustIssues["Sender"]
         if (collaboratorIssues) {
             let matchUncertainty = collaboratorIssues
-                .find(uncertainty => uncertainty.trustConcern = "Integrity")
-            return !!matchUncertainty;
+                .find(uncertainty =>
+                    uncertainty.trustConcern == "Integrity" && uncertainty.component == "bpmn:UserTask")
+            return !matchUncertainty;
         } else return false
     } else return false
 }
@@ -75,7 +76,7 @@ export function startTimer() {
 
 export const surveyTexts = [
     'Add a new external trust persona called "Distributor".',
-    'Add a trust policy for the trust entity "Collaborator" for the process Element "Manual" task and Integrity as a trust concern.',
+    'Add a trust policy for the trust entity "Sender" for the process Element "User Task" and Integrity as a trust concern.',
     'Go back to the dashboard. What amount of critical uncertainties from the perspective of the Distributor does Sender have?',
     'Go to the modeler. How many uncertainties does the task "prepare parcel" have?',
     'Export a trust report and save it locally.'

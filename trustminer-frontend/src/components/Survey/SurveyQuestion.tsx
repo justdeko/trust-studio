@@ -1,17 +1,18 @@
 import React, {Dispatch, SetStateAction, useState} from "react";
 import {Grid, IconButton, TextField, Typography} from "@material-ui/core";
 import {surveyTexts} from "../../util/survey_util";
-import {Check} from "@material-ui/icons";
+import {Check, ExitToApp} from "@material-ui/icons";
 import {green} from "@material-ui/core/colors";
 
 interface QuestionProps {
     index: number,
     correctAnswer: number,
-    setCompletedCount: Dispatch<SetStateAction<number>>
+    setCompletedCount: Dispatch<SetStateAction<number>>,
+    answeredCount: number
 }
 
 export default function SurveyQuestion(props: QuestionProps) {
-    const {index, correctAnswer, setCompletedCount} = props
+    const {index, correctAnswer, setCompletedCount, answeredCount} = props
     const [answerCorrect, setAnswerCorrect] = useState(false)
     const [answerSubmitted, setAnswerSubmitted] = useState(0)
     const [answer, setAnswer] = useState<number | undefined>()
@@ -28,7 +29,7 @@ export default function SurveyQuestion(props: QuestionProps) {
         <Typography style={{marginBottom: "10px"}}>
             {surveyTexts[index]}
         </Typography>
-        {answerCorrect ?
+        {answerCorrect || index - answeredCount < 2 ?
             <Grid container alignItems="center" justify="space-evenly" direction="row">
                 <Typography variant="button" display="block">
                     COMPLETED
@@ -52,7 +53,7 @@ export default function SurveyQuestion(props: QuestionProps) {
                     variant="outlined"
                 />
                 <IconButton onClick={submitAnswer}>
-                    <Check color="primary"/>
+                    <ExitToApp color="primary"/>
                 </IconButton>
             </Grid>
         }

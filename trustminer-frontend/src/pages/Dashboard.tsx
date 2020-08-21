@@ -33,6 +33,8 @@ import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import {whiteSelectorTheme} from "../styles/selector-styles";
 import SurveySidebar from "../components/Survey/SurveySidebar";
 import {checkPolicyExists, checkTrustPersonaCreated} from "../util/survey_util";
+import {recomputeRelevancy} from "../miner/trustAnalysis";
+import TrustPolicies from "../components/Trust/TrustPolicies";
 
 export default function Dashboard() {
     const classes = useDashboardStyles()
@@ -99,6 +101,14 @@ export default function Dashboard() {
                 })
             }
         }
+    }
+
+    function recomputeTrustPersonas() {
+        setTrustReport(prevState => {
+            if (prevState) {
+                return recomputeRelevancy(prevState)
+            } else return prevState
+        })
     }
 
     function mineWithGeneration(shouldDiscover: boolean, isUpload: boolean) {
@@ -189,6 +199,10 @@ export default function Dashboard() {
                             } else if (route.path === "/modeler") {
                                 return <Route exact path={route.path} key={route.path}>
                                     <Modeler performMining={mineWithGeneration}/>
+                                </Route>
+                            } else if (route.path === "/trust-policies") {
+                                return <Route exact path={route.path} key={route.path}>
+                                    <TrustPolicies recomputeTrustReport={recomputeTrustPersonas}/>
                                 </Route>
                             } else {
                                 return <Route exact path={route.path} key={route.path}>

@@ -5,8 +5,12 @@ import TrustPersonaEdit from "./TrustPersonaEdit";
 import {Grid} from "@material-ui/core";
 import {collaboratorNames, externalTrustPersonaNames} from "../../util/miner_util";
 
+interface PoliciesProps {
+    recomputeTrustReport?: () => void
+}
 
-export default function TrustPolicies() {
+export default function TrustPolicies(props: PoliciesProps) {
+    const {recomputeTrustReport} = props
     const [trustPersonas, setTrustPersonas] = useState<string[]>([])
     const [selectedTrustPersona, setSelectedTrustPersona] = useState("")
 
@@ -35,7 +39,7 @@ export default function TrustPolicies() {
                     <TrustPersonaEdit personas={trustPersonas} setPersonas={setTrustPersonas}/>
                 </Grid>
             </Grid>
-            <TrustPoliciesTable trustPersona={selectedTrustPersona}/>
+            <TrustPoliciesTable recomputeReport={recomputeTrustReport} trustPersona={selectedTrustPersona}/>
         </div>
     )
 }

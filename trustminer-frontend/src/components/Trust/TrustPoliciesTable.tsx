@@ -11,11 +11,12 @@ interface TableState {
 }
 
 interface TrustTableProps {
-    trustPersona: string
+    trustPersona: string,
+    recomputeReport?: () => void
 }
 
 export default function TrustPoliciesTable(props: TrustTableProps) {
-    const {trustPersona} = props
+    const {trustPersona, recomputeReport} = props
     const [state, setState] = useState<TableState>({
         columns: [
             {title: 'Trust Entity', field: "trustEntity"},
@@ -31,6 +32,12 @@ export default function TrustPoliciesTable(props: TrustTableProps) {
             return {...prevState, data};
         })
     }, [trustPersona])
+
+    useEffect(() => {
+        if (recomputeReport) {
+            recomputeReport()
+        }
+    }, [state])
 
     return (
         <div style={{maxWidth: "100%"}}>
