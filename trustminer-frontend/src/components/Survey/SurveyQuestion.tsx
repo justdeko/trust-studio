@@ -1,8 +1,9 @@
 import React, {Dispatch, SetStateAction, useState} from "react";
 import {Grid, IconButton, TextField, Typography} from "@material-ui/core";
-import {surveyTexts} from "../../util/survey_util";
+import {saveTime, startTimer, surveyTexts} from "../../util/survey_util";
 import {Check, ExitToApp} from "@material-ui/icons";
 import {green} from "@material-ui/core/colors";
+import {QUESTION_3, QUESTION_4, QUESTION_5} from "../../util/constants";
 
 interface QuestionProps {
     index: number,
@@ -22,6 +23,13 @@ export default function SurveyQuestion(props: QuestionProps) {
         setAnswerCorrect(answer === correctAnswer)
         if (correctAnswer === answer) {
             setCompletedCount(prevState => prevState + 1)
+            if (index === 2) {
+                saveTime(QUESTION_3)
+                startTimer(QUESTION_4)
+            } else if (index === 3) {
+                saveTime(QUESTION_4)
+                startTimer(QUESTION_5)
+            }
         }
     }
 

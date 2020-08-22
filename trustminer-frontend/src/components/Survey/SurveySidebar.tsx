@@ -3,9 +3,10 @@ import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import SurveyCheckpoint from "./SurveyCheckpoint";
 import SurveyQuestion from "./SurveyQuestion";
-import {Button, Grid, Typography} from "@material-ui/core";
+import {Button, CircularProgress, Grid, Typography} from "@material-ui/core";
 import {useSurveySidebarStyles} from "../../styles/survey-sidebar-styles";
 import {surveyPost} from "../../util/survey_util";
+import {SURVEY_DATA, SURVEY_ENABLED} from "../../util/constants";
 
 interface SidebarProps {
     open: boolean
@@ -18,6 +19,7 @@ export default function SurveySidebar(props: SidebarProps) {
     const {open, setOpen, completedTasks} = props
     const [completedCount, setCompletedCount] = useState(0)
     const [answeredCount, setAnsweredCount] = useState(0)
+    const [updatingData, setUpdatingData] = useState(false)
 
     const toggleDrawer = (open: boolean) => (
         event: React.KeyboardEvent | React.MouseEvent,
@@ -30,6 +32,19 @@ export default function SurveySidebar(props: SidebarProps) {
             return;
         }
         setOpen(open);
+    }
+
+    async function submitSurvey() {
+        setUpdatingData(true)
+        let surveyData = localStorage.getItem(SURVEY_DATA)
+        if (surveyData) {
+            console.log(JSON.parse(surveyData))
+        }
+        let response = await surveyPost()
+        if (response.status === 200) {
+            localStorage.setItem(SURVEY_ENABLED, "false")
+        } else
+            console.log(response)
     }
 
     useEffect(() => {
@@ -95,9 +110,12 @@ export default function SurveySidebar(props: SidebarProps) {
             }
             {completedCount > 4 ?
                 <Grid container alignItems="center" justify="center" className={classes.finalButton}>
-                    <Button onClick={surveyPost} color="primary" variant="contained">
-                        Finish Survey
-                    </Button>
+                    {updatingData ?
+                        <CircularProgress/> :
+                        <Button onClick={submitSurvey} color="primary" variant="contained">
+                            Finish Survey
+                        </Button>
+                    }
                 </Grid> : undefined
             }
         </div>

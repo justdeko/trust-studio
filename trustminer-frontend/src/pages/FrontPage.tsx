@@ -4,12 +4,15 @@ import {useFrontPageStyles} from "../styles/frontpage-styles";
 import {useHistory} from "react-router-dom";
 import {getFirstTime} from "../util/tour_util";
 import FirstTimeDialog from "../components/Tour/FirstTimeDialog";
+import {startTimer} from "../util/survey_util";
+import {INTRO, SURVEY_ENABLED} from "../util/constants";
 
 export default function FrontPage() {
     const classes = useFrontPageStyles();
     const history = useHistory();
     const [firstTimeDialogOpen, setFirstTimeDialogOpen] = useState(false)
     const [visible, setVisible] = useState(true)
+
     const redirect = () => {
         if (getFirstTime()) {
             setFirstTimeDialogOpen(true)
@@ -61,8 +64,12 @@ export default function FrontPage() {
                                     </Grid>
                                     <Grid item>
                                         <Button className={classes.signInButton} variant="outlined"
-                                                onClick={() => history.push('/login')}>
-                                            Sign in
+                                                onClick={() => {
+                                                    history.push('/introduction')
+                                                    localStorage.setItem(SURVEY_ENABLED, "true")
+                                                    startTimer(INTRO)
+                                                }}>
+                                            Start Survey
                                         </Button>
                                     </Grid>
                                 </Grid>

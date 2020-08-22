@@ -1,4 +1,4 @@
-import {START_TIME, SURVEY_DATA} from "./constants";
+import {START_TIME, SURVEY_DATA, SURVEY_ENABLED} from "./constants";
 import {SurveyData} from "../model/SurveyData";
 import {externalTrustPersonaNames} from "./miner_util";
 import {ExternalTrustPersona} from "../model/ExternalTrustPersona";
@@ -15,6 +15,11 @@ export async function surveyPost() {
 }
 
 /**
+ * Checks if a survey is currently running
+ */
+export const surveyEnabled = () => localStorage.getItem(SURVEY_ENABLED) === "true"
+
+/**
  * Updates the currently stored survey data with new values
  * @param newValues a dictionary of the new values
  */
@@ -27,6 +32,9 @@ export function updateSurveyData(newValues: { [key: string]: any }) {
         })
         localStorage.setItem(SURVEY_DATA, JSON.stringify(surveyData))
         console.log(`Survey Data updated: ${surveyData as SurveyData}`)
+    } else {
+        localStorage.setItem(SURVEY_DATA, JSON.stringify({}))
+        updateSurveyData(newValues)
     }
 }
 
@@ -57,10 +65,11 @@ export function checkPolicyExists(externalTrustPersonas: ExternalTrustPersona[])
 
 /**
  * Get the currently elapsed time after starting the timer
+ * @param id the timer id
  */
-export function getTimeElapsed(): number {
+export function getTimeElapsed(id: string): number {
     let endTime = new Date().getTime()
-    let dateString = localStorage.getItem(START_TIME)
+    let dateString = localStorage.getItem(START_TIME + id)
     if (dateString) {
         return endTime - new Date(dateString).getTime()
     } else return 0
@@ -68,15 +77,31 @@ export function getTimeElapsed(): number {
 
 /**
  * Starts the timer and stores the start locally
+ * @param id the timer id
  */
-export function startTimer() {
+export function startTimer(id: string) {
     let startTime = new Date()
-    localStorage.setItem(START_TIME, startTime.toDateString())
+    localStorage.setItem(START_TIME + id, startTime.toString())
 }
 
+/**
+ * Saves the duration of a timer into local storage
+ * @param id the given id
+ */
+export function saveTime(id: string) {
+    if (surveyEnabled()) {
+        let introTime = getTimeElapsed(id)
+        let identifier = id + "_duration"
+        updateSurveyData({[identifier]: introTime})
+    }
+}
+
+/**
+ * List of all survey task texts
+ */
 export const surveyTexts = [
     'Add a new external trust persona called "Distributor".',
-    'Add a trust policy for the trust entity "Sender" for the process Element "User Task" and Integrity as a trust concern.',
+    'Add a trust policy for Distributor with Trust Entity "Sender", Process Element "User Task" and Integrity as a trust concern.',
     'Go back to the dashboard. What amount of critical uncertainties from the perspective of the Distributor does Sender have?',
     'Go to the modeler. How many uncertainties does the task "prepare parcel" have?',
     'Export a trust report and save it locally.'

@@ -1,6 +1,8 @@
 import {Button, Grid, Typography} from "@material-ui/core";
 import React from "react";
 import {useHistory} from "react-router-dom"
+import {saveTime} from "../../util/survey_util";
+import {INTRO} from "../../util/constants";
 
 
 export default function FinalSection() {
@@ -16,6 +18,7 @@ export default function FinalSection() {
                     color="secondary"
                     onClick={() => {
                         history.push("/analysis")
+                        saveTime(INTRO)
                     }}>
                     Go to Dashboard
                 </Button>

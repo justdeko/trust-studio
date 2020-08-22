@@ -3,14 +3,17 @@ import React, {Dispatch, SetStateAction} from "react";
 import {Link, useTheme} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 import {setFirstTime} from "../../util/tour_util";
+import {saveTime, startTimer, surveyEnabled} from "../../util/survey_util";
+import {QUESTION_1, TOUR} from "../../util/constants";
 
 interface TourProps {
     tourOpen: boolean,
-    setTourOpen: Dispatch<SetStateAction<boolean>>
+    setTourOpen: Dispatch<SetStateAction<boolean>>,
+    setSurveySidebarOpen: Dispatch<SetStateAction<boolean>>
 }
 
 export default function FirstTimeTour(props: TourProps) {
-    const {tourOpen, setTourOpen} = props
+    const {tourOpen, setTourOpen, setSurveySidebarOpen} = props
     let history = useHistory()
 
     const pushToTarget = (target: string) => {
@@ -89,5 +92,13 @@ export default function FirstTimeTour(props: TourProps) {
                  steps={tourConfig}
                  rounded={10}
                  accentColor={theme.palette.secondary.light}
-                 onRequestClose={() => setTourOpen(false)}/>
+                 onRequestClose={() => {
+                     saveTime(TOUR)
+                     if (surveyEnabled()) {
+                         setSurveySidebarOpen(true)
+                         startTimer(QUESTION_1)
+                     }
+                     setTourOpen(false)
+                 }
+                 }/>
 }

@@ -11,7 +11,7 @@ import PublishIcon from '@material-ui/icons/Publish';
 import Sidebar from "../components/Sidebar/Sidebar";
 import {useDashboardStyles} from "../styles/dashboard-styles";
 import Routes from "../Routes";
-import {CURRENT_BPMN, GENERAL} from "../util/constants";
+import {CURRENT_BPMN, GENERAL, QUESTION_1, QUESTION_2, QUESTION_3, QUESTION_5, TOUR} from "../util/constants";
 import {TrustReport} from "../model/TrustReport";
 import {mine} from "../miner/miner";
 import UncertaintyDiscoveryDialog from "../components/UncertaintyDiscoveryDialog";
@@ -32,7 +32,7 @@ import PerspectiveSelector from "../components/PerspectiveSelector";
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import {whiteSelectorTheme} from "../styles/selector-styles";
 import SurveySidebar from "../components/Survey/SurveySidebar";
-import {checkPolicyExists, checkTrustPersonaCreated} from "../util/survey_util";
+import {checkPolicyExists, checkTrustPersonaCreated, saveTime, startTimer, surveyEnabled} from "../util/survey_util";
 import {recomputeRelevancy} from "../miner/trustAnalysis";
 import TrustPolicies from "../components/Trust/TrustPolicies";
 
@@ -74,12 +74,24 @@ export default function Dashboard() {
     }, [history])
 
     useEffect(() => {
-        if (checkTrustPersonaCreated()) {
-            completeTask(0)
-        }
-        if (trustReport) {
-            if (checkPolicyExists(trustReport.externalTrustPersonas)) {
-                completeTask(1)
+        if (surveyEnabled()) {
+            if (checkTrustPersonaCreated()) {
+                if (!completedTasks[0]) {
+                    setSurveySidebarOpen(true)
+                    saveTime(QUESTION_1)
+                    startTimer(QUESTION_2)
+                }
+                completeTask(0)
+            }
+            if (trustReport) {
+                if (checkPolicyExists(trustReport.externalTrustPersonas)) {
+                    if (!completedTasks[1]) {
+                        setSurveySidebarOpen(true)
+                        saveTime(QUESTION_2)
+                        startTimer(QUESTION_3)
+                    }
+                    completeTask(1)
+                }
             }
         }
     }, [trustReport])
@@ -128,6 +140,9 @@ export default function Dashboard() {
     }
 
     function startTour() {
+        if (surveyEnabled()) {
+            startTimer(TOUR)
+        }
         setTourOpen(true)
     }
 
@@ -172,6 +187,10 @@ export default function Dashboard() {
                                         color="inherit"
                                         onClick={() => {
                                             generatePdfDocument(trustReport)
+                                            if (!completedTasks[2]) {
+                                                setSurveySidebarOpen(true)
+                                                saveTime(QUESTION_5)
+                                            }
                                             completeTask(2)
                                         }}>
                                 <PictureAsPdf/>
@@ -213,7 +232,7 @@ export default function Dashboard() {
                     </Switch>
                 </Container>
             </main>
-            <FirstTimeTour tourOpen={tourOpen} setTourOpen={setTourOpen}/>
+            <FirstTimeTour setSurveySidebarOpen={setSurveySidebarOpen} tourOpen={tourOpen} setTourOpen={setTourOpen}/>
             <UncertaintyDiscoveryDialog
                 callWithUncertaintyGeneration={mineWithGeneration}
                 dialogOpen={uncDiscoveryDialogOpen}
@@ -221,12 +240,20 @@ export default function Dashboard() {
             <FirstTimeDialog dialogOpen={firstTimeDialogOpen}
                              setDialogOpen={setFirstTimeDialogOpen}
                              startTour={startTour}/>
-            <Fab className={classes.fab} color="secondary" variant="extended"
-                 onClick={() => setSurveySidebarOpen(true)}>
-                <EmojiObjectsIcon/>
-                Survey Progress
-            </Fab>
-            <SurveySidebar open={surveySidebarOpen} setOpen={setSurveySidebarOpen} completedTasks={completedTasks}/>
+            {surveyEnabled() && !getFirstTime()
+                ? <Fab className={classes.fab} color="secondary" variant="extended"
+                       onClick={() => setSurveySidebarOpen(true)}>
+                    <EmojiObjectsIcon/>
+                    Survey Progress
+                </Fab>
+                : undefined
+            }
+            {surveyEnabled() && !getFirstTime()
+                ? <SurveySidebar open={surveySidebarOpen}
+                                 setOpen={setSurveySidebarOpen}
+                                 completedTasks={completedTasks}/>
+                : undefined
+            }
         </div>
     );
 }
