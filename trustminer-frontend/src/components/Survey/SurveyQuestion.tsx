@@ -1,9 +1,9 @@
-import React, {Dispatch, SetStateAction, useState} from "react";
+import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
 import {Grid, IconButton, TextField, Typography} from "@material-ui/core";
-import {saveTime, startTimer, surveyTexts} from "../../util/survey_util";
+import {saveTime, startTimer, surveyTexts, updateSurveyData} from "../../util/survey_util";
 import {Check, ExitToApp} from "@material-ui/icons";
 import {green} from "@material-ui/core/colors";
-import {QUESTION_3, QUESTION_4, QUESTION_5} from "../../util/constants";
+import {QUESTION_3, QUESTION_4, QUESTION_5, SURVEY_DATA} from "../../util/constants";
 
 interface QuestionProps {
     index: number,
@@ -15,7 +15,7 @@ interface QuestionProps {
 export default function SurveyQuestion(props: QuestionProps) {
     const {index, correctAnswer, setCompletedCount, answeredCount} = props
     const [answerCorrect, setAnswerCorrect] = useState(false)
-    const [answerSubmitted, setAnswerSubmitted] = useState(0)
+    const [answerSubmitted, setAnswerSubmitted] = useState(getInitialAnswerState())
     const [answer, setAnswer] = useState<number | undefined>()
 
     function submitAnswer() {
@@ -24,14 +24,36 @@ export default function SurveyQuestion(props: QuestionProps) {
         if (correctAnswer === answer) {
             setCompletedCount(prevState => prevState + 1)
             if (index === 2) {
+                updateSurveyData({["question3_solved"]: true})
                 saveTime(QUESTION_3)
                 startTimer(QUESTION_4)
             } else if (index === 3) {
+                updateSurveyData({["question4_solved"]: true})
                 saveTime(QUESTION_4)
                 startTimer(QUESTION_5)
             }
         }
     }
+
+    function getInitialAnswerState(): number {
+        let surveyString = localStorage.getItem(SURVEY_DATA)
+        if (surveyString) {
+            let surveyObject = JSON.parse(surveyString)
+            if (index === 2) {
+                return surveyObject["question3_attempts"] || false
+            } else {
+                return surveyObject["question4_attempts"] || false
+            }
+        } else return 0
+    }
+
+    useEffect(() => {
+        if (index === 2) {
+            updateSurveyData({["question3_attempts"]: answerSubmitted})
+        } else {
+            updateSurveyData({["question4_attempts"]: answerSubmitted})
+        }
+    }, [answerSubmitted])
 
     return <>
         <Typography style={{marginBottom: "10px"}}>

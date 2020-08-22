@@ -1,6 +1,8 @@
 import React, {Dispatch, SetStateAction, useState} from "react";
 import {useSelectorStyles} from "../styles/selector-styles";
 import {FormControl, InputLabel, MenuItem, Select} from "@material-ui/core";
+import {saveEvent} from "../util/survey_util";
+import {TYPE_SELECT} from "../util/constants";
 
 interface PerspectiveProps {
     perspectiveNames: string[],
@@ -13,6 +15,7 @@ export default function PerspectiveSelector(props: PerspectiveProps) {
 
 
     function handleChange(e: any) {
+        saveEvent("perspective_selector", TYPE_SELECT, e.target.value)
         setCurrentValue(e.target.value)
         setSelected(e.target.value)
     }

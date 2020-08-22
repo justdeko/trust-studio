@@ -5,7 +5,7 @@ import {useHistory} from "react-router-dom";
 import {getFirstTime} from "../util/tour_util";
 import FirstTimeDialog from "../components/Tour/FirstTimeDialog";
 import {startTimer} from "../util/survey_util";
-import {INTRO, SURVEY_ENABLED} from "../util/constants";
+import {INTRO, SURVEY_COMPLETED, SURVEY_ENABLED} from "../util/constants";
 
 export default function FrontPage() {
     const classes = useFrontPageStyles();
@@ -62,16 +62,18 @@ export default function FrontPage() {
                                             Get started
                                         </Button>
                                     </Grid>
-                                    <Grid item>
-                                        <Button className={classes.signInButton} variant="outlined"
-                                                onClick={() => {
-                                                    history.push('/introduction')
-                                                    localStorage.setItem(SURVEY_ENABLED, "true")
-                                                    startTimer(INTRO)
-                                                }}>
-                                            Start Survey
-                                        </Button>
-                                    </Grid>
+                                    {!localStorage.getItem(SURVEY_COMPLETED) ?
+                                        <Grid item>
+                                            <Button className={classes.signInButton} variant="outlined"
+                                                    onClick={() => {
+                                                        history.push('/introduction')
+                                                        localStorage.setItem(SURVEY_ENABLED, "true")
+                                                        startTimer(INTRO)
+                                                    }}>
+                                                Start Survey
+                                            </Button>
+                                        </Grid> : undefined
+                                    }
                                 </Grid>
                             </div>
                         </Container>

@@ -1,5 +1,16 @@
-import {START_TIME, SURVEY_DATA, SURVEY_ENABLED} from "./constants";
-import {SurveyData} from "../model/SurveyData";
+import {
+    INTRO,
+    QUESTION_1,
+    QUESTION_2,
+    QUESTION_3,
+    QUESTION_4,
+    QUESTION_5,
+    START_TIME,
+    SURVEY_DATA,
+    SURVEY_ENABLED,
+    TOUR,
+    USER_EVENTS
+} from "./constants";
 import {externalTrustPersonaNames} from "./miner_util";
 import {ExternalTrustPersona} from "../model/ExternalTrustPersona";
 
@@ -31,11 +42,53 @@ export function updateSurveyData(newValues: { [key: string]: any }) {
             surveyData[key] = value
         })
         localStorage.setItem(SURVEY_DATA, JSON.stringify(surveyData))
-        console.log(`Survey Data updated: ${surveyData as SurveyData}`)
+        console.log(`Survey Data updated`)
     } else {
         localStorage.setItem(SURVEY_DATA, JSON.stringify({}))
         updateSurveyData(newValues)
     }
+}
+
+/**
+ * Saves any event to the user survey history
+ * @param id the event id
+ * @param type the event type (click, answer, etc.)
+ * @param state the current action state (for example selected menu option)
+ */
+export function saveEvent(id: string, type: string, state?: string) {
+    if (surveyEnabled()) {
+        let surveyString = localStorage.getItem(SURVEY_DATA)
+        if (surveyString) {
+            let surveyObject = JSON.parse(surveyString)
+            let currentData = surveyObject[USER_EVENTS] || []
+            currentData.push(
+                {
+                    "id": id,
+                    "type": type,
+                    "timestamp": new Date(),
+                    "state": (state ? state : undefined)
+                }
+            )
+            updateSurveyData({[USER_EVENTS]: currentData})
+        } else {
+            localStorage.setItem(SURVEY_DATA, JSON.stringify({}))
+            saveEvent(id, type, state)
+        }
+    }
+}
+
+/**
+ * Deletes all stored survey data
+ */
+export function deleteSurvey() {
+    localStorage.removeItem(SURVEY_DATA)
+    localStorage.removeItem(START_TIME + INTRO)
+    localStorage.removeItem(START_TIME + TOUR)
+    localStorage.removeItem(START_TIME + QUESTION_1)
+    localStorage.removeItem(START_TIME + QUESTION_2)
+    localStorage.removeItem(START_TIME + QUESTION_3)
+    localStorage.removeItem(START_TIME + QUESTION_4)
+    localStorage.removeItem(START_TIME + QUESTION_5)
 }
 
 /**

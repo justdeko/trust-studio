@@ -5,8 +5,9 @@ import SurveyCheckpoint from "./SurveyCheckpoint";
 import SurveyQuestion from "./SurveyQuestion";
 import {Button, CircularProgress, Grid, Typography} from "@material-ui/core";
 import {useSurveySidebarStyles} from "../../styles/survey-sidebar-styles";
-import {surveyPost} from "../../util/survey_util";
+import {deleteSurvey, surveyPost} from "../../util/survey_util";
 import {SURVEY_DATA, SURVEY_ENABLED} from "../../util/constants";
+import {useSnackbar} from "notistack";
 
 interface SidebarProps {
     open: boolean
@@ -20,6 +21,8 @@ export default function SurveySidebar(props: SidebarProps) {
     const [completedCount, setCompletedCount] = useState(0)
     const [answeredCount, setAnsweredCount] = useState(0)
     const [updatingData, setUpdatingData] = useState(false)
+
+    const {enqueueSnackbar} = useSnackbar();
 
     const toggleDrawer = (open: boolean) => (
         event: React.KeyboardEvent | React.MouseEvent,
@@ -43,8 +46,13 @@ export default function SurveySidebar(props: SidebarProps) {
         let response = await surveyPost()
         if (response.status === 200) {
             localStorage.setItem(SURVEY_ENABLED, "false")
-        } else
-            console.log(response)
+            enqueueSnackbar("Something went wrong when sending the survey. Maybe try again?", {variant: 'error'})
+            deleteSurvey()
+        } else {
+            setUpdatingData(false)
+            enqueueSnackbar("Something went wrong when sending the survey. Maybe try again?", {variant: 'error'})
+        }
+        console.log(response)
     }
 
     useEffect(() => {

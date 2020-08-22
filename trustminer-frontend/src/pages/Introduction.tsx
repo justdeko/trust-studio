@@ -6,6 +6,8 @@ import TrustMiningSection from "../components/IntroductionPages/TrustMiningSecti
 import UncertaintiesSection from "../components/IntroductionPages/UncertaintiesSection";
 import BpmTrustSection from "../components/IntroductionPages/BpmTrustSection";
 import FinalSection from "../components/IntroductionPages/FinalSection";
+import {saveEvent} from "../util/survey_util";
+import {TYPE_CLICK} from "../util/constants";
 
 const description = (text: string) =>
     <Typography align="center" color="textPrimary" variant="h6" style={{whiteSpace: 'pre-line', margin: '10'}}>
@@ -59,11 +61,13 @@ export default function Introduction() {
 
     function handleNext() {
         setContentVisible(false)
+        saveEvent("intro_next_button", TYPE_CLICK, (currentStep + 1).toString())
         setTimeout(() => setCurrentStep(currentStep => currentStep + 1), FADE_DURATION)
     }
 
     function handleBack() {
         setContentVisible(false)
+        saveEvent("intro_back_button", TYPE_CLICK, (currentStep - 1).toString())
         setTimeout(() => setCurrentStep(currentStep => currentStep - 1), FADE_DURATION)
     }
 
