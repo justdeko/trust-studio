@@ -6,7 +6,7 @@ import SurveyQuestion from "./SurveyQuestion";
 import {Button, CircularProgress, Grid, Typography} from "@material-ui/core";
 import {useSurveySidebarStyles} from "../../styles/survey-sidebar-styles";
 import {deleteSurvey, surveyPost} from "../../util/survey_util";
-import {SURVEY_DATA, SURVEY_ENABLED} from "../../util/constants";
+import {SURVEY_COMPLETED, SURVEY_DATA, SURVEY_ENABLED} from "../../util/constants";
 import {useSnackbar} from "notistack";
 
 interface SidebarProps {
@@ -45,9 +45,13 @@ export default function SurveySidebar(props: SidebarProps) {
         }
         let response = await surveyPost()
         if (response.status === 200) {
-            localStorage.setItem(SURVEY_ENABLED, "false")
-            enqueueSnackbar("Something went wrong when sending the survey. Maybe try again?", {variant: 'error'})
-            deleteSurvey()
+            response.json().then(data => {
+                localStorage.setItem(SURVEY_ENABLED, "false")
+                localStorage.setItem(SURVEY_COMPLETED, "true")
+                enqueueSnackbar("That's all! Now time to answer some last questions.", {variant: 'success'})
+                window.open(process.env.SURVEY_URL + data["userId"], "_blank")
+                deleteSurvey()
+            })
         } else {
             setUpdatingData(false)
             enqueueSnackbar("Something went wrong when sending the survey. Maybe try again?", {variant: 'error'})

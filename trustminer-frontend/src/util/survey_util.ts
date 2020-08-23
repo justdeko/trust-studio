@@ -18,7 +18,8 @@ import {ExternalTrustPersona} from "../model/ExternalTrustPersona";
  * Makes a post request to the survey backend
  */
 export async function surveyPost() {
-    return await fetch(process.env.PUBLIC_URL, {
+    let backendUrl = process.env.BACKEND_URL || "http://localhost:5000/"
+    return await fetch(backendUrl, {
         method: 'POST',
         body: localStorage.getItem(SURVEY_DATA),
         headers: {'Content-Type': 'application/json; charset=UTF-8'}

@@ -4,6 +4,8 @@ import React, {useEffect, useState} from "react";
 import {TrustConcern} from "../../model/TrustConcern";
 import {tableIcons} from "../../theme/MaterialTableIcons";
 import {loadTrustPoliciesForPersona, saveTrustPolicies} from "../../util/csv_util";
+import {saveEvent} from "../../util/survey_util";
+import {TYPE_MODIFY} from "../../util/constants";
 
 interface TableState {
     columns: Array<Column<TrustPolicyRow>>;
@@ -54,6 +56,11 @@ export default function TrustPoliciesTable(props: TrustTableProps) {
                                 setState((prevState) => {
                                     const data = [...prevState.data];
                                     data.push(newData);
+                                    saveEvent("trust_policy_table_add", TYPE_MODIFY,
+                                        newData.processElement +
+                                        ", " + newData.trustConcern +
+                                        ", " + newData.trustEntity
+                                    )
                                     saveTrustPolicies(data, trustPersona)
                                     return {...prevState, data};
                                 });
@@ -67,6 +74,11 @@ export default function TrustPoliciesTable(props: TrustTableProps) {
                                     setState((prevState) => {
                                         const data = [...prevState.data];
                                         data[data.indexOf(oldData)] = newData;
+                                        saveEvent("trust_policy_table_update", TYPE_MODIFY,
+                                            newData.processElement +
+                                            ", " + newData.trustConcern +
+                                            ", " + newData.trustEntity
+                                        )
                                         saveTrustPolicies(data, trustPersona)
                                         return {...prevState, data};
                                     });
@@ -79,6 +91,11 @@ export default function TrustPoliciesTable(props: TrustTableProps) {
                                 resolve();
                                 setState((prevState) => {
                                     const data = [...prevState.data];
+                                    saveEvent("trust_policy_table_delete", TYPE_MODIFY,
+                                        oldData.processElement +
+                                        ", " + oldData.trustConcern +
+                                        ", " + oldData.trustEntity
+                                    )
                                     data.splice(data.indexOf(oldData), 1);
                                     saveTrustPolicies(data, trustPersona)
                                     return {...prevState, data};

@@ -1,6 +1,8 @@
 import {FormControl, InputLabel, MenuItem, Select} from "@material-ui/core";
 import React, {Dispatch, SetStateAction, useState} from "react";
 import {useSelectorStyles} from "../../styles/selector-styles";
+import {saveEvent} from "../../util/survey_util";
+import {TYPE_SELECT} from "../../util/constants";
 
 interface SelectorProps {
     setSelected: Dispatch<SetStateAction<string>>
@@ -12,6 +14,7 @@ export default function RelationshipGraphSelector(props: SelectorProps) {
 
 
     function handleChange(e: any) {
+        saveEvent("graph_selector", TYPE_SELECT, e.target.value)
         setCurrentValue(e.target.value)
         setSelected(e.target.value)
     }

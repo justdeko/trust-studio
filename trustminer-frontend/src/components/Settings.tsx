@@ -3,13 +3,17 @@ import React, {useState} from "react";
 import {Delete} from "@material-ui/icons";
 import {getNightMode, setNightMode} from "../util/ui_util";
 import {useHistory} from "react-router-dom"
+import {SURVEY_COMPLETED, TYPE_CLICK} from "../util/constants";
+import {saveEvent} from "../util/survey_util";
 
 export default function Settings() {
     const [nightModeOn, setNightModeOn] = useState(getNightMode())
     const history = useHistory()
+
     function changeNightMode() {
         setNightModeOn(prevState => {
             setNightMode(!prevState)
+            saveEvent("night_mode_button", TYPE_CLICK, (!prevState).toString())
             window.location.reload()
             return !prevState
         })
@@ -32,7 +36,13 @@ export default function Settings() {
                             variant="contained"
                             color="secondary"
                             onClick={() => {
+                                let completed = localStorage.getItem(SURVEY_COMPLETED)
                                 localStorage.clear()
+                                //TODO: uncomment this in prod
+                                //persist completed survey even after deleting all data
+                                /*if (completed === "true") {
+                                    localStorage.setItem(SURVEY_COMPLETED, "true")
+                                }*/
                                 history.push("/")
                             }}
                             startIcon={<Delete/>}>

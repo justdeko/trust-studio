@@ -6,13 +6,14 @@ import propertiesPanelModule from 'bpmn-js-properties-panel';
 import propertiesProviderModule from 'bpmn-js-properties-panel/lib/provider/camunda';
 import camundaModdleDescriptor from 'camunda-bpmn-moddle/resources/camunda';
 import {emptyBpmn} from "../../resources/emptyBpmn";
-import {CURRENT_BPMN} from "../../util/constants";
+import {CURRENT_BPMN, TYPE_MODIFY} from "../../util/constants";
 import uncertainty from "../../resources/uncertaintyExtension.json"
 import UncertaintyBox from "./UncertaintyBox";
 import {getUncertainties} from "../../util/modeler_util";
 import {Button, Dialog, DialogTitle, Grid, List, ListItem, ListItemText} from "@material-ui/core";
 import {getNightMode} from "../../util/ui_util";
 import {saveFile} from "../../util/general_util";
+import {saveEvent} from "../../util/survey_util";
 
 //Initial code from https://github.com/Varooneh/reactbpmn/blob/master/src/components/bpmn/bpmn.modeler.component.jsx
 
@@ -55,6 +56,7 @@ export default function Modeler(props: ModelerProps) {
         newModeler.on('element.changed', function (event: any) {
             let element = event.element
             console.log("element changed: " + element)
+            saveEvent("modeler_change", TYPE_MODIFY, element)
             setCanRecompute(true)
             newModeler.saveXML({format: true}, function (err: Error, xml: string) {
                 localStorage.setItem(CURRENT_BPMN, xml)
