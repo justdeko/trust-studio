@@ -9,7 +9,7 @@ mongo_db = MongoEngine()
 mongo_db.init_app(app)
 
 
-@app.route("/startsession", methods=["GET"])
+@app.route("/helloworld", methods=["GET"])
 def start_session():
     return "Hello World!"
 
@@ -17,12 +17,9 @@ def start_session():
 @app.route("/survey", methods=["POST"])
 def post_analytics():
     survey_data = request.json
-    added = SurveyRepository.add_or_update(survey_data)
-    if added:
-        message = "Survey data created"
-    else:
-        message = "Survey data updated"
-    return {"message": message}, 200
+    survey = SurveyRepository.add_or_update(survey_data)
+    survey_id = survey.id
+    return {"message": "Survey submitted", "survey_id": survey_id}, 200
 
 
 if __name__ == "__main__":

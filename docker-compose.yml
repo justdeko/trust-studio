@@ -1,19 +1,24 @@
 version: "3.8"
 services:
   backend:
-    build: .
-    command: python -u app.py
+    container_name: "trust_studio_backend"
+    build:
+      context: trustminer-backend
+      dockerfile: Dockerfile.backend
     ports:
       - "5000:5000"
     volumes:
       - .:/app
     links:
       - db
+      - frontend
   db:
+    container_name: "trust_studio_db"
     image: mongo
   frontend:
+    container_name: "trust_studio_frontend"
     build:
-      context: .
+      context: trustminer-frontend
       dockerfile: Dockerfile.frontend
     ports:
-    - "3000:3000"
+      - "3000:80"

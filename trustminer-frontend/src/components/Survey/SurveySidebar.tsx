@@ -49,7 +49,7 @@ export default function SurveySidebar(props: SidebarProps) {
                 localStorage.setItem(SURVEY_ENABLED, "false")
                 localStorage.setItem(SURVEY_COMPLETED, "true")
                 enqueueSnackbar("That's all! Now time to answer some last questions.", {variant: 'success'})
-                window.open(process.env.SURVEY_URL + data["userId"], "_blank")
+                window.open(process.env.SURVEY_URL + data["survey_id"], "_blank")
                 deleteSurvey()
             })
         } else {
