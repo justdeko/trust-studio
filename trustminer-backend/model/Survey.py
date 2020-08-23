@@ -1,8 +1,24 @@
+from mongoengine import DateTimeField, IntField, EmbeddedDocument, StringField, EmbeddedDocumentListField, BooleanField
 from mongoengine import Document
-from mongoengine import DateTimeField, StringField
+
+
+class UserEvent(EmbeddedDocument):
+    event_id = StringField()
+    type = StringField()
+    timestamp = DateTimeField()
+    state = StringField()
 
 
 class Survey(Document):
-    participant_id = (StringField(required=True, unique=True),)
-    last_updated = (DateTimeField(),)
-    created = (DateTimeField(),)
+    question3_attempts = IntField()
+    question4_attempts = IntField()
+    question1_duration = IntField()
+    question2_duration = IntField()
+    question3_duration = IntField()
+    question4_duration = IntField()
+    question5_duration = IntField()
+    question3_solved = BooleanField()
+    question4_solved = BooleanField()
+    intro_duration = IntField()
+    tour_duration = IntField()
+    user_events = EmbeddedDocumentListField(UserEvent)

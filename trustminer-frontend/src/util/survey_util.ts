@@ -19,7 +19,7 @@ import {ExternalTrustPersona} from "../model/ExternalTrustPersona";
  */
 export async function surveyPost() {
     let backendUrl = process.env.BACKEND_URL || "http://localhost:5000/"
-    return await fetch(backendUrl, {
+    return await fetch(backendUrl+"survey", {
         method: 'POST',
         body: localStorage.getItem(SURVEY_DATA),
         headers: {'Content-Type': 'application/json; charset=UTF-8'}
@@ -64,7 +64,7 @@ export function saveEvent(id: string, type: string, state?: string) {
             let currentData = surveyObject[USER_EVENTS] || []
             currentData.push(
                 {
-                    "id": id,
+                    "event_id": id,
                     "type": type,
                     "timestamp": new Date(),
                     "state": (state ? state : undefined)

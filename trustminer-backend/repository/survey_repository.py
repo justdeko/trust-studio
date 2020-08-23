@@ -4,8 +4,14 @@ from model.Survey import Survey
 class SurveyRepository:
     @staticmethod
     def add_or_update(participant_data):
-        entity = Survey.objects(participant_id=participant_data["id"]).first
+        print(participant_data)
+        survey_id = participant_data.get("survey_id")
+        if survey_id is not None:
+            entity = Survey.objects(id=survey_id).first()
+        else:
+            entity = None
         if entity is None:
-            entity = Survey(participant_data)
+            del participant_data["survey_id"]
+            entity = Survey(**participant_data)
         entity.save()
         return entity
