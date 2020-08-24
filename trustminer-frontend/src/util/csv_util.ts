@@ -3,10 +3,14 @@ import {UncertaintyRow} from "../model/UncertaintyRow";
 import {CURRENT_UNCERTAINTY_LIST, TRUST_POLICY_LIST} from "./constants";
 import {TrustPolicyRow} from "../model/TrustPolicyRow";
 import {TrustPolicy} from "../model/TrustPolicy";
-import {TrustConcern} from "../model/TrustConcern";
+import {TrustConcern, TrustConcernRM} from "../model/TrustConcern";
 import {TableState} from "../components/UncertaintyTable";
 import {OptionsObject, SnackbarKey, SnackbarMessage} from "notistack";
 import {saveFile} from "./general_util";
+import {CollaboratorUncertaintiesRow} from "../model/CollaboratorUncertaintiesRow";
+import {Uncertainty} from "../model/Uncertainty";
+import {PerspectiveRM} from "../model/Perspective";
+import {getWrittenName} from "../model/ComponentTypes";
 
 export const sep = ";" // Column separator
 const nl = "\n" // Row separator
@@ -183,6 +187,21 @@ export function mapToTrustPolicyEntities(list: Array<TrustPolicyRow>): Array<Tru
         return {
             ...policy,
             trustConcern: TrustConcern[policy.trustConcern]
+        }
+    })
+}
+
+/**
+ * maps the list of a collaborators uncertainties to table row data
+ * @param uncertainties the list of the collaborator uncertainties
+ */
+export function mapToUncertaintiesRowData(uncertainties: Uncertainty[]): Array<CollaboratorUncertaintiesRow> {
+    return uncertainties.map(uncertainty => {
+        return {
+            component: getWrittenName(uncertainty.component),
+            perspective: PerspectiveRM[uncertainty.perspective],
+            trustconcern: TrustConcernRM[uncertainty.trustConcern],
+            root: uncertainty.root,
         }
     })
 }

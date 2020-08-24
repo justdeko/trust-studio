@@ -1,4 +1,11 @@
-from mongoengine import DateTimeField, IntField, EmbeddedDocument, StringField, EmbeddedDocumentListField, BooleanField
+from mongoengine import (
+    DateTimeField,
+    IntField,
+    EmbeddedDocument,
+    StringField,
+    EmbeddedDocumentListField,
+    BooleanField,
+)
 from mongoengine import Document
 
 

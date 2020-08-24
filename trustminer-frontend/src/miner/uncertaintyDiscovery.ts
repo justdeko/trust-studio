@@ -1,7 +1,7 @@
 import {CURRENT_BPMN, EXTENSION_NAME} from "../util/constants";
 import BpmnModdle from 'bpmn-moddle';
 import {extractUncertaintyList} from "../util/csv_util";
-import {ComponentTypes} from "../model/ComponentTypes";
+import {getComponentType} from "../model/ComponentTypes";
 import uncertainty from "../resources/uncertaintyExtension.json"
 import {Perspective} from "../model/Perspective";
 import {TrustConcern} from "../model/TrustConcern";
@@ -46,7 +46,7 @@ export async function insertUncertainties(definitions: any) {
  * @param el the specified moddle element
  */
 function insertIntoElement(el: any) {
-    let type = ComponentTypes[el.$type]
+    let type = getComponentType(el.$type)
     let uncertaintyList = extractUncertaintyList(type)
     const extensionElements = el.extensionElements || moddle.create('bpmn:ExtensionElements');
 
