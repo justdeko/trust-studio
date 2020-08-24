@@ -1,4 +1,4 @@
-import {FIRST_TIME} from "./constants";
+import {FIRST_TIME, TOUR_COMPLETED} from "./constants";
 
 /**
  * Check if it is the users first time using the app
@@ -14,4 +14,9 @@ export function getFirstTime(): boolean {
  */
 export function setFirstTime(firstTime: boolean) {
     localStorage.setItem(FIRST_TIME, firstTime.toString())
+}
+
+export function getTourCompleted(): boolean {
+    let tourCompleted = localStorage.getItem(TOUR_COMPLETED)
+    return tourCompleted !== null || tourCompleted === "true"
 }

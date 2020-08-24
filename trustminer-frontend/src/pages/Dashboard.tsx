@@ -21,7 +21,7 @@ import {TrustLogo} from "../TrustLogo";
 import {useSnackbar} from "notistack";
 import Modeler from "../components/Modeler/Modeler";
 import FirstTimeDialog from "../components/Tour/FirstTimeDialog";
-import {getFirstTime} from "../util/tour_util";
+import {getFirstTime, getTourCompleted} from "../util/tour_util";
 import FirstTimeTour from "../components/Tour/FirstTimeTour";
 import {defaults} from "react-chartjs-2";
 import {getNightMode} from "../util/ui_util";
@@ -42,9 +42,9 @@ export default function Dashboard() {
     const [trustReport, setTrustReport] = useState<TrustReport>()
     const [title, setTitle] = useState("Dashboard")
     const [uncDiscoveryDialogOpen, setUncDiscoveryDialogOpen] = useState(false)
-    const [firstTimeDialogOpen, setFirstTimeDialogOpen] = useState(getFirstTime())
+    const [firstTimeDialogOpen, setFirstTimeDialogOpen] = useState(getFirstTime() && !surveyEnabled())
     const [selectedPerspective, setSelectedPerspective] = useState(GENERAL)
-    const [tourOpen, setTourOpen] = useState(false)
+    const [tourOpen, setTourOpen] = useState(surveyEnabled() && !getTourCompleted())
     const [surveySidebarOpen, setSurveySidebarOpen] = useState(false)
     const [loadingTrustReport, setLoadingTrustReport] = useState(true)
     const [completedTasks, setCompletedTasks] = useState([false, false, false])
@@ -232,7 +232,8 @@ export default function Dashboard() {
                     </Switch>
                 </Container>
             </main>
-            <FirstTimeTour setSurveySidebarOpen={setSurveySidebarOpen} tourOpen={tourOpen} setTourOpen={setTourOpen}/>
+            <FirstTimeTour mineWithGeneration={mineWithGeneration} setSurveySidebarOpen={setSurveySidebarOpen}
+                           tourOpen={tourOpen} setTourOpen={setTourOpen}/>
             <UncertaintyDiscoveryDialog
                 callWithUncertaintyGeneration={mineWithGeneration}
                 dialogOpen={uncDiscoveryDialogOpen}

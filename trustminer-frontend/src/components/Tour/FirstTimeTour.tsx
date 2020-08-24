@@ -4,22 +4,27 @@ import {Link, useTheme} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 import {setFirstTime} from "../../util/tour_util";
 import {saveTime, startTimer, surveyEnabled} from "../../util/survey_util";
-import {QUESTION_1, TOUR} from "../../util/constants";
+import {QUESTION_1, TOUR, TOUR_COMPLETED} from "../../util/constants";
 
 interface TourProps {
     tourOpen: boolean,
     setTourOpen: Dispatch<SetStateAction<boolean>>,
-    setSurveySidebarOpen: Dispatch<SetStateAction<boolean>>
+    setSurveySidebarOpen: Dispatch<SetStateAction<boolean>>,
+    mineWithGeneration: (shouldDiscover: boolean, isUpload: boolean) => void
 }
 
 export default function FirstTimeTour(props: TourProps) {
-    const {tourOpen, setTourOpen, setSurveySidebarOpen} = props
+    const {tourOpen, setTourOpen, setSurveySidebarOpen, mineWithGeneration} = props
     let history = useHistory()
 
     const pushToTarget = (target: string) => {
         if (history.location.pathname !== target) {
             history.push(target)
         }
+    }
+
+    function setDefaultBpmn() {
+        mineWithGeneration(false, false)
     }
 
     const tourConfig = [
@@ -29,7 +34,8 @@ export default function FirstTimeTour(props: TourProps) {
         },
         {
             selector: '[data-tour="upload"]',
-            content: `Let's start by uploading a new bpmn file.`
+            content: `Let's start by uploading a new bpmn file. (We'll do this for you, just click next)`,
+            action: () => setDefaultBpmn()
         },
         {
             selector: '[data-tour="analysis"]',
@@ -91,6 +97,7 @@ export default function FirstTimeTour(props: TourProps) {
     return <Tour isOpen={tourOpen}
                  steps={tourConfig}
                  rounded={10}
+                 disableInteraction={true}
                  accentColor={theme.palette.secondary.light}
                  onRequestClose={() => {
                      saveTime(TOUR)
@@ -99,6 +106,8 @@ export default function FirstTimeTour(props: TourProps) {
                          startTimer(QUESTION_1)
                      }
                      setTourOpen(false)
+                     localStorage.setItem(TOUR_COMPLETED, "true")
+                     setFirstTime(false)
                  }
                  }/>
 }
