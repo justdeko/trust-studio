@@ -4,7 +4,6 @@ import React, {Dispatch, SetStateAction} from "react";
 interface DiscoveryDialogProps {
     dialogOpen: boolean,
     setDialogOpen: Dispatch<SetStateAction<boolean>>,
-
     callWithUncertaintyGeneration(generate: boolean, isUpload: boolean): void
 }
 

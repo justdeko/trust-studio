@@ -83,7 +83,7 @@ export default function Introduction() {
                         <Typography variant="h2" color="textPrimary" style={{margin: 20}}>
                             {getIntroductionPage(currentStep).title}
                         </Typography>
-                        <Container maxWidth={"md"}>
+                        <Container maxWidth={[0, 3, 4].includes(currentStep) ? "md" : "xl"}>
                             {getIntroductionPage(currentStep).content}
                         </Container>
                     </Grid>

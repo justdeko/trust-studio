@@ -4,9 +4,14 @@ import {Grid, Typography} from "@material-ui/core";
 
 export default function UncertaintiesSection() {
     return (
-        <Grid container direction="row">
+        <Grid container style={{padding: "30px", marginRight: "10"}} direction="row">
             <Grid item xs={4}>
-                <img style={{maxWidth: "50%"}} src="/full_logo_white_color.png" alt="logo"/>
+                <Grid container direction="column" alignItems="center">
+                    <img style={{maxWidth: "80%"}} src="/introduction_pictures/component_types.png" alt="logo"/>
+                    <Typography align="center" style={{marginTop: "20px"}} color="textPrimary">
+                        Different components uncertainties could exist for.
+                    </Typography>
+                </Grid>
             </Grid>
             <Grid item xs={8}>
                 <Grid container spacing={3} direction="column">
@@ -18,7 +23,7 @@ export default function UncertaintiesSection() {
                     </Typography>
                     <Grid item>
                         <Typography color="textPrimary" variant="h4">
-                            Uncertainty classificaqtion
+                            Uncertainty classification
                         </Typography>
                         <Typography display="block" color="textPrimary" variant="h6">
                             Uncertainties in our case consider of several parts, the first one being what component they

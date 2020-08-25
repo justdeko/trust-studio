@@ -232,7 +232,8 @@ export default function Dashboard() {
                     </Switch>
                 </Container>
             </main>
-            <FirstTimeTour mineWithGeneration={mineWithGeneration} setSurveySidebarOpen={setSurveySidebarOpen}
+            <FirstTimeTour callWithUncertaintyGeneration={mineWithGeneration}
+                           setSurveySidebarOpen={setSurveySidebarOpen}
                            tourOpen={tourOpen} setTourOpen={setTourOpen}/>
             <UncertaintyDiscoveryDialog
                 callWithUncertaintyGeneration={mineWithGeneration}

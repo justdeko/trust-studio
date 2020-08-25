@@ -1,20 +1,23 @@
 import Tour from "reactour";
-import React, {Dispatch, SetStateAction} from "react";
+import React, {Dispatch, SetStateAction, useState} from "react";
 import {Link, useTheme} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 import {setFirstTime} from "../../util/tour_util";
 import {saveTime, startTimer, surveyEnabled} from "../../util/survey_util";
-import {QUESTION_1, TOUR, TOUR_COMPLETED} from "../../util/constants";
+import {CURRENT_BPMN, QUESTION_1, TOUR, TOUR_COMPLETED} from "../../util/constants";
+import {introductionBpmn} from "../../resources/introductionBpmn";
 
 interface TourProps {
     tourOpen: boolean,
     setTourOpen: Dispatch<SetStateAction<boolean>>,
     setSurveySidebarOpen: Dispatch<SetStateAction<boolean>>,
-    mineWithGeneration: (shouldDiscover: boolean, isUpload: boolean) => void
+
+    callWithUncertaintyGeneration(generate: boolean, isUpload: boolean): void
 }
 
 export default function FirstTimeTour(props: TourProps) {
-    const {tourOpen, setTourOpen, setSurveySidebarOpen, mineWithGeneration} = props
+    const {tourOpen, setTourOpen, setSurveySidebarOpen, callWithUncertaintyGeneration} = props
+    const [reportGenerated, setReportGenerated] = useState(false)
     let history = useHistory()
 
     const pushToTarget = (target: string) => {
@@ -23,8 +26,12 @@ export default function FirstTimeTour(props: TourProps) {
         }
     }
 
-    function setDefaultBpmn() {
-        mineWithGeneration(false, false)
+    const setDefaultBpmn = () => {
+        if (reportGenerated) {
+            localStorage.setItem(CURRENT_BPMN, introductionBpmn)
+            callWithUncertaintyGeneration(false, false)
+            setReportGenerated(true)
+        }
     }
 
     const tourConfig = [

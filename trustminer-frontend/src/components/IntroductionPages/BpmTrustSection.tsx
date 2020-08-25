@@ -5,7 +5,12 @@ export default function BpmTrustSection() {
     return (
         <Grid container direction="row">
             <Grid item xs={4}>
-                <img style={{maxWidth: "50%"}} src="/full_logo_white_color.png" alt="logo"/>
+                <Grid container direction="column" alignItems="center">
+                    <img style={{maxWidth: "90%"}} src="/introduction_pictures/diagram.png" alt="logo"/>
+                    <Typography align="center" style={{marginTop: "20px"}} color="textPrimary">
+                        An example of a collaborative business process.
+                    </Typography>
+                </Grid>
             </Grid>
             <Grid item xs={8}>
                 <Grid container spacing={3} direction="column">
@@ -18,7 +23,8 @@ export default function BpmTrustSection() {
                         </Typography>
                         <Typography display="block" color="textPrimary" variant="h6">
                             Collaborative business processes consist of multiple participants, depicted in pools,
-                            who interact with each other.
+                            who interact with each other, either through message flows with message events or attached
+                            data inputs and outputs.
                             This makes the business process decentralized and contain multiple "stakeholders".
                         </Typography>
                     </Grid>
