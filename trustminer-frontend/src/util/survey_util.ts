@@ -154,7 +154,7 @@ export function saveTime(id: string) {
  * List of all survey task texts
  */
 export const surveyTexts = [
-    'Add a new external trust persona called "Distributor".',
+    'Add a new external trust persona called "Distributor". Switch to this trust persona.',
     'Add a trust policy for Distributor with Trust Entity "Sender", Process Element "User Task" and Integrity as a trust concern.',
     'Go back to the dashboard. What amount of critical uncertainties from the perspective of the Distributor does Sender have?',
     'Go to the modeler. How many uncertainties does the task "prepare parcel" have?',

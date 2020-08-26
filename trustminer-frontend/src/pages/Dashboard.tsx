@@ -101,7 +101,7 @@ export default function Dashboard() {
         fileSelector.setAttribute('type', 'file');
         fileSelector.setAttribute('accept', '.bpmn')
         fileSelector.click()
-        fileSelector.onchange = function (event) {
+        fileSelector.onchange = function (_) {
             let fileList = fileSelector.files;
             if (fileList) {
                 fileList[0].text().then(bpmnString => {
@@ -124,6 +124,7 @@ export default function Dashboard() {
     }
 
     function mineWithGeneration(shouldDiscover: boolean, isUpload: boolean) {
+        console.log("this happened")
         mine(shouldDiscover).then(trustReport => {
             setLoadingTrustReport(false)
             if (trustReport instanceof Error) {
@@ -174,25 +175,29 @@ export default function Dashboard() {
                     </Typography>
                     {trustReport && title === "Analysis" ?
                         <MuiThemeProvider theme={whiteSelectorTheme}>
-                            <PerspectiveSelector
-                                perspectiveNames={getPerspectiveNames(trustReport)}
-                                setSelected={setSelectedPerspective}/>
+                            <div data-tour="perspective">
+                                <PerspectiveSelector
+                                    perspectiveNames={getPerspectiveNames(trustReport)}
+                                    setSelected={setSelectedPerspective}/>
+                            </div>
                         </MuiThemeProvider>
                         : undefined
                     }
                     {trustReport && title === "Analysis" ?
                         <Tooltip
                             title="Make sure to adjust all of the graphs before exporting depending on how you want them to look like in your report.">
-                            <IconButton data-tour="perspective"
-                                        color="inherit"
-                                        onClick={() => {
-                                            generatePdfDocument(trustReport)
-                                            if (!completedTasks[2]) {
-                                                setSurveySidebarOpen(true)
-                                                saveTime(QUESTION_5)
-                                            }
-                                            completeTask(2)
-                                        }}>
+                            <IconButton
+                                color="inherit"
+                                onClick={() => {
+                                    generatePdfDocument(trustReport).then(() => {
+                                        enqueueSnackbar("PDF generated", {variant: 'success'})
+                                    })
+                                    if (!completedTasks[2]) {
+                                        setSurveySidebarOpen(true)
+                                        saveTime(QUESTION_5)
+                                    }
+                                    completeTask(2)
+                                }}>
                                 <PictureAsPdf/>
                             </IconButton>
                         </Tooltip>

@@ -27,9 +27,9 @@ export default function FirstTimeTour(props: TourProps) {
     }
 
     const setDefaultBpmn = () => {
-        if (reportGenerated) {
+        if (!reportGenerated) {
             localStorage.setItem(CURRENT_BPMN, introductionBpmn)
-            callWithUncertaintyGeneration(false, false)
+            callWithUncertaintyGeneration(true, false)
             setReportGenerated(true)
         }
     }
@@ -41,8 +41,8 @@ export default function FirstTimeTour(props: TourProps) {
         },
         {
             selector: '[data-tour="upload"]',
-            content: `Let's start by uploading a new bpmn file. (We'll do this for you, just click next)`,
-            action: () => setDefaultBpmn()
+            content: `This button lets you upload the bpmn file you want to analyze. (We already did this for you)`,
+            action: () => setDefaultBpmn
         },
         {
             selector: '[data-tour="analysis"]',

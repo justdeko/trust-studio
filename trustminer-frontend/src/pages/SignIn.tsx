@@ -10,7 +10,8 @@ export default function SignIn() {
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        //TODO: backend auth
+        console.log(email)
+        console.log(password)
     }
 
     return (

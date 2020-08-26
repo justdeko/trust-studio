@@ -6,6 +6,7 @@
  */
 export function saveFile(fileName: string, innerHTML: string, blob: Blob) {
     let link = document.createElement('a')
+    link.style.cssText = "display: none";
     link.download = fileName
     link.innerHTML = innerHTML
     link.href = window.URL.createObjectURL(blob)

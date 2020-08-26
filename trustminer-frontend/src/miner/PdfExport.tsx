@@ -51,7 +51,7 @@ const pdfDoc = (report: TrustReport, relGraphImage?: string) => {
  * Generates a trust report pdf
  * @param trustReport the specified trust report object the pdf is generated from
  */
-export async function generatePdfDocument(trustReport: TrustReport) {
+export async function generatePdfDocument(trustReport: TrustReport): Promise<void> {
     // Register fonts for the pdf
     Font.register({
         family: 'Comfortaa',

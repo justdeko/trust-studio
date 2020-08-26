@@ -74,7 +74,7 @@ export function importCsv(
     fileSelector.setAttribute('type', 'file');
     fileSelector.setAttribute('accept', '.csv')
     fileSelector.click()
-    fileSelector.onchange = function (event) {
+    fileSelector.onchange = function (_) {
         let fileList = fileSelector.files;
         if (fileList) {
             fileList[0].text().then(csvText => {
@@ -106,7 +106,7 @@ export function saveUncertainties(uncertaintyList: Array<UncertaintyRow>) {
         // add a newline if its not the last item
         if (index !== uncertaintyList.length - 1) stringRow += nl
         csvString += stringRow
-    }) //TODO: use join
+    })
     let header = defaultUncertainties.split(nl)[0]
     let csv = header + nl + csvString
     localStorage.setItem(CURRENT_UNCERTAINTY_LIST, csv)
