@@ -62,7 +62,7 @@ export default function FrontPage() {
                                             Get started
                                         </Button>
                                     </Grid>
-                                    {!localStorage.getItem(SURVEY_COMPLETED) ?
+                                    {!(localStorage.getItem(SURVEY_COMPLETED) === "true") ?
                                         <Grid item>
                                             <Button className={classes.signInButton} variant="outlined"
                                                     onClick={() => {

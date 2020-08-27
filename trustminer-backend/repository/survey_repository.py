@@ -11,7 +11,8 @@ class SurveyRepository:
         else:
             entity = None
         if entity is None:
-            del participant_data["survey_id"]
+            if survey_id is not None:
+                del participant_data["survey_id"]
             entity = Survey(**participant_data)
         entity.save()
         return entity

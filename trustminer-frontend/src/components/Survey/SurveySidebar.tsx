@@ -6,7 +6,7 @@ import SurveyQuestion from "./SurveyQuestion";
 import {Button, CircularProgress, Grid, Typography} from "@material-ui/core";
 import {useSurveySidebarStyles} from "../../styles/survey-sidebar-styles";
 import {deleteSurvey, surveyPost} from "../../util/survey_util";
-import {SURVEY_COMPLETED, SURVEY_DATA, SURVEY_ENABLED} from "../../util/constants";
+import {SURVEY_COMPLETED, SURVEY_ENABLED} from "../../util/constants";
 import {useSnackbar} from "notistack";
 
 interface SidebarProps {
@@ -39,24 +39,28 @@ export default function SurveySidebar(props: SidebarProps) {
 
     async function submitSurvey() {
         setUpdatingData(true)
-        let surveyData = localStorage.getItem(SURVEY_DATA)
-        if (surveyData) {
-            console.log(JSON.parse(surveyData))
-        }
-        let response = await surveyPost()
-        if (response.status === 200) {
-            response.json().then(data => {
+        surveyPost().then((response) => {
+            console.log(response)
+            if (response && response.status === 200) {
+                let data = response.data
                 localStorage.setItem(SURVEY_ENABLED, "false")
                 localStorage.setItem(SURVEY_COMPLETED, "true")
                 enqueueSnackbar("That's all! Now time to answer some last questions.", {variant: 'success'})
                 window.open(process.env.SURVEY_URL + data["survey_id"], "_blank")
                 deleteSurvey()
-            })
-        } else {
-            setUpdatingData(false)
-            enqueueSnackbar("Something went wrong when sending the survey. Maybe try again?", {variant: 'error'})
-        }
-        console.log(response)
+                setUpdatingData(false)
+            } else {
+                errorSnackbar()
+            }
+        }, (error) => {
+            console.log(error)
+            errorSnackbar()
+        })
+    }
+
+    function errorSnackbar() {
+        setUpdatingData(false)
+        enqueueSnackbar("Something went wrong when sending the survey. Maybe try again?", {variant: 'error'})
     }
 
     useEffect(() => {

@@ -191,12 +191,12 @@ export default function Dashboard() {
                                 onClick={() => {
                                     generatePdfDocument(trustReport).then(() => {
                                         enqueueSnackbar("PDF generated", {variant: 'success'})
+                                        if (!completedTasks[2]) {
+                                            setSurveySidebarOpen(true)
+                                            saveTime(QUESTION_5)
+                                        }
+                                        completeTask(2)
                                     })
-                                    if (!completedTasks[2]) {
-                                        setSurveySidebarOpen(true)
-                                        saveTime(QUESTION_5)
-                                    }
-                                    completeTask(2)
                                 }}>
                                 <PictureAsPdf/>
                             </IconButton>

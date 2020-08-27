@@ -13,17 +13,19 @@ import {
 } from "./constants";
 import {externalTrustPersonaNames} from "./miner_util";
 import {ExternalTrustPersona} from "../model/ExternalTrustPersona";
+import axios from 'axios';
 
 /**
  * Makes a post request to the survey backend
  */
 export async function surveyPost() {
     let backendUrl = process.env.BACKEND_URL || "http://localhost:5000/"
-    return await fetch(backendUrl+"survey", {
-        method: 'POST',
-        body: localStorage.getItem(SURVEY_DATA),
-        headers: {'Content-Type': 'application/json; charset=UTF-8'}
-    })
+    let data = localStorage.getItem(SURVEY_DATA)
+    if (data) {
+        let data_json = JSON.parse(data)
+        console.log(data_json)
+        return axios.post(backendUrl + "survey", data_json)
+    } else return undefined
 }
 
 /**

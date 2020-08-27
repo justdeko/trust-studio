@@ -1,11 +1,14 @@
 from flask import Flask
 from flask import request
+from flask_cors import CORS, cross_origin
 from flask_mongoengine import MongoEngine
 from marshmallow import Schema, fields, ValidationError
 
 from repository.survey_repository import SurveyRepository
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config["CORS_HEADERS"] = "Content-Type"
 mongo_db = MongoEngine()
 mongo_db.init_app(app)
 
@@ -39,8 +42,11 @@ def hello_world():
 
 
 @app.route("/survey", methods=["POST"])
+@cross_origin()
 def post_analytics():
     survey_data = request.json
+    print("this happened")
+    print(survey_data)
     try:
         result = SurveySchema().load(survey_data)
         survey = SurveyRepository.add_or_update(result)

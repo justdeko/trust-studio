@@ -38,11 +38,10 @@ export default function Settings() {
                             onClick={() => {
                                 let completed = localStorage.getItem(SURVEY_COMPLETED)
                                 localStorage.clear()
-                                //TODO: uncomment this in prod
                                 //persist completed survey even after deleting all data
-                                /*if (completed === "true") {
+                                if (completed === "true") {
                                     localStorage.setItem(SURVEY_COMPLETED, "true")
-                                }*/
+                                }
                                 history.push("/")
                             }}
                             startIcon={<Delete/>}>
