@@ -5,8 +5,8 @@ import SurveyCheckpoint from "./SurveyCheckpoint";
 import SurveyQuestion from "./SurveyQuestion";
 import {Button, CircularProgress, Grid, Typography} from "@material-ui/core";
 import {useSurveySidebarStyles} from "../../styles/survey-sidebar-styles";
-import {deleteSurvey, surveyPost} from "../../util/survey_util";
-import {SURVEY_COMPLETED, SURVEY_ENABLED} from "../../util/constants";
+import {deleteSurvey, saveEvent, surveyPost} from "../../util/survey_util";
+import {SURVEY_COMPLETED, SURVEY_ENABLED, TYPE_CLICK} from "../../util/constants";
 import {useSnackbar} from "notistack";
 
 interface SidebarProps {
@@ -34,6 +34,7 @@ export default function SurveySidebar(props: SidebarProps) {
         ) {
             return;
         }
+        saveEvent("open_survey_sidebar", TYPE_CLICK, open.toString())
         setOpen(open);
     }
 
@@ -129,7 +130,7 @@ export default function SurveySidebar(props: SidebarProps) {
                     {updatingData ?
                         <CircularProgress/> :
                         <Button onClick={submitSurvey} color="primary" variant="contained">
-                            Finish Survey
+                            Finish Study
                         </Button>
                     }
                 </Grid> : undefined

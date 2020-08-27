@@ -249,9 +249,11 @@ export default function Dashboard() {
                              startTour={startTour}/>
             {surveyEnabled() && !getFirstTime()
                 ? <Fab className={classes.fab} color="secondary" variant="extended"
-                       onClick={() => setSurveySidebarOpen(true)}>
+                       onClick={() => {
+                           setSurveySidebarOpen(true)
+                       }}>
                     <EmojiObjectsIcon/>
-                    Survey Progress
+                    Study Progress
                 </Fab>
                 : undefined
             }

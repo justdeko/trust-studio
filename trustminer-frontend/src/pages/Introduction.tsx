@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import {introductionTheme, useIntroductionStyles} from "../styles/introduction-styles";
-import {Button, Container, Fade, Grid, MobileStepper, MuiThemeProvider, Typography} from "@material-ui/core";
+import {useIntroductionStyles} from "../styles/introduction-styles";
+import {Button, Container, Fade, Grid, MobileStepper, Typography} from "@material-ui/core";
 import {KeyboardArrowLeft, KeyboardArrowRight} from "@material-ui/icons";
 import TrustMiningSection from "../components/IntroductionPages/TrustMiningSection";
 import UncertaintiesSection from "../components/IntroductionPages/UncertaintiesSection";
@@ -76,39 +76,37 @@ export default function Introduction() {
     }
 
     return (
-        <MuiThemeProvider theme={introductionTheme}>
-            <div className={classes.content}>
-                <Fade in={contentVisible} onExited={fadeBackIn} timeout={FADE_DURATION}>
-                    <Grid container direction="column">
-                        <Typography variant="h2" color="textPrimary" style={{margin: 20}}>
-                            {getIntroductionPage(currentStep).title}
-                        </Typography>
-                        <Container maxWidth={[0, 3, 4].includes(currentStep) ? "md" : "xl"}>
-                            {getIntroductionPage(currentStep).content}
-                        </Container>
-                    </Grid>
-                </Fade>
-                <div style={{bottom: '0', width: '100%', position: 'fixed'}}>
-                    <MobileStepper
-                        variant="progress"
-                        steps={5}
-                        position="static"
-                        activeStep={currentStep}
-                        nextButton={
-                            <Button size="small" onClick={handleNext} disabled={currentStep === 4}>
-                                Next
-                                <KeyboardArrowRight/>
-                            </Button>
-                        }
-                        backButton={
-                            <Button size="small" onClick={handleBack} disabled={currentStep === 0}>
-                                <KeyboardArrowLeft/>
-                                Back
-                            </Button>
-                        }
-                    />
-                </div>
+        <div className={classes.content}>
+            <Fade in={contentVisible} onExited={fadeBackIn} timeout={FADE_DURATION}>
+                <Grid container direction="column">
+                    <Typography variant="h2" color="textPrimary" style={{margin: 20}}>
+                        {getIntroductionPage(currentStep).title}
+                    </Typography>
+                    <Container maxWidth={[0, 3, 4].includes(currentStep) ? "md" : "xl"}>
+                        {getIntroductionPage(currentStep).content}
+                    </Container>
+                </Grid>
+            </Fade>
+            <div style={{bottom: '0', width: '100%', position: 'fixed'}}>
+                <MobileStepper
+                    variant="progress"
+                    steps={5}
+                    position="static"
+                    activeStep={currentStep}
+                    nextButton={
+                        <Button size="small" onClick={handleNext} disabled={currentStep === 4}>
+                            Next
+                            <KeyboardArrowRight/>
+                        </Button>
+                    }
+                    backButton={
+                        <Button size="small" onClick={handleBack} disabled={currentStep === 0}>
+                            <KeyboardArrowLeft/>
+                            Back
+                        </Button>
+                    }
+                />
             </div>
-        </MuiThemeProvider>
+        </div>
     )
 }

@@ -6,11 +6,13 @@ import {getFirstTime} from "../util/tour_util";
 import FirstTimeDialog from "../components/Tour/FirstTimeDialog";
 import {startTimer} from "../util/survey_util";
 import {INTRO, SURVEY_COMPLETED, SURVEY_ENABLED} from "../util/constants";
+import PrivacyDialog from "../components/PrivacyDialog";
 
 export default function FrontPage() {
     const classes = useFrontPageStyles();
     const history = useHistory();
     const [firstTimeDialogOpen, setFirstTimeDialogOpen] = useState(false)
+    const [privacyDialogOpen, setPrivacyDialogOpen] = useState(false)
     const [visible, setVisible] = useState(true)
 
     const redirect = () => {
@@ -34,10 +36,16 @@ export default function FrontPage() {
         history.push("/analysis")
     }
 
+    function startStudy() {
+        startTour()
+        localStorage.setItem(SURVEY_ENABLED, "true")
+        startTimer(INTRO)
+    }
+
     return (
         <>
             <CssBaseline/>
-            <div className={classes.content}>
+            <div className={visible ? classes.content : classes.contentFaded}>
                 <Fade in={visible} onExited={startIntro} timeout={1000}>
                     <Grid container
                           style={{height: '100vh'}}
@@ -55,25 +63,23 @@ export default function FrontPage() {
                             </Typography>
                             <div className={classes.buttons}>
                                 <Grid container spacing={2} justify="center">
+                                    {!(localStorage.getItem(SURVEY_COMPLETED) === "true") ?
+                                        <Grid item>
+                                            <Button variant="contained" color="secondary"
+                                                    onClick={() => {
+                                                        setPrivacyDialogOpen(true)
+                                                    }}>
+                                                Begin Study
+                                            </Button>
+                                        </Grid> : undefined
+                                    }
                                     <Grid item>
-                                        <Button variant="contained"
-                                                color="secondary"
+                                        <Button className={classes.signInButton}
+                                                variant="outlined"
                                                 onClick={redirect}>
                                             Get started
                                         </Button>
                                     </Grid>
-                                    {!(localStorage.getItem(SURVEY_COMPLETED) === "true") ?
-                                        <Grid item>
-                                            <Button className={classes.signInButton} variant="outlined"
-                                                    onClick={() => {
-                                                        history.push('/introduction')
-                                                        localStorage.setItem(SURVEY_ENABLED, "true")
-                                                        startTimer(INTRO)
-                                                    }}>
-                                                Start Survey
-                                            </Button>
-                                        </Grid> : undefined
-                                    }
                                 </Grid>
                             </div>
                         </Container>
@@ -83,8 +89,10 @@ export default function FrontPage() {
                                  setDialogOpen={setFirstTimeDialogOpen}
                                  cancelTour={cancelTour}
                                  startTour={startTour}/>
+                <PrivacyDialog dialogOpen={privacyDialogOpen}
+                               setDialogOpen={setPrivacyDialogOpen}
+                               startStudy={startStudy}/>
             </div>
-
             <footer className={classes.footer}>
                 <Typography className={classes.text}
                             variant="subtitle1"

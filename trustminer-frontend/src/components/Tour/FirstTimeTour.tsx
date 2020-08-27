@@ -3,8 +3,8 @@ import React, {Dispatch, SetStateAction, useState} from "react";
 import {Link, useTheme} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 import {setFirstTime} from "../../util/tour_util";
-import {saveTime, startTimer, surveyEnabled} from "../../util/survey_util";
-import {CURRENT_BPMN, QUESTION_1, TOUR, TOUR_COMPLETED} from "../../util/constants";
+import {saveEvent, saveTime, startTimer, surveyEnabled} from "../../util/survey_util";
+import {CURRENT_BPMN, QUESTION_1, TOUR, TOUR_COMPLETED, TYPE_NAVIGATE} from "../../util/constants";
 import {introductionBpmn} from "../../resources/introductionBpmn";
 
 interface TourProps {
@@ -106,6 +106,7 @@ export default function FirstTimeTour(props: TourProps) {
                  rounded={10}
                  disableInteraction={true}
                  accentColor={theme.palette.secondary.light}
+                 getCurrentStep={curr => saveEvent("tour_step", TYPE_NAVIGATE, curr.toString())}
                  onRequestClose={() => {
                      saveTime(TOUR)
                      if (surveyEnabled()) {

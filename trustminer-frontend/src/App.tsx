@@ -32,6 +32,7 @@ function App() {
                         <Route exact path="/trust-policies" component={Dashboard}/>
                         <Route exact path="/uncertainty-list" component={Dashboard}/>
                         <Route exact path="/settings" component={Dashboard}/>
+                        <Route exact path="/about" component={Dashboard}/>
                         <Route exact path="/login" component={SignIn}/>
                         <Route component={NotFound}/>
                     </Switch>
