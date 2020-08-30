@@ -9,6 +9,11 @@ from repository.survey_repository import SurveyRepository
 app = Flask(__name__)
 cors = CORS(app)
 app.config["CORS_HEADERS"] = "Content-Type"
+app.config["MONGODB_SETTINGS"] = {
+    "db": "trust_studio",
+    "host": "mongodb://db/trust_studio",
+    "port": 27017,
+}
 mongo_db = MongoEngine()
 mongo_db.init_app(app)
 

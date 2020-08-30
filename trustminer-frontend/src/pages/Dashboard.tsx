@@ -11,7 +11,16 @@ import PublishIcon from '@material-ui/icons/Publish';
 import Sidebar from "../components/Sidebar/Sidebar";
 import {useDashboardStyles} from "../styles/dashboard-styles";
 import Routes from "../Routes";
-import {CURRENT_BPMN, GENERAL, QUESTION_1, QUESTION_2, QUESTION_3, QUESTION_5, TOUR} from "../util/constants";
+import {
+    CURRENT_BPMN,
+    GENERAL,
+    QUESTION_1,
+    QUESTION_2,
+    QUESTION_3,
+    QUESTION_5,
+    TOUR,
+    TYPE_CLICK
+} from "../util/constants";
 import {TrustReport} from "../model/TrustReport";
 import {mine} from "../miner/miner";
 import UncertaintyDiscoveryDialog from "../components/UncertaintyDiscoveryDialog";
@@ -32,7 +41,14 @@ import PerspectiveSelector from "../components/PerspectiveSelector";
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import {whiteSelectorTheme} from "../styles/selector-styles";
 import SurveySidebar from "../components/Survey/SurveySidebar";
-import {checkPolicyExists, checkTrustPersonaCreated, saveTime, startTimer, surveyEnabled} from "../util/survey_util";
+import {
+    checkPolicyExists,
+    checkTrustPersonaCreated,
+    saveEvent,
+    saveTime,
+    startTimer,
+    surveyEnabled
+} from "../util/survey_util";
 import {recomputeRelevancy} from "../miner/trustAnalysis";
 import TrustPolicies from "../components/Trust/TrustPolicies";
 
@@ -250,6 +266,7 @@ export default function Dashboard() {
             {surveyEnabled() && !getFirstTime()
                 ? <Fab className={classes.fab} color="secondary" variant="extended"
                        onClick={() => {
+                           saveEvent("surveySidebar", TYPE_CLICK, "open")
                            setSurveySidebarOpen(true)
                        }}>
                     <EmojiObjectsIcon/>
