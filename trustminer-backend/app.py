@@ -36,6 +36,7 @@ class SurveySchema(Schema):
     question5_duration = fields.Int()
     question3_solved = fields.Bool()
     question4_solved = fields.Bool()
+    user_ip = fields.Str()
     intro_duration = fields.Int()
     tour_duration = fields.Int()
     user_events = fields.List(fields.Nested(UserEventSchema))

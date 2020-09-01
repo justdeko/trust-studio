@@ -29,3 +29,4 @@ class Survey(Document):
     intro_duration = IntField()
     tour_duration = IntField()
     user_events = EmbeddedDocumentListField(UserEvent)
+    user_ip = StringField()

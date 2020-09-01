@@ -14,6 +14,7 @@ import {
 import {externalTrustPersonaNames} from "./miner_util";
 import {ExternalTrustPersona} from "../model/ExternalTrustPersona";
 import axios from 'axios';
+import publicIp from "public-ip";
 
 /**
  * Makes a post request to the survey backend
@@ -150,6 +151,14 @@ export function saveTime(id: string) {
         let identifier = id + "_duration"
         updateSurveyData({[identifier]: introTime})
     }
+}
+
+/**
+ * fetches and saves the public ip of the user into the survey entity for tracking purposes
+ */
+export async function savePublicIp() {
+    let ip = await publicIp.v4()
+    updateSurveyData({["user_ip"]: ip})
 }
 
 /**

@@ -1,2 +1,4 @@
 /.idea
 /venv
+/trustminer-frontend/nginx
+/data

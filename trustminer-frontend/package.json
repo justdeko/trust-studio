@@ -29,6 +29,7 @@
     "html2canvas": "^1.0.0-rc.5",
     "material-table": "^1.62.0",
     "notistack": "^0.9.17",
+    "public-ip": "^4.0.2",
     "react": "^16.13.1",
     "react-chartjs-2": "^2.9.0",
     "react-d3-graph": "^2.4.1",
@@ -43,7 +44,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "GENERATE_SOURCEMAP=false react-scripts build export NODE_OPTIONS=--max_old_space_size=8192",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build export",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
