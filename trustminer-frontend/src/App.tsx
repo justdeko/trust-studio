@@ -12,6 +12,8 @@ import Introduction from "./pages/Introduction";
 import NotFound from "./pages/NotFound";
 import {saveEvent} from "./util/survey_util";
 import {TYPE_NAVIGATE} from "./util/constants";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Impressum from "./pages/Impressum";
 
 function App() {
 
@@ -34,6 +36,8 @@ function App() {
                         <Route exact path="/settings" component={Dashboard}/>
                         <Route exact path="/about" component={Dashboard}/>
                         <Route exact path="/login" component={SignIn}/>
+                        <Route exact path="/privacy-policy" component={PrivacyPolicy}/>
+                        <Route exact path="/impressum" component={Impressum}/>
                         <Route component={NotFound}/>
                     </Switch>
                 </main>

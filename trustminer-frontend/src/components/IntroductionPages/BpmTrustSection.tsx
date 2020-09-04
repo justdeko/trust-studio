@@ -33,11 +33,9 @@ export default function BpmTrustSection() {
                             Trust
                         </Typography>
                         <Typography color="textPrimary" display="block" variant="h6">
-                            The concept of trust is by definition the "firm belief in the reliability, truth, or ability
-                            of
-                            someone".
-                            However in the instance of collaborative business processes it is
-                            referring to the judgment of confidence in the process itself.
+                            The concept of trust is, by definition, the “firm belief in the reliability, truth,
+                            or ability of someone”. However, in the instance of collaborative business processes,
+                            it refers to the judgment of confidence in the process itself.
                             Trust is always subjective and non-quantifiable.
                         </Typography>
                     </Grid>

@@ -16,8 +16,8 @@ export default function UncertaintiesSection() {
             <Grid item xs={8}>
                 <Grid container spacing={3} direction="column">
                     <Typography paragraph={true} align="center" color="textPrimary" variant="h6">
-                        Uncertainties are the other relevant topic to understand this application. Uncertainties are,
-                        in comparison to trust, actually detectable and measurable.
+                        Uncertainties are the other relevant topic to understand this application.
+                        Uncertainties are, in comparison to trust, actually detectable and measurable.
                         The existence of uncertainties in a process is what requires the need for trust;
                         They make processes vulnerable and have a specific trust concern.
                     </Typography>
@@ -26,15 +26,14 @@ export default function UncertaintiesSection() {
                             Uncertainty classification
                         </Typography>
                         <Typography display="block" color="textPrimary" variant="h6">
-                            Uncertainties in our case consider of several parts, the first one being what component they
-                            belong
-                            to.
-                            This could be anything from an activity, a gateway, or even a message flow. <br/>
+                            In our case, uncertainty is composed of several parts,
+                            the first one being what component they belong to.
+                            This could be anything from an activity, a gateway, or even a message flow.
                             This means we need to look through all of the elements to find all uncertainties.
-                            Another important part is the trust concern. This is what describes the objective of this
-                            uncertainty.
-                            It could be anything from performance to integrity. For example: "Does the task execute
-                            correctly?"
+                            Another important part is the trust concern.
+                            This is what describes the objective of this uncertainty.
+                            It could be anything from performance to integrity. For example:
+                            “Does the task execute correctly?”
                         </Typography>
                     </Grid>
                     <Grid item>

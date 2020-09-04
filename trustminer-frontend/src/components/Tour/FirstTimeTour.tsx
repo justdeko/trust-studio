@@ -37,11 +37,11 @@ export default function FirstTimeTour(props: TourProps) {
     const tourConfig = [
         {
             selector: '[data-tour="welcome"]',
-            content: `Welcome to Trust Studio!. This is a tool for analysing trust and uncertainties in collaborative business processes. I'll take you through a quick walkthrough of the app.`
+            content: `Welcome to Trust Studio! This is a tool for analyzing trust and uncertainties in collaborative business processes. I’ll take you through a quick walkthrough of the app.`
         },
         {
             selector: '[data-tour="upload"]',
-            content: `This button lets you upload the bpmn file you want to analyze. (We already did this for you)`,
+            content: `This button lets you upload the BPMN file you want to analyze. In the study you are participating in, we already did this for you.`,
             action: () => setDefaultBpmn
         },
         {
@@ -51,11 +51,11 @@ export default function FirstTimeTour(props: TourProps) {
         },
         {
             selector: '[data-tour="perspective"]',
-            content: 'This dropdown menu lets you select the current perspective. A general view is the default, there are also collaborator and external perspectives. More on that later.'
+            content: 'This dropdown menu lets you select the current perspective. A general view is the default. There are also collaborator and external perspectives. More on that later.'
         },
         {
             selector: '[data-tour="relationship-analysis"]',
-            content: `This graph displays the relationships of collaborators between each other, both from a data and a message flow perspective`,
+            content: `This graph displays the relationships of collaborators between each other, both from a data and a message flow perspective.`,
             action: () => pushToTarget("/analysis")
         },
         {
@@ -75,7 +75,7 @@ export default function FirstTimeTour(props: TourProps) {
         },
         {
             selector: '[data-tour="modeler"]',
-            content: `In the modeler you can edit and even export your uploaded bpmn file.`,
+            content: `In the modeler you can edit and export your BPMN file with annotated uncertainties.`,
             action: () => pushToTarget("/modeler")
         },
         {

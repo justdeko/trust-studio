@@ -34,6 +34,11 @@ export const useFrontPageStyles = makeStyles((theme: Theme) => createStyles({
         maxWidth: '45%',
         minWidth: '40%'
     },
+    snetImage: {
+        width: 'auto',
+        height: 'auto',
+        maxHeight: '60px'
+    },
     signInButton: {
         color: '#ffffff',
         borderColor: '#ffffff'

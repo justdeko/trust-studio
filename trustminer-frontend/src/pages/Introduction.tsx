@@ -19,10 +19,10 @@ function getIntroductionPage(step: number) {
         case 0:
             return {
                 title: "Introduction",
-                content: description("Welcome to Trust Studio!\nThis is an application for mining and analysing trust in business processes. " +
-                    "This introduction will give you a quick overview of the relevant topics, " +
+                content: description("Welcome to Trust Studio!\nThis is an application for mining and analyzing trust in business processes. " +
+                    "This introduction will give you a quick overview of the relevant concepts, " +
                     "related to trust and uncertainties in business processes.\n" +
-                    "The app was developed with help from the SNET chair of the technical university berlin and is an open-source project.")
+                    "The app was developed at the chair for Service-centric Networking (SNET) at TU Berlin and is an open-source project.")
             }
         case 1:
             return {

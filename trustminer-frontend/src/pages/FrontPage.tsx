@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Button, Container, CssBaseline, Fade, Grid, Typography} from "@material-ui/core";
+import {Button, Container, CssBaseline, Fade, Grid, Link, Typography} from "@material-ui/core";
 import {useFrontPageStyles} from "../styles/frontpage-styles";
 import {useHistory} from "react-router-dom";
 import {getFirstTime} from "../util/tour_util";
@@ -58,7 +58,7 @@ export default function FrontPage() {
                         <Container maxWidth="sm">
                             <Typography variant="h5" align="center" className={classes.text} color="textSecondary"
                                         paragraph>
-                                Trust Studio is a tool for evaluating and analysing trust and uncertainties in business
+                                Trust Studio is a tool for evaluating and analyzing trust and uncertainties in business
                                 process models annotated with BPMN.
                             </Typography>
                             <div className={classes.buttons}>
@@ -94,13 +94,25 @@ export default function FrontPage() {
                                startStudy={startStudy}/>
             </div>
             <footer className={classes.footer}>
-                <Typography className={classes.text}
-                            variant="subtitle1"
-                            align="center"
-                            color="textSecondary"
-                            component="p">
-                    Copyright © SNET, Denis Koljada, Marcel Müller
-                </Typography>
+                <Grid container direction="row" justify="space-between" alignItems="center"
+                      style={{paddingInlineStart: "20px", paddingInlineEnd: "20px"}}>
+                    <Grid item>
+                        <img className={classes.snetImage} src="/snetlogo.png" alt="snet-logo"/>
+                    </Grid>
+                    <Grid item>
+                        <Typography className={classes.text}
+                                    variant="subtitle1"
+                                    align="center"
+                                    color="textSecondary"
+                                    component="p">
+                            Copyright © SNET, Denis Koljada, Marcel Müller | <Link color="secondary" onClick={() => {
+                            history.push("/impressum")
+                        }}>Impressum</Link> | <Link color="secondary" onClick={() => {
+                            history.push("privacy-policy")
+                        }}>Privacy Policy</Link>
+                        </Typography>
+                    </Grid>
+                </Grid>
             </footer>
         </>
     )
