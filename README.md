@@ -1,4 +1,4 @@
-![Trust Studio Logo](images/trust_studio_logo.png)
+![Trust Studio Logo](images/trust_logo.png)
 
 Trust studio is a tool for evaluating and analysing trust and uncertainties
 in business process models annotated with [BPMN](https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation).

@@ -100,7 +100,7 @@ export function deleteSurvey() {
  */
 export function checkTrustPersonaCreated(): boolean {
     let external = externalTrustPersonaNames()
-    return !!external.find(name => name == "Distributor");
+    return !!external.find(name => name === "Distributor");
 }
 
 /**
@@ -114,7 +114,7 @@ export function checkPolicyExists(externalTrustPersonas: ExternalTrustPersona[])
         if (collaboratorIssues) {
             let matchUncertainty = collaboratorIssues
                 .find(uncertainty =>
-                    uncertainty.trustConcern == "Integrity" && uncertainty.component == "bpmn:UserTask")
+                    uncertainty.trustConcern === "Integrity" && uncertainty.component === "bpmn:UserTask")
             return !matchUncertainty;
         } else return false
     } else return false
@@ -158,7 +158,7 @@ export function saveTime(id: string) {
  */
 export async function savePublicIp() {
     let ip = await publicIp.v4()
-    updateSurveyData({["user_ip"]: ip})
+    updateSurveyData({"user_ip": ip})
 }
 
 /**

@@ -89,10 +89,9 @@ export function trustAnalysisText(trustPersona: Collaborator | ExternalTrustPers
     let external = (instanceOfCollaborator(trustPersona)) ? "a collaborator" : "an external"
     let name = trustPersona.name
     let regardsToNames = toEnumeration(Object.keys(issues))
-    let values = Object.values(issues)
     let largestEntry = Object.entries(issues).reduce((a, b) => a[1].length > b[1].length ? a : b)[0]
     let otherEntries = Object.entries(issues)
-        .filter((kv) => kv[0] != largestEntry)
+        .filter((kv) => kv[0] !== largestEntry)
         .map((kv) => `${kv[0]} (${kv[1].length})`)
     let otherEntriesText = otherEntries.length > 0 ? toEnumeration(otherEntries) : "nobody"
     return `${name} is ${external} trust persona with critical uncertainties in regards to ${regardsToNames}.` +

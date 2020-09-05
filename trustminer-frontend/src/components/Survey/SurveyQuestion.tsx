@@ -24,11 +24,11 @@ export default function SurveyQuestion(props: QuestionProps) {
         if (correctAnswer === answer) {
             setCompletedCount(prevState => prevState + 1)
             if (index === 2) {
-                updateSurveyData({["question3_solved"]: true})
+                updateSurveyData({"question3_solved": true})
                 saveTime(QUESTION_3)
                 startTimer(QUESTION_4)
             } else if (index === 3) {
-                updateSurveyData({["question4_solved"]: true})
+                updateSurveyData({"question4_solved": true})
                 saveTime(QUESTION_4)
                 startTimer(QUESTION_5)
             }
@@ -49,9 +49,9 @@ export default function SurveyQuestion(props: QuestionProps) {
 
     useEffect(() => {
         if (index === 2) {
-            updateSurveyData({["question3_attempts"]: answerSubmitted})
+            updateSurveyData({"question3_attempts": answerSubmitted})
         } else {
-            updateSurveyData({["question4_attempts"]: answerSubmitted})
+            updateSurveyData({"question4_attempts": answerSubmitted})
         }
     }, [answerSubmitted])
 

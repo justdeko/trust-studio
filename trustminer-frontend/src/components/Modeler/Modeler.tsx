@@ -14,22 +14,23 @@ import {Button, Dialog, DialogTitle, Grid, List, ListItem, ListItemText} from "@
 import {getNightMode} from "../../util/ui_util";
 import {saveFile} from "../../util/general_util";
 import {saveEvent} from "../../util/survey_util";
+import {TrustReport} from "../../model/TrustReport";
 
 //Initial code from https://github.com/Varooneh/reactbpmn/blob/master/src/components/bpmn/bpmn.modeler.component.jsx
 
 interface ModelerProps {
+    trustReport?: TrustReport,
+
     performMining?(shouldDiscover: boolean, isUpload: boolean): void
 }
 
 export default function Modeler(props: ModelerProps) {
-    const {performMining} = props
+    const {performMining, trustReport} = props
     const [modeler, setModeler] = useState<typeof BpmnModeler>()
     const [dialogOpen, setDialogOpen] = useState(false)
-    const [moddle, setModdle] = useState()
     const [uncertaintyList, setUncertaintyList] = useState([])
-    const [modeling, setModeling] = useState()
     const [canRecompute, setCanRecompute] = useState(false)
-
+    const [startedCompute, setStartedCompute] = useState(false)
 
     useEffect(() => {
         let propPanel = getNightMode() ? {} : {
@@ -62,8 +63,6 @@ export default function Modeler(props: ModelerProps) {
                 localStorage.setItem(CURRENT_BPMN, xml)
             });
         });
-        setModdle(newModeler.get('moddle'))
-        setModeling(newModeler.get('modeling'))
 
         newModeler.on('element.contextmenu', 1500, (event: any) => {
             openUncertainties(event)
@@ -134,9 +133,17 @@ export default function Modeler(props: ModelerProps) {
     function recomputeReport() {
         setCanRecompute(false)
         if (performMining) {
+            setStartedCompute(true)
             performMining(true, true)
         }
     }
+
+    useEffect(() => {
+        if (startedCompute) {
+            setStartedCompute(false)
+            window.location.reload()
+        }
+    }, [trustReport])
 
     return (
         <div id="bpmncontainer" style={{height: '100%'}}>

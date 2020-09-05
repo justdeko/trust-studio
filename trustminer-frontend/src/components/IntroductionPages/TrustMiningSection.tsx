@@ -22,7 +22,7 @@ function getStepContent(step: number) {
         case 2:
             return `Step 3 aggregates all of the data about uncertainties in relation to each collaborator and 
             calculate relevant statistics. Examples are for that global uncertainty and relative lane uncertainties. 
-            The application lets you find out more about these metrics by hovering over the info button. `;
+            The application lets you find out more about these metrics by hovering over the metric title.`;
         case 3:
             return 'The last step adds "perspective" to the view on trust. For example, ' +
                 'if you trust all communication in a process, because everybody is using encrypted communication, ' +

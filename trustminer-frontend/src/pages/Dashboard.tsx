@@ -140,7 +140,6 @@ export default function Dashboard() {
     }
 
     function mineWithGeneration(shouldDiscover: boolean, isUpload: boolean) {
-        console.log("this happened")
         mine(shouldDiscover).then(trustReport => {
             setLoadingTrustReport(false)
             if (trustReport instanceof Error) {
@@ -153,7 +152,6 @@ export default function Dashboard() {
                 setTrustReport(trustReport)
             }
         })
-
     }
 
     function startTour() {
@@ -238,7 +236,7 @@ export default function Dashboard() {
                                 </Route>
                             } else if (route.path === "/modeler") {
                                 return <Route exact path={route.path} key={route.path}>
-                                    <Modeler performMining={mineWithGeneration}/>
+                                    <Modeler performMining={mineWithGeneration} trustReport={trustReport}/>
                                 </Route>
                             } else if (route.path === "/trust-policies") {
                                 return <Route exact path={route.path} key={route.path}>

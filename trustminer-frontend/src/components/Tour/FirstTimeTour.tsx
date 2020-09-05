@@ -1,6 +1,6 @@
 import Tour from "reactour";
 import React, {Dispatch, SetStateAction, useState} from "react";
-import {Link, useTheme} from "@material-ui/core";
+import {Button, Link, useTheme} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 import {setFirstTime} from "../../util/tour_util";
 import {saveEvent, saveTime, startTimer, surveyEnabled} from "../../util/survey_util";
@@ -32,6 +32,17 @@ export default function FirstTimeTour(props: TourProps) {
             callWithUncertaintyGeneration(true, false)
             setReportGenerated(true)
         }
+    }
+
+    function closeTour() {
+        saveTime(TOUR)
+        if (surveyEnabled()) {
+            setSurveySidebarOpen(true)
+            startTimer(QUESTION_1)
+        }
+        setTourOpen(false)
+        localStorage.setItem(TOUR_COMPLETED, "true")
+        setFirstTime(false)
     }
 
     const tourConfig = [
@@ -93,7 +104,8 @@ export default function FirstTimeTour(props: TourProps) {
             content: () => (
                 <div>
                     This concludes our little tour. If you want more info about the project, check out our <Link
-                    color="secondary" href="https://github.com/justdeko/trust-studio">Github Page</Link>.
+                    color="secondary" href="https://github.com/justdeko/trust-studio">Github Page</Link>. <br/>
+                    <Button onClick={closeTour}>Finish Tour</Button>
                 </div>
             ),
             action: () => setFirstTime(false)
@@ -104,18 +116,12 @@ export default function FirstTimeTour(props: TourProps) {
     return <Tour isOpen={tourOpen}
                  steps={tourConfig}
                  rounded={10}
+                 showCloseButton={false}
                  disableInteraction={true}
                  accentColor={theme.palette.secondary.light}
                  getCurrentStep={curr => saveEvent("tour_step", TYPE_NAVIGATE, curr.toString())}
                  onRequestClose={() => {
-                     saveTime(TOUR)
-                     if (surveyEnabled()) {
-                         setSurveySidebarOpen(true)
-                         startTimer(QUESTION_1)
-                     }
-                     setTourOpen(false)
-                     localStorage.setItem(TOUR_COMPLETED, "true")
-                     setFirstTime(false)
-                 }
-                 }/>
+                     setTourOpen(true)
+
+                 }}/>
 }
