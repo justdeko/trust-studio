@@ -93,7 +93,7 @@ export default function FirstTimeTour(props: TourProps) {
             content: () => (
                 <div>
                     This concludes our little tour. If you want more info about the project, check out our <Link
-                    color="secondary" href="https://github.com/justdeko/trustminer">Github Page</Link>.
+                    color="secondary" href="https://github.com/justdeko/trust-studio">Github Page</Link>.
                 </div>
             ),
             action: () => setFirstTime(false)

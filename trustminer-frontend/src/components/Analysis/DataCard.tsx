@@ -1,18 +1,21 @@
-import {Card, CardContent, Typography} from "@material-ui/core";
+import {Card, CardContent, Tooltip, Typography} from "@material-ui/core";
 import React from "react";
 
 interface DataCardProps {
     content: React.ReactNode,
-    title: string
+    title: string,
+    tooltipTitle: string
 }
 
 export default function DataCard(props: DataCardProps) {
-    const {content, title} = props
+    const {content, title, tooltipTitle} = props
     return <Card style={{height: '100%'}}>
         <CardContent style={{height: '100%'}}>
-            <Typography variant="h5" component="h2">
-                {title}
-            </Typography>
+            <Tooltip title={tooltipTitle}>
+                <Typography variant="h5" component="h2">
+                    {title}
+                </Typography>
+            </Tooltip>
             {content}
         </CardContent>
     </Card>

@@ -20,7 +20,8 @@ export default function UncertaintyChart(props: UncertaintyChartProps) {
         <div data-tour="uncertainty-chart" style={{height: '100%'}}>
             <DataCard
                 content={<Doughnut plugins={plugins} width={500} height={300} data={props.data}/>}
-                title="Uncertainty Distribution"/>
+                title="Uncertainty Distribution"
+                tooltipTitle="This graph shows the distribution of uncertainties for each collaborator."/>
         </div>
     )
 }
