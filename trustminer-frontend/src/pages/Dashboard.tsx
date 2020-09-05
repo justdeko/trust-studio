@@ -51,6 +51,7 @@ import {
 } from "../util/survey_util";
 import {recomputeRelevancy} from "../miner/trustAnalysis";
 import TrustPolicies from "../components/Trust/TrustPolicies";
+import {TrustMiningProgress} from "../components/TrustMiningProgress";
 
 export default function Dashboard() {
     const classes = useDashboardStyles()
@@ -63,6 +64,7 @@ export default function Dashboard() {
     const [tourOpen, setTourOpen] = useState(surveyEnabled() && !getTourCompleted())
     const [surveySidebarOpen, setSurveySidebarOpen] = useState(false)
     const [loadingTrustReport, setLoadingTrustReport] = useState(true)
+    const [displayLoadingScreen, setDisplayLoadingScreen] = useState(false)
     const [completedTasks, setCompletedTasks] = useState([false, false, false])
 
     const {enqueueSnackbar} = useSnackbar();
@@ -125,7 +127,7 @@ export default function Dashboard() {
                     let found = checkForUncertainties(bpmnString)
                     if (found) {
                         setUncDiscoveryDialogOpen(true)
-                    } else mineWithGeneration(true, true)
+                    } else mineWithGeneration(true, true, true)
                 })
             }
         }
@@ -139,14 +141,31 @@ export default function Dashboard() {
         })
     }
 
-    function mineWithGeneration(shouldDiscover: boolean, isUpload: boolean) {
+    function mineWithGeneration(shouldDiscover: boolean, isUpload: boolean, loadingScreen = false) {
+        if (loadingScreen) {
+            setDisplayLoadingScreen(true)
+        }
         mine(shouldDiscover).then(trustReport => {
-            setLoadingTrustReport(false)
+            if (loadingScreen) {
+                setTimeout(() => {
+                    setLoadingTrustReport(false)
+                    setDisplayLoadingScreen(false)
+                }, 6000)
+            } else {
+                setLoadingTrustReport(false)
+            }
             if (trustReport instanceof Error) {
                 console.log(trustReport)
             } else {
                 if (isUpload) {
-                    enqueueSnackbar('Trust report computed', {variant: 'success'})
+                    if (loadingScreen) {
+                        setTimeout(() => {
+                            enqueueSnackbar('Trust report computed', {variant: 'success'})
+
+                        }, 6000)
+                    } else {
+                        enqueueSnackbar('Trust report computed', {variant: 'success'})
+                    }
                 }
                 console.log(trustReport)
                 setTrustReport(trustReport)
@@ -226,29 +245,31 @@ export default function Dashboard() {
             <main className={classes.content}>
                 <div className={classes.appBarSpacer}/>
                 <Container maxWidth="xl" className={classes.container}>
-                    <Switch>
-                        {Routes.map((route: any) => {
-                            if (route.path === "/analysis") {
-                                return <Route exact path={route.path} key={route.path}>
-                                    <Analysis selectedPerspective={selectedPerspective}
-                                              trustReport={trustReport}
-                                              loading={loadingTrustReport}/>
-                                </Route>
-                            } else if (route.path === "/modeler") {
-                                return <Route exact path={route.path} key={route.path}>
-                                    <Modeler performMining={mineWithGeneration} trustReport={trustReport}/>
-                                </Route>
-                            } else if (route.path === "/trust-policies") {
-                                return <Route exact path={route.path} key={route.path}>
-                                    <TrustPolicies recomputeTrustReport={recomputeTrustPersonas}/>
-                                </Route>
-                            } else {
-                                return <Route exact path={route.path} key={route.path}>
-                                    <route.component/>
-                                </Route>
-                            }
-                        })}
-                    </Switch>
+                    {displayLoadingScreen ? <TrustMiningProgress/> :
+                        <Switch>
+                            {Routes.map((route: any) => {
+                                if (route.path === "/analysis") {
+                                    return <Route exact path={route.path} key={route.path}>
+                                        <Analysis selectedPerspective={selectedPerspective}
+                                                  trustReport={trustReport}
+                                                  loading={loadingTrustReport}/>
+                                    </Route>
+                                } else if (route.path === "/modeler") {
+                                    return <Route exact path={route.path} key={route.path}>
+                                        <Modeler performMining={mineWithGeneration} trustReport={trustReport}/>
+                                    </Route>
+                                } else if (route.path === "/trust-policies") {
+                                    return <Route exact path={route.path} key={route.path}>
+                                        <TrustPolicies recomputeTrustReport={recomputeTrustPersonas}/>
+                                    </Route>
+                                } else {
+                                    return <Route exact path={route.path} key={route.path}>
+                                        <route.component/>
+                                    </Route>
+                                }
+                            })}
+                        </Switch>
+                    }
                 </Container>
             </main>
             <FirstTimeTour callWithUncertaintyGeneration={mineWithGeneration}
