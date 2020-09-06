@@ -40,6 +40,9 @@ export default function About() {
                     Source code
                 </Button>
             </Grid>
+            <Grid item style={{marginTop: "10%"}}>
+                <Typography>Loading animations: See github readme</Typography>
+            </Grid>
         </Grid>
     )
 }

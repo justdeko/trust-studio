@@ -101,7 +101,7 @@ export function TrustMiningProgress() {
                 <FadeIn>
                     <Grid container justify="space-between"
                           alignItems="center" direction="row">
-                        <Typography>Generating trust Perspectives...</Typography>
+                        <Typography>Generating trust perspectives...</Typography>
                         {!done ? (
                             <Lottie options={loadingOptions} height={120} width={120}/>
                         ) : (

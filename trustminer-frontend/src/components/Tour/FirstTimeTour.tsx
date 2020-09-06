@@ -108,7 +108,6 @@ export default function FirstTimeTour(props: TourProps) {
                     <Button onClick={closeTour}>Finish Tour</Button>
                 </div>
             ),
-            action: () => setFirstTime(false)
         }
     ]
     const theme = useTheme();

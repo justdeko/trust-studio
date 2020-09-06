@@ -52,6 +52,12 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 - [notistack](https://github.com/iamhosseindhv/notistack)
 - [react-pdf](https://github.com/diegomura/react-pdf)
 - [html2canvas](https://github.com/niklasvh/html2canvas)
+- [react-fade-in](https://github.com/gkaemmer/react-fade-in)
+- [react-lottie](https://github.com/chenqingspring/react-lottie)
+
+### Loading animations
+- Done: https://lottiefiles.com/leosoares
+- Loading: https://lottiefiles.com/lottiefilez
 
 #### bpmn.io
 

@@ -10,6 +10,7 @@ export const SURVEY_ENABLED = "survey_enabled"
 export const SURVEY_DATA = "survey_data"
 export const START_TIME = "start_time_"
 export const SURVEY_COMPLETED = "survey_completed"
+export const LOGGED_IN = "logged_in"
 
 // Custom uncertainty rendering
 export const HIGH_PRIORITY = 1500,
