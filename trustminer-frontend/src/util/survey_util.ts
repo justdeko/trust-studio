@@ -20,7 +20,7 @@ import publicIp from "public-ip";
  * Makes a post request to the survey backend
  */
 export async function surveyPost() {
-    let backendUrl = process.env.BACKEND_URL || "http://localhost:5000/"
+    let backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000/"
     let data = localStorage.getItem(SURVEY_DATA)
     if (data) {
         let data_json = JSON.parse(data)
