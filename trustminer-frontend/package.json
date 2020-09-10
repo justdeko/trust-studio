@@ -49,7 +49,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "GENERATE_SOURCEMAP=false react-scripts build export",
-    "test": "react-scripts test",
+    "test": "react-scripts src/test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
