@@ -14,7 +14,7 @@ export default function UncertaintiesSection() {
                 </Grid>
             </Grid>
             <Grid item xs={8}>
-                <Grid container spacing={3} direction="column">
+                <Grid container spacing={3} direction="column" style={{minHeight: "110%"}}>
                     <Typography paragraph={true} align="center" color="textPrimary" variant="h6">
                         Uncertainties are the other relevant topic to understand this application.
                         Uncertainties are, in comparison to trust, actually detectable and measurable.
@@ -45,7 +45,7 @@ export default function UncertaintiesSection() {
                             - The component it belongs to.<br/>
                             - The uncertainty root, for example data or organization<br/>
                             - The trust concern, for example integrity or confidentiality. <br/>
-                            - The uncertainty perspective (data, functional or control flow)
+                            - The uncertainty perspective (data, functional or control flow) <br/>
                         </Typography>
                     </Grid>
                 </Grid>

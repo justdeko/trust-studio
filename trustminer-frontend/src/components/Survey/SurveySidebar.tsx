@@ -5,7 +5,7 @@ import SurveyCheckpoint from "./SurveyCheckpoint";
 import SurveyQuestion from "./SurveyQuestion";
 import {Button, CircularProgress, Grid, Typography} from "@material-ui/core";
 import {useSurveySidebarStyles} from "../../styles/survey-sidebar-styles";
-import {deleteSurvey, saveEvent, surveyPost} from "../../util/survey_util";
+import {deleteSurvey, saveEvent, savePublicIp, surveyPost} from "../../util/survey_util";
 import {SURVEY_COMPLETED, SURVEY_ENABLED, TYPE_CLICK} from "../../util/constants";
 import {useSnackbar} from "notistack";
 import {useHistory} from "react-router-dom"
@@ -43,6 +43,7 @@ export default function SurveySidebar(props: SidebarProps) {
 
     async function submitSurvey() {
         setUpdatingData(true)
+        await savePublicIp()
         surveyPost().then((response) => {
             console.log(response)
             if (response && response.status === 200) {

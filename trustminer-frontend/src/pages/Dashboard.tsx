@@ -11,16 +11,7 @@ import PublishIcon from '@material-ui/icons/Publish';
 import Sidebar from "../components/Sidebar/Sidebar";
 import {useDashboardStyles} from "../styles/dashboard-styles";
 import Routes from "../Routes";
-import {
-    CURRENT_BPMN,
-    GENERAL,
-    QUESTION_1,
-    QUESTION_2,
-    QUESTION_3,
-    QUESTION_5,
-    TOUR,
-    TYPE_CLICK
-} from "../util/constants";
+import {CURRENT_BPMN, GENERAL, QUESTION_1, QUESTION_2, QUESTION_3, QUESTION_5, TYPE_CLICK} from "../util/constants";
 import {TrustReport} from "../model/TrustReport";
 import {mine} from "../miner/miner";
 import UncertaintyDiscoveryDialog from "../components/UncertaintyDiscoveryDialog";
@@ -174,9 +165,6 @@ export default function Dashboard() {
     }
 
     function startTour() {
-        if (surveyEnabled()) {
-            startTimer(TOUR)
-        }
         setTourOpen(true)
     }
 

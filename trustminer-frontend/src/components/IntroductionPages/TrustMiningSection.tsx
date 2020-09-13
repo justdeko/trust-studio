@@ -1,7 +1,9 @@
 import {Box, Paper, Step, StepContent, StepLabel, Stepper, Typography} from "@material-ui/core";
-import React from "react";
+import React, {useEffect} from "react";
 import Button from "@material-ui/core/Button";
 import {useTrustMiningStepsStyles} from "../../styles/trust-mining-steps-styles";
+import {saveEvent} from "../../util/survey_util";
+import {TYPE_CLICK} from "../../util/constants";
 
 
 function getSteps() {
@@ -50,6 +52,10 @@ export default function TrustMiningSection() {
     const handleNext = () => setActiveStep((prevActiveStep) => prevActiveStep + 1)
     const handleBack = () => setActiveStep((prevActiveStep) => prevActiveStep - 1)
     const handleReset = () => setActiveStep(0)
+
+    useEffect(() => {
+        saveEvent("intro_mining_step", TYPE_CLICK, activeStep.toString())
+    }, [activeStep])
 
     return (
         <div className={classes.root}>
