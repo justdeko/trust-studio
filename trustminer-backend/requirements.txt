@@ -4,15 +4,8 @@
 Flask==1.1.2
 
 # Flask Packages
-Flask-WTF==0.14.3
-Flask-User==1.0.2.2
-Flask-Restplus==0.13.0
 flask-mongoengine==0.9.5
 flask_cors==3.0.7
-
-# Automated tests
-pytest==6.0.1
-pytest-cov==2.10.1
 
 # Mongo
 mongoengine==0.20.0

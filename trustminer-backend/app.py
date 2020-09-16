@@ -51,7 +51,6 @@ def hello_world():
 @cross_origin()
 def post_analytics():
     survey_data = request.json
-    print("this happened")
     print(survey_data)
     try:
         result = SurveySchema().load(survey_data)
