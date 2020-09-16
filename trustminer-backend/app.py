@@ -62,4 +62,8 @@ def post_analytics():
 
 # run the command "docker run -p 27017:27017 mongo" beforehand for testing
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    context = (
+        "/etc/ssl/certificate.crt",
+        "/etc/ssl/private.key",
+    )  # certificate and key files
+    app.run(host="0.0.0.0", port=5000, ssl_context=context)

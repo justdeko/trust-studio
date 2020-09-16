@@ -9,6 +9,7 @@ services:
       - "5000:5000"
     volumes:
       - .:/app
+      - ssl:/etc/ssl
     links:
       - db
       - frontend
@@ -20,6 +21,10 @@ services:
     build:
       context: trustminer-frontend
       dockerfile: Dockerfile.frontend
+    volumes:
+      - ssl:/etc/ssl
     ports:
       - "3000:443"
     network_mode: "host"
+volumes:
+  ssl:
