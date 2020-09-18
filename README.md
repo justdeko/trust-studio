@@ -54,6 +54,7 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 - [html2canvas](https://github.com/niklasvh/html2canvas)
 - [react-fade-in](https://github.com/gkaemmer/react-fade-in)
 - [react-lottie](https://github.com/chenqingspring/react-lottie)
+- [react-fade-in](https://github.com/gkaemmer/react-fade-in)
 
 ### Loading animations
 - Done: https://lottiefiles.com/leosoares

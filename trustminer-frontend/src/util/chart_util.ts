@@ -179,7 +179,10 @@ export function getUncertaintyDistributionData(collaborators: Collaborator[]): U
     }
 }
 
-
+/**
+ * Get a dictionary with pairs of collaborator names and their corresponding uncertainty counts
+ * @param collaborators the list of collaborators
+ */
 function getCollaboratorUncertaintyCounts(collaborators: Collaborator[]): { [id: string]: number } {
     let collaboratorCounts: { [id: string]: number } = {}
     collaborators.forEach(collaborator => {

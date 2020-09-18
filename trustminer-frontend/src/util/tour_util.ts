@@ -16,6 +16,9 @@ export function setFirstTime(firstTime: boolean) {
     localStorage.setItem(FIRST_TIME, firstTime.toString())
 }
 
+/**
+ * CHeck if the tour was completed
+ */
 export function getTourCompleted(): boolean {
     let tourCompleted = localStorage.getItem(TOUR_COMPLETED)
     return tourCompleted !== null || tourCompleted === "true"

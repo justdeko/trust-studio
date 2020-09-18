@@ -2,6 +2,7 @@ version: "3.8"
 services:
   backend:
     container_name: "trust_studio_backend"
+    restart: always
     build:
       context: trustminer-backend
       dockerfile: Dockerfile.backend
@@ -15,9 +16,11 @@ services:
       - frontend
   db:
     container_name: "trust_studio_db"
+    restart: always
     image: mongo
   frontend:
     container_name: "trust_studio_frontend"
+    restart: always
     build:
       context: trustminer-frontend
       dockerfile: Dockerfile.frontend

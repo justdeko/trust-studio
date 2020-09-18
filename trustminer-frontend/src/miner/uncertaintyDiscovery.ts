@@ -50,7 +50,7 @@ function insertIntoElement(el: any) {
     let uncertaintyList = extractUncertaintyList(type)
     const extensionElements = el.extensionElements || moddle.create('bpmn:ExtensionElements');
 
-    //if there already are uncertainties in this element, skip it
+    // if there already are uncertainties in this element, skip it
     if (extensionElements.get("values").find((extensionElement: any) => extensionElement.$instanceOf(EXTENSION_NAME))) {
         return
     }
