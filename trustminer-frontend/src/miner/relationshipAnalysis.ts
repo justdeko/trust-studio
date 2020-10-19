@@ -19,6 +19,13 @@ export function generateGraphData(definitions: any): GraphData {
             let sourceName = collaboratorNames[sourceId]
             let targetId = messageFlow.targetRef.$parent.id
             let targetName = collaboratorNames[targetId]
+            // If collapsed process, add its own name instead of parent (parent is bpmn graph and not pool)
+            if (messageFlow.targetRef.$parent.$type === "bpmn:Collaboration") {
+                targetName = messageFlow.targetRef.name
+            }
+            if (messageFlow.sourceRef.$parent.$type === "bpmn:Collaboration") {
+                sourceName = messageFlow.sourceRef.name
+            }
             let linkObj = {source: sourceName, target: targetName}
             if (!links.find(link => link.target === targetName && link.source === sourceName)) {
                 links.push(linkObj)
@@ -43,7 +50,12 @@ export function getCollaboratorNames(collab: any) {
     if (collab && collab.participants) {
         collab.participants.forEach((participant: any) => {
             let name = participant.name
-            let processId = participant.processRef.id
+            // If collapsed process, add it with simple id as key
+            let processRef = participant.processRef
+            let processId = participant.id
+            if (processRef) {
+                processId = participant.processRef.id
+            }
             collaboratorNames[processId] = name
         })
     }
