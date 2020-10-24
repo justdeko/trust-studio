@@ -16,6 +16,10 @@ export function findCriticalUncertainties(collaborators: Collaborator[], persona
     let policies = getPoliciesForPersona(personaName)
     let trustIssues: { [id: string]: Uncertainty[] } = {}
     collaborators.filter(collaborator => collaborator.name !== personaName).forEach((collaborator) => {
+        if (policies.find(policy => (policy.processElement === "All" && policy.trustEntity === collaborator.name))) {
+            trustIssues[collaborator.name] = []
+            return // Skip to next iteration since all policies were filtered
+        }
         trustIssues[collaborator.name] = collaborator.uncertainties.filter(uncertainty =>
             !policies.find((policy) =>
                 getComponentType(uncertainty.component) === policy.processElement

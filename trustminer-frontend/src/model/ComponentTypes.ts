@@ -21,6 +21,14 @@ export const ComponentTypes: { [id: string]: string; } = {
     "bpmn:DataOutput": "Attached Data Output",
 }
 
+export const defaultBpmnElements = [
+    "All",
+    "Event", "Or Split", "Parallel Split",
+    "Control Flow", "Database", "Join",
+    "Attached Data Input", "Attached Data Output", "User Task",
+    "Manual Task", "Service Task"
+]
+
 /**
  * Gets the written name of a bpmn component tag (e.g. bpmn:DataInput => Data Input)
  * @param tag the bpmn component tag

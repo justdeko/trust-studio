@@ -6,6 +6,9 @@ import {tableIcons} from "../../theme/MaterialTableIcons";
 import {loadTrustPoliciesForPersona, saveTrustPolicies} from "../../util/csv_util";
 import {saveEvent} from "../../util/survey_util";
 import {TYPE_MODIFY} from "../../util/constants";
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import {defaultBpmnElements} from "../../model/ComponentTypes";
 
 interface TableState {
     columns: Array<Column<TrustPolicyRow>>;
@@ -21,9 +24,32 @@ export default function TrustPoliciesTable(props: TrustTableProps) {
     const {trustPersona, recomputeReport} = props
     const [state, setState] = useState<TableState>({
         columns: [
-            {title: 'Trust Entity', field: "trustEntity"},
-            {title: 'Process Element', field: 'processElement'},
-            {title: 'Trust Concern', field: 'trustConcern', lookup: TrustConcern}
+            {
+                title: 'Trust Entity',
+                field: "trustEntity",
+            },
+            {
+                title: 'Process Element',
+                field: 'processElement',
+                editComponent: props => (
+                    <Autocomplete
+                        id="autocomplete-textfield"
+                        freeSolo
+                        onChange={(e, value) => props.onChange(value)}
+                        value={props.value}
+                        options={defaultBpmnElements}
+                        renderInput={(params: any) => (
+                            <TextField {...params} onChange={e => props
+                                .onChange(e.target.value)}/>
+                        )}
+                    />
+                )
+            },
+            {
+                title: 'Trust Concern',
+                field: 'trustConcern',
+                lookup: TrustConcern
+            }
         ],
         data: loadTrustPoliciesForPersona(trustPersona),
     });
