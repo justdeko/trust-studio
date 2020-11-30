@@ -1,7 +1,9 @@
 import {Box, Paper, Step, StepContent, StepLabel, Stepper, Typography} from "@material-ui/core";
-import React from "react";
+import React, {useEffect} from "react";
 import Button from "@material-ui/core/Button";
 import {useTrustMiningStepsStyles} from "../../styles/trust-mining-steps-styles";
+import {saveEvent} from "../../util/survey_util";
+import {TYPE_CLICK} from "../../util/constants";
 
 
 function getSteps() {
@@ -11,20 +13,26 @@ function getSteps() {
 function getStepContent(step: number) {
     switch (step) {
         case 0:
-            return `Identify uncertainties at every process component. 
+            return `This step identifies general relevant uncertainties for each process component. 
             This is done by adding uncertainties into the model based on the type of a process component, 
-            iterating through all of them. This step is optional, in case the bpmn model already contains uncertainties.`;
+            iterating through all of them. For example, for every message flow between different companies, 
+            privacy is an important trust concern.`;
         case 1:
-            return 'Find functional relationships within the model between collaborators, both from a message flow and ' +
-                'a data object perspective.';
+            return 'Step 2 finds functional relationships within the model between collaborators, ' +
+                'both from a message flow and a data object perspective. For example, ' +
+                'if one collaborator consumes data which another one produces, this is a data dependency.';
         case 2:
-            return `Aggregate all of the data about uncertainties in relation to each collaborator and calculate 
-            relevant statistics, for example global uncertainty, relative lane uncertainties, etc`;
+            return `Step 3 aggregates all of the data about uncertainties in relation to each collaborator and 
+            calculate relevant statistics. Examples are for that global uncertainty and relative lane uncertainties. 
+            The application lets you find out more about these metrics by hovering over the metric title.`;
         case 3:
-            return 'Identify all relevant (critical) uncertainties in relation to each trust persona,' +
-                ' both external and internal.';
+            return 'The last step adds "perspective" to the view on trust. For example, ' +
+                'if you trust all communication in a process, because everybody is using encrypted communication, ' +
+                'the confidentiality of messages is not relevant for you anymore. ' +
+                'This step reduces the general trust issues and gives you a list of trust concerns you really have ' +
+                'to worry about. Therefore, the user defines a trust persona with these trust policies.';
         default:
-            return 'Unknown step';
+            return 'You went a bit too far. Maybe go back one or a few steps?';
     }
 }
 
@@ -44,6 +52,10 @@ export default function TrustMiningSection() {
     const handleNext = () => setActiveStep((prevActiveStep) => prevActiveStep + 1)
     const handleBack = () => setActiveStep((prevActiveStep) => prevActiveStep - 1)
     const handleReset = () => setActiveStep(0)
+
+    useEffect(() => {
+        saveEvent("intro_mining_step", TYPE_CLICK, activeStep.toString())
+    }, [activeStep])
 
     return (
         <div className={classes.root}>

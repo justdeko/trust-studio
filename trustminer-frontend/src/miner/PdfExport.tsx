@@ -51,13 +51,13 @@ const pdfDoc = (report: TrustReport, relGraphImage?: string) => {
  * Generates a trust report pdf
  * @param trustReport the specified trust report object the pdf is generated from
  */
-export async function generatePdfDocument(trustReport: TrustReport) {
+export async function generatePdfDocument(trustReport: TrustReport): Promise<void> {
     // Register fonts for the pdf
     Font.register({
         family: 'Comfortaa',
-        src: 'http://fonts.gstatic.com/s/comfortaa/v7/r_tUZNl0G8xCoOmp_JkSCi3USBnSvpkopQaUR-2r7iU.ttf'
+        src: 'https://fonts.gstatic.com/s/comfortaa/v7/r_tUZNl0G8xCoOmp_JkSCi3USBnSvpkopQaUR-2r7iU.ttf'
     });
-    Font.register({family: 'Roboto', src: "http://fonts.gstatic.com/s/roboto/v15/dtpHsbgPEm2lVWciJZ0P-A.ttf"});
+    Font.register({family: 'Roboto', src: "https://fonts.gstatic.com/s/roboto/v15/dtpHsbgPEm2lVWciJZ0P-A.ttf"});
     // Get the image of the relationship graph
     let relGraphImage = await getComponentPng('rel_graph')
     // get the pdf and save it locally

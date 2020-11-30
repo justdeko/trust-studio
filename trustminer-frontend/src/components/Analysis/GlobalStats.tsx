@@ -1,5 +1,5 @@
 import React from "react";
-import {Card, CardContent, Grid, Typography} from "@material-ui/core";
+import {Card, CardContent, Grid, Tooltip, Typography} from "@material-ui/core";
 
 interface GlobalStatProps {
     globalUncertainty: number,
@@ -17,19 +17,30 @@ export default function GlobalStats(props: GlobalStatProps) {
                     Global statistics
                 </Typography>
                 <Grid item>
-                    <Typography variant="subtitle1">Global Uncertainty</Typography>
+                    <Tooltip
+                        title="The global uncertainty is the total amount of uncertainties in the entire collaborative process.">
+                        <Typography variant="subtitle1">Global Uncertainty</Typography>
+                    </Tooltip>
                     <Typography variant='h4'>{globalUncertainty}</Typography>
                 </Grid>
                 <Grid item>
-                    <Typography variant="subtitle1">Average Element Uncertainty</Typography>
+                    <Tooltip
+                        title="Average Element uncertainty is the global uncertainty value divided
+                         by the amount of elements in the entire process.">
+                        <Typography variant="subtitle1">Average Element Uncertainty</Typography>
+                    </Tooltip>
                     <Typography variant='h4'>{averageUncertainty.toFixed(3)}</Typography>
                 </Grid>
                 <Grid item>
-                    <Typography variant="subtitle1">Collaborators</Typography>
+                    <Tooltip title="The amount of collaborators in the current process.">
+                        <Typography variant="subtitle1">Collaborators</Typography>
+                    </Tooltip>
                     <Typography variant='h4'>{collaboratorCount}</Typography>
                 </Grid>
                 <Grid item>
-                    <Typography variant="subtitle1">External Trust Personas</Typography>
+                    <Tooltip title="The amount of external trust personas in the current process.">
+                        <Typography variant="subtitle1">External Trust Personas</Typography>
+                    </Tooltip>
                     <Typography variant='h4'>{externalTrustPersonaCount}</Typography>
                 </Grid>
             </Grid>

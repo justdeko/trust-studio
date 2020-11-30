@@ -9,6 +9,10 @@ interface componentTypesChartProps {
 }
 
 export default function ComponentTypesChart(props: componentTypesChartProps) {
-    return <DataCard content={<Bar data={props.chartData} height={200} width={500}
-                                   options={chartOptions}/>} title="Component Types"/>
+    return <DataCard content={
+        <Bar data={props.chartData}
+             height={200}
+             width={500}
+             options={chartOptions}/>
+    } title="Component Types" tooltipTitle="The distribution of the bpmn components an uncertainty belongs to."/>
 }

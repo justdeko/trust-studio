@@ -4,6 +4,11 @@ import React, {useEffect, useState} from "react";
 import {TrustConcern} from "../../model/TrustConcern";
 import {tableIcons} from "../../theme/MaterialTableIcons";
 import {loadTrustPoliciesForPersona, saveTrustPolicies} from "../../util/csv_util";
+import {saveEvent} from "../../util/survey_util";
+import {TYPE_MODIFY} from "../../util/constants";
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import {defaultBpmnElements} from "../../model/ComponentTypes";
 
 interface TableState {
     columns: Array<Column<TrustPolicyRow>>;
@@ -11,16 +16,40 @@ interface TableState {
 }
 
 interface TrustTableProps {
-    trustPersona: string
+    trustPersona: string,
+    recomputeReport?: () => void
 }
 
 export default function TrustPoliciesTable(props: TrustTableProps) {
-    const {trustPersona} = props
+    const {trustPersona, recomputeReport} = props
     const [state, setState] = useState<TableState>({
         columns: [
-            {title: 'Trust Entity', field: "trustEntity"},
-            {title: 'Process Element', field: 'processElement'},
-            {title: 'Trust Concern', field: 'trustConcern', lookup: TrustConcern}
+            {
+                title: 'Trust Entity',
+                field: "trustEntity",
+            },
+            {
+                title: 'Process Element',
+                field: 'processElement',
+                editComponent: props => (
+                    <Autocomplete
+                        id="autocomplete-textfield"
+                        freeSolo
+                        onChange={(e, value) => props.onChange(value)}
+                        value={props.value}
+                        options={defaultBpmnElements}
+                        renderInput={(params: any) => (
+                            <TextField {...params} onChange={e => props
+                                .onChange(e.target.value)}/>
+                        )}
+                    />
+                )
+            },
+            {
+                title: 'Trust Concern',
+                field: 'trustConcern',
+                lookup: TrustConcern
+            }
         ],
         data: loadTrustPoliciesForPersona(trustPersona),
     });
@@ -31,6 +60,12 @@ export default function TrustPoliciesTable(props: TrustTableProps) {
             return {...prevState, data};
         })
     }, [trustPersona])
+
+    useEffect(() => {
+        if (recomputeReport) {
+            recomputeReport()
+        }
+    }, [state])
 
     return (
         <div style={{maxWidth: "100%"}}>
@@ -47,6 +82,11 @@ export default function TrustPoliciesTable(props: TrustTableProps) {
                                 setState((prevState) => {
                                     const data = [...prevState.data];
                                     data.push(newData);
+                                    saveEvent("trust_policy_table_add", TYPE_MODIFY,
+                                        newData.processElement +
+                                        ", " + newData.trustConcern +
+                                        ", " + newData.trustEntity
+                                    )
                                     saveTrustPolicies(data, trustPersona)
                                     return {...prevState, data};
                                 });
@@ -60,6 +100,11 @@ export default function TrustPoliciesTable(props: TrustTableProps) {
                                     setState((prevState) => {
                                         const data = [...prevState.data];
                                         data[data.indexOf(oldData)] = newData;
+                                        saveEvent("trust_policy_table_update", TYPE_MODIFY,
+                                            newData.processElement +
+                                            ", " + newData.trustConcern +
+                                            ", " + newData.trustEntity
+                                        )
                                         saveTrustPolicies(data, trustPersona)
                                         return {...prevState, data};
                                     });
@@ -72,6 +117,11 @@ export default function TrustPoliciesTable(props: TrustTableProps) {
                                 resolve();
                                 setState((prevState) => {
                                     const data = [...prevState.data];
+                                    saveEvent("trust_policy_table_delete", TYPE_MODIFY,
+                                        oldData.processElement +
+                                        ", " + oldData.trustConcern +
+                                        ", " + oldData.trustEntity
+                                    )
                                     data.splice(data.indexOf(oldData), 1);
                                     saveTrustPolicies(data, trustPersona)
                                     return {...prevState, data};

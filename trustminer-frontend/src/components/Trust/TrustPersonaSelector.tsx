@@ -1,6 +1,8 @@
 import {FormControl, InputLabel, MenuItem, Select} from "@material-ui/core";
 import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
 import {useSelectorStyles} from "../../styles/selector-styles";
+import {saveEvent} from "../../util/survey_util";
+import {TYPE_SELECT} from "../../util/constants";
 
 interface SelectorProps {
     personas: string[],
@@ -16,6 +18,7 @@ export default function TrustPersonaSelector(props: SelectorProps) {
     }, [personas])
 
     function handleChange(e: any) {
+        saveEvent("trust_persona_selector", TYPE_SELECT, e.target.value)
         setCurrentValue(e.target.value)
         setSelected(e.target.value)
     }

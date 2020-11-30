@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  backend:
+    container_name: "trust_studio_backend"
+    restart: always
+    build:
+      context: trustminer-backend
+      dockerfile: Dockerfile.backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+      - ssl:/etc/ssl
+    links:
+      - db
+      - frontend
+  db:
+    container_name: "trust_studio_db"
+    restart: always
+    image: mongo
+  frontend:
+    container_name: "trust_studio_frontend"
+    restart: always
+    build:
+      context: trustminer-frontend
+      dockerfile: Dockerfile.frontend
+    volumes:
+      - ssl:/etc/ssl
+    ports:
+      - "3000:443"
+    network_mode: "host"
+volumes:
+  ssl:

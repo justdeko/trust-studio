@@ -14,9 +14,8 @@ class UncertaintyBox extends BaseRenderer {
     }
 
     canRender(element: any) {
-
         // ignore labels
-        return isAny(element, ['bpmn:Task', 'bpmn:Event']) && !element.labelTarget;
+        return isAny(element, ['bpmn:Task', 'bpmn:Event']) && !element.labelTarget && element.type !== "bpmn:BoundaryEvent";
     }
 
 

@@ -3,7 +3,7 @@ import {Graph, GraphConfiguration} from "react-d3-graph";
 import {graphConfig} from "../../resources/graphConfig";
 import {DataObjectGraphData, GraphData} from "../../model/GraphData";
 import RelationshipGraphSelector from "./RelationshipGraphSelector";
-import {Card, CardContent, Grid, Typography} from "@material-ui/core";
+import {Card, CardContent, Grid, Tooltip, Typography} from "@material-ui/core";
 
 interface GraphProps {
     graphData: GraphData,
@@ -18,9 +18,12 @@ export default function RelationshipGraph(props: GraphProps) {
         <Card data-tour="relationship-analysis" style={{height: '100%'}}>
             <CardContent>
                 <Grid container justify="space-between" alignItems="center" direction="row">
-                    <Typography variant="h5" component="h2">
-                        Relationship Analysis
-                    </Typography>
+                    <Tooltip title="This graph shows the relationship between collaborators of the process
+                    both from a data and a message flow perspective.">
+                        <Typography variant="h5" component="h2">
+                            Relationship Analysis
+                        </Typography>
+                    </Tooltip>
                     <RelationshipGraphSelector setSelected={setSelectedType}/>
                 </Grid>
                 {graphWrapper(

@@ -17,7 +17,7 @@ export default function TrustIssuesChart(props: TrustIssuesProps) {
                     <HorizontalBar data={props.chartData} height={300} width={400} options={chartOptions}/>
                 </Grid>
             </Grid>
-        }
-                  title="Trust issues"/>
+        } title="Trust issues" tooltipTitle="Shows all trust issues and relevant uncertainties
+        for collaborators from the current perspective."/>
     )
 }

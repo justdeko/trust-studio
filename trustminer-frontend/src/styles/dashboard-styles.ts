@@ -3,7 +3,7 @@ import {createStyles, Theme} from "@material-ui/core";
 
 export const drawerWidth = 240;
 
-export const useDashboardStyles = makeStyles((theme: Theme) =>createStyles({
+export const useDashboardStyles = makeStyles((theme: Theme) => createStyles({
     root: {
         display: 'flex',
     },
@@ -52,4 +52,9 @@ export const useDashboardStyles = makeStyles((theme: Theme) =>createStyles({
     fixedHeight: {
         height: 240,
     },
+    fab: {
+        position: 'absolute',
+        bottom: theme.spacing(2),
+        right: theme.spacing(3),
+    }
 }))

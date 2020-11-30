@@ -1,0 +1,105 @@
+{
+  "user_events": [
+    {
+      "event_id": "location",
+      "type": "navigate",
+      "timestamp": "2020-08-23T15:55:59.260Z",
+      "state": "/introduction"
+    },
+    {
+      "event_id": "intro_next_button",
+      "type": "click",
+      "timestamp": "2020-08-23T15:56:01.322Z",
+      "state": "1"
+    },
+    {
+      "event_id": "intro_next_button",
+      "type": "click",
+      "timestamp": "2020-08-23T15:56:02.744Z",
+      "state": "2"
+    },
+    {
+      "event_id": "intro_next_button",
+      "type": "click",
+      "timestamp": "2020-08-23T15:56:04.325Z",
+      "state": "3"
+    },
+    {
+      "event_id": "intro_back_button",
+      "type": "click",
+      "timestamp": "2020-08-23T15:56:06.967Z",
+      "state": "2"
+    },
+    {
+      "event_id": "intro_next_button",
+      "type": "click",
+      "timestamp": "2020-08-23T15:56:08.234Z",
+      "state": "3"
+    },
+    {
+      "event_id": "intro_next_button",
+      "type": "click",
+      "timestamp": "2020-08-23T15:56:09.126Z",
+      "state": "4"
+    },
+    {
+      "event_id": "location",
+      "type": "navigate",
+      "timestamp": "2020-08-23T15:56:10.926Z",
+      "state": "/analysis"
+    },
+    {
+      "event_id": "location",
+      "type": "navigate",
+      "timestamp": "2020-08-23T15:57:37.331Z",
+      "state": "/modeler"
+    },
+    {
+      "event_id": "location",
+      "type": "navigate",
+      "timestamp": "2020-08-23T15:57:38.764Z",
+      "state": "/trust-policies"
+    },
+    {
+      "event_id": "location",
+      "type": "navigate",
+      "timestamp": "2020-08-23T15:57:41.059Z",
+      "state": "/uncertainty-list"
+    },
+    {
+      "event_id": "location",
+      "type": "navigate",
+      "timestamp": "2020-08-23T15:57:49.048Z",
+      "state": "/trust-policies"
+    },
+    {
+      "event_id": "trust_persona_selector",
+      "type": "select",
+      "timestamp": "2020-08-23T15:57:55.017Z",
+      "state": "Distributor"
+    },
+    {
+      "event_id": "trust_policy_table_add",
+      "type": "modify",
+      "timestamp": "2020-08-23T15:58:09.775Z",
+      "state": "User Task, 1, Sender"
+    },
+    {
+      "event_id": "location",
+      "type": "navigate",
+      "timestamp": "2020-08-23T15:58:20.683Z",
+      "state": "/analysis"
+    }
+  ],
+  "intro_duration": 11862,
+  "tour_duration": 91485,
+  "question1_duration": 11151,
+  "question2_duration": 14880,
+  "question3_attempts": 3,
+  "question3_solved": true,
+  "question3_duration": 19885,
+  "question4_attempts": 1,
+  "question4_solved": true,
+  "question4_duration": 11697,
+  "question5_duration": 5252
+}

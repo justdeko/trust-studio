@@ -2,9 +2,10 @@ import {Collaborator} from "../model/Collaborator";
 import {Uncertainty} from "../model/Uncertainty";
 import {loadTrustPoliciesForPersona, mapToTrustPolicyEntities} from "../util/csv_util";
 import {TrustPolicy} from "../model/TrustPolicy";
-import {ComponentTypes} from "../model/ComponentTypes";
+import {getComponentType} from "../model/ComponentTypes";
 import {ExternalTrustPersona} from "../model/ExternalTrustPersona";
 import {externalTrustPersonaNames} from "../util/miner_util";
+import {TrustReport} from "../model/TrustReport";
 
 /**
  * Find all critical uncertainties for a collaborator and map them to a dictionary (personaId - uncertainty list)
@@ -15,9 +16,13 @@ export function findCriticalUncertainties(collaborators: Collaborator[], persona
     let policies = getPoliciesForPersona(personaName)
     let trustIssues: { [id: string]: Uncertainty[] } = {}
     collaborators.filter(collaborator => collaborator.name !== personaName).forEach((collaborator) => {
+        if (policies.find(policy => (policy.processElement === "All" && policy.trustEntity === collaborator.name))) {
+            trustIssues[collaborator.name] = []
+            return // Skip to next iteration since all policies were filtered
+        }
         trustIssues[collaborator.name] = collaborator.uncertainties.filter(uncertainty =>
             !policies.find((policy) =>
-                ComponentTypes[uncertainty.component] === policy.processElement
+                getComponentType(uncertainty.component) === policy.processElement
                 && uncertainty.trustConcern === policy.trustConcern
                 && collaborator.name === policy.trustEntity
             )
@@ -49,4 +54,24 @@ export function findCriticalUncertaintiesForExternal(collaborators: Collaborator
 function getPoliciesForPersona(id: string): TrustPolicy[] {
     let policyList = loadTrustPoliciesForPersona(id)
     return mapToTrustPolicyEntities(policyList)
+}
+
+/**
+ * Recomputes the last step of the trust report (relevancy analysis). Relevant when trust policies change
+ * @param trustReport the current trust report
+ */
+export function recomputeRelevancy(trustReport: TrustReport) {
+    let collaborators = trustReport.collaborators
+    let collaboratorsWithCritical = collaborators.map((collaborator) => {
+        return {
+            ...collaborator,
+            trustIssues: findCriticalUncertainties(collaborators, collaborator.name)
+        }
+    })
+    let external = findCriticalUncertaintiesForExternal(collaborators)
+    return {
+        ...trustReport,
+        collaborators: collaboratorsWithCritical,
+        externalTrustPersonas: external
+    }
 }

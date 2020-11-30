@@ -139,10 +139,10 @@ export function mapToTrustIssuesChartData(trustIssues: { [id: string]: Uncertain
 export function mapToUncertaintyComponentData(uncertainties: Uncertainty[]): BarChartData {
     // Get all unique component names
     let componentNames = uncertainties
-        .map(uncertainty => uncertainty.component).filter((v, i, a) => a.indexOf(v) == i)
+        .map(uncertainty => uncertainty.component).filter((v, i, a) => a.indexOf(v) === i)
     let componentCounts: number[] = []
     componentNames.forEach(name => {
-        componentCounts.push(uncertainties.filter(uncertainty => uncertainty.component == name).length)
+        componentCounts.push(uncertainties.filter(uncertainty => uncertainty.component === name).length)
     })
     return {
         labels: componentNames.map(name => getWrittenName(name)),
@@ -179,7 +179,10 @@ export function getUncertaintyDistributionData(collaborators: Collaborator[]): U
     }
 }
 
-
+/**
+ * Get a dictionary with pairs of collaborator names and their corresponding uncertainty counts
+ * @param collaborators the list of collaborators
+ */
 function getCollaboratorUncertaintyCounts(collaborators: Collaborator[]): { [id: string]: number } {
     let collaboratorCounts: { [id: string]: number } = {}
     collaborators.forEach(collaborator => {

@@ -5,6 +5,7 @@ import UncertaintyTable from "./components/UncertaintyTable";
 import Analysis from "./components/Analysis/Analysis";
 import TrustPolicies from "./components/Trust/TrustPolicies";
 import Settings from "./components/Settings";
+import About from "./components/About";
 
 
 const AnalysisRoute: React.FC = () => <Analysis/>
@@ -12,6 +13,7 @@ const ModelerRoute: React.FC = () => <Modeler/>
 const TrustRoute: React.FC = () => <TrustPolicies/>
 const UncertaintyList: React.FC = () => <UncertaintyTable/>
 const SettingsRoute: React.FC = () => <Settings/>
+const AboutRoute: React.FC = () => <About/>
 
 const Routes = [
     {
@@ -39,6 +41,11 @@ const Routes = [
         title: 'Settings',
         component: SettingsRoute
     },
+    {
+        path: '/about',
+        title: 'About',
+        component: AboutRoute
+    }
 ]
 
 export default Routes

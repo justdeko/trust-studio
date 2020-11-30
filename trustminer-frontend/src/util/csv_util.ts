@@ -3,10 +3,14 @@ import {UncertaintyRow} from "../model/UncertaintyRow";
 import {CURRENT_UNCERTAINTY_LIST, TRUST_POLICY_LIST} from "./constants";
 import {TrustPolicyRow} from "../model/TrustPolicyRow";
 import {TrustPolicy} from "../model/TrustPolicy";
-import {TrustConcern} from "../model/TrustConcern";
+import {TrustConcern, TrustConcernRM} from "../model/TrustConcern";
 import {TableState} from "../components/UncertaintyTable";
 import {OptionsObject, SnackbarKey, SnackbarMessage} from "notistack";
 import {saveFile} from "./general_util";
+import {CollaboratorUncertaintiesRow} from "../model/CollaboratorUncertaintiesRow";
+import {Uncertainty} from "../model/Uncertainty";
+import {PerspectiveRM} from "../model/Perspective";
+import {getWrittenName} from "../model/ComponentTypes";
 
 export const sep = ";" // Column separator
 const nl = "\n" // Row separator
@@ -70,7 +74,7 @@ export function importCsv(
     fileSelector.setAttribute('type', 'file');
     fileSelector.setAttribute('accept', '.csv')
     fileSelector.click()
-    fileSelector.onchange = function (event) {
+    fileSelector.onchange = function (_) {
         let fileList = fileSelector.files;
         if (fileList) {
             fileList[0].text().then(csvText => {
@@ -102,7 +106,7 @@ export function saveUncertainties(uncertaintyList: Array<UncertaintyRow>) {
         // add a newline if its not the last item
         if (index !== uncertaintyList.length - 1) stringRow += nl
         csvString += stringRow
-    }) //TODO: use join
+    })
     let header = defaultUncertainties.split(nl)[0]
     let csv = header + nl + csvString
     localStorage.setItem(CURRENT_UNCERTAINTY_LIST, csv)
@@ -183,6 +187,21 @@ export function mapToTrustPolicyEntities(list: Array<TrustPolicyRow>): Array<Tru
         return {
             ...policy,
             trustConcern: TrustConcern[policy.trustConcern]
+        }
+    })
+}
+
+/**
+ * maps the list of a collaborators uncertainties to table row data
+ * @param uncertainties the list of the collaborator uncertainties
+ */
+export function mapToUncertaintiesRowData(uncertainties: Uncertainty[]): Array<CollaboratorUncertaintiesRow> {
+    return uncertainties.map(uncertainty => {
+        return {
+            component: getWrittenName(uncertainty.component),
+            perspective: PerspectiveRM[uncertainty.perspective],
+            trustconcern: TrustConcernRM[uncertainty.trustConcern],
+            root: uncertainty.root,
         }
     })
 }

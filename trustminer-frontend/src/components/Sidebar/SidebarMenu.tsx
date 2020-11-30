@@ -7,6 +7,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import HelpIcon from '@material-ui/icons/Help';
 import SettingsIcon from '@material-ui/icons/Settings';
+import InfoIcon from '@material-ui/icons/Info';
 import {Link} from "react-router-dom";
 
 export const mainListItems = (
@@ -42,6 +43,13 @@ export const mainListItems = (
         <ListItem button component={Link} to={'/settings'}>
             <ListItemIcon>
                 <SettingsIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Settings"/>
+        </ListItem>
+
+        <ListItem button component={Link} to={'/about'}>
+            <ListItemIcon>
+                <InfoIcon/>
             </ListItemIcon>
             <ListItemText primary="Settings"/>
         </ListItem>

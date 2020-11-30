@@ -9,6 +9,7 @@ import TrustConcernChart from "./TrustConcernChart";
 import {mapToTrustConcernChartData, mapToUncertaintyComponentData} from "../../../util/chart_util";
 import ComponentTypesChart from "./ComponentTypesChart";
 import {mapToCritical} from "../../../util/miner_util";
+import CollaboratorUncertaintiesTable from "./CollaboratorUncertaintiesTable";
 
 interface CollaboratorSectionProps {
     trustReport: TrustReport,
@@ -60,6 +61,9 @@ export default function CollaboratorSection(props: CollaboratorSectionProps) {
                 </Grid>
                 <Grid item>
                     <ComponentTypesChart chartData={mapToUncertaintyComponentData(selectedCollaborator.uncertainties)}/>
+                </Grid>
+                <Grid item style={{width: '100%'}}>
+                    <CollaboratorUncertaintiesTable collaborator={selectedCollaborator}/>
                 </Grid>
             </Grid>
         </div>

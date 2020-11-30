@@ -3,7 +3,7 @@
 /.pnp
 .pnp.js
 
-# testing
+# test
 /coverage
 
 # production
@@ -22,3 +22,5 @@ yarn-error.log*
 
 #ide-specific
 /.idea
+/nginx
+/src/test/testFiles/

@@ -9,6 +9,10 @@ interface concernChartProps {
 }
 
 export default function TrustConcernChart(props: concernChartProps) {
-    return <DataCard content={<Bar data={props.chartData} height={200} width={400}
-                                   options={chartOptions}/>} title="Trust concern distribution"/>
+    return <DataCard content={
+        <Bar data={props.chartData}
+             height={200} width={400}
+             options={chartOptions}/>
+    } title="Trust concern distribution" tooltipTitle="The distribution of the trust concerns
+    of all critical uncertainties of the collaborator."/>
 }

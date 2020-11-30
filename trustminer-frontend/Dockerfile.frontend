@@ -1,0 +1,15 @@
+FROM node:alpine AS build
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY . ./
+RUN npm run build
+
+# prod environment
+FROM nginx:stable-alpine
+COPY --from=build /app/build /usr/share/nginx/html
+COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx/.htpasswd /etc/apache2/.htpasswd
+COPY nginx/cert /etc/ssl
+EXPOSE 443
+CMD ["nginx", "-g", "daemon off;"]

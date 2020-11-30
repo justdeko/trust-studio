@@ -1,27 +1,19 @@
 export const ComponentTypes: { [id: string]: string; } = {
-    "bpmn:Task": "Task",
-    "bpmn:ManualTask": "Manual Task",
-    "bpmn:UserTask": "User Task",
-    "bpmn:BusinessRuleTask": "Business Rule Task",
-    "bpmn:ServiceTask": "Service Task",
-    "bpmn:ScriptTask": "Script Task",
-    "bpmn:SendTask": "Send Task",
-    "bpmn:ReceiveTask": "Receive Task",
-
+    // Events
     "bpmn:EndEvent": "Event",
     "bpmn:StartEvent": "Event",
     "bpmn:IntermediateThrowEvent": "Event",
     "bpmn:IntermediateCatchEvent": "Event",
+    "bpmn:BoundaryEvent": "Event",
 
+    // Gateways
     "bpmn:ExclusiveGateway": "Or Split",
     "bpmn:ParallelGateway": "Parallel Split",
     "bpmn:Join": "Join",
 
     "bpmn:SequenceFlow": "Control Flow",
-    "bpmn:MessageFlow": "Message Flow",
 
-    "bpmn:BoundaryEvent": "Event",
-    //Database
+    // Database
     "bpmn:DataStoreReference": "Database",
 
     // I/O
@@ -29,5 +21,23 @@ export const ComponentTypes: { [id: string]: string; } = {
     "bpmn:DataOutput": "Attached Data Output",
 }
 
+export const defaultBpmnElements = [
+    "All",
+    "Event", "Or Split", "Parallel Split",
+    "Control Flow", "Database", "Join",
+    "Attached Data Input", "Attached Data Output", "User Task",
+    "Manual Task", "Service Task"
+]
+
+/**
+ * Gets the written name of a bpmn component tag (e.g. bpmn:DataInput => Data Input)
+ * @param tag the bpmn component tag
+ */
 export const getWrittenName = (tag: string) => tag.split(":")[1]
     .replace(/([a-z])([A-Z])/g, '$1 $2') //replace the camel case values with spaces
+
+/**
+ * get the written name for any component tag, with default mappings.
+ * @param tag the bpmn component tag
+ */
+export const getComponentType = (tag: string) => ComponentTypes[tag] || getWrittenName(tag)
