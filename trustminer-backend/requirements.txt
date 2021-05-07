@@ -5,7 +5,7 @@ Flask==1.1.2
 
 # Flask Packages
 flask-mongoengine==0.9.5
-flask_cors==3.0.7
+flask_cors==3.0.9
 
 # Mongo
 mongoengine==0.20.0
