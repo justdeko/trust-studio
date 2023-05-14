@@ -1,7 +1,7 @@
 # Usage: pip install -r requirements.txt
 
 # Flask Framework
-Flask==1.1.2
+Flask==2.3.2
 
 # Flask Packages
 flask-mongoengine==0.9.5
