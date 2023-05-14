@@ -26,7 +26,7 @@
     "bpmn-moddle": "^7.0.3",
     "camunda-bpmn-moddle": "^4.4.0",
     "chart.js": "^2.9.4",
-    "d3": "^5.16.0",
+    "d3": "^7.8.4",
     "diagram-js": "^6.8.0",
     "diagram-js-minimap": "^2.0.3",
     "html2canvas": "^1.0.0-rc.7",
