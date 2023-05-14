@@ -41,7 +41,7 @@
     "react-lottie": "^1.2.3",
     "react-pdf": "^4.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
+    "react-scripts": "5.0.1",
     "reactour": "^1.18.0",
     "styled-components": "^5.2.0",
     "tiny-svg": "^2.2.2",
